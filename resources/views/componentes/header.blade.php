@@ -8,15 +8,16 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
-    <link href="{{asset('../assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('../assets/css/light-bootstrap-dashboard.css?v=2.0.0')}}" rel="stylesheet" />
+    <link href="{{ asset('../assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('../assets/css/light-bootstrap-dashboard.css?v=2.0.0') }}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="{{asset('../assets/css/demo.css')}}" rel="stylesheet" />
+    <link href="{{ asset('../assets/css/demo.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -30,54 +31,54 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                        BathPet
                     </a>
                 </div>
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/dashboard')}}">
+                        <a class="nav-link" href="{{ url('/dashboard') }}">
                             <i class="nc-icon nc-chart-pie-35"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{url('/clientes')}}">
+                        <a class="nav-link" href="{{ url('/clientes') }}">
                             <i class="nc-icon nc-circle-09"></i>
                             <p>Clientes</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{url('/servicos')}}">
+                        <a class="nav-link" href="{{ url('/servicos') }}">
                             <i class="nc-icon nc-notes"></i>
                             <p>Serviços</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{url('/agendamento')}}">
+                        <a class="nav-link" href="{{ url('/agendamento') }}">
                             <i class="nc-icon nc-paper-2"></i>
                             <p>Agendamento</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{url('financeiro')}}">
+                        <a class="nav-link" href="{{ url('financeiro') }}">
                             <i class="nc-icon nc-atom"></i>
                             <p>Financeiro</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{url('/marketing')}}">
+                        <a class="nav-link" href="{{ url('/marketing') }}">
                             <i class="nc-icon nc-pin-3"></i>
                             <p>Marketing</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{'/notificacoes'}}">
+                        <a class="nav-link" href="{{ '/notificacoes' }}">
                             <i class="nc-icon nc-bell-55"></i>
                             <p>Notificações</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{url('/relatorios')}}">
+                        <a class="nav-link" href="{{ url('/relatorios') }}">
                             <i class="nc-icon nc-bell-55"></i>
                             <p>Relatórios</p>
                         </a>
@@ -90,14 +91,15 @@
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#pablo"> Dashboard </a>
-                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="nav navbar-nav mr-auto">
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="#" class="nav-link" data-toggle="dropdown">
                                     <i class="nc-icon nc-palette"></i>
                                     <span class="d-lg-none">Dashboard</span>
@@ -122,16 +124,18 @@
                                     <i class="nc-icon nc-zoom-split"></i>
                                     <span class="d-lg-block">&nbsp;Search</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="#pablo">
                                     <span class="no-icon">Account</span>
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="http://example.com"
+                                    id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
                                     <span class="no-icon">Dropdown</span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -142,12 +146,18 @@
                                     <div class="divider"></div>
                                     <a class="dropdown-item" href="#">Separated link</a>
                                 </div>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
-                                    <span class="no-icon">Log out</span>
-                                </a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-link">
+                                        {{ __('Log Out') }}
+                                    </button>
+                                </form>
                             </li>
+
+
+                            
                         </ul>
                     </div>
                 </div>
