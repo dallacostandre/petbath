@@ -9,7 +9,7 @@ class PetRaca extends Model
 {
     use HasFactory;
 
-    protected $table = ['pet_racas'];
+    protected $table = 'pet_racas';
 
     protected $fillable = [
         'nome_raca'

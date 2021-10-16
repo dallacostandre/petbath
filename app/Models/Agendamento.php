@@ -9,7 +9,7 @@ class Agendamento extends Model
 {
     use HasFactory;
     
-    protected $table = ['agendamento'];
+    protected $table = 'agendamento';
     
     protected $fillable = [
         'unique_pet',

@@ -27,6 +27,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'unique_user',
+        'unique_endereco',
+        'unique_pet',
+        'user_telefone',
+        'user_whats_app',
+        'user_foto',
+        'user_cpf_cpnj',
+        'user_responsavel',
+        
     ];
 
     /**

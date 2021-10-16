@@ -9,7 +9,7 @@ class ClienteEndereco extends Model
 {
     use HasFactory;
 
-    protected $table = ['cliente_endereco'];
+    protected $table = 'cliente_endereco';
 
     protected $fillable = [
         'unique_endereço',

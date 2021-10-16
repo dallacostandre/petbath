@@ -30,6 +30,5 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     // DEVE ESTAR LOGADO
-
     Route::post('/create-new-client', [ClienteController::class, 'create']);
 });
