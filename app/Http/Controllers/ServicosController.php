@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Servicos;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServicosController extends Controller
 {
@@ -14,7 +16,13 @@ class ServicosController extends Controller
      */
     public function index()
     {
-        //
+        $servicos = Servicos::all();
+        return view('lista_servicos', compact('servicos'));
+    }
+
+    public function cadastroServicoView()
+    {
+        return view('cadastro_servico');
     }
 
     /**
@@ -22,9 +30,38 @@ class ServicosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if ($request) {
+            $servico_preco = str_replace(',','.',$request->servico_preco);
+            $unique_servico = uniqid();
+            $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
+            $unique_user = $unique_user_db[0]->unique_user;
+
+            $servicos = new Servicos();
+            $servicos->unique_servico = $unique_servico;
+            $servicos->unique_user = $unique_user;
+            $servicos->servico_nome = $request->servico_nome;
+            $servicos->servico_tempo = $request->servico_tempo;
+            $servicos->servico_preco = $servico_preco;
+            $servicos->servico_pet_porte = $request->servico_pet_porte;
+            $servicos->save();
+
+            return response()->json([
+                'title' => 'Serviço Cadastrado',
+                'message' => 'Serviço foi cadastrado com sucesso.',
+                'icon' => 'success',
+                'url' => '/servicos'
+            ]);
+
+        } else {
+            return response()->json([
+                'title' => 'Houve um erro Cadastrado',
+                'message' => 'Houve um erro ao cadastrar o serviço',
+                'icon' => 'error',
+                'url' => '/servicos'
+            ]);
+        }
     }
 
     /**

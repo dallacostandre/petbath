@@ -6,87 +6,50 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Edit Profile</h4>
+                        <h4 class="card-title">Adicionar Serviço</h4>
                     </div>
                     <div class="card-body">
                         <form>
                             <div class="row">
                                 <div class="col-md-5 pr-1">
                                     <div class="form-group">
-                                        <label>Company (disabled)</label>
-                                        <input type="text" class="form-control" disabled="" placeholder="Company"
-                                            value="Creative Code Inc.">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 px-1">
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username"
-                                            value="michael23">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 pl-1">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <label>Nome Serviço</label>
+                                        <input type="text" class="form-control" placeholder="Insira o Serviço"
+                                            name="servico_nome" id="servico_nome">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 pr-1">
+                                <div class="col-md-3 pr-1">
                                     <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" class="form-control" placeholder="Company" value="Mike">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 pl-1">
-                                    <div class="form-group">
-                                        <label>Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Last Name"
-                                            value="Andrew">
+                                        <label>Tempo Serviço</label>
+                                        <input type="time" class="form-control" placeholder="Username"
+                                            name="servico_tempo" id="servico_tempo">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-3 pr-1">
                                     <div class="form-group">
-                                        <label>Address</label>
-                                        <input type="text" class="form-control" placeholder="Home Address"
-                                            value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                                        <label for="exampleInputEmail1">Preço Serviço</label>
+                                        <input type="text" class="form-control money2" placeholder="Insira o preço"
+                                            name="servico_preco" id="servico_preco">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 pr-1">
-                                    <div class="form-group">
-                                        <label>City</label>
-                                        <input type="text" class="form-control" placeholder="City" value="Mike">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 px-1">
-                                    <div class="form-group">
-                                        <label>Country</label>
-                                        <input type="text" class="form-control" placeholder="Country" value="Andrew">
-                                    </div>
-                                </div>
-                                <div class="col-md-4 pl-1">
-                                    <div class="form-group">
-                                        <label>Postal Code</label>
-                                        <input type="number" class="form-control" placeholder="ZIP Code">
-                                    </div>
+                                <div class="col-md-3 pr-1">
+                                    <label>Porte</label>
+                                    <select class="form-control" name="servico_pet_porte" id="servico_pet_porte">
+                                        <option selected disabled>Selecione o Porte</option>
+                                        <option value="pequeno">Pequeno</option>
+                                        <option value="medio">Médio</option>
+                                        <option value="grande">Grande</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>About Me</label>
-                                        <textarea rows="4" cols="80" class="form-control"
-                                            placeholder="Here can be your description"
-                                            value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                            <button type="button" class="btn btn-info btn-fill float-end"
+                                id="cadastrarServico">Salvar</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -97,3 +60,62 @@
 </div>
 @component('componentes.footer')
 @endcomponent
+
+<script>
+    $('.money2').mask("#.##0,00", {
+        reverse: true
+    });
+</script>
+
+<script>
+    $('#cadastrarServico').on('click', function() {
+        event.preventDefault();
+        var url = '/add-novo-servico';
+        var servico_nome = $('#servico_nome').val();
+        var servico_tempo = $('#servico_tempo').val();
+        var servico_preco = $('#servico_preco').val();
+        var servico_pet_porte = $('#servico_pet_porte').val();
+        var _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: url,
+            type: "post",
+            dataType: "json",
+            data: {
+                servico_nome: servico_nome,
+                servico_tempo: servico_tempo,
+                servico_preco: servico_preco,
+                servico_pet_porte: servico_pet_porte,
+                _token:_token
+            }
+        }).done(function(data) {
+            Swal.fire({
+                title: data.title,
+                message: data.message,
+                icon: data.icon,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+            if (data.url) {
+                window.location.href = data.url;
+            }
+
+        }).fail(function(jqXHR, textStatus, data) {
+            Swal.fire({
+                title: "Error",
+                message: jqXHR,
+                icon: "error",
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+    });
+</script>

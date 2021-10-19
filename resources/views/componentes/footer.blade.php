@@ -126,6 +126,9 @@
 <script src="{{ asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
 <script src="{{ asset('assets/js/light-bootstrap-dashboard.js?v=2.0.0') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/js/demo.js') }}"></script>
+<script src="{{ asset('../assets/font-awesome-pro/js/fontawesome.js') }}" rel="stylesheet"></script>
+<script src="{{ asset('../assets/font-awesome-pro/js/regular.js') }}" rel="stylesheet"></script>
+<script src="{{ asset('../assets/font-awesome-pro/js/all.js') }}" rel="stylesheet"></script>
 {{-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
 
 </html>

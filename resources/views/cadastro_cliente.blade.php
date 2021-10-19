@@ -22,7 +22,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Perfil</h4>
+                        <h4 class="card-title"><i class="fas fa-user"></i>&nbsp;@if (isset($cliente)) {{ $titulo }} @else Perfil @endif</h4>
                     </div>
                     <div class="card-body">
                         <form method="POST" enctype="multipart/form-data">
@@ -30,16 +30,16 @@
                             <div class="row">
                                 <div class="col-md-6 pr-1">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Telefone</label>
+                                        <label for="exampleInputEmail1">Telefone de Contato</label>
                                         <input type="text" class="form-control phone" name="telefone" id="telefone"
-                                            placeholder="Insira o Telefone" required>
+                                            placeholder="Insira o Telefone" value="@if (isset($cliente)) {{ $cliente[0]->cliente_telefone }} @endif" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 pl-1">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Whats App</label>
                                         <input type="text" class="form-control whatsApp" name="whatsapp" id="whatsapp"
-                                            placeholder="Insira o Whats App">
+                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_whatsapp }} @endif" placeholder="Insira o Whats App" required>
                                     </div>
                                 </div>
                             </div>
@@ -48,14 +48,14 @@
                                     <div class="form-group">
                                         <label>Primeiro Nome</label>
                                         <input type="text" class="form-control" name="nome" id="nome"
-                                            placeholder="Insira o nome">
+                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_nome }} @endif" placeholder="Insira o nome" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 pl-1">
                                     <div class="form-group">
                                         <label>Sobrenome</label>
                                         <input type="text" class="form-control" id="sobrenome" name="sobrenome"
-                                            placeholder="Insira o sobrenome">
+                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_sobrenome }} @endif" placeholder="Insira o sobrenome" required>
                                     </div>
                                 </div>
                             </div>
@@ -65,14 +65,14 @@
                                     <div class="form-group">
                                         <label>CEP</label>
                                         <input type="text" class="form-control cep" id="cep" name="cep"
-                                            placeholder="Insira o CEP">
+                                            placeholder="Insira o CEP" value="@if (isset($endereco)) {{ $endereco[0]->cliente_cep }} @endif" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 pr-1">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="text" class="form-control" id="email" name="email"
-                                            placeholder="Insira um email">
+                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_email }} @endif" placeholder="Insira um email" required>
                                     </div>
                                 </div>
                             </div>
@@ -81,21 +81,22 @@
                                 <div class="col-md-6 pr-1">
                                     <div class="form-group">
                                         <label>Endereço</label>
-                                        <input type="text" class="form-control" id="rua" name="rua" placeholder="Rua">
+                                        <input type="text" class="form-control" id="rua" name="rua" placeholder="Rua"
+                                            value="@if (isset($endereco)) {{ $endereco[0]->cliente_rua }} @endif" required>
                                     </div>
                                 </div>
                                 <div class="col-md-2 pr-1">
                                     <div class="form-group">
                                         <label>N°</label>
                                         <input type="text" class="form-control numero" id="numero" name="numero"
-                                            placeholder="Numero">
+                                            value="@if (isset($endereco)) {{ $endereco[0]->cliente_numero }} @endif" placeholder="Numero" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4 pl-1">
                                     <div class="form-group">
                                         <label>Complemento</label>
                                         <input type="text" class="form-control" id="complemento" name="complemento"
-                                            placeholder="Ex:Casa/Apto">
+                                            placeholder="Ex:Casa/Apto" value="@if (isset($endereco)) {{ $endereco[0]->cliente_complemento }} @endif" required>
                                     </div>
                                 </div>
                             </div>
@@ -104,14 +105,14 @@
                                     <div class="form-group">
                                         <label>Cidade</label>
                                         <input type="text" class="form-control" id="cidade" name="cidade"
-                                            placeholder="Cidade">
+                                            value="@if (isset($endereco)) {{ $endereco[0]->cliente_cidade }} @endif" placeholder="Cidade" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label>Bairro</label>
                                         <input type="text" class="form-control" id="bairro" name="bairro"
-                                            placeholder="Bairro">
+                                            value="@if (isset($endereco)) {{ $endereco[0]->cliente_bairro }} @endif" placeholder="Bairro" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -119,24 +120,23 @@
                                         <div class="form-group">
                                             <label>Estado</label>
                                             <input type="text" class="form-control" id="uf" name="uf"
-                                                placeholder="Estado">
+                                                value="@if (isset($endereco)) {{ $endereco[0]->cliente_estado }} @endif" placeholder="Estado" required>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-                            {{-- <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>About Me</label>
-                                        <textarea rows="4" cols="80" class="form-control"
-                                            placeholder="Here can be your description"
-                                            value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                                    </div>
-                                </div>
-                            </div> --}}
-                            <button type="button" class="btn btn-info btn-fill pull-right"
-                                id="salvarCliente">Cadastrar</button>
+                            @if (isset($cliente))
+                                <input type="text" value="{{ $cliente[0]->id }}" id="id_cliente" style="display:none;">
+                                <button type="button" class="btn btn-info btn-fill pull-right"
+                                    id="atualizarCliente">Salvar
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-info btn-fill pull-right"
+                                    id="salvarCliente">Cadastrar
+                                </button>
+
+                            @endif
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -144,38 +144,50 @@
             </div>
             <div class="col-md-4">
                 <div class="card card-user">
-                    <div class="card-image">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-                            alt="...">
-                    </div>
-                    {{-- <div class="card-body">
-                        <div class="author">
-                            <a href="#">
-                                <img class="avatar border-gray" src="../assets/img/faces/face-3.jpg" alt="...">
-                                <h5 class="title">Mike Andrew</h5>
-                            </a>
-                            <p class="description">
-                                michael24
-                            </p>
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; padding-bottom:10px;">
+                            @if (isset($cliente))
+                                <h4 class="card-title">Pets de {{ $cliente[0]->cliente_nome }}</h4>
+                                <a class="btn btn-success" href="#">Cadastrar Pet</a>
+                            @else
+                                <h4 class="card-title"><i class="fas fa-dog"></i>&nbsp; Sem Pets </h4>
+                            @endif
                         </div>
-                        <p class="description text-center">
-                            "Lamborghini Mercy
-                            <br> Your chick she so thirsty
-                            <br> I'm in that two seat Lambo"
-                        </p>
-                    </div> --}}
-                    <hr>
-                    <div class="button-container mr-auto ml-auto">
-                        <button href="#" class="btn btn-simple btn-link btn-icon">
-                            <i class="fa fa-facebook-square"></i>
-                        </button>
-                        <button href="#" class="btn btn-simple btn-link btn-icon">
-                            <i class="fa fa-twitter"></i>
-                        </button>
-                        <button href="#" class="btn btn-simple btn-link btn-icon">
-                            <i class="fa fa-google-plus-square"></i>
-                        </button>
                     </div>
+                    @if (isset($cliente))
+                        <div class="row-md-12 pr-1" style="padding-bottom: 20px;">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button"
+                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            @Petonome
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <p><strong>Nome:</strong> @nomePet</p>
+                                        <p><strong>Porte:</strong> @portePet</p>
+                                        <p><strong>Raça:</strong> @raçaPet</p>
+                                        <p><strong>Espécie: </strong>@especiePet</p>
+                                        <p><strong>Sexo:</strong> @sexoPet</p>
+                                        <p><strong>Pelagem:</strong> @sexoPet</p>
+                                        <p><strong>Castrado:</strong> @castradoPet</p>
+                                        <hr>
+                                        <div style="direction: ltr">
+                                            <a href="#" style="color: red">
+                                                <i class="fal fa-ban fa-lg"></i>
+                                                Excluir
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -185,13 +197,14 @@
 @endcomponent
 
 <script>
-    $('.phone').mask('(99) 9999-9999');
-    $('.whatsApp').mask('(99) 9 9999-9999');
-    $('.numero').mask('99999');
-    $('.cep').mask('99-999999');
+    $('.collapse').collapse()
+
+    $('.phone').mask('00 0000-0000');
+    $('.whatsApp').mask('00 0 0000-0000');
+    $('.numero').mask('00000');
+    $('.cep').mask('00-000000');
 
     $(document).ready(function() {
-
         function limpa_formulário_cep() {
             // Limpa valores do formulário de cep.
             $("#rua").val("");
@@ -279,6 +292,76 @@
 </script>
 
 <script>
+    $('#atualizarCliente').on('click', function() {
+        event.preventDefault();
+        var url = '/atualizar-cliente';
+        var telefone = $('#telefone').val();
+        var whatsapp = $('#whatsapp').val();
+        var nome = $('#nome').val();
+        var sobrenome = $('#sobrenome').val();
+        var cep = $('#cep').val();
+        var email = $('#email').val();
+        var rua = $('#rua').val();
+        var numero = $('#numero').val();
+        var complemento = $('#complemento').val();
+        var bairro = $('#bairro').val();
+        var cidade = $('#cidade').val();
+        var uf = $('#uf').val();
+        var id_cliente = $('#id_cliente').val();
+        var _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: url,
+            context: document.body,
+            type: "POST",
+            dataType: 'json',
+            data: {
+                telefone: telefone,
+                whatsapp: whatsapp,
+                nome: nome,
+                sobrenome: sobrenome,
+                cep: cep,
+                email: email,
+                rua: rua,
+                numero: numero,
+                complemento: complemento,
+                bairro: bairro,
+                cidade: cidade,
+                uf: uf,
+                id_cliente: id_cliente,
+                _token: _token
+            }
+        }).done(function(data) {
+            Swal.fire({
+                title: data.title,
+                message: data.message,
+                icon: data.icon,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+            if (data.url) {
+                window.location.href = data.url;
+            }
+
+        }).fail(function(jqXHR, textStatus, data) {
+            Swal.fire({
+                title: "Error",
+                message: jqXHR,
+                icon: "error",
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        });
+    });
+
     $('#salvarCliente').on('click', function() {
         event.preventDefault();
         var url = '/create-new-client';
@@ -327,8 +410,10 @@
                 hideClass: {
                     popup: 'animate__animated animate__fadeOutUp'
                 }
-            })
-            window.location.href = data.url;
+            });
+            if (data.url) {
+                window.location.href = data.url;
+            }
 
         }).fail(function(jqXHR, textStatus) {
             Swal.fire({

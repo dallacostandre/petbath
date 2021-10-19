@@ -7,17 +7,19 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
+    <title>Bath Pet - Gestão para Banho & Tosa</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" /> --}}
     <!-- CSS Files -->
     <link href="{{ asset('../assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/css/light-bootstrap-dashboard.css?v=2.0.0') }}" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="{{ asset('../assets/css/demo.css') }}" rel="stylesheet" />
+    
+    <link href="{{ asset('../assets/font-awesome-pro/css/fontawesome.css') }}" rel="stylesheet" />
+    <link href="{{ asset('../assets/font-awesome-pro/css/regular.css') }}" rel="stylesheet" />
+    <link href="{{ asset('../assets/font-awesome-pro/css/all.css') }}" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
@@ -31,7 +33,7 @@
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
+                    <a href="{{url('/')}}" class="simple-text">
                         BathPet
                     </a>
                 </div>

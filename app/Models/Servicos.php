@@ -15,6 +15,7 @@ class Servicos extends Model
         'unique_servico',
         'servico_nome',
         'servico_tempo',
-        'servico_preco'
+        'servico_preco',
+        'servico_pet_porte'
     ];
 }

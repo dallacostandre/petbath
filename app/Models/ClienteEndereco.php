@@ -13,12 +13,12 @@ class ClienteEndereco extends Model
 
     protected $fillable = [
         'unique_endereço',
-        'user_rua',
-        'user_numero',
-        'user_bairro',
-        'user_complemento',
-        'user_cep',
-        'user_estado',
-        'user_cidade',
+        'cliente_rua',
+        'cliente_numero',
+        'cliente_bairro',
+        'cliente_complemento',
+        'cliente_cep',
+        'cliente_estado',
+        'cliente_cidade',
     ];
 }
