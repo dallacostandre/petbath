@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PetDadosController;
 use App\Http\Controllers\ServicosController;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::POST('/add-novo-servico', [ServicosController::class,'create']);
     
     // HISTÓRICO
+
+    //PET
+    Route::GET('/pets', [PetDadosController::class, 'index']);
+     Route::GET('/cadastro-pet', [PetDadosController::class, 'cadastroPetView']);
+     Route::POST('/add-novo-pet', [PetDadosController::class, 'create']);
 
     
 });

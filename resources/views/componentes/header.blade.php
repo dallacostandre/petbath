@@ -20,6 +20,7 @@
     <link href="{{ asset('../assets/font-awesome-pro/css/fontawesome.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/font-awesome-pro/css/regular.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/font-awesome-pro/css/all.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
@@ -46,14 +47,20 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/clientes') }}">
+                            <i class="fal fa-users fa-2x"></i>
+                            <p> &nbsp;&nbsp; Meus Clientes</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ url('/pets') }}">
                             <i class="nc-icon nc-circle-09"></i>
-                            <p>Clientes</p>
+                            <p>Pets</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/servicos') }}">
                             <i class="nc-icon nc-notes"></i>
-                            <p>Serviços</p>
+                            <p>Meus Serviços</p>
                         </a>
                     </li>
                     <li>

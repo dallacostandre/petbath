@@ -8,7 +8,7 @@
                 <div class="card strpied-tabled-with-hover">
                     <div style="display: flex; justify-content:space-around;">
                         <div class="container" style="margin: auto;">
-                            <h4>Clientes Cadastrados</h4>
+                            <h4>Meus Clientes</h4>
                             <p>Here is a subtitle for this table</p>
                         </div>
                         <div class="col col-2" style="float: right; margin:auto;">

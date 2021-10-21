@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\ClienteEndereco;
+use App\Models\PetDados;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,13 +19,12 @@ class ClienteController extends Controller
             $string = str_replace(' ', '', $string); // Replaces all spaces with hyphens.
             return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
         }
-
-
     }
 
     public function create(Request $request)
     {
         $unique_endereco = uniqid();
+        $unique_cliente = uniqid();
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
         $unique_user = $unique_user_db[0]->unique_user;
         $email = $request->email;
@@ -59,6 +59,7 @@ class ClienteController extends Controller
             }
             $novo_cliente = new Cliente;
             $novo_cliente->unique_user = $unique_user;
+            $novo_cliente->unique_cliente = $unique_cliente;
             $novo_cliente->cliente_nome = $request->nome;
             $novo_cliente->cliente_sobrenome = $request->sobrenome;
             $novo_cliente->cliente_email = $email;
@@ -89,7 +90,11 @@ class ClienteController extends Controller
 
     public function index()
     {
-        $clientes_cadastrados = Cliente::all();
+
+        $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
+        $unique_user = $unique_user_db[0]->unique_user;
+
+        $clientes_cadastrados = Cliente::where(['unique_user' => $unique_user])->get();
 
         return view(
             'lista_clientes',
@@ -185,7 +190,8 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         $endereco = ClienteEndereco::where(['unique_endereco' => $cliente->unique_endereco])->get();
+        $pets = PetDados::where(['unique_cliente' => $cliente->unique_cliente])->get();
 
-        return view('visualizar_dados_cliente', compact('cliente', 'endereco'));
+        return view('visualizar_dados_cliente', compact('cliente', 'endereco', 'pets'));
     }
 }

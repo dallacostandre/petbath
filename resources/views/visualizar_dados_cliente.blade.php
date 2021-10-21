@@ -147,63 +147,68 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header" style="display: flex; justify-content: space-between;padding-bottom:15px;">
-                        <h4 class="card-title"><i class="fas fa-dog"></i>&nbsp;Pets de {{$cliente->cliente_nome}}</h4>
-                        <a class="btn btn-success" href="#">Cadastrar Pet</a>
+                    <div class="card-header"
+                        style="display: flex; justify-content: space-between;padding-bottom:15px;">
+                        <h4 class="card-title"><i class="fas fa-dog"></i>&nbsp;Pets de
+                            {{ $cliente->cliente_nome }}</h4>
+                        <a class="btn btn-success" href="{{ url('/cadastro-pet') }}">Cadastrar Pet</a>
                     </div>
                     <div class="card card-user">
                         <div class="card-header">
-                        {{-- PETS CADASTRADOS --}}
-                        @if (isset($cliente))
-                            <div class="row-md-6 pr-1" style="padding-bottom: 20px;">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card-header" id="headingOne">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left" type="button"
-                                                data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
-                                                @Petonome
-                                            </button>
-                                        </h2>
-                                    </div>
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                        data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <p><strong>Nome:</strong> @nomePet</p>
-                                            <p><strong>Porte:</strong> @portePet</p>
-                                            <p><strong>Raça:</strong> @raçaPet</p>
-                                            <p><strong>Espécie: </strong>@especiePet</p>
-                                            <p><strong>Sexo:</strong> @sexoPet</p>
-                                            <p><strong>Pelagem:</strong> @sexoPet</p>
-                                            <p><strong>Castrado:</strong> @castradoPet</p>
-                                            <hr>
-                                            <div style="direction: ltr">
-                                                <a href="#" style="color: red">
-                                                    <i class="fal fa-ban fa-lg"></i>
-                                                    Excluir
-                                                </a>
+                            {{-- PETS CADASTRADOS --}}
+                            @if (isset($pets))
+                                @foreach ($pets as $pet)
+                                    <div class="row-md-6 pr-1" style="padding-bottom: 20px;">
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="card-header" id="headingOne">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link btn-block text-left" type="button"
+                                                        data-toggle="collapse" data-target="#collapseOne"
+                                                        aria-expanded="true" aria-controls="collapseOne">
+                                                        @Petonome
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <p><strong>Nome:</strong> {{$pet->pet_nome}}</p>
+                                                    <p><strong>Porte:</strong> {{$pet->pet_porte}}</p>
+                                                    <p><strong>Raça:</strong> {{$pet->pet_raca}}</p>
+                                                    <p><strong>Espécie: </strong> {{$pet->pet_especie}}</p>
+                                                    <p><strong>Sexo:</strong> {{$pet->pet_genero}}</p>
+                                                    <p><strong>Pelagem:</strong> {{$pet->pet_pelagem}}</p>
+                                                    <p><strong>Castrado:</strong> @if($pet->pet_castracao == 1 ) Sim @else Não @endif</p>
+                                                    <p><strong>Observações:</strong> {{$pet->pet_observacoes}}</p>
+                                                    <hr>
+                                                    <div style="direction: ltr">
+                                                        <a href="#" style="color: red">
+                                                            <i class="fal fa-ban fa-lg"></i>
+                                                            Excluir
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        @else
-                            <h4 class="card-title"><i class="fas fa-dog"></i>&nbsp; Sem Pets </h4>
-                        @endif
+                                @endforeach
+
+                            @else
+                                <h4 class="card-title"><i class="fas fa-dog"></i>&nbsp; Sem Pets </h4>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@component('componentes.footer')
-@endcomponent
+    @component('componentes.footer')
+    @endcomponent
 
-<script>
-    $('.collapse').collapse()
+    <script>
+        $('.collapse').collapse()
 
-    $('.phone').mask('00 0000-0000');
-    $('.whatsApp').mask('00 0 0000-0000');
-    $('.numero').mask('00000');
-    $('.cep').mask('00-000000');
-</script>
+        $('.phone').mask('00 0000-0000');
+        $('.whatsApp').mask('00 0 0000-0000');
+        $('.numero').mask('00000');
+        $('.cep').mask('00-000000');
+    </script>
