@@ -8,12 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::GET('/', function () {
-    return view('landing_page');
-});
-
-Route::GET('/login', function () {
     return view('auth.login');
 });
+
 
 Route::group(['middleware' => 'auth'], function () {
 
