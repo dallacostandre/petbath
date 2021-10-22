@@ -7,8 +7,12 @@ use App\Models\Cliente;
 use Illuminate\Support\Facades\Route;
 
 
-Route::GET('/', function () {
+/* Route::GET('/', function () {
     return view('auth.login');
+}); */
+
+Route::GET('/', function () {
+    return view('landing_page');
 });
 
 
