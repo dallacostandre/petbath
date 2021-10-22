@@ -42,6 +42,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/pets', [PetDadosController::class, 'index']);
      Route::GET('/cadastro-pet', [PetDadosController::class, 'cadastroPetView']);
      Route::POST('/add-novo-pet', [PetDadosController::class, 'create']);
-
-    
 });
