@@ -16,12 +16,24 @@
     <!-- CSS Files -->
     <link href="{{ asset('../assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/css/light-bootstrap-dashboard.css?v=2.0.0') }}" rel="stylesheet" />
-    
+
     <link href="{{ asset('../assets/font-awesome-pro/css/fontawesome.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/font-awesome-pro/css/regular.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/font-awesome-pro/css/all.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-16TDNEJNYX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-16TDNEJNYX');
+    </script>
 </head>
 
 <body>
@@ -34,7 +46,7 @@
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="{{url('/')}}" class="simple-text">
+                    <a href="{{ url('/') }}" class="simple-text">
                         BathPet
                     </a>
                 </div>
@@ -167,7 +179,7 @@
                             </li>
 
 
-                            
+
                         </ul>
                     </div>
                 </div>
