@@ -4,12 +4,17 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Bath Pet - Gestão para Banho & Tosa</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-        name='viewport' />
+    <meta name="description" content="Sistema para gerenciamento de petshops com foco em banho e tosa.">
+    <meta name="robots" content="all">
+    <meta name="author" content="Creatif Digital">
+    <meta name="keywords"
+        content="sistema para pet shop, sistema pet shop, software para pet shop, programa para pet shop, sistema para banho e tosa, software petshop">
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" /> --}}
@@ -22,6 +27,7 @@
     <link href="{{ asset('../assets/font-awesome-pro/css/all.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-16TDNEJNYX"></script>
     <script>
