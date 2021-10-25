@@ -29,6 +29,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <meta name="google-site-verification" content="lT3OPUbB3Ptqvk5xG_OrHRgkiJeSBPZ0K-efVaZNeqg" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-16TDNEJNYX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
