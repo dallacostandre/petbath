@@ -8,6 +8,7 @@ use App\Models\PetDados;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ClienteController extends Controller
 {
@@ -23,6 +24,8 @@ class ClienteController extends Controller
 
     public function create(Request $request)
     {
+        $nomeCompleto = strtolower($request->nome);
+        $nomeCompletoEditado = Str::ucfirst($nomeCompleto);
         $unique_endereco = uniqid();
         $unique_cliente = uniqid();
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
@@ -39,7 +42,6 @@ class ClienteController extends Controller
         // VALIDAR SE HÁ EMAIL E NÚMERO CADASTRADO ANTES DE QUALQUER COISA -<<<
         $email_usado = Cliente::where(['cliente_email' => $email])->get();
         $telefone_usado = Cliente::where(['cliente_telefone' => $telefone])->get();
-
 
         if (count($email_usado) >= 1) {
             return response()->json([
@@ -60,7 +62,7 @@ class ClienteController extends Controller
             $novo_cliente = new Cliente;
             $novo_cliente->unique_user = $unique_user;
             $novo_cliente->unique_cliente = $unique_cliente;
-            $novo_cliente->cliente_nome = $request->nome;
+            $novo_cliente->cliente_nome = $nomeCompletoEditado;
             /* $novo_cliente->cliente_sobrenome = $request->sobrenome; */
             $novo_cliente->cliente_email = $email;
             $novo_cliente->cliente_telefone = $telefone;
@@ -109,10 +111,10 @@ class ClienteController extends Controller
 
     public function editarView($id)
     {
-        $cliente = Cliente::find($id)->get();
-        $unique_endereco = Cliente::where(['unique_endereco' => $cliente[0]->unique_endereco])->get();
+        $cliente = Cliente::find($id);
+        $unique_endereco = Cliente::where(['unique_endereco' => $cliente->unique_endereco])->get();
         $endereco = ClienteEndereco::where(['unique_endereco' => $unique_endereco[0]->unique_endereco])->get();
-        $titulo = 'Editando: ' . $cliente[0]->cliente_nome;
+        $titulo = 'Editando: ' . $cliente->cliente_nome;
 
         return view('cadastro_cliente', compact(
             'cliente',
@@ -124,8 +126,8 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         if ($id) {
-            $cliente = Cliente::find($id)->get();
-            $unique = Cliente::where(['unique_endereco' => $cliente[0]->unique_endereco])->get();
+            $cliente = Cliente::find($id);
+            $unique = Cliente::where(['unique_endereco' => $cliente->unique_endereco])->get();
             $unique_endereco = $unique[0]->unique_endereco;
             $endereco = ClienteEndereco::where(['unique_endereco' => $unique_endereco])->get();
             $id_endereco = $endereco[0]->id;
@@ -146,6 +148,8 @@ class ClienteController extends Controller
     public function update(Request $request)
     {
 
+        $nomeCompleto = strtolower($request->nome);
+        $nomeCompletoEditado = Str::ucfirst($nomeCompleto);
         $email = $request->email;
         $id = $request->id_cliente;
         $telefone_view = $request->telefone;
@@ -157,15 +161,15 @@ class ClienteController extends Controller
         $telefone = str_replace('-', '', $telefone_str);
 
         $atualizar_cliente = Cliente::find($id);
-        $atualizar_cliente->cliente_nome = $request->nome;
+        $atualizar_cliente->cliente_nome = $nomeCompletoEditado;
         /* $atualizar_cliente->cliente_sobrenome = $request->sobrenome; */
         $atualizar_cliente->cliente_email = $email;
         $atualizar_cliente->cliente_telefone = $telefone;
         $atualizar_cliente->cliente_whatsapp = $whatsapp;
         $atualizar_cliente->save();
 
-        $cliente = Cliente::find($id)->get();
-        $unique = Cliente::where(['unique_endereco' => $cliente[0]->unique_endereco])->get();
+        $cliente = Cliente::find($id);
+        $unique = Cliente::where(['unique_endereco' => $cliente->unique_endereco])->get();
         $unique_endereco = $unique[0]->unique_endereco;
 
         $endereco = ClienteEndereco::where(['unique_endereco' => $unique_endereco])->first();

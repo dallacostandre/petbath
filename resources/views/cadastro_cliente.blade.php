@@ -32,14 +32,14 @@
                                     <div class="form-group">
                                         <label for="whatsapp">Whats App</label>
                                         <input type="text" class="form-control whatsApp" name="whatsapp" id="whatsapp"
-                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_whatsapp }} @endif" placeholder="Insira o Whats App" required>
+                                            value="@if (isset($cliente)) {{ $cliente->cliente_whatsapp }} @endif" placeholder="Insira o Whats App" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="telefone">Telefone para Recado</label>
                                         <input type="text" class="form-control phone" name="telefone" id="telefone"
-                                            placeholder="Insira o Telefone" value="@if (isset($cliente)) {{ $cliente[0]->cliente_telefone }} @endif" required>
+                                            placeholder="Insira o Telefone" value="@if (isset($cliente)) {{ $cliente->cliente_telefone }} @endif" required>
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         <label>Nome(completo)</label>
                                         <input type="text" class="form-control" name="nome" id="nome"
-                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_nome }} @endif" placeholder="Insira o nome completo"
+                                            value="@if (isset($cliente)) {{ $cliente->cliente_nome }} @endif" placeholder="Insira o nome completo"
                                             required>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="text" class="form-control" id="email" name="email"
-                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_email }} @endif" placeholder="Insira um email" required>
+                                            value="@if (isset($cliente)) {{ $cliente->cliente_email }} @endif" placeholder="Insira um email" required>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                             @if (isset($cliente))
-                                <input type="text" value="{{ $cliente[0]->id }}" id="id_cliente"
+                                <input type="text" value="{{ $cliente->id }}" id="id_cliente"
                                     style="display:none;">
                                 <button type="button" class="btn btn-info btn-fill pull-right"
                                     id="atualizarCliente">Salvar
@@ -139,7 +139,7 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; padding-bottom:10px;">
                             @if (isset($cliente))
-                                <h4 class="card-title">Pets de {{ $cliente[0]->cliente_nome }}</h4>
+                                <h4 class="card-title">Pets de {{ $cliente->cliente_nome }}</h4>
                                 <a class="btn btn-success" href="#">Cadastrar Pet</a>
                             @else
                                 <h4 class="card-title"><i class="fas fa-dog"></i>&nbsp; Sem Pets </h4>
@@ -323,7 +323,7 @@
                 id_cliente: id_cliente,
                 _token: _token
             }
-        }).success(function(data) {
+        }).done(function(data) {
             Swal.fire({
                 title: data.title,
                 message: data.message,

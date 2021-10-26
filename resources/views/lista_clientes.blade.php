@@ -33,7 +33,7 @@
                             <tbody>
                                 @foreach ($clientes_cadastrados as $cliente)
                                     <tr>
-                                        <td>{{ $cliente->cliente_nome }}</td>
+                                        <td>{{ Str::ucfirst($cliente->cliente_nome) }}</td>
                                         <td>@Pets</td>
                                         <td>{{ $cliente->cliente_email }}</td>
                                         <td class="phone">{{ $cliente->cliente_telefone }}</td>
