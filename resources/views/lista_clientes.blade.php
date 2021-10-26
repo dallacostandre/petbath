@@ -26,6 +26,7 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Whats App</th>
+                                <th>Whats App</th>
                                 <th>Ações</th>
                                 <th>Histórico</th>
                             </thead>
@@ -35,7 +36,8 @@
                                         <td>{{ $cliente->cliente_nome }}</td>
                                         <td>@Pets</td>
                                         <td>{{ $cliente->cliente_email }}</td>
-                                        <td>{{ $cliente->cliente_telefone }}</td>
+                                        <td class="phone">{{ $cliente->cliente_telefone }}</td>
+                                        <td class="phone" >{{ $cliente->cliente_whatsapp }}</td>
                                         <td>
                                             <a href="https://wa.me/+55{{ $cliente->cliente_whatsapp }}"
                                                 target="_blank" data-toggle="tooltip" data-placement="top"
@@ -77,4 +79,6 @@
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    $('.phone').mask('(00) 0 0000-0000');
 </script>

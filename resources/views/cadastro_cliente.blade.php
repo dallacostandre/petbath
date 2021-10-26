@@ -191,7 +191,7 @@
 <script>
     $('.collapse').collapse()
 
-    $('.phone').mask('00 0000-0000');
+    $('.phone').mask('00 0 0000-0000');
     $('.whatsApp').mask('00 0 0000-0000');
     $('.numero').mask('00000');
     $('.cep').mask('00 000-000');
