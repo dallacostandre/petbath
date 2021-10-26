@@ -11,34 +11,28 @@
                     <div class="card-body">
                         <form>
                             <div class="row">
-                                <div class="col-md-5 pr-1">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nome Serviço</label>
                                         <input type="text" class="form-control" placeholder="Insira o Serviço"
                                             name="servico_nome" id="servico_nome">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 pr-1">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tempo Serviço</label>
-                                        <input type="time" class="form-control" placeholder="Username"
-                                            name="servico_tempo" id="servico_tempo">
+                                        <label>Raça</label>
+                                        {{-- FOREACH E RAÇAS --}}
+                                        <select class="form-control" name="pet_raca" id="pet_raca" required>
+                                            <option disabled>Selecione uma raça</option>
+                                            @foreach ($raca_pet as $raca)
+                                                <option value="{{ $raca->id }}">{{ $raca->nome_raca }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 pr-1">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Preço Serviço</label>
-                                        <input type="text" class="form-control money2" placeholder="Insira o preço"
-                                            name="servico_preco" id="servico_preco">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 pr-1">
+                                <div class="col-md-4 ">
                                     <label>Porte</label>
                                     <select class="form-control" name="servico_pet_porte" id="servico_pet_porte">
                                         <option selected disabled>Selecione o Porte</option>
@@ -46,6 +40,20 @@
                                         <option value="medio">Médio</option>
                                         <option value="grande">Grande</option>
                                     </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tempo Serviço</label>
+                                        <input type="time" class="form-control" placeholder="Username"
+                                            name="servico_tempo" id="servico_tempo">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Preço Serviço</label>
+                                        <input type="text" class="form-control money2" placeholder="Insira o preço"
+                                            name="servico_preco" id="servico_preco">
+                                    </div>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-info btn-fill float-end"
@@ -86,7 +94,7 @@
                 servico_tempo: servico_tempo,
                 servico_preco: servico_preco,
                 servico_pet_porte: servico_pet_porte,
-                _token:_token
+                _token: _token
             }
         }).done(function(data) {
             Swal.fire({

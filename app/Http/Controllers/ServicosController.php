@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PetRaca;
 use App\Models\Servicos;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,13 +17,14 @@ class ServicosController extends Controller
      */
     public function index()
     {
-        $servicos = Servicos::all();
+        $servicos = Servicos::orderBy('id', 'DESC')->get();
         return view('lista_servicos', compact('servicos'));
     }
-
+    
     public function cadastroServicoView()
     {
-        return view('cadastro_servico');
+        $raca_pet  = PetRaca::all();
+        return view('cadastro_servico', compact('raca_pet'));
     }
 
     /**

@@ -44,71 +44,53 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
+        <div class="sidebar" data-color="original" data-image="../assets/img/sidebar-5.jpg">
             <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="{{ url('/') }}" class="simple-text">
-                        BathPet
-                    </a>
+                <div class="logo" >
+                    <img src="../assets/img/topo_logo_sistema.png" width="100%" style="background-color: white!important;">
                 </div>
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/dashboard') }}">
-                            <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Dashboard</p>
+                            <i class="fas fa-paw fa-2x"></i>
+                            <p> &nbsp;&nbsp; Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ url('/agendamento') }}">
+                            <i class="far fa-clipboard-list-check fa-2x "></i>
+                            <p> &nbsp;&nbsp; Agendamento</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/clientes') }}">
                             <i class="fal fa-users fa-2x"></i>
-                            <p> &nbsp;&nbsp; Meus Clientes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url('/pets') }}">
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>Pets</p>
+                            <p> &nbsp;&nbsp; Clientes</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/servicos') }}">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>Meus Serviços</p>
+                            <i class="fas fa-dog fa-2x"></i>
+                            <p> &nbsp;&nbsp; Serviços</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ url('/agendamento') }}">
-                            <i class="nc-icon nc-paper-2"></i>
-                            <p>Agendamento</p>
+                        <a class="nav-link" href="{{ url('/produtos') }}">
+                            <i class="fas fa-bone fa-2x"></i>
+                            <p> &nbsp;&nbsp; Produtos</p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('financeiro') }}">
-                            <i class="nc-icon nc-atom"></i>
-                            <p>Financeiro</p>
+                            <i class="fal fa-comment-alt-dollar fa-2x"></i>
+                            <p> &nbsp;&nbsp; Financeiro</p>
                         </a>
                     </li>
+
                     <li>
                         <a class="nav-link" href="{{ url('/marketing') }}">
-                            <i class="nc-icon nc-pin-3"></i>
-                            <p>Marketing</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ '/notificacoes' }}">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Notificações</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url('/relatorios') }}">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Relatórios</p>
+                            <i class="far fa-id-badge fa-2x"></i>
+                            <p> &nbsp;&nbsp; Perfil</p>
                         </a>
                     </li>
                 </ul>
