@@ -21,7 +21,7 @@ class PetDadosController extends Controller
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
         $unique_user = $unique_user_db[0]->unique_user;
 
-        $pets = PetDados::where(['unique_user' => $unique_user])->get();
+        $pets = PetDados::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->get();
         return view('lista_pets', compact('pets'));
     }
 

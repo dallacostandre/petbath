@@ -19,33 +19,30 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title"><i class="fas fa-user"></i>&nbsp;@if (isset($cliente)) {{ $titulo }} @else Perfil @endif</h4>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data">
-                            @csrf
+                    <form method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-header">
+                            <h4 class="card-title"><i class="fas fa-user"></i>&nbsp;@if (isset($cliente)) {{ $titulo }} @else Cadastro Cliente @endif</h4>
+                        </div>
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="whatsapp">Whats App</label>
                                         <input type="text" class="form-control whatsApp" name="whatsapp" id="whatsapp"
                                             value="@if (isset($cliente)) {{ $cliente->cliente_whatsapp }} @endif" placeholder="Insira o Whats App" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="telefone">Telefone para Recado</label>
                                         <input type="text" class="form-control phone" name="telefone" id="telefone"
                                             placeholder="Insira o Telefone" value="@if (isset($cliente)) {{ $cliente->cliente_telefone }} @endif" required>
                                     </div>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nome(completo)</label>
                                         <input type="text" class="form-control" name="nome" id="nome"
@@ -53,7 +50,7 @@
                                             required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="text" class="form-control" id="email" name="email"
@@ -61,16 +58,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label>CEP</label>
                                         <input type="text" class="form-control cep" id="cep" name="cep"
                                             placeholder="Insira o CEP" value="@if (isset($endereco)) {{ $endereco[0]->cliente_cep }} @endif" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Endereço</label>
                                         <input type="text" class="form-control" id="rua" name="rua" placeholder="Rua"
@@ -84,7 +80,7 @@
                                             value="@if (isset($endereco)) {{ $endereco[0]->cliente_numero }} @endif" placeholder="Numero" required>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Complemento</label>
                                         <input type="text" class="form-control" id="complemento" name="complemento"
@@ -115,26 +111,103 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-header">
+                                <h4 class="card-title"><i class="fas fa-user"></i>&nbsp;Cadastro Pet</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Nome do Pet</label>
+                                        <input type="text" class="form-control" placeholder="Insira o nome do Pet"
+                                            name="pet_nome" id="pet_nome" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Espécie</label>
+                                        <select class="form-control" name="pet_especie" id="pet_especie" required>
+                                            <option selected disabled>Espécie</option>
+                                            <option value="felino">Felino</option>
+                                            <option value="canino">Canino</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Porte</label>
+                                        <select class="form-control" name="pet_porte" id="pet_porte" required>
+                                            <option selected disabled>Selecione o porte</option>
+                                            <option value="grande">Grande</option>
+                                            <option value="medio">Médio</option>
+                                            <option value="pequeno">Pequeno</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Raça</label>
+                                        {{-- FOREACH E RAÇAS --}}
+                                        <select class="form-control" name="pet_raca" id="pet_raca" required>
+                                            <option disabled>Selecione uma raça</option>
+                                            @foreach ($raca_pet as $raca)
+                                                <option value="{{ $raca->id }}">{{ $raca->nome_raca }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Sexo</label>
+                                        <select class="form-control" name="pet_genero" id="pet_genero" required>
+                                            <option selected disabled>Selecione o gênero</option>
+                                            <option value="m">Macho</option>
+                                            <option value="f">Fêmea</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Pelagem</label>
+                                        <select class="form-control" name="pet_pelagem" id="pet_pelagem" required>
+                                            <option selected disabled>Selecione a pelagem</option>
+                                            <option value="curto">Curto</option>
+                                            <option value="longo">Longo</option>
+                                            <option value="medio">Médio</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Observações</label>
+                                        <textarea rows="4" cols="80" class="form-control" name="pet_observacoes"
+                                            id="pet_observacoes"
+                                            placeholder="Insira uma observação aqui,caso tenha."></textarea>
+                                    </div>
+                                </div>
+                            </div>
                             @if (isset($cliente))
-                                <input type="text" value="{{ $cliente->id }}" id="id_cliente"
-                                    style="display:none;">
+                                <input type="text" value="{{ $cliente->id }}" id="id_cliente" style="display:none;">
                                 <button type="button" class="btn btn-info btn-fill pull-right"
                                     id="atualizarCliente">Salvar
                                 </button>
                             @else
-                        <div style="float:right" >
-                            <button type="button" class="btn btn-info btn-fill pull-right"
-                            id="salvarCliente">Cadastrar
-                        </button>
-                    </div>
-
+                                <div style="float:right">
+                                    <button type="button" class="btn btn-info btn-fill pull-right"
+                                        id="salvarCliente">Cadastrar
+                                    </button>
+                                </div>
                             @endif
-                            <div class="clearfix"></div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="col-md-4">
+{{--             <div class="col-md-12">
                 <div class="card card-user">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; padding-bottom:10px;">
@@ -147,7 +220,7 @@
                         </div>
                     </div>
                     @if (isset($cliente))
-                        <div class="row-md-12 pr-1" style="padding-bottom: 20px;">
+                        <div class="row-md-12 " style="padding-bottom: 20px;">
                             <div class="accordion" id="accordionExample">
                                 <div class="card-header" id="headingOne">
                                     <h2 class="mb-0">
@@ -181,7 +254,7 @@
                         </div>
                     @endif
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

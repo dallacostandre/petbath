@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\ClienteEndereco;
 use App\Models\PetDados;
+use App\Models\PetRaca;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,7 +96,7 @@ class ClienteController extends Controller
 
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
         $unique_user = $unique_user_db[0]->unique_user;
-
+        
         $clientes_cadastrados = Cliente::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->get();
 
         return view(
@@ -106,7 +107,8 @@ class ClienteController extends Controller
 
     public function cadastroView()
     {
-        return view('cadastro_cliente');
+        $raca_pet  = PetRaca::all();
+        return view('cadastro_cliente', compact('raca_pet'));
     }
 
     public function editarView($id)
