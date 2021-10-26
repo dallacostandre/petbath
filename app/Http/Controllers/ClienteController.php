@@ -61,7 +61,7 @@ class ClienteController extends Controller
             $novo_cliente->unique_user = $unique_user;
             $novo_cliente->unique_cliente = $unique_cliente;
             $novo_cliente->cliente_nome = $request->nome;
-            $novo_cliente->cliente_sobrenome = $request->sobrenome;
+            /* $novo_cliente->cliente_sobrenome = $request->sobrenome; */
             $novo_cliente->cliente_email = $email;
             $novo_cliente->cliente_telefone = $telefone;
             $novo_cliente->cliente_whatsapp = $whatsapp;
@@ -158,7 +158,7 @@ class ClienteController extends Controller
 
         $atualizar_cliente = Cliente::find($id);
         $atualizar_cliente->cliente_nome = $request->nome;
-        $atualizar_cliente->cliente_sobrenome = $request->sobrenome;
+        /* $atualizar_cliente->cliente_sobrenome = $request->sobrenome; */
         $atualizar_cliente->cliente_email = $email;
         $atualizar_cliente->cliente_telefone = $telefone;
         $atualizar_cliente->cliente_whatsapp = $whatsapp;

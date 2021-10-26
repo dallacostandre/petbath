@@ -28,47 +28,32 @@
                         <form method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 pr-1">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Telefone de Contato</label>
-                                        <input type="text" class="form-control phone" name="telefone" id="telefone"
-                                            placeholder="Insira o Telefone" value="@if (isset($cliente)) {{ $cliente[0]->cliente_telefone }} @endif" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 pl-1">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Whats App</label>
+                                        <label for="whatsapp">Whats App</label>
                                         <input type="text" class="form-control whatsApp" name="whatsapp" id="whatsapp"
                                             value="@if (isset($cliente)) {{ $cliente[0]->cliente_whatsapp }} @endif" placeholder="Insira o Whats App" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 pr-1">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Primeiro Nome</label>
-                                        <input type="text" class="form-control" name="nome" id="nome"
-                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_nome }} @endif" placeholder="Insira o nome" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 pl-1">
-                                    <div class="form-group">
-                                        <label>Sobrenome</label>
-                                        <input type="text" class="form-control" id="sobrenome" name="sobrenome"
-                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_sobrenome }} @endif" placeholder="Insira o sobrenome" required>
+                                        <label for="telefone">Telefone para Recado</label>
+                                        <input type="text" class="form-control phone" name="telefone" id="telefone"
+                                            placeholder="Insira o Telefone" value="@if (isset($cliente)) {{ $cliente[0]->cliente_telefone }} @endif" required>
                                     </div>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-6 pr-1">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>CEP</label>
-                                        <input type="text" class="form-control cep" id="cep" name="cep"
-                                            placeholder="Insira o CEP" value="@if (isset($endereco)) {{ $endereco[0]->cliente_cep }} @endif" required>
+                                        <label>Nome(completo)</label>
+                                        <input type="text" class="form-control" name="nome" id="nome"
+                                            value="@if (isset($cliente)) {{ $cliente[0]->cliente_nome }} @endif" placeholder="Insira o nome completo"
+                                            required>
                                     </div>
                                 </div>
-                                <div class="col-md-6 pr-1">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="text" class="form-control" id="email" name="email"
@@ -78,21 +63,28 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-6 pr-1">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>CEP</label>
+                                        <input type="text" class="form-control cep" id="cep" name="cep"
+                                            placeholder="Insira o CEP" value="@if (isset($endereco)) {{ $endereco[0]->cliente_cep }} @endif" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Endereço</label>
                                         <input type="text" class="form-control" id="rua" name="rua" placeholder="Rua"
                                             value="@if (isset($endereco)) {{ $endereco[0]->cliente_rua }} @endif" required>
                                     </div>
                                 </div>
-                                <div class="col-md-2 pr-1">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label>N°</label>
                                         <input type="text" class="form-control numero" id="numero" name="numero"
                                             value="@if (isset($endereco)) {{ $endereco[0]->cliente_numero }} @endif" placeholder="Numero" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4 pl-1">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Complemento</label>
                                         <input type="text" class="form-control" id="complemento" name="complemento"
@@ -101,33 +93,31 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 pr-1">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Cidade</label>
                                         <input type="text" class="form-control" id="cidade" name="cidade"
                                             value="@if (isset($endereco)) {{ $endereco[0]->cliente_cidade }} @endif" placeholder="Cidade" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4 px-1">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Bairro</label>
                                         <input type="text" class="form-control" id="bairro" name="bairro"
                                             value="@if (isset($endereco)) {{ $endereco[0]->cliente_bairro }} @endif" placeholder="Bairro" required>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <input type="text" class="form-control" id="uf" name="uf"
-                                                value="@if (isset($endereco)) {{ $endereco[0]->cliente_estado }} @endif" placeholder="Estado" required>
-                                        </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Estado</label>
+                                        <input type="text" class="form-control" id="uf" name="uf"
+                                            value="@if (isset($endereco)) {{ $endereco[0]->cliente_estado }} @endif" placeholder="Estado" required>
                                     </div>
                                 </div>
-
                             </div>
                             @if (isset($cliente))
-                                <input type="text" value="{{ $cliente[0]->id }}" id="id_cliente" style="display:none;">
+                                <input type="text" value="{{ $cliente[0]->id }}" id="id_cliente"
+                                    style="display:none;">
                                 <button type="button" class="btn btn-info btn-fill pull-right"
                                     id="atualizarCliente">Salvar
                                 </button>
@@ -202,7 +192,7 @@
     $('.phone').mask('00 0000-0000');
     $('.whatsApp').mask('00 0 0000-0000');
     $('.numero').mask('00000');
-    $('.cep').mask('00-000000');
+    $('.cep').mask('00 000-000');
 
     $(document).ready(function() {
         function limpa_formulário_cep() {
@@ -331,7 +321,7 @@
                 id_cliente: id_cliente,
                 _token: _token
             }
-        }).done(function(data) {
+        }).success(function(data) {
             Swal.fire({
                 title: data.title,
                 message: data.message,
@@ -346,7 +336,6 @@
             if (data.url) {
                 window.location.href = data.url;
             }
-
         }).fail(function(jqXHR, textStatus, data) {
             Swal.fire({
                 title: "Error",
@@ -415,7 +404,7 @@
                 window.location.href = data.url;
             }
 
-        }).fail(function(jqXHR, textStatus) {
+        }).fail(function(jqXHR, textStatus, data) {
             Swal.fire({
                 title: data.title,
                 message: data.message,
