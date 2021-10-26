@@ -94,7 +94,7 @@ class ClienteController extends Controller
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
         $unique_user = $unique_user_db[0]->unique_user;
 
-        $clientes_cadastrados = Cliente::where(['unique_user' => $unique_user])->get();
+        $clientes_cadastrados = Cliente::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->get();
 
         return view(
             'lista_clientes',

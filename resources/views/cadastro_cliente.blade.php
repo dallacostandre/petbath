@@ -63,7 +63,7 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>CEP</label>
                                         <input type="text" class="form-control cep" id="cep" name="cep"
@@ -84,7 +84,7 @@
                                             value="@if (isset($endereco)) {{ $endereco[0]->cliente_numero }} @endif" placeholder="Numero" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Complemento</label>
                                         <input type="text" class="form-control" id="complemento" name="complemento"
@@ -122,9 +122,11 @@
                                     id="atualizarCliente">Salvar
                                 </button>
                             @else
-                                <button type="button" class="btn btn-info btn-fill pull-right"
-                                    id="salvarCliente">Cadastrar
-                                </button>
+                        <div style="float:right" >
+                            <button type="button" class="btn btn-info btn-fill pull-right"
+                            id="salvarCliente">Cadastrar
+                        </button>
+                    </div>
 
                             @endif
                             <div class="clearfix"></div>
