@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::ANY('historico-cliente/{id}', [ClienteController::class, 'historicoCliente']);
 
     // SERVIÇOs
-    Route::GET('/servicos', [ServicosController::class, 'index']);
+    Route::GET('/servicos-e-produtos', [ServicosController::class, 'index']);
     Route::GET('/cadastro-servico', [ServicosController::class, 'cadastroServicoView']);
     Route::POST('/add-novo-servico', [ServicosController::class, 'create']);
     

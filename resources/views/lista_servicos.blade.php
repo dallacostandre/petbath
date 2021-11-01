@@ -9,7 +9,6 @@
                     <div style="display: flex; justify-content:space-around;">
                         <div class="container" style="margin: auto;">
                             <h4>Meus Serviços</h4>
-                            <p>Here is a subtitle for this table</p>
                         </div>
                         <div class="col col-2" style="float: right; margin:auto;">
                             <a type="button" aria-hidden="true" href="{{url('/cadastro-servico')}}" class="btn btn-success">
@@ -21,7 +20,6 @@
                         <table class="table table-striped table-hover table-sm">
                             <thead>
                                 <th>Nome Serviço</th>
-                                <th>Tempo</th>
                                 <th>Preço</th>
                                 <th>Porte</th>
                                 <th>Ações</th>
@@ -30,7 +28,6 @@
                                 @foreach ($servicos as $servico)
                                 <tr>
                                     <td>{{$servico->servico_nome}}</td>
-                                    <td>{{$servico->servico_tempo}}</td>
                                     <td>{{$servico->servico_preco}}</td>
                                     <td>{{$servico->servico_pet_porte}}</td>
                                     <td>

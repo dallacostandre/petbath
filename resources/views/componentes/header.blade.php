@@ -70,15 +70,9 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ url('/servicos') }}">
+                        <a class="nav-link" href="{{ url('/servicos-e-produtos') }}">
                             <i class="fas fa-dog fa-2x"></i>
-                            <p> &nbsp;&nbsp; Serviços</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{ url('/produtos') }}">
-                            <i class="fas fa-bone fa-2x"></i>
-                            <p> &nbsp;&nbsp; Produtos</p>
+                            <p> &nbsp;&nbsp; Produtos & Serviços</p>
                         </a>
                     </li>
                     <li>

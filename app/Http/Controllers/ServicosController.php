@@ -18,12 +18,12 @@ class ServicosController extends Controller
     public function index()
     {
         $servicos = Servicos::orderBy('id', 'DESC')->get();
-        return view('lista_servicos', compact('servicos'));
+        $raca_pet  = PetRaca::all();
+        return view('produtos_e_servicos', compact('servicos', 'raca_pet'));
     }
     
     public function cadastroServicoView()
     {
-        $raca_pet  = PetRaca::all();
         return view('cadastro_servico', compact('raca_pet'));
     }
 
