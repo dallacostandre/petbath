@@ -9,7 +9,6 @@
                     <div style="display: flex; justify-content:space-around;">
                         <div class="container" style="margin: auto;">
                             <h4>Meus Clientes</h4>
-                            <p>Here is a subtitle for this table</p>
                         </div>
                         <div class="col col-2" style="float: right; margin:auto;">
                             <a type="button" aria-hidden="true" href="{{ url('/cadastro-cliente') }}"
@@ -22,10 +21,9 @@
                         <table class="table table-striped">
                             <thead>
                                 <th>Nome</th>
-                                <th>Pet</th>
-                                <th>Email</th>
-                                <th>Telefone</th>
-                                <th>Whats App</th>
+                                <th>Telefone p/ Recado</th>
+                                <th>Whats App Numero</th>
+                                <th>Instagram</th>
                                 <th>Whats App</th>
                                 <th>Ações</th>
                                 <th>Histórico</th>
@@ -34,10 +32,9 @@
                                 @foreach ($clientes_cadastrados as $cliente)
                                     <tr>
                                         <td>{{ Str::ucfirst($cliente->cliente_nome) }}</td>
-                                        <td>@Pets</td>
-                                        <td>{{ $cliente->cliente_email }}</td>
                                         <td class="phone">{{ $cliente->cliente_telefone }}</td>
                                         <td class="phone" >{{ $cliente->cliente_whatsapp }}</td>
+                                        <td>Instagram Cliente</td>
                                         <td>
                                             <a href="https://wa.me/+55{{ $cliente->cliente_whatsapp }}"
                                                 target="_blank" data-toggle="tooltip" data-placement="top"

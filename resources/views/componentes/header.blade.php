@@ -46,8 +46,9 @@
     <div class="wrapper">
         <div class="sidebar" data-color="original" data-image="../assets/img/sidebar-5.jpg">
             <div class="sidebar-wrapper">
-                <div class="logo" >
-                    <img src="../assets/img/topo_logo_sistema.png" width="100%" style="background-color: white!important;">
+                <div class="logo">
+                    <img src="../assets/img/topo_logo_sistema.png" width="100%"
+                        style="background-color: white!important;">
                 </div>
                 <ul class="nav">
                     <li class="nav-item">
@@ -86,12 +87,47 @@
                             <p> &nbsp;&nbsp; Financeiro</p>
                         </a>
                     </li>
-
                     <li>
-                        <a class="nav-link" href="{{ url('/marketing') }}">
-                            <i class="far fa-id-badge fa-2x"></i>
-                            <p> &nbsp;&nbsp; Perfil</p>
+                        <a class="nav-link" href="{{ url('/leva-e-tras') }}">
+                            <i class="fas fa-car fa-2x "></i>
+                            <p> &nbsp;&nbsp; Leva & Trás</p>
                         </a>
+                    </li>
+                    <li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fal fa-user-cog fa-2x"></i>
+                            Configurações
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
+                                <p>
+                                    <i class="fal fa-user"></i>
+                                    Configuração de Perfil
+                                </p>
+                            </a>
+                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
+                                <p>
+                                    <i class="fal fa-user"></i>
+                                    Configuração de Layout
+                                </p>
+                            </a>
+                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
+                                <p>
+                                    <i class="fal fa-user"></i>
+                                    Configuração de Notificação
+                                </p>
+                            </a>
+                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
+                                <p>
+                                    <i class="fal fa-user"></i>
+                                    Plano & Assinatura
+                                </p>
+                            </a>
+                        </div>
+                    </li>
                     </li>
                 </ul>
             </div>
@@ -100,7 +136,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Dashboard </a>
+                    <a class="navbar-brand" href="#pablo">Dashboard </a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>

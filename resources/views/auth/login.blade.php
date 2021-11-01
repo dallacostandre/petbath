@@ -2,7 +2,6 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
             <div style="display: flex; justify-content:center;">
-
                 <img src="../assets/img/topo_logo_sistema.png" width="20%">
             </div>
         </x-slot>
