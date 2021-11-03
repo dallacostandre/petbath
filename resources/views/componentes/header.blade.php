@@ -75,11 +75,32 @@
                             <p> &nbsp;&nbsp; Produtos & Serviços</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="{{ url('financeiro') }}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">
                             <i class="fal fa-comment-alt-dollar fa-2x"></i>
-                            <p> &nbsp;&nbsp; Financeiro</p>
+                            Financeiro
                         </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('/fluxo-de-caixa') }}">
+                                <p>
+                                    <i class="fal fa-user"></i>
+                                    Fluxo de Caixa
+                                </p>
+                            </a>
+                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
+                                <p>
+                                    <i class="fal fa-user"></i>
+                                    P.D.V.
+                                </p>
+                            </a>
+                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
+                                <p>
+                                    <i class="fal fa-user"></i>
+                                    Relatórios
+                                </p>
+                            </a>
+                        </div>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/leva-e-tras') }}">
@@ -121,7 +142,6 @@
                                 </p>
                             </a>
                         </div>
-                    </li>
                     </li>
                 </ul>
             </div>
