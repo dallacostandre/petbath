@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ConfiguracaoController;
 use App\Http\Controllers\FinanceiroController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\LevaTrasController;
 use App\Http\Controllers\PetDadosController;
 use App\Http\Controllers\ServicosController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CalenderController;
 
 
 Route::GET('/acessar', function () {
@@ -44,15 +46,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/servicos-e-produtos', [ServicosController::class, 'index']);
     Route::GET('/cadastro-servico', [ServicosController::class, 'cadastroServicoView']);
     Route::POST('/add-novo-servico', [ServicosController::class, 'create']);
-    
+
     // HISTÓRICO
-    
+
     // CONFIGURAÇÃO
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
-    
+
     // LEVA & TRAS
     Route::GET('/leva-e-tras', [LevaTrasController::class, 'index']);
-    
+
     //FLUXO DE CAIXA
     Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'index']);
 
@@ -60,4 +62,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/pets', [PetDadosController::class, 'index']);
     Route::GET('/cadastro-pet', [PetDadosController::class, 'cadastroPetView']);
     Route::POST('/add-novo-pet', [PetDadosController::class, 'create']);
+
+    // AGENDAMENTO
+    Route::GET('/agendamento', [AgendamentoController::class, 'index']);
+    Route::get('calendar-event', [CalenderController::class, 'index']);
+    Route::post('calendar-crud-ajax', [CalenderController::class, 'calendarEvents']);
 });

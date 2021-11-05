@@ -1,22 +1,26 @@
 @component('componentes.header')
 @endcomponent
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- End Navbar -->
 <div class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card strpied-tabled-with-hover">
-                    <div class="container" style="display: flex; justify-content:space-between;">
-                        <h4>Fluxo de Caixa</h4>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                            Filtros
-                        </button>
+                    <div class="container-fluid">
+                        <h4>Gestão Financeira</h4>
+                        <div style="display: flex; justify-content:flex-end;">
+                            <div style="margin-right: 0.25rem" >
+                                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Filtrar</button>
+                            </div>
+                            <div>
+                                <button class="btn btn-success btn-sm" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"> Novo Lançamento</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body ">
-                        <table class="table table-striped">
+                    <div class="container-fluid">
+                        <table class="table table-hover">
                             <thead>
                                 <th>Descrição</th>
                                 <th>Método de Pagamento</th>
@@ -24,6 +28,7 @@
                                 <th>Entrada</th>
                                 <th>Saída</th>
                                 <th>Saldo</th>
+                                <th>Ações</th>
                             </thead>
                             <tbody>
                                 <tr>
@@ -33,30 +38,12 @@
                                     <td>XXXXX</td>
                                     <td>XXXXX</td>
                                     <td>XXXXX</td>
-                                </tr>
-                                <tr>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                </tr>
-                                <tr>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                </tr>
-                                <tr>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
-                                    <td>XXXXX</td>
+                                    <td>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Remover">
+                                            <i class="fas fa-exchange-alt"></i></a>&nbsp;&nbsp;
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Alterar">
+                                            <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -112,19 +99,52 @@
             </div>
         </div>
         <div class="container" style="display: flex; justify-content:space-between;">
-            <a class="nav-item" href="http://">Limpar Filtro</a>
-            <button type="button" name="" id="" class="btn btn-primary" btn-lg btn-block">Filtrar</button>
+            <a style="text-decoration: none;" href="http://">Limpar Filtro</a>
+            <button type="button" name="" id="" class="btn btn-success btn-sm" btn-lg btn-block">Filtrar</button>
         </div>
+    </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lançamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option value="1">Despesa</option>
+                        <option value="2">Receita</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" type="text" placeholder="Descrição">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" type="text" placeholder="Valor">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" type="text" placeholder="Descrição">
+                </div>
+                <div class="mb-3">
+                    <select class="form-select form-select-sm"" aria-label=" Default select example">
+                        <option value="1">Cartão</option>
+                        <option value="2">Débito</option>
+                        <option value="3">Outro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer mx-auto" >
+                <button type="button" class="btn btn-success btn-sm">Adicionar</button>
+            </div>
+        </div>
     </div>
 </div>
 @component('componentes.footer')
 @endcomponent
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 <script>
     $(function() {
