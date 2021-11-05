@@ -75,73 +75,60 @@
                             <p> &nbsp;&nbsp; Produtos & Serviços</p>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">
+                    <li>
+                        <a class="nav-link" href="#" id="financeiro">
                             <i class="fal fa-comment-alt-dollar fa-2x"></i>
                             Financeiro
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ url('/fluxo-de-caixa') }}">
-                                <p>
-                                    <i class="fal fa-user"></i>
-                                    Fluxo de Caixa
-                                </p>
-                            </a>
-                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
-                                <p>
-                                    <i class="fal fa-user"></i>
-                                    P.D.V.
-                                </p>
-                            </a>
-                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
-                                <p>
-                                    <i class="fal fa-user"></i>
-                                    Relatórios
-                                </p>
-                            </a>
+                        <div id="list_financeiro">
+                            <ul style="list-style-type:none;">
+                                <li>
+                                    <a class="nav-link" href="{{ url('/fluxo-de-caixa') }}">
+                                        <p>
+                                            Fluxo de Caixa
+                                        </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{{ url('/configuracoes') }}">
+                                        <p>
+                                            P.D.V.
+                                        </p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="{{ url('/configuracoes') }}">
+                                        <p>
+                                            Relatórios
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ url('/leva-e-tras') }}">
-                            <i class="fas fa-car fa-2x "></i>
-                            <p> &nbsp;&nbsp; Leva & Trás</p>
-                        </a>
-                    </li>
-                    <li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link" href="#" id="configuracoes">
                             <i class="fal fa-user-cog fa-2x"></i>
                             Configurações
                         </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
-                                <p>
-                                    <i class="fal fa-user"></i>
-                                    Configuração de Perfil
-                                </p>
-                            </a>
-                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
-                                <p>
-                                    <i class="fal fa-user"></i>
-                                    Configuração de Layout
-                                </p>
-                            </a>
-                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
-                                <p>
-                                    <i class="fal fa-user"></i>
-                                    Configuração de Notificação
-                                </p>
-                            </a>
-                            <a class="dropdown-item" href="{{ url('/configuracoes') }}">
-                                <p>
-                                    <i class="fal fa-user"></i>
-                                    Plano & Assinatura
-                                </p>
-                            </a>
-                        </div>
+                        <ul style="list-style-type:none;">
+                            <li><a class="nav-link" href="{{ url('/configuracoes') }}">
+                                    <p>Configuração de Perfil</p>
+                                </a></li>
+                            <li><a class="nav-link" href="{{ url('/configuracoes') }}">
+                                    <p>Configuração de Layout</p>
+                                </a></li>
+                            <li>
+                                <a class="nav-link" href="{{ url('/configuracoes') }}">
+                                    <p>Configuração de Notificação</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{ url('/configuracoes') }}">
+                                    <p>Plano & Assinatura</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -172,11 +159,11 @@
                                     <span class="d-lg-none">Notification</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Notification 1</a>
-                                    <a class="dropdown-item" href="#">Notification 2</a>
-                                    <a class="dropdown-item" href="#">Notification 3</a>
-                                    <a class="dropdown-item" href="#">Notification 4</a>
-                                    <a class="dropdown-item" href="#">Another notification</a>
+                                    <a  href="#">Notification 1</a>
+                                    <a  href="#">Notification 2</a>
+                                    <a  href="#">Notification 3</a>
+                                    <a  href="#">Notification 4</a>
+                                    <a  href="#">Another notification</a>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -199,12 +186,12 @@
                                     <span class="no-icon">Dropdown</span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a  href="#">Action</a>
+                                    <a  href="#">Another action</a>
+                                    <a  href="#">Something</a>
+                                    <a  href="#">Something else here</a>
                                     <div class="divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
+                                    <a  href="#">Separated link</a>
                                 </div>
                             </li> --}}
                             <li class="nav-item">

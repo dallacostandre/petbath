@@ -52,4 +52,17 @@
 <script src="{{ asset('../assets/font-awesome-pro/js/all.js') }}" rel="stylesheet"></script>
 {{-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
 
+<script>
+    $(document).ready(function() { 
+        $("#list_financeiro").hide();
+    });
+
+    function() {
+        $("#financeiro").click(function() {
+            $("#list_financeiro").show();
+        })
+
+    }
+</script>
+
 </html>
