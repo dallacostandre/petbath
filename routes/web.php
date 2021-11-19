@@ -56,7 +56,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/leva-e-tras', [LevaTrasController::class, 'index']);
 
     //FLUXO DE CAIXA
-    Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'index']);
+    Route::GET('/caixa', [FinanceiroController::class, 'index']);
+    Route::GET('/relatorio', [FinanceiroController::class, 'relatorio']);
+    
+    //CONFIGURAÇÕES DE PERFIL
+    Route::GET('/configuracao-perfil', [ConfiguracaoController::class, 'configuracoesPerfil']);
+
 
     //PET
     Route::GET('/pets', [PetDadosController::class, 'index']);

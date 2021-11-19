@@ -22,9 +22,9 @@
                     <div class="container-fluid">
                         <table class="table table-hover">
                             <thead>
+                                <th>Data</th>
                                 <th>Descrição</th>
-                                <th>Método de Pagamento</th>
-                                <th>Data Pagamento</th>
+                                <th>Método</th>
                                 <th>Entrada</th>
                                 <th>Saída</th>
                                 <th>Saldo</th>

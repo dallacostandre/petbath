@@ -82,4 +82,9 @@ class FinanceiroController extends Controller
     {
         //
     }
+
+    public function relatorio()
+    {
+        return view('relatorio_financeiro');
+    }
 }

@@ -83,16 +83,16 @@
                         <div id="list_financeiro">
                             <ul style="list-style-type:none;">
                                 <li>
-                                    <a class="nav-link" href="{{ url('/fluxo-de-caixa') }}">
+                                    <a class="nav-link" href="{{ url('/caixa') }}">
                                         <p>
-                                            Fluxo de Caixa
+                                            Caixa
                                         </p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{ url('/configuracoes') }}">
+                                    <a class="nav-link" href="{{ url('/relatorio') }}">
                                         <p>
-                                            P.D.V.
+                                            Relatório Financeiro
                                         </p>
                                     </a>
                                 </li>
@@ -112,22 +112,23 @@
                             Configurações
                         </a>
                         <ul style="list-style-type:none;">
-                            <li><a class="nav-link" href="{{ url('/configuracoes') }}">
+                            <li><a class="nav-link" href="{{ url('/configuracao-perfil') }}">
                                     <p>Configuração de Perfil</p>
                                 </a></li>
-                            <li><a class="nav-link" href="{{ url('/configuracoes') }}">
+                            {{-- <li><a class="nav-link" href="{{ url('/configuracoes') }}">
                                     <p>Configuração de Layout</p>
-                                </a></li>
-                            <li>
+                                </a>
+                            </li> --}}
+{{--                             <li>
                                 <a class="nav-link" href="{{ url('/configuracoes') }}">
                                     <p>Configuração de Notificação</p>
                                 </a>
-                            </li>
-                            <li>
+                            </li> --}}
+                            {{-- <li>
                                 <a class="nav-link" href="{{ url('/configuracoes') }}">
                                     <p>Plano & Assinatura</p>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                 </ul>

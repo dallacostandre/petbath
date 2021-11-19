@@ -41,15 +41,27 @@
         });
 
         var calendar = $('#full_calendar_events').fullCalendar({
+            header: {
+                left: 'prev,next today myCustomButton',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
             editable: true,
             editable: true,
+            defaultView: 'agendaWeek',
+
+            duration: {
+                days: 7
+            },
+            minTime: "07:00:00",
+            maxTime: "23:00:00",
             events: SITEURL + "/calendar-event",
             displayEventTime: true,
             eventRender: function(event, element, view) {
                 if (event.allDay === 'true') {
                     event.allDay = true;
                 } else {
-                    event.allDay = false;
+                    event.allDay = true;
                 }
             },
             selectable: true,

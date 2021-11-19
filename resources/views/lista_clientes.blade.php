@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-striped">
-                            <thead>
+                            <thead class="text-center">
                                 <th>Nome</th>
                                 <th>Telefone p/ Recado</th>
                                 <th>Whats App Numero</th>
@@ -30,10 +30,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($clientes_cadastrados as $cliente)
-                                    <tr>
+                                    <tr class="text-center">
                                         <td>{{ Str::ucfirst($cliente->cliente_nome) }}</td>
                                         <td class="phone">{{ $cliente->cliente_telefone }}</td>
-                                        <td class="phone" >{{ $cliente->cliente_whatsapp }}</td>
+                                        <td class="phone">{{ $cliente->cliente_whatsapp }}</td>
                                         <td>Instagram Cliente</td>
                                         <td>
                                             <a href="https://wa.me/+55{{ $cliente->cliente_whatsapp }}"

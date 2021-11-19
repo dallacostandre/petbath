@@ -10,4 +10,9 @@ class ConfiguracaoController extends Controller
     {
         return view('configuracoes');
     }
+
+    public function configuracoesPerfil()
+    {
+        return view('configuracoes_perfil');
+    }
 }
