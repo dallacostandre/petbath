@@ -13,7 +13,7 @@ use App\Http\Controllers\CalenderController;
 
 Route::GET('/acessar', function () {
     return view('auth.login');
-});
+})->name('acessar');
 
 Route::GET('/cadastro', function () {
     return view('auth.register');
