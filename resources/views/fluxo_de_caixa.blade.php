@@ -9,7 +9,7 @@
                     <div class="container-fluid">
                         <h4>Fluxo de Caixa</h4>
                         <div style="display: flex; justify-content:flex-end;">
-                            <div style="margin-right: 0.25rem" >
+                            <div style="margin-right: 0.25rem">
                                 <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="offcanvas"
                                     data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Filtrar</button>
                             </div>
@@ -114,14 +114,34 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
+                <div style="display: flex; justify-content:space-between;padding-left:0px;" class="container">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Entrada
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Saída
+                        </label>
+                    </div>
+                </div>
+                {{-- <div class="mb-3">
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option value="1">Despesa</option>
                         <option value="2">Receita</option>
                     </select>
-                </div>
+                </div> --}}
                 <div class="mb-3">
-                    <input class="form-control form-control-sm" type="text" placeholder="Descrição">
+                    <select class="form-select" multiple aria-label="multiple select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
                 </div>
                 <div class="mb-3">
                     <input class="form-control form-control-sm" type="text" placeholder="Valor">
@@ -140,7 +160,7 @@
                     </select>
                 </div>
             </div>
-            <div class="modal-footer mx-auto" >
+            <div class="modal-footer mx-auto">
                 <button type="button" class="btn btn-success btn-sm">Adicionar</button>
             </div>
         </div>
