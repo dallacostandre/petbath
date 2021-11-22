@@ -28,7 +28,7 @@
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
-                                Cadastro de Cliente
+                                Dados do Cliente
                             </button>
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse"

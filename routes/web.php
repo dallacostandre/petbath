@@ -20,15 +20,10 @@ Route::GET('/cadastro', function () {
 });
 
 
-Route::GET('/', function () {
-    return view('landing_page');
-});
-
-
 // USUARIO DEVE ESTAR LOGADO
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::GET('/dashboard', function () {
+    Route::GET('/', function () {
         return view('dashboard');
     })->name('dashboard');
 
@@ -61,7 +56,6 @@ Route::group(['middleware' => 'auth'], function () {
     
     //CONFIGURAÇÕES DE PERFIL
     Route::GET('/configuracao-perfil', [ConfiguracaoController::class, 'configuracoesPerfil']);
-
 
     //PET
     Route::GET('/pets', [PetDadosController::class, 'index']);
