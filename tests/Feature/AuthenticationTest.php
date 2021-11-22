@@ -35,7 +35,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->post('/login', [
+        $this->post('/acessar', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
