@@ -10,8 +10,38 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card strpied-tabled-with-hover">
-                    <div class="container-fluid">
-                        <h4>Agendamento</h4>
+                    <div>
+                    </div>
+                    <h4>Agendamento</h4>
+                    <div class="container"style="display: flex">
+                        <div class="col-md-6" >
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                                  <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small>3 days ago</small>
+                                  </div>
+                                  <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                  <small>Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                  <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small class="text-muted">3 days ago</small>
+                                  </div>
+                                  <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                  <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                  <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">List group item heading</h5>
+                                    <small class="text-muted">3 days ago</small>
+                                  </div>
+                                  <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                  <small class="text-muted">Donec id elit non mi porta.</small>
+                                </a>
+                              </div>
+                        </div>
                         <div id='full_calendar_events'></div>
                     </div>
                 </div>
@@ -41,12 +71,11 @@
         });
 
         var calendar = $('#full_calendar_events').fullCalendar({
-            header: {
-                left: 'prev,next today myCustomButton',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            editable: true,
+            // header: {
+            //     left: 'prev,next today myCustomButton',
+            //     center: 'title',
+            //     right: 'month,agendaWeek,agendaDay'
+            // },
             editable: true,
             defaultView: 'agendaWeek',
 

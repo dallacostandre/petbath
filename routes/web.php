@@ -9,6 +9,7 @@ use App\Http\Controllers\PetDadosController;
 use App\Http\Controllers\ServicosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalenderController;
+use App\Http\Controllers\PacotesEPromocoesController;
 
 
 Route::GET('/acessar', function () {
@@ -66,4 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/agendamento', [AgendamentoController::class, 'index']);
     Route::get('calendar-event', [CalenderController::class, 'index']);
     Route::post('calendar-crud-ajax', [CalenderController::class, 'calendarEvents']);
+
+    // PACOTES E PROMOÇÕES
+    Route::get('/pacotes-e-promocoes', [PacotesEPromocoesController::class, 'pacotesEPromocoesIndex']);
 });

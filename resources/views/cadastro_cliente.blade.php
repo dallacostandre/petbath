@@ -21,6 +21,7 @@
             </div>
         @endif
         <div class="row">
+            #primeiro accordeon aberto
             <div class="col-md-12">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
@@ -31,7 +32,7 @@
                                 Dados do Cliente
                             </button>
                         </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                        <div id="flush-collapseOne" class="accordion-collapse collapse in"
                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <div class="card">
@@ -143,6 +144,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                             @if (isset($cliente))
                                                 <input type="text" value="{{ $cliente->id }}" id="id_cliente"
                                                     style="display:none;">
@@ -152,11 +154,10 @@
                                             @else
                                                 <div style="float:right">
                                                     <button type="button" class="btn btn-info btn-fill pull-right"
-                                                        id="salvarCliente">Cadastrar
+                                                        id="salvarCliente">Incluir Pet
                                                     </button>
                                                 </div>
                                             @endif
-                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -290,7 +291,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div style="float:right">
+                                        <button type="button" class="btn btn-info btn-fill pull-right"
+                                        id="salvarCliente">
+                                        Finalizar Cadastro
+                                    </button>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>

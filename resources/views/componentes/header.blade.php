@@ -76,6 +76,12 @@
                         </a>
                     </li>
                     <li>
+                        <a class="nav-link" href="{{ url('/pacotes-e-promocoes') }}">
+                            <i class="fas fa-dog fa-2x"></i>
+                            <p> &nbsp;&nbsp; Pacotes & Promoções</p>
+                        </a>
+                    </li>
+                    <li>
                         <a class="nav-link" href="#" id="financeiro">
                             <i class="fal fa-comment-alt-dollar fa-2x"></i>
                             Financeiro
