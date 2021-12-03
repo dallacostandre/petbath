@@ -21,9 +21,7 @@
     <link href="{{ asset('../assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/css/light-bootstrap-dashboard.css?v=2.0.0') }}" rel="stylesheet" />
 
-    <link href="{{ asset('../assets/font-awesome-pro/css/fontawesome.css') }}" rel="stylesheet" />
-    <link href="{{ asset('../assets/font-awesome-pro/css/regular.css') }}" rel="stylesheet" />
-    <link href="{{ asset('../assets/font-awesome-pro/css/all.css') }}" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -59,32 +57,32 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/agendamento') }}">
-                            <i class="far fa-clipboard-list-check fa-2x "></i>
-                            <p> &nbsp;&nbsp; Agendamento</p>
+
+                            <p> &nbsp;&nbsp; </p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/clientes') }}">
-                            <i class="fal fa-users fa-2x"></i>
-                            <p> &nbsp;&nbsp; Clientes</p>
+                           
+                            <p> &nbsp;&nbsp; </p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/servicos-e-produtos') }}">
-                            <i class="fas fa-dog fa-2x"></i>
-                            <p> &nbsp;&nbsp; Produtos & Serviços</p>
+                            
+                            <p> &nbsp;&nbsp; </p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/pacotes-e-promocoes') }}">
-                            <i class="fas fa-dog fa-2x"></i>
-                            <p> &nbsp;&nbsp; Pacotes & Promoções</p>
+                     
+                            <p> &nbsp;&nbsp; </p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="#" id="financeiro">
-                            <i class="fal fa-comment-alt-dollar fa-2x"></i>
-                            Financeiro
+
+                            
                         </a>
                         <div id="list_financeiro">
                             <ul style="list-style-type:none;">
@@ -114,8 +112,8 @@
                     </li>
                     <li>
                         <a class="nav-link" href="#" id="configuracoes">
-                            <i class="fal fa-user-cog fa-2x"></i>
-                            Configurações
+                            
+                            
                         </a>
                         <ul style="list-style-type:none;">
                             <li><a class="nav-link" href="{{ url('/configuracao-perfil') }}">
@@ -201,14 +199,7 @@
                                     <a  href="#">Separated link</a>
                                 </div>
                             </li> --}}
-                            <li class="nav-item">
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-link">
-                                        {{ __('Log Out') }}
-                                    </button>
-                                </form>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>

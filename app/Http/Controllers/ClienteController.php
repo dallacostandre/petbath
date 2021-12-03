@@ -100,7 +100,7 @@ class ClienteController extends Controller
         $clientes_cadastrados = Cliente::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->get();
 
         return view(
-            'lista_clientes',
+            'dashboard.clientes',
             compact('clientes_cadastrados')
         );
     }
@@ -108,7 +108,7 @@ class ClienteController extends Controller
     public function cadastroView()
     {
         $raca_pet  = PetRaca::all();
-        return view('cadastro_cliente', compact('raca_pet'));
+        return view('dashboard.cliente_cadastro', compact('raca_pet'));
     }
 
     public function editarView($id)

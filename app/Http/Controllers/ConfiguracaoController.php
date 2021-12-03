@@ -8,11 +8,6 @@ class ConfiguracaoController extends Controller
 {
     public function index()
     {
-        return view('configuracoes');
-    }
-
-    public function configuracoesPerfil()
-    {
-        return view('configuracoes_perfil');
+        return view('dashboard.configuracoes');
     }
 }

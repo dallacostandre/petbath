@@ -14,7 +14,7 @@ class FinanceiroController extends Controller
      */
     public function index()
     {
-        return view('fluxo_de_caixa');
+        return view('dashboard.financeiro');
     }
 
     /**

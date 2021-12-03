@@ -1,0 +1,22 @@
+.botao-padrao {
+    color: white;
+    background-color: #7511A6;
+    border-color: #7511A6;
+}
+
+.botao-padrao:hover {
+    color: white;
+    background-color: #AF24F2;
+    border-color: #AF24F2;
+}
+
+.botao-padrao-topo {
+    justify-content: flex-end;
+    display: flex;
+}
+
+.btn-padrao-2 {
+    color: white;
+    background-color: #ECC32F;
+    border-color: #ECC32F;
+}

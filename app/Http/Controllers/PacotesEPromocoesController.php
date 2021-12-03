@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class PacotesEPromocoesController extends Controller
 {
-    public function pacotesEPromocoesIndex()
+    public function index()
     {
-return view('pacotes_e_promocoes');
+return view('dashboard.pacotes_e_promocoes');
     }
 }
