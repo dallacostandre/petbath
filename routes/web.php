@@ -23,15 +23,9 @@ Route::GET('/cadastro', function () {
 // USUARIO DEVE ESTAR LOGADO
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::GET('/', function () {
-        return view('dashboard.index');
-    })->name('dashboard');
-
     // CLIENTE
     Route::GET('/clientes', [ClienteController::class, 'index']);
     Route::GET('/cadastro-cliente', [ClienteController::class, 'cadastroView']);
-
-    
 
     // SERVIÇOS
     Route::GET('/produtos-e-servicos', [ServicosController::class, 'index']);
@@ -43,20 +37,28 @@ Route::group(['middleware' => 'auth'], function () {
 
     // CONFIGURAÇÃO
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
-    Route::GET('/editar-perfil', [ConfiguracaoController::class, 'configuracoesPerfilClientesIndex']);
-
-    // LEVA & TRAS
-    Route::GET('/leva-e-tras', [LevaTrasController::class, 'index']);
+    Route::GET('/editar-perfil', [ConfiguracaoController::class, 'editarPerfil']);
 
     //FLUXO DE CAIXA
     
-    Route::GET('/financeiro', [FinanceiroController::class, 'index']);
 
     //PET
     Route::GET('/pets', [PetDadosController::class, 'index']);
 
     // AGENDAMENTO
     Route::GET('/agendamento', [AgendamentoController::class, 'index']);
+
+    //------------------------ NOVAS ROTAS
+
+    Route::GET('/', function () {return view('dashboard.index');})->name('dashboard');
+
+    Route::GET('/planos-e-assinaturas', [ConfiguracaoController::class, 'planosAssinaturas']);
+
+    Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'fluxoDeCaixa']);
+
+    Route::GET('/financeiro', [FinanceiroController::class, 'index']);
+
+    
 
     
 });

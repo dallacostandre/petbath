@@ -11,8 +11,13 @@ class ConfiguracaoController extends Controller
         return view('dashboard.configuracoes');
     }
 
-    public function configuracoesPerfilClientesIndex()
+    public function editarPerfil()
     {
-        return view('dashboard.configuracao_perfil');
+        return view('dashboard.editar_perfil');
+    }
+
+    public function planosAssinaturas()
+    {
+        return view('dashboard.planos_assinaturas_usuario');
     }
 }

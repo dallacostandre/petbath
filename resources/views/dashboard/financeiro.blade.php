@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Fluxo de Caixa</h5>
                         <p class="card-text">Realizar lançamentos | Verificar Saldo </p>
-                        <a href="#" class="btn btn-primary">Entrar</a>
+                        <a href="{{url('/fluxo-de-caixa')}}" class="btn btn-primary">Acessar</a>
                     </div>
                 </div>
             </div>

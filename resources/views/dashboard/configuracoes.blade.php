@@ -18,7 +18,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    {{-- <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Notificações</h5>
@@ -27,14 +27,14 @@
                                 <a href="#" class="btn btn-primary">Entrar</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Plano & Assinatura</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.
                                 </p>
-                                <a href="#" class="btn btn-primary">Entrar</a>
+                                <a href="{{url('/planos-e-assinaturas')}}" class="btn btn-primary">Entrar</a>
                             </div>
                         </div>
                     </div>

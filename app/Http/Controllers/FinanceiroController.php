@@ -87,4 +87,9 @@ class FinanceiroController extends Controller
     {
         return view('relatorio_financeiro');
     }
+    
+    public function fluxoDeCaixa()
+    {
+        return view('dashboard.fluxo_de_caixa');
+    }
 }
