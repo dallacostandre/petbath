@@ -43,7 +43,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <label>Custo Unitário</label>
+                                                    <label>Custo</label>
                                                     <input type="text" class="form-control" name="servico_nome"
                                                         id="servico_nome">
                                                 </div>
@@ -70,6 +70,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <button type="button" class="btn btn-success botao-padrao float-end"
+                                        id="cadastrarServico">Adicionar
+                                    </button>
+                                    <div class="clearfix"></div>
 
                                 </div>
                             </div>
@@ -216,8 +220,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-info btn-fill float-end"
-                                            id="cadastrarServico">Adicionar</button>
+                                        <button type="button" class="btn btn-success botao-padrao float-end"
+                                            id="cadastrarServico">Adicionar
+                                        </button>
                                         <div class="clearfix"></div>
                                     </form>
                                 </div>
@@ -260,10 +265,12 @@
                                                 <td>
                                                     <a href="{{ url('editar-servico/') }}" data-toggle="tooltip"
                                                         data-placement="top" title="Editar Servico">
-                                                        <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
+                                                        <i class="fas fa-user-edit"></i>
+                                                    </a> &nbsp;&nbsp;
                                                     <a href="{{ url('excluir-servico/') }}" data-toggle="tooltip"
                                                         data-placement="top" title="Excluir Servico">
-                                                        <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
+                                                        <i class="fad fa-trash"></i>
+                                                    </a>&nbsp;&nbsp;
                                                 </td>
                                             </tr>
                                         </tbody>

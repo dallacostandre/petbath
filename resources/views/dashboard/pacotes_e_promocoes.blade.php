@@ -32,25 +32,9 @@
                                                         id="Nome do Pacote">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-9">
                                                 <div class="form-group">
-                                                    <label>Serviços</label>
-                                                    <input type="text" class="form-control"
-                                                        name="servico_nome"
-                                                        id="servico_nome">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Serviços</label>
-                                                    <input type="text" class="form-control"
-                                                        name="servico_nome"
-                                                        id="servico_nome">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Produtos</label>
+                                                    <label>Descrição do Pacote</label>
                                                     <input type="text" class="form-control"
                                                         name="servico_nome"
                                                         id="servico_nome">
@@ -60,7 +44,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Custo Unitário</label>
+                                                    <label for="exampleInputEmail1">Custo</label>
                                                     <input type="text" class="form-control money2"
                                                         name="servico_preco"
                                                         id="servico_preco">
@@ -91,9 +75,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-info btn-fill float-end"
-                                            id="cadastrarServico">Adicionar</button>
-                                        <div class="clearfix"></div>
+                                        <button type="button" class="btn btn-success botao-padrao float-end " 
+                                        id="cadastrarServico">Adicionar
+                                    </button>
+                                    <div class="clearfix"></div>
                                     </form>
                                 </div>
                             </div>
@@ -192,25 +177,9 @@
                                                         id="servico_nome">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-9">
                                                 <div class="form-group">
-                                                    <label>Serviços</label>
-                                                    <input type="text" class="form-control"
-                                                        name="servico_nome"
-                                                        id="servico_nome">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Serviços</label>
-                                                    <input type="text" class="form-control"
-                                                        name="servico_nome"
-                                                        id="servico_nome">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Produtos</label>
+                                                    <label>Descrição do Pacote</label>
                                                     <input type="text" class="form-control"
                                                         name="servico_nome"
                                                         id="servico_nome">
@@ -251,7 +220,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-info btn-fill float-end"
+                                        <button type="button" class="btn btn-success botao-padrao float-end"
                                             id="cadastrarServico">Adicionar</button>
                                         <div class="clearfix"></div>
                                     </form>
