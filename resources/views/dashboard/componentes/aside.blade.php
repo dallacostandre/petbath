@@ -53,6 +53,14 @@
                         <span class="hide-menu">Configurações</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-link">
+                            {{ __('Log Out') }}
+                        </button>
+                    </form>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
