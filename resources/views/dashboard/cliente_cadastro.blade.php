@@ -131,24 +131,129 @@
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              Accordion Item #2
+                              Cadastro Pet 
                             </button>
                           </h2>
                           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                              <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                            </div>
-                          </div>
-                        </div>
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              Accordion Item #3
-                            </button>
-                          </h2>
-                          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                              <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                              <div class="row" style="display: flex">
+                                <div class="col-md-3">
+                                    <div class="card card-user">
+                                        <div class="card-header">
+                                            <div style="display: flex; justify-content: space-between; padding-bottom:10px;">
+                                                <h4 class="card-title">Pets de @Cliente</h4>
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Adicionar Pet"><i class="fal fa-plus-circle fa-2x"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row-md-12 " style="padding-bottom: 20px;">
+                                                <div class="list-group">
+                                                    <a href="#" class="list-group-item list-group-item-action active"
+                                                        aria-current="true">
+                                                        @pet
+                                                    </a>
+                                                    <a href="#" class="list-group-item list-group-item-action">@pet</a>
+                                                    <a href="#" class="list-group-item list-group-item-action">@pet</a>
+                                                    <a href="#" class="list-group-item list-group-item-action">@pet</a>
+                                                    <a class="list-group-item list-group-item-action disabled">@pet</a>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card card-user">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Nome do Pet</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Insira o nome do Pet" name="pet_nome"
+                                                            id="pet_nome" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Espécie</label>
+                                                        <select class="form-control" name="pet_especie"
+                                                            id="pet_especie" required>
+                                                            <option selected disabled>Espécie</option>
+                                                            <option value="felino">Felino</option>
+                                                            <option value="canino">Canino</option>
+                                                            <option value="outro">Outro</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Porte</label>
+                                                        <select class="form-control" name="pet_porte" id="pet_porte"
+                                                            required>
+                                                            <option selected disabled>Selecione o porte</option>
+                                                            <option value="grande">Grande</option>
+                                                            <option value="medio">Médio</option>
+                                                            <option value="pequeno">Pequeno</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Raça</label>
+                                                        {{-- FOREACH E RAÇAS --}}
+                                                        <select class="form-control" name="pet_raca" id="pet_raca"
+                                                            required>
+                                                            <option disabled>Selecione uma raça</option>
+                                                            @foreach ($raca_pet as $raca)
+                                                                <option value="{{ $raca->id }}">
+                                                                    {{ $raca->nome_raca }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Sexo</label>
+                                                        <select class="form-control" name="pet_genero" id="pet_genero"
+                                                            required>
+                                                            <option selected disabled>Selecione o gênero</option>
+                                                            <option value="m">Macho</option>
+                                                            <option value="f">Fêmea</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Pelagem</label>
+                                                        <select class="form-control" name="pet_pelagem"
+                                                            id="pet_pelagem" required>
+                                                            <option selected disabled>Selecione a pelagem</option>
+                                                            <option value="curto">Curto</option>
+                                                            <option value="longo">Longo</option>
+                                                            <option value="medio">Médio</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Observações</label>
+                                                        <textarea rows="4" cols="80" class="form-control"
+                                                            name="pet_observacoes" id="pet_observacoes"
+                                                            placeholder="Insira uma observação aqui,caso tenha."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="float:right">
+                                        <button type="button" class="btn btn-success botao-padrao" id="salvarCliente">Finalizar</button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>

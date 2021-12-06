@@ -2400,8 +2400,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input:checked {
-    background-color: #2962ff;
-    border-color: #2962ff
+    background-color: #a2388c;
+    border-color: #a2388c
 }
 
 .form-check-input:checked[type=checkbox] {
@@ -2413,8 +2413,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input[type=checkbox]:indeterminate {
-    background-color: #2962ff;
-    border-color: #2962ff;
+    background-color: #a2388c;
+    border-color: #a2388c;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e")
 }
 
@@ -2501,7 +2501,7 @@ textarea.form-control-lg {
     width: 1rem;
     height: 1rem;
     margin-top: -0.25rem;
-    background-color: #2962ff;
+    background-color: #a2388c;
     border: 0;
     border-radius: 1rem;
     -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -2536,7 +2536,7 @@ textarea.form-control-lg {
 .form-range::-moz-range-thumb {
     width: 1rem;
     height: 1rem;
-    background-color: #2962ff;
+    background-color: #a2388c;
     border: 0;
     border-radius: 1rem;
     -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4296,7 +4296,7 @@ fieldset:disabled .btn {
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #2962ff
+    background-color: #a2388c
 }
 
 .dropdown-item.disabled,
@@ -4344,7 +4344,7 @@ fieldset:disabled .btn {
 .dropdown-menu-dark .dropdown-item.active,
 .dropdown-menu-dark .dropdown-item:active {
     color: #fff;
-    background-color: #2962ff
+    background-color: #a2388c
 }
 
 .dropdown-menu-dark .dropdown-item.disabled,
@@ -4567,7 +4567,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: #fff;
-    background-color: #2962ff
+    background-color: #a2388c
 }
 
 .nav-fill .nav-item,
@@ -5371,8 +5371,8 @@ fieldset:disabled .btn {
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background-color: #2962ff;
-    border-color: #2962ff
+    background-color: #a2388c;
+    border-color: #a2388c
 }
 
 .page-item.disabled .page-link {
@@ -5717,8 +5717,8 @@ fieldset:disabled .btn {
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #2962ff;
-    border-color: #2962ff
+    background-color: #a2388c;
+    border-color: #a2388c
 }
 
 .list-group-item+.list-group-item {
@@ -11652,7 +11652,7 @@ html {
 }
 
 a {
-    color: #2962ff
+    color: #a2388c
 }
 
 a:focus,
@@ -11666,7 +11666,7 @@ a.link {
 
 a.link:focus,
 a.link:hover {
-    color: #2962ff
+    color: #a2388c
 }
 
 .box {
@@ -11768,7 +11768,7 @@ html body .bg-megna {
 }
 
 html body .bg-theme {
-    background-color: #2962ff
+    background-color: #a2388c
 }
 
 html body .bg-inverse {
@@ -11828,7 +11828,7 @@ ul.list-style-none li a {
 }
 
 ul.list-style-none li a:hover {
-    color: #2962ff
+    color: #a2388c
 }
 
 .card {
@@ -12041,7 +12041,7 @@ textarea.form-control {
 
 .lds-ripple .lds-pos {
     position: absolute;
-    border: 2px solid #2962FF;
+    border: 2px solid #a2388c;
     opacity: 1;
     border-radius: 50%;
     -webkit-animation: lds-ripple 1s cubic-bezier(0, 0.1, 0.5, 1) infinite;
@@ -15899,10 +15899,10 @@ body .jqstooltip {
 }
 
 .nav-pills.custom-pills .nav-link.active {
-    color: #2962ff;
+    color: #a2388c;
     opacity: 1;
     background-color: transparent;
-    border-bottom: 2px solid #2962ff
+    border-bottom: 2px solid #a2388c
 }
 
 label {
