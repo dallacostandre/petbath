@@ -14,7 +14,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Editar Perfil</h5>
                                 <p class="card-text">Realizar lançamentos | Verificar Saldo </p>
-                                <a href="#" class="btn btn-primary">Entrar</a>
+                                <a href="{{url('/editar-perfil')}}" class="btn btn-primary">Entrar</a>
                             </div>
                         </div>
                     </div>

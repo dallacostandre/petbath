@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // CONFIGURAÇÃO
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
+    Route::GET('/editar-perfil', [ConfiguracaoController::class, 'configuracoesPerfilClientesIndex']);
 
     // LEVA & TRAS
     Route::GET('/leva-e-tras', [LevaTrasController::class, 'index']);
@@ -50,9 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
     //FLUXO DE CAIXA
     
     Route::GET('/financeiro', [FinanceiroController::class, 'index']);
-    
-    //CONFIGURAÇÕES DE PERFIL
-    Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
 
     //PET
     Route::GET('/pets', [PetDadosController::class, 'index']);

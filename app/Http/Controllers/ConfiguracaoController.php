@@ -10,4 +10,9 @@ class ConfiguracaoController extends Controller
     {
         return view('dashboard.configuracoes');
     }
+
+    public function configuracoesPerfilClientesIndex()
+    {
+        return view('dashboard.configuracao_perfil');
+    }
 }

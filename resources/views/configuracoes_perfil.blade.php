@@ -1,7 +1,6 @@
 @component('componentes.header')
 @endcomponent
 
-
 <div class="content">
     <div class="container-fluid">
         <div class="row">
