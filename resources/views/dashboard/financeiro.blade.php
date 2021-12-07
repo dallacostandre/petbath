@@ -12,8 +12,17 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Fluxo de Caixa</h5>
-                        <p class="card-text">Realizar lançamentos | Verificar Saldo </p>
+                        <h5 class="card-title">Financeiro</h5>
+                        <p class="card-text">Realizar Lançamento e Verificar Saldo</p>
+                        <a href="{{url('/fluxo-de-caixa')}}" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Caixa</h5>
+                        <p class="card-text">Fluxo de Caixa</p>
                         <a href="{{url('/fluxo-de-caixa')}}" class="btn btn-primary">Acessar</a>
                     </div>
                 </div>
@@ -22,7 +31,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Relatórios</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                        <p class="card-text">Relatórios Personalizados
                         </p>
                         <a href="#" class="btn btn-primary">Entrar</a>
                     </div>

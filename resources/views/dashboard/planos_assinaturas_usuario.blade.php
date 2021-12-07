@@ -19,16 +19,19 @@
                                     <thead>
                                         <tr class="text-center">
                                             <th>Plano</th>
+                                            <th>Mês/Ano</th>
+                                            <th>Data de Vencimento</th>
                                             <th>Descrição</th>
-                                            <th>Data de Pagamento</th>
+                                            <th>Data do Pagamento</th>
                                             <th>Status</th>
                                             <th>Ações</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                             <tr class="text-center">
                                                 <td>Plano Premium</td>
+                                                <td>02/2020</td>
+                                                <td>01/02/2022</td>
                                                 <td>Lorem Lorem Lorem</td>
                                                 <td>01/02/2022</td>
                                                 <td>Pagamento Realizado</td>
