@@ -59,7 +59,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/excluir-cliente/{id}', [ClienteController::class, 'destroy']);
     Route::GET('/historico-cliente/{id}', [ClienteController::class, 'historicoView']);
 
-    
-
-    
 });
