@@ -3,13 +3,25 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Novo Cadastro</h4>
+                <h4 class="page-title">
+                    @if (isset($cliente))
+                        {{ $titulo }}
+                    @else
+                        Cadastro Novo Cliente
+                    @endif
+                </h4>
             </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="col md-12">
             <div class="accordion" id="accordionExample">
+                @if (isset($cliente))
+                    <form action="{{ route('updateCliente', ['id' => $cliente->id]) }}" method="POST">
+                    @else
+                        <form action="{{ route('cadastrarNovoCliente') }}" method="POST">
+                @endif
+                @csrf
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -17,6 +29,11 @@
                             Cadastro Cliente
                         </button>
                     </h2>
+                    @if (session()->has('message'))
+                        <div class="alert alert-primary" id="success-alert"role="alert">
+                            {{ Session::get('message') }}
+                        </div>
+                    @endif
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
@@ -26,36 +43,60 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="whatsapp">Whats App</label>
-                                                <input type="text" class="form-control whatsApp" name="whatsapp"
-                                                    id="whatsapp" value="@if (isset($cliente)) {{ $cliente->cliente_whatsapp }} @endif" required>
+                                                <input type="text" class="form-control whatsApp" name="cliente_whatsapp"
+                                                    id="whatsapp" value="@if (isset($cliente)) {{ $cliente->cliente_whatsapp }} @endif"
+                                                    @error('cliente_whatsapp') is-invalid @enderror">
+                                                @error('cliente_whatsapp')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="telefone">Telefone para Recado</label>
-                                                <input type="text" class="form-control phone" name="telefone"
-                                                    id="telefone" value="@if (isset($cliente)) {{ $cliente->cliente_telefone }} @endif" required>
+                                                <label for="telefone">Telefone</label>
+                                                <input type="text" class="form-control phone" name="cliente_telefone"
+                                                    id="telefone" value="@if (isset($cliente)) {{ $cliente->cliente_telefone }} @endif"
+                                                    @error('cliente_telefone') is-invalid @enderror">
+                                                @error('cliente_telefone')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Nome(completo)</label>
-                                                <input type="text" class="form-control" name="nome" id="nome"
-                                                    value="@if (isset($cliente)) {{ $cliente->cliente_nome }} @endif" required>
+                                                <label>Nome Completo</label>
+                                                <input type="text" class="form-control" name="cliente_nome"
+                                                    id="cliente_nome" value="@if (isset($cliente)) {{ $cliente->cliente_nome }} @endif"
+                                                    @error('cliente_nome') is-invalid @enderror">
+                                                @error('cliente_nome')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input type="text" class="form-control" id="email" name="email"
-                                                    value="@if (isset($cliente)) {{ $cliente->cliente_email }} @endif" required>
+                                                <input type="text" class="form-control" id="email"
+                                                    name="cliente_email" value="@if (isset($cliente)) {{ $cliente->cliente_email }} @endif"
+                                                    @error('cliente_email') is-invalid @enderror">
+                                                @error('cliente_email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Instagram</label>
-                                                <input type="text" class="form-control" id="instagram_cliente"
-                                                    name="instagram_cliente" value="@if (isset($instagram_cliente)) {{ $cliente->instagram_cliente }} @endif">
+                                                <input type="text" class="form-control" id="cliente_instagram"
+                                                    name="cliente_instagram" value="@if (isset($cliente)) {{ $cliente->cliente_instagram }} @endif">
                                             </div>
                                         </div>
                                     </div>
@@ -63,29 +104,53 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>CEP</label>
-                                                <input type="text" class="form-control cep" id="cep" name="cep"
-                                                    value="@if (isset($endereco)) {{ $endereco[0]->cliente_cep }} @endif" required>
+                                                <input type="text" class="form-control cep" id="cep" name="cliente_cep"
+                                                    value="@if (isset($endereco)) {{ $endereco->cliente_cep }} @endif" @error('cliente_cep') is-invalid
+                                                    @enderror">
+                                                @error('cliente_cep')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Endereço</label>
-                                                <input type="text" class="form-control" id="rua" name="rua"
-                                                    value="@if (isset($endereco)) {{ $endereco[0]->cliente_rua }} @endif" required>
+                                                <input type="text" class="form-control" id="rua" name="cliente_rua"
+                                                    value="@if (isset($endereco)) {{ $endereco->cliente_rua }} @endif" @error('cliente_rua') is-invalid
+                                                    @enderror">
+                                                @error('cliente_rua')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>N°</label>
-                                                <input type="text" class="form-control numero" id="numero" name="numero"
-                                                    value="@if (isset($endereco)) {{ $endereco[0]->cliente_numero }} @endif" required>
+                                                <input type="text" class="form-control numero" id="numero"
+                                                    name="cliente_numero" value="@if (isset($endereco)) {{ $endereco->cliente_numero }} @endif"
+                                                    @error('cliente_numero') is-invalid @enderror">
+                                                @error('cliente_numero')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Complemento</label>
                                                 <input type="text" class="form-control" id="complemento"
-                                                    name="complemento" value="@if (isset($endereco)) {{ $endereco[0]->cliente_complemento }} @endif" required>
+                                                    name="cliente_complemento" value="@if (isset($endereco)) {{ $endereco->cliente_complemento }} @endif"
+                                                    @error('cliente_complemento') is-invalid @enderror">
+                                                @error('cliente_complemento')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -93,180 +158,204 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Cidade</label>
-                                                <input type="text" class="form-control" id="cidade" name="cidade"
-                                                    value="@if (isset($endereco)) {{ $endereco[0]->cliente_cidade }} @endif" required>
+                                                <input type="text" class="form-control" id="cidade"
+                                                    name="cliente_cidade" value="@if (isset($endereco)) {{ $endereco->cliente_cidade }} @endif"
+                                                    @error('cliente_cidade') is-invalid @enderror">
+                                                @error('cliente_cidade')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Bairro</label>
-                                                <input type="text" class="form-control" id="bairro" name="bairro"
-                                                    value="@if (isset($endereco)) {{ $endereco[0]->cliente_bairro }} @endif" required>
+                                                <input type="text" class="form-control" id="bairro"
+                                                    name="cliente_bairro" value="@if (isset($endereco)) {{ $endereco->cliente_bairro }} @endif"
+                                                    @error('cliente_bairro') is-invalid @enderror">
+                                                @error('cliente_bairro')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Estado</label>
-                                                <input type="text" class="form-control" id="uf" name="uf"
-                                                    value="@if (isset($endereco)) {{ $endereco[0]->cliente_estado }} @endif" required>
+                                                <input type="text" class="form-control uf" id="uf" name="cliente_estado"
+                                                    value="@if (isset($endereco)) {{ $endereco->cliente_estado }} @endif" @error('cliente_estado')
+                                                    is-invalid @enderror">
+                                                @error('cliente_estado')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div style="float:right">
-                                        <button type="button" class="btn btn-success botao-padrao"
-                                            id="salvarCliente">Confirmar e Continuar
-                                        </button>
+                                        @if (isset($cliente))
+                                            <button class="btn btn-success botao-padrao" type="submit"
+                                                aria-expanded="false">
+                                                Atualizar
+                                            </button>
+                                        @else
+                                            <button class="btn btn-success botao-padrao" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                                Avancar
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Cadastro Pet
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="row" style="display: flex">
-                                <div class="col-md-3">
-                                    <div class="card card-user">
-                                        <div class="card-header">
-                                            <div
-                                                style="display: flex; justify-content: space-between; padding-bottom:10px;">
-                                                <h4 class="card-title">Pets de @Cliente</h4>
-                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Adicionar Pet"><i class="fal fa-plus-circle fa-2x"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="row-md-12 " style="padding-bottom: 20px;">
-                                            <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action active"
-                                                    aria-current="true">
-                                                    @pet
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">@pet</a>
-                                                <a href="#" class="list-group-item list-group-item-action">@pet</a>
-                                                <a href="#" class="list-group-item list-group-item-action">@pet</a>
-                                                <a class="list-group-item list-group-item-action disabled">@pet</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="card card-user">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Nome do Pet</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Insira o nome do Pet" name="pet_nome"
-                                                            id="pet_nome" required>
+                @if (isset($cliente))
+                @else
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Cadastro Pet
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row" style="display: flex">
+                                    <div class="col-md-12">
+                                        <div class="card card-user">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Nome do Pet</label>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Insira o nome do Pet" name="pet_nome"
+                                                                id="pet_nome" value="@if (isset($pet_dados)) {{ $pet_dados->pet_nome }} @endif"
+                                                                @error('pet_nome') is-invalid @enderror">
+                                                            @error('pet_nome')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Espécie</label>
-                                                        <select class="form-control" name="pet_especie"
-                                                            id="pet_especie" required>
-                                                            <option selected disabled>Espécie</option>
-                                                            <option value="felino">Felino</option>
-                                                            <option value="canino">Canino</option>
-                                                            <option value="outro">Outro</option>
-                                                        </select>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Espécie</label>
+                                                            <select class="form-control" name="pet_especie"
+                                                                id="pet_especie">
+                                                                <option selected disabled>Selecione a Espécie
+                                                                </option>
+                                                                <option value="felino">Felino</option>
+                                                                <option value="canino">Canino</option>
+                                                                <option value="outro">Outro</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Porte</label>
-                                                        <select class="form-control" name="pet_porte" id="pet_porte"
-                                                            required>
-                                                            <option selected disabled>Selecione o porte</option>
-                                                            <option value="grande">Grande</option>
-                                                            <option value="medio">Médio</option>
-                                                            <option value="pequeno">Pequeno</option>
-                                                        </select>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Porte</label>
+                                                            <select class="form-control" name="pet_porte"
+                                                                id="pet_porte">
+                                                                <option selected disabled>Selecione o porte</option>
+                                                                <option value="grande">Grande</option>
+                                                                <option value="medio">Médio</option>
+                                                                <option value="pequeno">Pequeno</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Raça</label>
-                                                        {{-- FOREACH E RAÇAS --}}
-                                                        <select class="form-control" name="pet_raca" id="pet_raca"
-                                                            required>
-                                                            <option disabled>Selecione uma raça</option>
-                                                            @foreach ($raca_pet as $raca)
-                                                                <option value="{{ $raca->id }}">
-                                                                    {{ $raca->nome_raca }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Raça</label>
+                                                            {{-- FOREACH E RAÇAS --}}
+                                                            <select class="form-control" name="pet_raca"
+                                                                id="pet_raca">
+                                                                <option disabled>Selecione uma raça</option>
+                                                                @foreach ($raca_pet as $raca)
+                                                                    <option value="{{ $raca->id }}">
+                                                                        {{ $raca->nome_raca }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Sexo</label>
+                                                            <select class="form-control" name="pet_genero"
+                                                                id="pet_genero">
+                                                                <option selected disabled>Selecione o gênero
+                                                                </option>
+                                                                <option value="m">Macho</option>
+                                                                <option value="f">Fêmea</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Pelagem</label>
+                                                            <select class="form-control" name="pet_pelagem"
+                                                                id="pet_pelagem">
+                                                                <option selected disabled>Selecione a pelagem
+                                                                </option>
+                                                                <option value="curto">Curto</option>
+                                                                <option value="longo">Longo</option>
+                                                                <option value="medio">Médio</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Sexo</label>
-                                                        <select class="form-control" name="pet_genero" id="pet_genero"
-                                                            required>
-                                                            <option selected disabled>Selecione o gênero</option>
-                                                            <option value="m">Macho</option>
-                                                            <option value="f">Fêmea</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Pelagem</label>
-                                                        <select class="form-control" name="pet_pelagem"
-                                                            id="pet_pelagem" required>
-                                                            <option selected disabled>Selecione a pelagem</option>
-                                                            <option value="curto">Curto</option>
-                                                            <option value="longo">Longo</option>
-                                                            <option value="medio">Médio</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>Observações</label>
-                                                        <textarea rows="4" cols="80" class="form-control"
-                                                            name="pet_observacoes" id="pet_observacoes"
-                                                            placeholder="Insira uma observação aqui,caso tenha."></textarea>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Observações</label>
+                                                            <textarea rows="4" cols="80" class="form-control"
+                                                                name="pet_observacoes" id="pet_observacoes"
+                                                                placeholder="Insira uma observação aqui,caso tenha."></textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div style="float:right">
-                                        <button type="button" class="btn btn-success botao-padrao"
-                                            id="salvarCliente">Finalizar</button>
+                                        <div style="float:right" class="ms-1">
+                                            <button type="submit" class="btn btn-success botao-padrao">
+                                                Finalizar
+                                            </button>
+                                        </div>
+                                        <div style="float:right">
+                                            <button type="button" class="btn btn-success botao-padrao"
+                                                id="salvarAgendarCliente">
+                                                Salvar e Agendar
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
+                </form>
             </div>
         </div>
         @component('dashboard.componentes.footer')@endcomponent
 
         <script>
-            $('.collapse').collapse()
-
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+                $("#success-alert").slideUp(500);
+            });
             $('.phone').mask('00 0 0000-0000');
             $('.whatsApp').mask('00 0 0000-0000');
             $('.numero').mask('00000');
             $('.cep').mask('00 000-000');
+            $('.uf').mask('AA');
 
             $(document).ready(function() {
                 function limpa_formulário_cep() {
@@ -351,147 +440,6 @@
                         //cep sem valor, limpa formulário.
                         limpa_formulário_cep();
                     }
-                });
-            });
-        </script>
-
-        <script>
-            $('#atualizarCliente').on('click', function() {
-                event.preventDefault();
-                var url = '/atualizar-cliente';
-                var telefone = $('#telefone').val();
-                var whatsapp = $('#whatsapp').val();
-                var nome = $('#nome').val();
-                var sobrenome = $('#sobrenome').val();
-                var cep = $('#cep').val();
-                var email = $('#email').val();
-                var instagram_cliente = $('#instagram_cliente').val();
-                var rua = $('#rua').val();
-                var numero = $('#numero').val();
-                var complemento = $('#complemento').val();
-                var bairro = $('#bairro').val();
-                var cidade = $('#cidade').val();
-                var uf = $('#uf').val();
-                var id_cliente = $('#id_cliente').val();
-                var _token = $('meta[name="csrf-token"]').attr('content');
-
-                $.ajax({
-                    url: url,
-                    context: document.body,
-                    type: "POST",
-                    dataType: 'json',
-                    data: {
-                        telefone: telefone,
-                        whatsapp: whatsapp,
-                        nome: nome,
-                        sobrenome: sobrenome,
-                        cep: cep,
-                        email: email,
-                        instagram_cliente: instagram_cliente,
-                        rua: rua,
-                        numero: numero,
-                        complemento: complemento,
-                        bairro: bairro,
-                        cidade: cidade,
-                        uf: uf,
-                        id_cliente: id_cliente,
-                        _token: _token
-                    }
-                }).done(function(data) {
-                    Swal.fire({
-                        title: data.title,
-                        message: data.message,
-                        icon: data.icon,
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    if (data.url) {
-                        window.location.href = data.url;
-                    }
-                }).fail(function(jqXHR, textStatus, data) {
-                    Swal.fire({
-                        title: "Error",
-                        message: jqXHR,
-                        icon: "error",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                });
-            });
-
-            $('#salvarCliente').on('click', function() {
-                event.preventDefault();
-                var url = '/create-new-client';
-                var telefone = $('#telefone').val();
-                var whatsapp = $('#whatsapp').val();
-                var nome = $('#nome').val();
-                var sobrenome = $('#sobrenome').val();
-                var cep = $('#cep').val();
-                var email = $('#email').val();
-                var rua = $('#rua').val();
-                var numero = $('#numero').val();
-                var complemento = $('#complemento').val();
-                var bairro = $('#bairro').val();
-                var cidade = $('#cidade').val();
-                var uf = $('#uf').val();
-                var _token = $('meta[name="csrf-token"]').attr('content');
-
-                $.ajax({
-                    url: url,
-                    context: document.body,
-                    type: "POST",
-                    dataType: 'json',
-                    data: {
-                        telefone: telefone,
-                        whatsapp: whatsapp,
-                        nome: nome,
-                        sobrenome: sobrenome,
-                        cep: cep,
-                        email: email,
-                        rua: rua,
-                        numero: numero,
-                        complemento: complemento,
-                        bairro: bairro,
-                        cidade: cidade,
-                        uf: uf,
-                        _token: _token
-                    }
-                }).done(function(data) {
-                    Swal.fire({
-                        title: data.title,
-                        message: data.message,
-                        icon: data.icon,
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    });
-                    if (data.url) {
-                        window.location.href = data.url;
-                    }
-
-                }).fail(function(jqXHR, textStatus, data) {
-                    Swal.fire({
-                        title: data.title,
-                        message: data.message,
-                        icon: data.icon,
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
                 });
             });
         </script>

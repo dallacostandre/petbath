@@ -63,7 +63,7 @@
                             </b>
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <span style="color: white">Administrador</span>
+                                <span style="color: white">{{auth()->user()->name}}</span>
                                 <!-- Light Logo text -->
                             </span>
                         </a>

@@ -66,46 +66,36 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Lançamento</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Você deseja lançar para:</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div style="display: flex; justify-content:space-between;padding-left:0px;" class="container">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Entrada
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                                checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                Saída
-                            </label>
-                        </div>
+                    <div class="mb-3">
+                        <input class="form-control form-control-sm" type="text" placeholder="Pequise por pet, cliente ou telefone">
                     </div>
-                    {{-- <div class="mb-3">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                    <option value="1">Despesa</option>
-                                    <option value="2">Receita</option>
-                                </select>
-                            </div> --}}
+                    <div class="mb-3">
+                        <select class="form-select form-select-sm"" aria-label=" Default select example">
+                            <option value="1">Serviço 1</option>
+                            <option value="1">Serviço 2</option>
+                            <option value="1">Serviço 3</option>
+                            <option value="1">Serviço 4</option>
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <input class="form-control form-control-sm" type="text" placeholder="Valor">
                     </div>
                     <div class="mb-3">
                         <input class="form-control form-control-sm" type="text" placeholder="Descrição">
                     </div>
-                    <div class="mb-3">
-                        <select class="form-select form-select-sm"" aria-label=" Default select example">
-                            <option value="1">Cartão</option>
-                            <option value="2">Débito</option>
-                            <option value="2">Pix</option>
-                            <option value="2">Dinheiro</option>
-                            <option value="2">Transferência</option>
-                            <option value="3">Outro</option>
-                        </select>
+                    <div class="mb-12" >
+                        <label for="">Serviços Selecionados</label>
+                        <ul>
+                            <li>Cras justo odio</li>
+                            <li>Dapibus ac facilisis in</li>
+                            <li>Morbi leo risus</li>
+                            <li>Porta ac consectetur ac</li>
+                            <li>Vestibulum at eros</li>
+                          </ul>
                     </div>
                 </div>
                 <div class="modal-footer mx-auto">
@@ -125,7 +115,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                        <p>Filtre pelas categorias:</p>
+                        <p>Filtre por categorias:</p>
                     </div>
                     <div>
                         <div class="mb-2">
@@ -167,7 +157,8 @@
                 <div class="modal-footer mx-auto">
                     <div class="container" style="display: flex; justify-content:space-between;">
                         <a style="text-decoration: none;" href="http://">Limpar Filtro</a>
-                        <button type="button" name="" id="" class="btn btn-success btn-sm" btn-lg btn-block">Filtrar</button>
+                        <button type="button" name="" id="" class="btn btn-success btn-sm" btn-lg
+                            btn-block">Filtrar</button>
                     </div>
                 </div>
             </div>

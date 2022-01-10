@@ -23,10 +23,6 @@ Route::GET('/cadastro', function () {
 // USUARIO DEVE ESTAR LOGADO
 Route::group(['middleware' => 'auth'], function () {
 
-    // CLIENTE
-    Route::GET('/clientes', [ClienteController::class, 'index']);
-    Route::GET('/cadastro-cliente', [ClienteController::class, 'cadastroView']);
-
     // SERVIÇOS
     Route::GET('/produtos-e-servicos', [ServicosController::class, 'index']);
     
@@ -41,7 +37,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //FLUXO DE CAIXA
     
-
     //PET
     Route::GET('/pets', [PetDadosController::class, 'index']);
 
@@ -51,12 +46,18 @@ Route::group(['middleware' => 'auth'], function () {
     //------------------------ NOVAS ROTAS
 
     Route::GET('/', function () {return view('dashboard.index');})->name('dashboard');
-
     Route::GET('/planos-e-assinaturas', [ConfiguracaoController::class, 'planosAssinaturas']);
-
     Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'fluxoDeCaixa']);
-
     Route::GET('/financeiro', [FinanceiroController::class, 'index']);
+    
+    //CLIENTE
+    Route::GET('/clientes', [ClienteController::class, 'index'])->name('clientes');
+    Route::GET('/cadastro-cliente', [ClienteController::class, 'create']);
+    Route::POST('/cadastrar-novo-cliente', [ClienteController::class, 'store'])->name('cadastrarNovoCliente');
+    Route::GET('/editar-cliente/{id}', [ClienteController::class, 'edit']);
+    Route::POST('/update-cliente/{id}', [ClienteController::class, 'update'])->name('updateCliente');
+    Route::GET('/excluir-cliente/{id}', [ClienteController::class, 'destroy']);
+    Route::GET('/historico-cliente/{id}', [ClienteController::class, 'historicoView']);
 
     
 

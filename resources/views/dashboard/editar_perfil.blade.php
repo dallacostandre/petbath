@@ -1,8 +1,5 @@
 @component('dashboard.componentes.header')@endcomponent
 <div class="page-wrapper">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
@@ -25,16 +22,7 @@
             </div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
     <div class="container-fluid">
-        <!-- ============================================================== -->
-        <!-- Start Page Content -->
-        <!-- ============================================================== -->
         <!-- Row -->
         <div class="row">
             <!-- Column -->
@@ -125,9 +113,6 @@
                                     <input class="form-control form-control-line"></input>
                                 </div>
                             </div>
-
-
-
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>CEP</label>
