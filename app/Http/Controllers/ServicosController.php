@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PetRaca;
+use App\Models\Produtos;
 use App\Models\Servicos;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class ServicosController extends Controller
     public function index()
     {
         $servicos = Servicos::orderBy('id', 'DESC')->get();
+        $produtos = Produtos::orderBy('id', 'DESC')->get();
         $raca_pet  = PetRaca::all();
-        return view('dashboard.produtos_e_servicos', compact('servicos', 'raca_pet'));
+        return view('dashboard.produtos_e_servicos', compact('servicos', 'raca_pet', 'produtos'));
     }
     
     public function cadastroServicoView()

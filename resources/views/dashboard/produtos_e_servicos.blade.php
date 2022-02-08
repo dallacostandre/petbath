@@ -51,22 +51,22 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>% de Lucro</label>
-                                                    <input type="text" class="form-control money2"
+                                                    <input type="number" class="form-control percentual" max="100" min="0"
                                                         name="porcentagemLucroProduto" id="porcentagemLucroProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Preço Sugerido</label>
-                                                    <input type="text" class="form-control money2"
+                                                    <input type="text" class="form-control" disabled
                                                         name="precoSugeridoProduto" id="precoSugeridoProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Preço de Venda</label>
-                                                    <input type="text" class="form-control money2" name="precoVendaProduto"
-                                                        id="precoVendaProduto">
+                                                    <input type="text" class="form-control money2"
+                                                        name="precoVendaProduto" id="precoVendaProduto">
                                                 </div>
                                             </div>
                                         </div>
@@ -104,21 +104,25 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>xxxx</td>
-                                                    <td>xxxx</td>
-                                                    <td>xxxx</td>
-                                                    <td>xxxxx</td>
-                                                    <td>xxxxx</td>
-                                                    <td>xxxxx</td>
-                                                    <td>
-                                                        <a href="{{ url('editar-produto/') }}" data-toggle="tooltip"
-                                                            data-placement="top" title="Editar Produto">
-                                                            <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
-                                                        <a href="{{ url('excluir-produto/') }}" data-toggle="tooltip"
-                                                            data-placement="top" title="Excluir Produto">
-                                                            <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
-                                                    </td>
+                                                    @foreach ($produtos as $produto)
+                                                        <td>{{ $produto->codigo_produto }}</td>
+                                                        <td>{{ $produto->nome_produto }}</td>
+                                                        <td>R$ {{ $produto->custo_produto }}</td>
+                                                        <td>%</td>
+                                                        <td>%</td>
+                                                        <td>R$ {{ $produto->preco_de_venda_produto }}</td>
+                                                        <td>
+                                                            <a href="{{ url('editar-produto/') }}"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Editar Produto">
+                                                                <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
+                                                            <a href="{{ url('excluir-produto/') }}"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Excluir Produto">
+                                                                <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
+                                                        </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -288,15 +292,17 @@
 @component('dashboard.componentes.footer')@endcomponent
 
 <script>
-    $('.money2').mask("#.##0,00", {reverse: true});
+    $('.money2').mask("###.###,##", {reverse: true});
+    $('.percentual').mask("000");
     $('#cadastrarProduto').on('click', function(e) {
         e.preventDefault();
-                
+
         var url = "/cadastraProduto";
         var nomeProduto = $('#nomeProduto').val();
         var codigoProduto = $('#codigoProduto').val();
         var custoProduto = $('#custoProduto').val();
         var precoVendaProduto = $('#precoVendaProduto').val();
+        var percentualLucro = $('#porcentagemLucroProduto').val();
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -336,4 +342,21 @@
         });
 
     });
+
+    $('#porcentagemLucroProduto').on('change', function() {
+        var custo = $('#custoProduto').val();
+        var porcentagem = $('#porcentagemLucroProduto').val();  
+        var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem)/100) + parseFloat(custo);
+        $('#precoSugeridoProduto').val(precoSugeridoProduto);
+        $('#precoVendaProduto').val(precoSugeridoProduto);
+    });
+
+    $('#custoProduto').on('change', function() {
+        var custo = $('#custoProduto').val();
+        var porcentagem = $('#porcentagemLucroProduto').val();  
+        var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem)/100) + parseFloat(custo);
+        $('#precoSugeridoProduto').val(precoSugeridoProduto);
+        $('#precoVendaProduto').val(precoSugeridoProduto);
+    });
+
 </script>
