@@ -18,6 +18,7 @@
     <link href="{{ asset('../assets/font-awesome-pro/css/fontawesome.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/font-awesome-pro/css/regular.css') }}" rel="stylesheet" />
     <link href="{{ asset('../assets/font-awesome-pro/css/all.css') }}" rel="stylesheet" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

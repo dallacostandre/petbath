@@ -28,8 +28,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Nome Produto</label>
-                                                    <input type="text" class="form-control" name="servico_nome"
-                                                        id="servico_nome">
+                                                    <input type="text" class="form-control" name="nomeProduto"
+                                                        id="nomeProduto">
                                                 </div>
                                             </div>
                                         </div>
@@ -37,44 +37,43 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Codigo do Prod.</label>
-                                                    <input type="text" class="form-control" name="servico_nome"
-                                                        id="servico_nome">
+                                                    <input type="text" class="form-control" name="codigoProduto"
+                                                        id="codigoProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Custo</label>
-                                                    <input type="text" class="form-control" name="servico_nome"
-                                                        id="servico_nome">
+                                                    <input type="text" class="form-control money2" name="custoProduto "
+                                                        id="custoProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>% de Lucro</label>
-                                                    <input type="text" class="form-control" name="servico_nome"
-                                                        id="servico_nome">
+                                                    <input type="text" class="form-control money2"
+                                                        name="porcentagemLucroProduto" id="porcentagemLucroProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Preço Sugerido</label>
-                                                    <input type="text" class="form-control" name="servico_nome"
-                                                        id="servico_nome">
+                                                    <input type="text" class="form-control money2"
+                                                        name="precoSugeridoProduto" id="precoSugeridoProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Preço de Venda</label>
-                                                    <input type="text" class="form-control" name="servico_nome"
-                                                        id="servico_nome">
+                                                    <input type="text" class="form-control money2" name="precoVendaProduto"
+                                                        id="precoVendaProduto">
                                                 </div>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-success botao-padrao float-end"
-                                        id="cadastrarServico">Adicionar
-                                    </button>
-                                    <div class="clearfix"></div>
-
+                                            id="cadastrarProduto">Adicionar
+                                        </button>
+                                        <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
@@ -287,3 +286,54 @@
 </div>
 
 @component('dashboard.componentes.footer')@endcomponent
+
+<script>
+    $('.money2').mask("#.##0,00", {reverse: true});
+    $('#cadastrarProduto').on('click', function(e) {
+        e.preventDefault();
+                
+        var url = "/cadastraProduto";
+        var nomeProduto = $('#nomeProduto').val();
+        var codigoProduto = $('#codigoProduto').val();
+        var custoProduto = $('#custoProduto').val();
+        var precoVendaProduto = $('#precoVendaProduto').val();
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            method: 'POST',
+            dataType: 'JSON',
+            data: {
+                nome_produto: nomeProduto,
+                codigo_produto: codigoProduto,
+                custo_produto: custoProduto,
+                preco_de_venda_produto: precoVendaProduto,
+                _token: token
+            },
+            success: function(data) {
+                Swal.fire({
+                    title: data.title,
+                    text: data.mensagem,
+                    icon: data.icone,
+                    button: "Ótimo!",
+                });
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            },
+            error: function(data) {
+                Swal.fire({
+                    title: 'Ops',
+                    text: 'Não foi possível excluir',
+                    icon: error,
+                    button: "Ótimo!",
+                });
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            }
+        });
+
+    });
+</script>

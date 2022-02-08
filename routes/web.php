@@ -10,7 +10,7 @@ use App\Http\Controllers\ServicosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalenderController;
 use App\Http\Controllers\PacotesEPromocoesController;
-
+use App\Http\Controllers\ProdutoController;
 
 Route::GET('/acessar', function () {
     return view('auth.login');
@@ -29,13 +29,10 @@ Route::group(['middleware' => 'auth'], function () {
     // PACOTES E PROMOÇÕES    
     Route::get('/pacotes-e-promocoes', [PacotesEPromocoesController::class, 'index']);
 
-    // HISTÓRICO
 
     // CONFIGURAÇÃO
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
     Route::GET('/editar-perfil', [ConfiguracaoController::class, 'editarPerfil']);
-
-    //FLUXO DE CAIXA
     
     //PET
     Route::GET('/pets', [PetDadosController::class, 'index']);
@@ -58,5 +55,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::POST('/update-cliente/{id}', [ClienteController::class, 'update'])->name('updateCliente');
     Route::GET('/excluir-cliente/{id}', [ClienteController::class, 'destroy']);
     Route::GET('/historico-cliente/{id}', [ClienteController::class, 'historicoView']);
+    Route::GET('/visualizar-cliente/{id}', [ClienteController::class, 'viewCliente'])->name('viewCliente');
+    
+    // PRODUTO
+    Route::POST('/cadastraProduto', [ProdutoController::class, 'store'])->name('cadastroProduto');
+
 
 });

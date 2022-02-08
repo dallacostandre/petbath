@@ -27,6 +27,7 @@
 <!--Custom JavaScript -->
 <script src="{{url('assets-2/dist/js/custom.min.js')}}"></script>
 <script src="{{url('assets-2/dist/js/mask.js')}}"></script>
+<script src="{{url('assets-2/dist/js/sweet.js')}}"></script>
 <!--This page JavaScript -->
 <!--chartis chart-->
 <script src="{{url('assets-2/libs/chartist/dist/chartist.min.js')}}"></script>

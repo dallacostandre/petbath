@@ -213,13 +213,14 @@ class ClienteController extends Controller
         }
     }
 
-    public function visualizarCliente($id)
+    public function viewCliente($id)
     {
         $cliente = Cliente::find($id);
         $endereco = ClienteEndereco::where(['unique_endereco' => $cliente->unique_endereco])->get();
         $pets = PetDados::where(['unique_cliente' => $cliente->unique_cliente])->get();
+        $titulo = 'Visualizando: '. $cliente->cliente_nome; 
 
-        return view('visualizar_dados_cliente', compact('cliente', 'endereco', 'pets'));
+        return view('dashboard.cliente_dados', compact('cliente', 'endereco', 'pets', 'titulo'));
     }
 
     public function historicoCliente($id)
