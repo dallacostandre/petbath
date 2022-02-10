@@ -16,5 +16,7 @@ class Produtos extends Model
         'codigo_produto',
         'custo_produto',
         'preco_de_venda_produto',
+        'percentual_lucro',
+        'lucro_produto'
     ];
 }

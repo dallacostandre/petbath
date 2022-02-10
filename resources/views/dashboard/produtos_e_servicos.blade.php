@@ -29,7 +29,7 @@
                                                 <div class="form-group">
                                                     <label>Nome Produto</label>
                                                     <input type="text" class="form-control" name="nomeProduto"
-                                                        id="nomeProduto">
+                                                        required id="nomeProduto">
                                                 </div>
                                             </div>
                                         </div>
@@ -38,40 +38,63 @@
                                                 <div class="form-group">
                                                     <label>Codigo do Prod.</label>
                                                     <input type="text" class="form-control" name="codigoProduto"
-                                                        id="codigoProduto">
+                                                        required id="codigoProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label>Custo</label>
+                                                <label>Custo Unitário</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">R$</div>
+                                                    </div>
                                                     <input type="text" class="form-control money2" name="custoProduto "
-                                                        id="custoProduto">
+                                                        required id="custoProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <label>% de Lucro</label>
-                                                    <input type="number" class="form-control percentual" max="100" min="0"
-                                                        name="porcentagemLucroProduto" id="porcentagemLucroProduto">
+                                                    <label>Lucro em %</label>
+                                                    <input type="text" class="form-control percentual percent" max="100"
+                                                        required min="0" name="porcentagemLucroProduto"
+                                                        id="porcentagemLucroProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label>Preço Sugerido</label>
+                                                <label>Preço Sugerido</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">R$</div>
+                                                    </div>
                                                     <input type="text" class="form-control" disabled
                                                         name="precoSugeridoProduto" id="precoSugeridoProduto">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label>Preço de Venda</label>
-                                                    <input type="text" class="form-control money2"
+                                                <label>Preço de Venda</label>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">R$</div>
+                                                    </div>
+                                                    <input type="text" class="form-control money2" required
                                                         name="precoVendaProduto" id="precoVendaProduto">
                                                 </div>
                                             </div>
+
+
+                                            <div class="col-md-2">
+                                                <label>Lucro</label>
+                                                <div class="input-group mb-2">
+                                                    <input type="text" class="form-control money2" disabled required
+                                                        name="lucroProduto" id="lucroProduto">
+                                                </div>
+                                                <small class="form-text text-muted">Lucro estimado sem taxas e
+                                                    impostos.
+                                                </small>
+                                            </div>
                                         </div>
                                         <button type="button" class="btn btn-success botao-padrao float-end"
-                                            id="cadastrarProduto">Adicionar
+                                            id="adicionarProduto">
+                                            Adicionar
                                         </button>
                                         <div class="clearfix"></div>
                                 </div>
@@ -98,8 +121,8 @@
                                                 <th>Nome Produto</th>
                                                 <th>Custo Unit.</th>
                                                 <th>% de Lucro</th>
-                                                <th>Preço Sugerido</th>
                                                 <th>Preço Venda</th>
+                                                <th>Lucro Estimado</th>
                                                 <th>Ações</th>
                                             </thead>
                                             <tbody>
@@ -108,15 +131,18 @@
                                                         <td>{{ $produto->codigo_produto }}</td>
                                                         <td>{{ $produto->nome_produto }}</td>
                                                         <td>R$ {{ $produto->custo_produto }}</td>
-                                                        <td>%</td>
-                                                        <td>%</td>
+                                                        <td>{{ $produto->percentual_lucro }}</td>
                                                         <td>R$ {{ $produto->preco_de_venda_produto }}</td>
+                                                        <td>
+                                                            <span style="color: green; fontWeight:500;">{{ $produto->lucro_produto }}</span>
+                                                        </td>
                                                         <td>
                                                             <a href="{{ url('editar-produto/') }}"
                                                                 data-toggle="tooltip" data-placement="top"
                                                                 title="Editar Produto">
                                                                 <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
                                                             <a href="{{ url('excluir-produto/') }}"
+                                                                class="removerProduto" data-id={{ $produto->id }}
                                                                 data-toggle="tooltip" data-placement="top"
                                                                 title="Excluir Produto">
                                                                 <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
@@ -128,6 +154,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{$produtos->links() }}
                         </div>
                     </div>
                 </div>
@@ -197,34 +224,35 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Custo Unitário</label>
-                                                    <input type="text" class="form-control money2" name="servico_preco"
-                                                        id="servico_preco">
+                                                    <input type="text" class="form-control money2" name="custoServico"
+                                                        id="custoServico">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">% de Lucro</label>
-                                                    <input type="text" class="form-control money2" name="servico_preco"
-                                                        id="servico_preco">
+                                                    <input type="text" class="form-control money2 percentual percent" name="porcentagemLucroServico"
+                                                        id="porcentagemLucroServico">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Preço Sugerido</label>
-                                                    <input type="text" class="form-control money2" name="servico_preco"
-                                                        id="servico_preco">
+                                                    <input type="text" class="form-control money2" name="precoSugeridoServico"
+                                                        id="precoSugeridoServico">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Preço de Venda</label>
-                                                    <input type="text" class="form-control money2" name="servico_preco"
-                                                        id="servico_preco">
+                                                    <input type="text" class="form-control money2" name="precoVendaServico"
+                                                        id="precoVendaServico">
                                                 </div>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-success botao-padrao float-end"
-                                            id="cadastrarServico">Adicionar
+                                            id="cadastrarServico">
+                                            Adicionar
                                         </button>
                                         <div class="clearfix"></div>
                                     </form>
@@ -292,9 +320,14 @@
 @component('dashboard.componentes.footer')@endcomponent
 
 <script>
-    $('.money2').mask("###.###,##", {reverse: true});
-    $('.percentual').mask("000");
-    $('#cadastrarProduto').on('click', function(e) {
+    $('.money2').mask('000.000.000.000.000,00', {
+        reverse: true
+    });
+    $('.percent').mask('##0,00%', {
+        reverse: true
+    });
+
+    $('#adicionarProduto').on('click', function(e) {
         e.preventDefault();
 
         var url = "/cadastraProduto";
@@ -303,6 +336,7 @@
         var custoProduto = $('#custoProduto').val();
         var precoVendaProduto = $('#precoVendaProduto').val();
         var percentualLucro = $('#porcentagemLucroProduto').val();
+        var lucroProduto = $('#lucroProduto').val();
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -315,6 +349,8 @@
                 codigo_produto: codigoProduto,
                 custo_produto: custoProduto,
                 preco_de_venda_produto: precoVendaProduto,
+                percentual_lucro: percentualLucro,
+                lucro_produto: lucroProduto,
                 _token: token
             },
             success: function(data) {
@@ -326,37 +362,117 @@
                 });
                 setTimeout(function() {
                     location.reload();
-                }, 2000);
+                }, 1000);
             },
             error: function(data) {
                 Swal.fire({
-                    title: 'Ops',
-                    text: 'Não foi possível excluir',
-                    icon: error,
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Não foi possível adicionar o produto',
+                    button: "Voltar!",
+                });
+            }
+        });
+    });
+
+    $('.removerProduto').on('click', function(e) {
+        e.preventDefault();
+
+        var url = "/removerProduto";
+        var idProduto = $(this).data('id');
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            method: 'DELETE',
+            dataType: 'JSON',
+            data: {
+                id: idProduto,
+                _token: token
+            },
+            success: function(data) {
+                Swal.fire({
+                    title: data.title,
+                    text: data.mensagem,
+                    icon: data.icone,
                     button: "Ótimo!",
                 });
                 setTimeout(function() {
                     location.reload();
-                }, 2000);
+                }, 1000);
+            },
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Não foi possível adicionar o produto',
+                });
             }
         });
-
     });
 
     $('#porcentagemLucroProduto').on('change', function() {
         var custo = $('#custoProduto').val();
-        var porcentagem = $('#porcentagemLucroProduto').val();  
-        var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem)/100) + parseFloat(custo);
+        var porcentagem = $('#porcentagemLucroServico').val();
+        var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
         $('#precoSugeridoProduto').val(precoSugeridoProduto);
         $('#precoVendaProduto').val(precoSugeridoProduto);
+
+        var lucroProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+        $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(lucroProduto));
+
     });
 
     $('#custoProduto').on('change', function() {
         var custo = $('#custoProduto').val();
-        var porcentagem = $('#porcentagemLucroProduto').val();  
-        var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem)/100) + parseFloat(custo);
+        var porcentagem = $('#porcentagemLucroProduto').val();
+        var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
         $('#precoSugeridoProduto').val(precoSugeridoProduto);
         $('#precoVendaProduto').val(precoSugeridoProduto);
+        $('#precoVendaProduto').val(precoSugeridoProduto);
+
+        var lucroProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+        $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(lucroProduto));
     });
+
+
+    $('#porcentagemLucroServico').on('change', function() {
+        var custo = $('#custoServico').val();
+        var porcentagem = $('#porcentagemLucroServico').val();
+        var precoSugeridoServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
+        $('#precoSugeridoServico').val(precoSugeridoServico);
+        $('#precoVendaServico').val(precoSugeridoServico);
+
+        var lucroServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+        $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(lucroServico));
+
+    });
+
+    $('#custoServico').on('change', function() {
+        var custo = $('#custoServico').val();
+        var porcentagem = $('#porcentagemLucroServico').val();
+        var precoSugeridoServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
+        $('#precoSugeridoServico').val(precoSugeridoServico);
+        $('#precoVendaServico').val(precoSugeridoServico);
+
+        var lucroServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+        $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(lucroServico));
+
+    });
+
+
 
 </script>

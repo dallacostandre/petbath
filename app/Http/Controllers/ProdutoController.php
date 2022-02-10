@@ -38,9 +38,15 @@ class ProdutoController extends Controller
         if ($request) {
             Produtos::create($request->all());
             return response()->json([
-                'title' => 'Cadastrado',
-                'mensagem' => 'Adicionado com sucesso',
                 'icone' => 'success',
+                'title' => 'Cadastrado',
+                'mensagem' => 'Produto cadastrado com sucesso',
+            ]);
+        } else {
+            return response()->json([
+                'icone' => 'warning',
+                'title' => 'Não foi possível realizar um cadastro',
+                'mensagem' => 'Erro ao cadastrar produto, tente novamente.',
             ]);
         }
     }
@@ -53,7 +59,6 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -85,8 +90,23 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $resposta = Produtos::findOrFail($id);
+        if ($resposta) {
+            $resposta->delete();
+            return response()->json([
+                'icone' => 'success',
+                'title' => 'Produto excluído com sucesso.',
+                'mensagem' => 'Sucesso ao excluir produto.',
+            ]);
+        } else {
+            return response()->json([
+                'icone' => 'error',
+                'title' => 'Produto não excluído.',
+                'mensagem' => 'Erro ao excluir seu produto.',
+            ]);
+        }
     }
 }

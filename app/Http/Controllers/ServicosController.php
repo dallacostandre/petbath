@@ -18,8 +18,8 @@ class ServicosController extends Controller
      */
     public function index()
     {
-        $servicos = Servicos::orderBy('id', 'DESC')->get();
-        $produtos = Produtos::orderBy('id', 'DESC')->get();
+        $servicos = Servicos::orderBy('id', 'DESC')->paginate(10);
+        $produtos = Produtos::orderBy('id', 'DESC')->paginate(10);
         $raca_pet  = PetRaca::all();
         return view('dashboard.produtos_e_servicos', compact('servicos', 'raca_pet', 'produtos'));
     }

@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     
     // PRODUTO
     Route::POST('/cadastraProduto', [ProdutoController::class, 'store'])->name('cadastroProduto');
+    Route::DELETE('/removerProduto', [ProdutoController::class, 'destroy'])->name('removerProduto');
 
 
 });

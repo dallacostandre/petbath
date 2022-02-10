@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableProdutosNovo extends Migration
+class AddLucroProdutoColumnToProdutos extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AlterTableProdutosNovo extends Migration
     public function up()
     {
         Schema::table('produtos', function (Blueprint $table) {
-            $table->string('percentual_lucro', 500);
+            $table->string('lucro_produto', 100);
         });
     }
 
@@ -25,6 +25,8 @@ class AlterTableProdutosNovo extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('produtos', function (Blueprint $table) {
+            //
+        });
     }
 }
