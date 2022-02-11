@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produtos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProdutoController extends Controller
 {
@@ -36,6 +37,26 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         if ($request) {
+
+            $validate = Validator::make($request->all(),[
+                'nome_produto' => 'required',
+                'codigo_produto' => 'required',
+                'custo_produto' => 'required',
+                'preco_de_venda_produto' => 'required',
+                'percentual_lucro' => 'required',
+                'lucro_produto' => 'required',
+                'lucro_produto' => 'required'
+            ]);
+
+
+            if ($validate->fails()) {
+                return response()->json([
+                    'icone' => 'warning',
+                    'title' => 'Campo faltando',
+                    'mensagem' => 'Ops, existem campos que estão em branco. ',
+                ]);
+            };
+
             Produtos::create($request->all());
             return response()->json([
                 'icone' => 'success',

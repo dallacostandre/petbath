@@ -28,8 +28,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Nome Produto</label>
-                                                    <input type="text" class="form-control" name="nomeProduto"
-                                                        required id="nomeProduto">
+                                                    <input type="text" class="form-control" name="nomeProduto"id="nomeProduto" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -37,8 +36,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Codigo do Prod.</label>
-                                                    <input type="text" class="form-control" name="codigoProduto"
-                                                        required id="codigoProduto">
+                                                    <input type="text" class="form-control" name="codigoProduto" id="codigoProduto" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -47,16 +45,16 @@
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">R$</div>
                                                     </div>
-                                                    <input type="text" class="form-control money2" name="custoProduto "
-                                                        required id="custoProduto">
+                                                    <input type="text" class="form-control money2" name="custoProduto"
+                                                        id="custoProduto" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Lucro em %</label>
-                                                    <input type="text" class="form-control percentual percent" max="100"
-                                                        required min="0" name="porcentagemLucroProduto"
-                                                        id="porcentagemLucroProduto">
+                                                    <input type="text" class="form-control percent" max="100" min="0"
+                                                        name="porcentagemLucroProduto" id="porcentagemLucroProduto"
+                                                        required>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -133,8 +131,7 @@
                                                         <td>R$ {{ $produto->custo_produto }}</td>
                                                         <td>{{ $produto->percentual_lucro }}</td>
                                                         <td>R$ {{ $produto->preco_de_venda_produto }}</td>
-                                                        <td>
-                                                            <span style="color: green; fontWeight:500;">{{ $produto->lucro_produto }}</span>
+                                                        <td><span> R$ {{ $produto->lucro_produto }}</span>
                                                         </td>
                                                         <td>
                                                             <a href="{{ url('editar-produto/') }}"
@@ -154,7 +151,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{$produtos->links() }}
+                            {{ $produtos->links() }}
                         </div>
                     </div>
                 </div>
@@ -231,22 +228,22 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">% de Lucro</label>
-                                                    <input type="text" class="form-control money2 percentual percent" name="porcentagemLucroServico"
-                                                        id="porcentagemLucroServico">
+                                                    <input type="text" class="form-control money2"
+                                                        name="porcentagemLucroServico" id="porcentagemLucroServico">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Preço Sugerido</label>
-                                                    <input type="text" class="form-control money2" name="precoSugeridoServico"
-                                                        id="precoSugeridoServico">
+                                                    <input type="text" class="form-control money2"
+                                                        name="precoSugeridoServico" id="precoSugeridoServico">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Preço de Venda</label>
-                                                    <input type="text" class="form-control money2" name="precoVendaServico"
-                                                        id="precoVendaServico">
+                                                    <input type="text" class="form-control money2"
+                                                        name="precoVendaServico" id="precoVendaServico">
                                                 </div>
                                             </div>
                                         </div>
@@ -323,7 +320,7 @@
     $('.money2').mask('000.000.000.000.000,00', {
         reverse: true
     });
-    $('.percent').mask('##0,00%', {
+    $('.percent').mask('0.000,00%', {
         reverse: true
     });
 
@@ -414,65 +411,62 @@
 
     $('#porcentagemLucroProduto').on('change', function() {
         var custo = $('#custoProduto').val();
-        var porcentagem = $('#porcentagemLucroServico').val();
+        var porcentagem = $('#porcentagemLucroProduto').val();
         var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
-        $('#precoSugeridoProduto').val(precoSugeridoProduto);
-        $('#precoVendaProduto').val(precoSugeridoProduto);
 
-        var lucroProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
-        $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(lucroProduto));
-
+        if (custo === "") {
+            return false;
+        } else {
+            $('#precoSugeridoProduto').val(precoSugeridoProduto);
+            $('#precoVendaProduto').val(precoSugeridoProduto);
+            var lucroProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+            $('#lucroProduto').val(lucroProduto);
+        }
     });
 
     $('#custoProduto').on('change', function() {
         var custo = $('#custoProduto').val();
         var porcentagem = $('#porcentagemLucroProduto').val();
         var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
-        $('#precoSugeridoProduto').val(precoSugeridoProduto);
-        $('#precoVendaProduto').val(precoSugeridoProduto);
-        $('#precoVendaProduto').val(precoSugeridoProduto);
 
-        var lucroProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
-        $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(lucroProduto));
+        if (porcentagem === "") {
+            return false;
+        } else {
+            $('#precoSugeridoProduto').val(precoSugeridoProduto);
+            $('#precoVendaProduto').val(precoSugeridoProduto);
+            var lucroProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+            $('#lucroProduto').val(lucroProduto);
+        }
     });
 
 
-    $('#porcentagemLucroServico').on('change', function() {
-        var custo = $('#custoServico').val();
-        var porcentagem = $('#porcentagemLucroServico').val();
-        var precoSugeridoServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
-        $('#precoSugeridoServico').val(precoSugeridoServico);
-        $('#precoVendaServico').val(precoSugeridoServico);
+    // $('#porcentagemLucroServico').on('change', function() {
+    //     var custo = $('#custoServico').val();
+    //     var porcentagem = $('#porcentagemLucroServico').val();
+    //     var precoSugeridoServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
+    //     $('#precoSugeridoServico').val(precoSugeridoServico);
+    //     $('#precoVendaServico').val(precoSugeridoServico);
 
-        var lucroServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
-        $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(lucroServico));
+    //     var lucroServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+    //     $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
+    //         style: 'currency',
+    //         currency: 'BRL'
+    //     }).format(lucroServico));
 
-    });
+    // });
 
-    $('#custoServico').on('change', function() {
-        var custo = $('#custoServico').val();
-        var porcentagem = $('#porcentagemLucroServico').val();
-        var precoSugeridoServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
-        $('#precoSugeridoServico').val(precoSugeridoServico);
-        $('#precoVendaServico').val(precoSugeridoServico);
+    // $('#custoServico').on('change', function() {
+    //     var custo = $('#custoServico').val();
+    //     var porcentagem = $('#porcentagemLucroServico').val();
+    //     var precoSugeridoServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
+    //     $('#precoSugeridoServico').val(precoSugeridoServico);
+    //     $('#precoVendaServico').val(precoSugeridoServico);
 
-        var lucroServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
-        $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(lucroServico));
+    //     var lucroServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+    //     $('#lucroProduto').val(new Intl.NumberFormat('pt-BR', {
+    //         style: 'currency',
+    //         currency: 'BRL'
+    //     }).format(lucroServico));
 
-    });
-
-
-
+    // });
 </script>
