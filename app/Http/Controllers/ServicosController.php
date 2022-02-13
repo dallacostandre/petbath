@@ -122,8 +122,23 @@ class ServicosController extends Controller
      * @param  \App\Models\Servicos  $servicos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Servicos $servicos)
+    public function destroy(Servicos $servicos, Request $request)
     {
-        //
+        $id = $request->id;
+        $resposta = Servicos::findOrFail($id);
+        if ($resposta) {
+            $resposta->delete();
+            return response()->json([
+                'title' => 'Serviço excluído com sucesso.',
+                'text' => 'Sucesso ao excluir Serviço.',
+                'icon' => 'success',
+            ]);
+        } else {
+            return response()->json([
+                'title' => 'Serviço não excluído.',
+                'text' => 'Erro ao excluir seu Serviço.',
+                'icon' => 'error',
+            ]);
+        }
     }
 }

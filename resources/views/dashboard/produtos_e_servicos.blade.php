@@ -320,11 +320,11 @@
                                                 <td>R$ {{ $servico->servico_preco_de_venda }}</td>
                                                 <td>R$ {{ $servico->servico_lucro }}</td>
                                                 <td>
-                                                    <a href="{{ url('editar-servico/') }}" data-toggle="tooltip"
+                                                    <a href="{{ url('/editar-servico/') }}" data-toggle="tooltip"
                                                     data-placement="top" title="Editar Servico">
                                                     <i class="fas fa-user-edit"></i>
                                                 </a> &nbsp;&nbsp;
-                                                <a href="{{ url('excluir-servico/') }}" data-toggle="tooltip"
+                                                <a href="{{ url('/removerServico') }}" class="removerServico" data-toggle="tooltip" data-id={{ $servico->id }}
                                                 data-placement="top" title="Excluir Servico">
                                                 <i class="fad fa-trash"></i>
                                                     </a>&nbsp;&nbsp;
@@ -435,7 +435,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Atenção',
-                    text: 'Não foi possível adicionar o produto',
+                    text: 'Não foi possível excluir o produto',
                 });
             }
         });
@@ -524,6 +524,42 @@
         });
     });
 
+    $('.removerServico').on('click', function(e) {
+        e.preventDefault();
+
+        var url = "/removerServico";
+        var idProduto = $(this).data('id');
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            method: 'DELETE',
+            dataType: 'JSON',
+            data: {
+                id: idProduto,
+                _token: token
+            },
+            success: function(data) {
+                Swal.fire({
+                    title: data.title,
+                    text: data.text,
+                    icon: data.icon,
+                });
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            },
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Não foi possível excluir o serviço',
+                });
+            }
+        });
+    });
+
 
     $('#servico_porcentagem_lucro').on('change', function() {
         var custo = $('#servico_custo').val();
@@ -557,4 +593,5 @@
             $('#servico_lucro').val(lucroServico);
         }
     });
+
 </script>

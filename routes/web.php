@@ -61,9 +61,10 @@ Route::group(['middleware' => 'auth'], function () {
     // PRODUTO
     Route::POST('/cadastraProduto', [ProdutoController::class, 'store'])->name('cadastroProduto');
     Route::DELETE('/removerProduto', [ProdutoController::class, 'destroy'])->name('removerProduto');
-
+    
     // SERVICO
     Route::POST('/cadastraServico',[ServicosController::class, 'create'])->name('cadastrarServico');
+    Route::DELETE('/removerServico', [ServicosController::class, 'destroy'])->name('removerServico');
 
 
 });
