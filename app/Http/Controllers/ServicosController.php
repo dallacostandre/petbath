@@ -18,11 +18,7 @@ class ServicosController extends Controller
      */
     public function index()
     {
-        $produtos = Produtos::orderBy('id', 'DESC')->paginate(10);
-        $servicos = Servicos::orderBy('id', 'DESC')->paginate(10);
-        $raca_pet  = PetRaca::all();
         
-        return view('dashboard.produtos_e_servicos', compact('servicos', 'raca_pet', 'produtos'));
     }
 
     public function cadastroServicoView()
@@ -43,7 +39,7 @@ class ServicosController extends Controller
 
             $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
             $unique_user = $unique_user_db[0]->unique_user;
-
+            
             $servicos = new Servicos();
             $servicos->unique_servico = $unique_servico;
             $servicos->unique_user = $unique_user;

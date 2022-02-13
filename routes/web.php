@@ -9,6 +9,7 @@ use App\Http\Controllers\PetDadosController;
 use App\Http\Controllers\ServicosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalenderController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PacotesEPromocoesController;
 use App\Http\Controllers\ProdutoController;
 use App\Models\Servicos;
@@ -25,11 +26,9 @@ Route::GET('/cadastro', function () {
 Route::group(['middleware' => 'auth'], function () {
 
     // SERVIÇOS
-    Route::GET('/produtos-e-servicos', [ServicosController::class, 'index']);
+    Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
+    Route::GET('/pacotes-e-promocoes', [DashboardController::class, 'pacotesEPromocoes']);
     
-    // PACOTES E PROMOÇÕES    
-    Route::get('/pacotes-e-promocoes', [PacotesEPromocoesController::class, 'index']);
-
 
     // CONFIGURAÇÃO
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
@@ -65,6 +64,10 @@ Route::group(['middleware' => 'auth'], function () {
     // SERVICO
     Route::POST('/cadastraServico',[ServicosController::class, 'create'])->name('cadastrarServico');
     Route::DELETE('/removerServico', [ServicosController::class, 'destroy'])->name('removerServico');
+
+    //PACOTES
+
+    Route::POST('/cadastroPacote', []);
 
 
 });

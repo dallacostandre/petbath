@@ -32,7 +32,7 @@
                                                         id="Nome do Pacote">
                                                 </div>
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Descrição do Pacote</label>
                                                     <input type="text" class="form-control"
@@ -40,7 +40,56 @@
                                                         id="servico_nome">
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>Frequência</label>
+                                                    <select class="form-select">
+                                                        <option value="mensal">Mensal</option>
+                                                        <option value="semestral">Semestral</option>
+                                                        <option value="anual">Anual</option>
+                                                      </select>
+                                                </div>
+                                            </div>
                                         </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Servico</label>
+                                                    <select class="form-select">
+                                                        @foreach ($servicos as $servico)
+                                                            <option value="{{ $servico->id }}">{{ $servico->servico_nome }}</option>
+                                                        @endforeach
+                                                      </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">% de Lucro</label>
+                                                    <input type="text" class="form-control money2"
+                                                        name="servico_preco"
+                                                        id="servico_preco">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Preço Sugerido</label>
+                                                    <input type="text" class="form-control money2"
+                                                        name="servico_preco"
+                                                        id="servico_preco">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Preço de Venda</label>
+                                                    <input type="text" class="form-control money2"
+                                                        name="servico_preco"
+                                                        id="servico_preco">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">

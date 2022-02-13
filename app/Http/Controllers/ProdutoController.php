@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produtos;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProdutoController extends Controller
@@ -39,15 +41,13 @@ class ProdutoController extends Controller
         if ($request) {
 
             $validate = Validator::make($request->all(),[
-                'nome_produto' => 'required',
-                'codigo_produto' => 'required',
-                'custo_produto' => 'required',
-                'preco_de_venda_produto' => 'required',
-                'percentual_lucro' => 'required',
-                'lucro_produto' => 'required',
-                'lucro_produto' => 'required'
+                'produto_porcentagem_lucro' => 'require d',
+                'produto_nome' => 'required',
+                'produto_codigo' => 'required',
+                'produto_custo' => 'required',
+                'produto_preco_de_venda' => 'required',
+                'produto_lucro' => 'required',
             ]);
-
 
             if ($validate->fails()) {
                 return response()->json([
@@ -57,7 +57,23 @@ class ProdutoController extends Controller
                 ]);
             };
 
-            Produtos::create($request->all());
+            $data = $request->all();
+            $unique_produto = uniqid();
+
+            $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
+            $unique_user = $unique_user_db[0]->unique_user;
+
+            $produto = new Produtos();
+            $produto->unique_user = $unique_user;
+            $produto->unique_produto = $unique_produto;
+            $produto->produto_porcentagem_lucro = $data['produto_porcentagem_lucro'];
+            $produto->produto_nome = $data['produto_nome'];
+            $produto->produto_codigo = $data['produto_codigo'];
+            $produto->produto_custo = $data['produto_custo'];
+            $produto->produto_preco_de_venda = $data['produto_preco_de_venda'];
+            $produto->produto_lucro = $data['produto_lucro'];
+            $produto->save();
+            
             return response()->json([
                 'title' => 'Cadastrado',
                 'text' => 'Produto cadastrado com sucesso',

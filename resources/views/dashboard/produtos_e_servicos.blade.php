@@ -126,13 +126,13 @@
                                             <tbody>
                                                 <tr>
                                                     @foreach ($produtos as $produto)
-                                                        <td>{{ $produto->codigo_produto }}</td>
-                                                        <td>{{ $produto->nome_produto }}</td>
-                                                        <td>R$ {{ $produto->custo_produto }}</td>
-                                                        <td>{{ $produto->percentual_lucro }}</td>
-                                                        <td>R${{ number_format($produto->preco_de_venda_produto, 2, ',', '.') }}</td>
+                                                        <td>{{ $produto->produto_codigo }}</td>
+                                                        <td>{{ $produto->produto_nome }}</td>
+                                                        <td>R$ {{ $produto->produto_custo }}</td>
+                                                        <td>{{ $produto->produto_porcentagem_lucro }}</td>
+                                                        <td>R${{ number_format($produto->produto_preco_de_venda, 2, ',', '.') }}</td>
                                                         <td>R$
-                                                            {{ number_format($produto->lucro_produto, 2, ',', '.') }}
+                                                            {{ number_format($produto->produto_lucro, 2, ',', '.') }}
                                                         </td>
                                                         <td>
                                                             <a href="{{ url('editar-produto/') }}"
@@ -196,7 +196,6 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Raça</label>
-                                                    {{-- FOREACH E RAÇAS --}}
                                                     <select class="form-control" name="servico_pet_raca"
                                                         id="servico_pet_raca" required>
                                                         <option disabled>Selecione uma raça</option>
@@ -362,12 +361,12 @@
         e.preventDefault();
 
         var url = "/cadastraProduto";
-        var nomeProduto = $('#nomeProduto').val();
-        var codigoProduto = $('#codigoProduto').val();
-        var custoProduto = $('#custoProduto').val();
-        var precoVendaProduto = $('#precoVendaProduto').val();
-        var percentualLucro = $('#porcentagemLucroProduto').val();
-        var lucroProduto = $('#lucroProduto').val();
+        var produto_nome = $('#nomeProduto').val();
+        var produto_codigo = $('#codigoProduto').val();
+        var produto_custo = $('#custoProduto').val();
+        var produto_preco_de_venda = $('#precoVendaProduto').val();
+        var produto_porcentagem_lucro = $('#porcentagemLucroProduto').val();
+        var produto_lucro = $('#lucroProduto').val();
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -376,19 +375,19 @@
             method: 'POST',
             dataType: 'JSON',
             data: {
-                nome_produto: nomeProduto,
-                codigo_produto: codigoProduto,
-                custo_produto: custoProduto,
-                preco_de_venda_produto: precoVendaProduto,
-                percentual_lucro: percentualLucro,
-                lucro_produto: lucroProduto,
+                produto_nome: produto_nome,
+                produto_porcentagem_lucro: produto_porcentagem_lucro,
+                produto_codigo: produto_codigo,
+                produto_custo: produto_custo,
+                produto_preco_de_venda: produto_preco_de_venda,
+                produto_lucro: produto_lucro,
                 _token: token
             },
             success: function(data) {
                 Swal.fire({
                     title: data.title,
-                    text: data.mensagem,
-                    icon: data.icone,
+                    text: data.text,
+                    icon: data.icon,
                 });
                 setTimeout(function() {
                     location.reload();
