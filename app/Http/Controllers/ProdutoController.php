@@ -51,23 +51,23 @@ class ProdutoController extends Controller
 
             if ($validate->fails()) {
                 return response()->json([
-                    'icone' => 'warning',
                     'title' => 'Campo faltando',
-                    'mensagem' => 'Ops, existem campos que estão em branco. ',
+                    'text' => 'Ops, existem campos que estão em branco. ',
+                    'icon' => 'warning',
                 ]);
             };
 
             Produtos::create($request->all());
             return response()->json([
-                'icone' => 'success',
                 'title' => 'Cadastrado',
-                'mensagem' => 'Produto cadastrado com sucesso',
+                'text' => 'Produto cadastrado com sucesso',
+                'icon' => 'success',
             ]);
         } else {
             return response()->json([
-                'icone' => 'warning',
                 'title' => 'Não foi possível realizar um cadastro',
-                'mensagem' => 'Erro ao cadastrar produto, tente novamente.',
+                'text' => 'Erro ao cadastrar produto, tente novamente.',
+                'icon' => 'warning',
             ]);
         }
     }
@@ -118,15 +118,15 @@ class ProdutoController extends Controller
         if ($resposta) {
             $resposta->delete();
             return response()->json([
-                'icone' => 'success',
                 'title' => 'Produto excluído com sucesso.',
-                'mensagem' => 'Sucesso ao excluir produto.',
+                'text' => 'Sucesso ao excluir produto.',
+                'icon' => 'success',
             ]);
         } else {
             return response()->json([
-                'icone' => 'error',
                 'title' => 'Produto não excluído.',
-                'mensagem' => 'Erro ao excluir seu produto.',
+                'text' => 'Erro ao excluir seu produto.',
+                'icon' => 'error',
             ]);
         }
     }

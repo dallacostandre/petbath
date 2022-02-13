@@ -65,9 +65,6 @@
                                                 <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
                                             <a href="{{ url('excluir-cliente/' . $cliente->id) }}">
                                                 <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
-                                            <a href="{{ url('visualizar-cliente/' . $cliente->id) }}">
-                                                <i class="fas fa-user-circle"></i>
-                                            </a>&nbsp;&nbsp;
                                             <a href="{{ url('visualizar-cliente/' . $cliente->id) }}"
                                                 title="Notificar Cliente">
                                                 <i class="fad fa-bells"></i>

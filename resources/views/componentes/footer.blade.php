@@ -50,7 +50,9 @@
 <script src="{{ asset('../assets/font-awesome-pro/js/fontawesome.js') }}" rel="stylesheet"></script>
 <script src="{{ asset('../assets/font-awesome-pro/js/regular.js') }}" rel="stylesheet"></script>
 <script src="{{ asset('../assets/font-awesome-pro/js/all.js') }}" rel="stylesheet"></script>
-{{-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
+
+{{-- news Js --}}
+<script src="{{ asset('assets-2/dist/js/ajax.js') }}" type="text/javascript"></script>
 
 <script>
     $(document).ready(function() { 

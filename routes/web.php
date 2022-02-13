@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalenderController;
 use App\Http\Controllers\PacotesEPromocoesController;
 use App\Http\Controllers\ProdutoController;
+use App\Models\Servicos;
 
 Route::GET('/acessar', function () {
     return view('auth.login');
@@ -60,6 +61,9 @@ Route::group(['middleware' => 'auth'], function () {
     // PRODUTO
     Route::POST('/cadastraProduto', [ProdutoController::class, 'store'])->name('cadastroProduto');
     Route::DELETE('/removerProduto', [ProdutoController::class, 'destroy'])->name('removerProduto');
+
+    // SERVICO
+    Route::POST('/cadastraServico',[ServicosController::class, 'create'])->name('cadastrarServico');
 
 
 });

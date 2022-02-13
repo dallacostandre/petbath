@@ -14,8 +14,12 @@ class Servicos extends Model
         'unique_user',
         'unique_servico',
         'servico_nome',
-        'servico_tempo',
-        'servico_preco',
-        'servico_pet_porte'
+        'servico_pet_raca',
+        'servico_pet_porte',
+        'servico_codigo',
+        'servico_custo',
+        'servico_porcentagem_lucro',
+        'servico_preco_de_venda',
+        'servico_lucro',
     ];
 }

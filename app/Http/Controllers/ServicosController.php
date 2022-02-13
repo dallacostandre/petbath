@@ -18,12 +18,13 @@ class ServicosController extends Controller
      */
     public function index()
     {
-        $servicos = Servicos::orderBy('id', 'DESC')->paginate(10);
         $produtos = Produtos::orderBy('id', 'DESC')->paginate(10);
+        $servicos = Servicos::orderBy('id', 'DESC')->paginate(10);
         $raca_pet  = PetRaca::all();
+        
         return view('dashboard.produtos_e_servicos', compact('servicos', 'raca_pet', 'produtos'));
     }
-    
+
     public function cadastroServicoView()
     {
         return view('cadastro_servico', compact('raca_pet'));
@@ -37,33 +38,35 @@ class ServicosController extends Controller
     public function create(Request $request)
     {
         if ($request) {
-            $servico_preco = str_replace(',','.',$request->servico_preco);
+            $data = $request->all();
             $unique_servico = uniqid();
+
             $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
             $unique_user = $unique_user_db[0]->unique_user;
 
             $servicos = new Servicos();
             $servicos->unique_servico = $unique_servico;
             $servicos->unique_user = $unique_user;
-            $servicos->servico_nome = $request->servico_nome;
-            $servicos->servico_tempo = $request->servico_tempo;
-            $servicos->servico_preco = $servico_preco;
-            $servicos->servico_pet_porte = $request->servico_pet_porte;
+            $servicos->servico_nome = $data['servico_nome'];
+            $servicos->servico_pet_raca = $data['servico_pet_raca'];
+            $servicos->servico_pet_porte = $data['servico_pet_porte'];
+            $servicos->servico_codigo = $data['servico_codigo'];
+            $servicos->servico_custo = $data['servico_custo'];
+            $servicos->servico_porcentagem_lucro = $data['servico_porcentagem_lucro'];
+            $servicos->servico_preco_de_venda = $data['servico_preco_de_venda'];
+            $servicos->servico_lucro = $data['servico_lucro'];
             $servicos->save();
 
             return response()->json([
                 'title' => 'Serviço Cadastrado',
-                'message' => 'Serviço foi cadastrado com sucesso.',
+                'text' => 'Serviço foi cadastrado com sucesso.',
                 'icon' => 'success',
-                'url' => '/servicos'
             ]);
-
         } else {
             return response()->json([
                 'title' => 'Houve um erro Cadastrado',
-                'message' => 'Houve um erro ao cadastrar o serviço',
+                'text' => 'Houve um erro ao cadastrar o serviço',
                 'icon' => 'error',
-                'url' => '/servicos'
             ]);
         }
     }
