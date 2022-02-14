@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::DELETE('/removerServico', [ServicosController::class, 'destroy'])->name('removerServico');
 
     //PACOTES
-
+    Route::GET('/getServicoPreco', [ServicosController::class, 'getServicoPreco'])->name('getServicoPreco');
     Route::POST('/cadastroPacote', []);
 
 

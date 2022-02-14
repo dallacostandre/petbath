@@ -18,7 +18,6 @@ class ServicosController extends Controller
      */
     public function index()
     {
-        
     }
 
     public function cadastroServicoView()
@@ -39,7 +38,7 @@ class ServicosController extends Controller
 
             $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
             $unique_user = $unique_user_db[0]->unique_user;
-            
+
             $servicos = new Servicos();
             $servicos->unique_servico = $unique_servico;
             $servicos->unique_user = $unique_user;
@@ -134,6 +133,24 @@ class ServicosController extends Controller
                 'title' => 'Serviço não excluído.',
                 'text' => 'Erro ao excluir seu Serviço.',
                 'icon' => 'error',
+            ]);
+        }
+    }
+
+    public function getServicoPreco(Request $request)
+    {
+        $id = $request->id;
+        $resposta = Servicos::where(['id' => $id])->first();
+        if ($resposta) {
+            return response()->json([
+                'value' => $resposta->servico_preco_de_venda,
+                'text' => 'Sucesso ao procurar serviço. Servico encontrado.',
+            ]);
+        } else {
+            return response()->json([
+                'icon' => 'error',
+                'title' => 'Preco do servico não foi não encontrado.',
+                'text' => 'Erro ao procurar preco do serviço.',
             ]);
         }
     }
