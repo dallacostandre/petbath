@@ -30,9 +30,10 @@ class DashboardController extends Controller
     public function pacotesEPromocoes()
     {
         $unique_user = User::find(Auth::id())->getUserUniqueId();
-        $servicos = Servicos::orderBy('id', 'DESC')->where(['unique_user'=> $unique_user])->paginate(10);
+        $servicos = Servicos::orderBy('id', 'DESC')->where(['unique_user'=> $unique_user])->get();
+        $produtos = Produtos::orderBy('id', 'DESC')->where(['unique_user'=> $unique_user])->get();
 
-        return view('dashboard.pacotes_e_promocoes', compact('servicos'));
+        return view('dashboard.pacotes_e_promocoes', compact('servicos', 'produtos'));
 
     }
 }

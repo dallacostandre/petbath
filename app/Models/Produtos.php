@@ -12,11 +12,15 @@ class Produtos extends Model
     protected $table = 'produtos';
 
     protected $fillable = [
-        'nome_produto',
-        'codigo_produto',
-        'custo_produto',
-        'preco_de_venda_produto',
-        'percentual_lucro',
-        'lucro_produto'
+        'unique_user',
+        'unique_produto',
+        'produto_porcentagem_lucro',
+        'produto_nome',
+        'produto_codigo',
+        'produto_custo',
+        'produto_preco_de_venda',
+        'produto_lucro',
+
+
     ];
 }

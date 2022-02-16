@@ -25,11 +25,6 @@ Route::GET('/cadastro', function () {
 // USUARIO DEVE ESTAR LOGADO
 Route::group(['middleware' => 'auth'], function () {
 
-    // SERVIÇOS
-    Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
-    Route::GET('/pacotes-e-promocoes', [DashboardController::class, 'pacotesEPromocoes']);
-    
-
     // CONFIGURAÇÃO
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
     Route::GET('/editar-perfil', [ConfiguracaoController::class, 'editarPerfil']);
@@ -64,9 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
     // SERVICO
     Route::POST('/cadastraServico',[ServicosController::class, 'create'])->name('cadastrarServico');
     Route::DELETE('/removerServico', [ServicosController::class, 'destroy'])->name('removerServico');
+    Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
 
     //PACOTES
     Route::GET('/getServicoPreco', [ServicosController::class, 'getServicoPreco'])->name('getServicoPreco');
+    Route::GET('/pacotes-e-promocoes', [DashboardController::class, 'pacotesEPromocoes']);
     Route::POST('/cadastroPacote', []);
 
 
