@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //------------------------ NOVAS ROTAS
 
+    // DASHBOARD
+    Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
     Route::GET('/', function () {return view('dashboard.index');})->name('dashboard');
     Route::GET('/planos-e-assinaturas', [ConfiguracaoController::class, 'planosAssinaturas']);
     Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'fluxoDeCaixa']);
@@ -59,11 +61,13 @@ Route::group(['middleware' => 'auth'], function () {
     // SERVICO
     Route::POST('/cadastraServico',[ServicosController::class, 'create'])->name('cadastrarServico');
     Route::DELETE('/removerServico', [ServicosController::class, 'destroy'])->name('removerServico');
-    Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
+    Route::GET('/getServicoPreco', [ServicosController::class, 'getServicoPreco'])->name('getServicoPreco');
+    Route::POST('/getServicosTable', [ServicosController::class, 'getServicosTable'])->name('getServicosTable'); // NAO USADO AINDA
+    Route::GET('/getAllServicosProdutos', [ServicosController::class, 'getAllServicosProdutos'])->name('getAllServicosProdutos');
 
     //PACOTES
-    Route::GET('/getServicoPreco', [ServicosController::class, 'getServicoPreco'])->name('getServicoPreco');
     Route::GET('/pacotes-e-promocoes', [DashboardController::class, 'pacotesEPromocoes']);
+
     Route::POST('/cadastroPacote', []);
 
 

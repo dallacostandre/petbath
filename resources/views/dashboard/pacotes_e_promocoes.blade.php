@@ -45,169 +45,82 @@
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="card-body">
-                                <form>
-                                    <div class="col col-10" style="display: flex">
-                                        <div class="form-check me-4">
-                                            <input class="form-check-input" type="radio" name="exampleRadios"
-                                                id="exampleRadios2" value="option2">
-                                            <label class="form-check-label" for="exampleRadios2">
-                                                Pacote
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="exampleRadios"
-                                                id="exampleRadios3" value="option3">
-                                            <label class="form-check-label" for="exampleRadios3">
-                                                Promoção
-                                            </label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Pacote</label>
+                                            <input type="text" class="form-control" name="pacote_nome"
+                                                placeholder="Qual o nome do pacote?" id="pacote_nome">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Nome Pacote</label>
-                                                <input type="text" class="form-control" name="pacote_nome"
-                                                    id="pacote_nome">
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Serviço ou Produto </label>
+                                            <input type="text" class="form-control" data-id="{{ $unique_user }}"
+                                                placeholder="Digite aqui o nome do produto ou servico cadastrado"
+                                                id="inputInsertPacotePromocoes">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle"
-                                                                type="button" id="dropdownMenuButton1"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                Serviço
-                                                            </button>
-                                                            <ul class="dropdown-menu"
-                                                                aria-labelledby="dropdownMenuButton1">
-                                                                <li>
-                                                                    <div class="ui-widget" autocomplete="off">
-                                                                        <select class="combobox">
-                                                                            @foreach ($servicos as $servico)
-                                                                                <option value="{{ $servico->id }}">
-                                                                                    {{ $servico->servico_nome }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </th>
-                                                    <th>Quantidade</th>
-                                                    <th>Valor Unitário</th>
-                                                    <th>Valor Total</th>
-                                                    <th>Desconto %</th>
-                                                    <th>Valor Final</th>
-                                                    <th>Ações</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>Teste</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>Teste</td>
-                                                    <td>Teste</td>
-                                                    <td>Teste</td>
-                                                    <td>Teste</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                </div>
+                                <div class="row">
+                                    <table class="table" id="tableProdutoServicosSelecionados">
+                                        <thead>
+                                            <tr>
+                                                <th>Tipo</th>
+                                                <th>Quantidade</th>
+                                                <th>Valor Unitário</th>
+                                                <th>Valor Total</th>
+                                                <th>Desconto %</th>
+                                                <th>Valor Final</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <br>
+                                <hr>
+                                <div class="row" style="display: flex;">
+                                    <div class="col col-md-6">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here"
+                                                id="floatingTextarea2" style="height: 100px"></textarea>
+                                            <label for="floatingTextarea2">Observações Adicionais</label>
+                                        </div>
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle"
-                                                                type="button" id="dropdownMenuButton1"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                                Produtos
-                                                            </button>
-                                                            <ul class="dropdown-menu"
-                                                                aria-labelledby="dropdownMenuButton1">
-                                                                <li>
-                                                                    <div class="ui-widget" autocomplete="off">
-                                                                        <select class="combobox">
-                                                                            @foreach ($produtos as $produto)
-                                                                                <option value="{{ $produto->id }}">
-                                                                                    {{ $produto->produto_nome }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </th>
-                                                    <th>Quantidade</th>
-                                                    <th>Valor Unitário</th>
-                                                    <th>Valor Total</th>
-                                                    <th>Desconto %</th>
-                                                    <th>Valor Final</th>
-                                                    <th>Ações</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>Teste</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>Teste</td>
-                                                    <td>Teste</td>
-                                                    <td>Teste</td>
-                                                    <td>Teste</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <hr>
-                                    <div class="row" style="display: flex;">
+                                    <div class="col col-md-6" style="display: flex;">
                                         <div class="col col-md-6">
-                                            <div class="form-floating">
-                                                <textarea class="form-control" placeholder="Leave a comment here"
-                                                    id="floatingTextarea2" style="height: 100px"></textarea>
-                                                <label for="floatingTextarea2">Observações Adicionais</label>
+                                            <div class="col col-md-12">
+                                                <label for="">Preço Total Sugerido:</label>
+                                            </div>
+                                            <div class="col col-md-12">
+                                                <label for="">Preço Total de Venda:</label>
                                             </div>
                                         </div>
-                                        <div class="col col-md-6" style="display: flex;">
-                                            <div class="col col-md-6">
-                                                <div class="col col-md-12">
-                                                    <label for="">Preço Total Sugerido:</label>
-                                                </div>
-                                                <div class="col col-md-12">
-                                                    <label for="">Preço Total de Venda:</label>
+                                        <div class="col col-md-6">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control percent"
+                                                        name="pacote_porcentagem_desconto"
+                                                        id="pacote_porcentagem_desconto">
                                                 </div>
                                             </div>
-                                            <div class="col col-md-6">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control percent"
-                                                            name="pacote_porcentagem_desconto"
-                                                            id="pacote_porcentagem_desconto">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control money2"
-                                                            name="pacote_valor_final" id="pacote_valor_final">
-                                                    </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control money2"
+                                                        name="pacote_valor_final" id="pacote_valor_final">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-success botao-padrao float-end"
-                                        id="cadastrarServico">Adicionar
-                                    </button>
-                                    <div class="clearfix"></div>
-                                </form>
+                                </div>
+                                <button type="button" class="btn btn-success botao-padrao float-end"
+                                    id="cadastrarServico">Adicionar
+                                </button>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
@@ -224,7 +137,7 @@
                         <div class="accordion-body">
                             <div class="card strpied-tabled-with-hover">
                                 <div class="card-body table-responsive">
-                                    <table class="table table-striped table-hover table-sm">
+                                    <table class="table table-striped table-hover table-sm ">
                                         <thead>
                                             <th>Cod. Prom/Pacote </th>
                                             <th>Nome Promo/Pacote</th>
@@ -282,173 +195,24 @@
         reverse: true
     });
 
-    $('.getServicoPreco').on('change', function(e) {
-        e.preventDefault();
+    $(document).ready(function() {
 
-        var url = "/getServicoPreco";
-        var id = $(this).val();
-        var idInput = $(this).data("id");
-        var token = $('meta[name="csrf-token"]').attr('content');
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            method: 'GET',
-            dataType: 'JSON',
-            data: {
-                id: id,
-                _token: token
-            },
-            success: function(data) {
-                $('#input' + idInput).val(data.value);
-            },
-            error: function(data) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Atenção',
-                    text: 'Não foi possível encontrar o preco do servico',
-                });
+        $('#inputInsertPacotePromocoes').autocomplete({
+            source: '/getAllServicosProdutos',
+            minlength: 1,
+            autoFocus: true,
+            select: function(e, ui) {
+                $('#tableProdutoServicosSelecionados').append(
+                '<tr><td>Serviço</td><td><div class="col col-4"><input class="form-control form-control-sm" type="text"/></div></td><td><span id="valorUnitario"></td><td><span id="valorTotal"></td><td><input class="form-control form-control-sm" type="text" placeholder="%"></td><td><span id="valorTotalComDesconto"></td><td><a href="#" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fad fa-trash"></i></a></td></tr>');
             }
-        });
-    });
-
-    $(function() {
-        $.widget("custom.combobox", {
-            _create: function() {
-                this.wrapper = $("<span>")
-                    .addClass("custom-combobox")
-                    .insertAfter(this.element);
-
-                this.element.hide();
-                this._createAutocomplete();
-                this._createShowAllButton();
-            },
-
-            _createAutocomplete: function() {
-                var selected = this.element.children(":selected"),
-                    value = selected.val() ? selected.text() : "";
-
-                this.input = $("<input>")
-                    .appendTo(this.wrapper)
-                    .val(value)
-                    .attr("title", "")
-                    .addClass(
-                        "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left"
-                    )
-                    .autocomplete({
-                        delay: 0,
-                        minLength: 0,
-                        source: this._source.bind(this)
-                    })
-                    .tooltip({
-                        classes: {
-                            "ui-tooltip": "ui-state-highlight"
-                        }
-                    });
-
-                this._on(this.input, {
-                    autocompleteselect: function(event, ui) {
-                        ui.item.option.selected = true;
-                        this._trigger("select", event, {
-                            item: ui.item.option
-                        });
-                    },
-
-                    autocompletechange: "_removeIfInvalid"
-                });
-            },
-
-            _createShowAllButton: function() {
-                var input = this.input,
-                    wasOpen = false;
-
-                $("<a>")
-                    .attr("tabIndex", -1)
-                    .attr("title", "Show All Items")
-                    .tooltip()
-                    .appendTo(this.wrapper)
-                    .button({
-                        icons: {
-                            primary: "ui-icon-triangle-1-s"
-                        },
-                        text: false
-                    })
-                    .removeClass("ui-corner-all")
-                    .addClass("custom-combobox-toggle ui-corner-right")
-                    .on("mousedown", function() {
-                        wasOpen = input.autocomplete("widget").is(":visible");
-                    })
-                    .on("click", function() {
-                        input.trigger("focus");
-
-                        // Close if already visible
-                        if (wasOpen) {
-                            return;
-                        }
-
-                        // Pass empty string as value to search for, displaying all results
-                        input.autocomplete("search", "");
-                    });
-            },
-
-            _source: function(request, response) {
-                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-                response(this.element.children("option").map(function() {
-                    var text = $(this).text();
-                    if (this.value && (!request.term || matcher.test(text)))
-                        return {
-                            label: text,
-                            value: text,
-                            option: this
-                        };
-                }));
-            },
-
-            _removeIfInvalid: function(event, ui) {
-
-                // Selected an item, nothing to do
-                if (ui.item) {
-                    return;
-                }
-
-                // Search for a match (case-insensitive)
-                var value = this.input.val(),
-                    valueLowerCase = value.toLowerCase(),
-                    valid = false;
-                this.element.children("option").each(function() {
-                    if ($(this).text().toLowerCase() === valueLowerCase) {
-                        this.selected = valid = true;
-                        return false;
-                    }
-                });
-
-                // Found a match, nothing to do
-                if (valid) {
-                    return;
-                }
-
-                // Remove invalid value
-                this.input
-                    .val("")
-                    .attr("title", value + " didn't match any item")
-                    .tooltip("open");
-                this.element.val("");
-                this._delay(function() {
-                    this.input.tooltip("close").attr("title", "");
-                }, 2500);
-                this.input.autocomplete("instance").term = "";
-            },
-
-            _destroy: function() {
-                this.wrapper.remove();
-                this.element.show();
-            }
-        });
-
-        $(".combobox").combobox();
-
-        $("#toggle").on("click", function() {
-            $(".combobox").toggle();
         });
     });
 </script>
+{{-- 
+// <th>Tipo</th>
+// <th>Quantidade</th>
+// <th>Valor Unitário</th>
+// <th>Valor Total</th>
+// <th>Desconto %</th>
+// <th>Valor Final</th>
+// <th>Ações</th> --}}

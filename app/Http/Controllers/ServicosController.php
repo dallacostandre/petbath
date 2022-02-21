@@ -8,6 +8,8 @@ use App\Models\Servicos;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use LDAP\Result;
 
 class ServicosController extends Controller
 {
@@ -153,5 +155,55 @@ class ServicosController extends Controller
                 'text' => 'Erro ao procurar preco do serviço.',
             ]);
         }
+    }
+
+    public function getServicosTable(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->id;
+            $response = Servicos::where(['id' => $id])->get();
+            return response()->json([
+                'return' => $response,
+            ]);
+        }
+        return response()->json([
+            'icon' => 'error',
+            'title' => 'Preco do servico não foi não encontrado.',
+            'text' => 'Erro ao procurar o serviço.',
+        ]);
+    }
+
+    public function getAllServicosProdutos(Request $request)
+    {
+        if ($request->ajax()) {
+            $unique_user_db = User::where(['id' => Auth::id()])->first();
+            $resultsProduto = Produtos::where(['unique_user' => $unique_user_db->unique_user])->orderBy('id', 'ASC')->get();
+            
+            foreach ($resultsProduto as $key => $v) {
+                $arrayProdutoParaAutoComplete[] = [
+                    "id" => $v->id, 
+                    "value" => ($v->produto_nome)
+                ];
+            }
+
+            $resultsServico = Servicos::where(['unique_user' => $unique_user_db->unique_user])->orderBy('id', 'ASC')->get();
+
+            foreach ($resultsServico as $key => $v) {
+                $arrayServicoParaAutoComplete[] = [
+                    "id" => $v->id, 
+                    "value" => ($v->servico_nome)
+                ];
+            }
+
+
+            $result = array_merge($arrayServicoParaAutoComplete, $arrayProdutoParaAutoComplete);
+
+            return response()->json($result);
+        }
+        return response()->json([
+            'icon' => 'error',
+            'title' => 'Produto e servico não foram encontrados.',
+            'text' => 'Erro ao procurar o serviço.',
+        ]);
     }
 }
