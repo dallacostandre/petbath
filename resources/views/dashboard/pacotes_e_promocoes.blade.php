@@ -202,17 +202,30 @@
             minlength: 1,
             autoFocus: true,
             select: function(e, ui) {
-                $('#tableProdutoServicosSelecionados').append(
-                '<tr><td>Serviço</td><td><div class="col col-4"><input class="form-control form-control-sm" type="text"/></div></td><td><span id="valorUnitario"></td><td><span id="valorTotal"></td><td><input class="form-control form-control-sm" type="text" placeholder="%"></td><td><span id="valorTotalComDesconto"></td><td><a href="#" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fad fa-trash"></i></a></td></tr>');
+                const text = '<tr><td>' + ui.item.label + '</td>' +
+                    '<td>' +
+                    '<div class="col col-4">' +
+                    '<input class="form-control form-control-sm" type="text"/>' +
+                    '</div>' +
+                    '</td>' +
+                    '<td>' +
+                    '<span id="valorUnitario">' + ui.item.custo + '</span>' +
+                    '</td>' +
+                    '<td>' +
+                    '<span id="valorTotal"></span>' +
+                    '</td>' +
+                    '<td>' +
+                    '<input class="form-control form-control-sm" type="text" placeholder="%">' +
+                    '</td>' +
+                    '<td>' +
+                    '<span id="valorTotalComDesconto"></span>' +
+                    '</td>' +
+                    '<td>' +
+                    '<a href="#" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fad fa-trash"></i></a>' +
+                    '</td>' +
+                    '</tr>' ;
+                $('#tableProdutoServicosSelecionados').append(text)
             }
         });
     });
 </script>
-{{-- 
-// <th>Tipo</th>
-// <th>Quantidade</th>
-// <th>Valor Unitário</th>
-// <th>Valor Total</th>
-// <th>Desconto %</th>
-// <th>Valor Final</th>
-// <th>Ações</th> --}}

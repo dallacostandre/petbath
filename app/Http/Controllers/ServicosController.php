@@ -182,7 +182,9 @@ class ServicosController extends Controller
             foreach ($resultsProduto as $key => $v) {
                 $arrayProdutoParaAutoComplete[] = [
                     "id" => $v->id, 
-                    "value" => ($v->produto_nome)
+                    "value" => $v->produto_nome,
+                    "custo" => $v->produto_custo,
+                    "unique_produto" => $v->unique_produto,   
                 ];
             }
 
@@ -191,7 +193,9 @@ class ServicosController extends Controller
             foreach ($resultsServico as $key => $v) {
                 $arrayServicoParaAutoComplete[] = [
                     "id" => $v->id, 
-                    "value" => ($v->servico_nome)
+                    "value" => $v->servico_nome,
+                    "custo" => $v->servico_custo,
+                    "unique_servico" => $v->unique_servico
                 ];
             }
 
