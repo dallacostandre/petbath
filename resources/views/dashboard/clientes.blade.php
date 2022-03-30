@@ -1,4 +1,5 @@
-@component('dashboard.componentes.header')@endcomponent
+@component('dashboard.componentes.header')
+@endcomponent
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
@@ -30,8 +31,11 @@
                     <div class="card-body">
                         <h4 class="card-title">Encontre Clientes, Edite e Notifique</h4>
                     </div>
+                    <div class="container">
+                        <input class="form-control form-control-sm" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names...">
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="myTable">
                             <thead>
                                 <tr class="text-center">
                                     <th>Status</th>
@@ -85,7 +89,8 @@
             </div>
         </div>
     </div>
-    @component('dashboard.componentes.footer')@endcomponent
+    @component('dashboard.componentes.footer')
+    @endcomponent
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -145,5 +150,26 @@
 
         myModal.addEventListener('shown.bs.modal', function() {
             myInput.focus()
-        })
+        });
+
+        function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }        
     </script>
