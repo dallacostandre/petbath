@@ -205,7 +205,7 @@
                                             <button class="btn btn-success botao-padrao" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                 aria-expanded="false" aria-controls="collapseTwo">
-                                                Avancar
+                                                Avançar
                                             </button>
                                         @endif
                                     </div>
