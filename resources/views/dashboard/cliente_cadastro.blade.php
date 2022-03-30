@@ -327,7 +327,7 @@
                                         </div>
                                         <div style="float:right" class="ms-1">
                                             <button type="submit" class="btn btn-success botao-padrao">
-                                                Finalizar
+                                                Salvar
                                             </button>
                                         </div>
                                         <div style="float:right">
