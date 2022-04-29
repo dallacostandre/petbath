@@ -17,19 +17,18 @@ class PetDadosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($uniqueIdCliente)
     {
-        $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
-        $unique_user = $unique_user_db[0]->unique_user;
-
-        $pets = PetDados::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->get();
-        return view('lista_pets', compact('pets'));
+        $uniqueCliente = $uniqueIdCliente;
+        $objPets = PetDados::where(['unique_cliente' => $uniqueIdCliente])->paginate(10);
+        $raca_pet = PetRaca::all();
+        
+        return view('dashboard.lista_pets', compact('objPets', 'raca_pet', 'uniqueCliente'));
     }
 
     public function cadastroPetView()
     {
         $raca_pet = PetRaca::all();
-        
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
         $unique_user = $unique_user_db[0]->unique_user;
         $clientes = Cliente::where(['unique_user' => $unique_user])->get();
@@ -44,7 +43,6 @@ class PetDadosController extends Controller
      */
     public function create(Request $request)
     {
-        
     }
 
     /**
@@ -73,12 +71,20 @@ class PetDadosController extends Controller
             $cadastro_pet->pet_pelagem = $request->pet_pelagem;
             $cadastro_pet->save();
 
-            return response()->json([
-                'message' => 'Pet cadastrado com sucesso!',
-                'icon' => 'success',
-                'title' => 'Pet Cadastrado',
-                'url' => 'dados-cliente/' . $unique_user_db[0]->id
-            ]);
+            if ($request->view == "pets") {
+                return response()->json([
+                    'title' => 'Pet Cadastrado',
+                    'message' => 'Pet cadastrado com sucesso!',
+                    'icon' => 'success',
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'Pet cadastrado com sucesso!',
+                    'icon' => 'success',
+                    'title' => 'Pet Cadastrado',
+                    'url' => '/pets/' . $request->uniqueIdCliente
+                ]);
+            }
         }
     }
 
@@ -88,9 +94,32 @@ class PetDadosController extends Controller
      * @param  \App\Models\PetDados  $petDados
      * @return \Illuminate\Http\Response
      */
-    public function show(PetDados $petDados)
+    public function show(PetDados $petDados, Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $dados = PetDados::where(['id' => $request->id])->get();
+            $dadosPet = [
+                'unique_pet' => $dados[0]->unique_pet,
+                'pet_id' => $dados[0]->id,
+                'pet_nome' => $dados[0]->pet_nome,
+                'pet_raca' => $dados[0]->pet_raca,
+                'pet_porte' => $dados[0]->pet_porte,
+                'pet_genero' => $dados[0]->pet_genero,
+                'pet_especie' => $dados[0]->pet_especie,
+                'pet_observacoes' => $dados[0]->pet_observacoes,
+                'pet_pelagem' => $dados[0]->pet_pelagem,
+            ];
+
+            return response()->json([
+                'dados' => $dadosPet,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Houve um erro.',
+                'icon' => 'error',
+                'title' => 'Erro',
+            ]);
+        }
     }
 
     /**
@@ -113,7 +142,30 @@ class PetDadosController extends Controller
      */
     public function update(Request $request, PetDados $petDados)
     {
-        //
+        if ($request) {
+            $cadastro_pet = PetDados::find($request->id_pet);
+            $cadastro_pet->pet_nome = $request->pet_nome;
+            $cadastro_pet->pet_raca = $request->pet_raca;
+            $cadastro_pet->pet_porte = $request->pet_porte;
+            $cadastro_pet->pet_genero = $request->pet_genero;
+            $cadastro_pet->pet_especie = $request->pet_especie;
+            $cadastro_pet->pet_observacoes = $request->pet_observacoes;
+            $cadastro_pet->pet_castracao = $request->pet_castracao;
+            $cadastro_pet->pet_pelagem = $request->pet_pelagem;
+            $cadastro_pet->update();
+
+            return response()->json([
+                'title' => 'Pet foi atualizado com sucesso.',
+                'message' => 'Pet atualizado com sucesso!',
+                'icon' => 'success',
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Pet não foi atualizado',
+                'icon' => 'erro',
+                'title' => 'Houve um erro.',
+            ]);
+        }
     }
 
     /**
@@ -122,8 +174,22 @@ class PetDadosController extends Controller
      * @param  \App\Models\PetDados  $petDados
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PetDados $petDados)
+    public function destroy(PetDados $petDados, Request $request)
     {
-        //
+        // VALIDAR SE EXISTE ALGUM AGENDAMENTO COM ESTE PET E VOLTAR UMA INFORMAÇÃO
+        if ($request->ajax()) {
+            PetDados::destroy($request->id);
+            return response()->json([
+                'message' => 'Pet excluído com sucesso!',
+                'icon' => 'success',
+                'title' => 'Pet Excluído',
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Houve um erro.',
+                'icon' => 'error',
+                'title' => 'Erro',
+            ]);
+        }
     }
 }

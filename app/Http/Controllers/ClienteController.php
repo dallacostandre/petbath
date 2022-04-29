@@ -225,8 +225,12 @@ class ClienteController extends Controller
         return view('historico');
     }
 
-    public function viewClientePosCadastro()
+    public function viewClientePosCadastro(Request $request, $uniqueIdCliente)
     {
-        dd('aqui');
+        $raca_pet  = PetRaca::all();
+        $pets = PetDados::where(['unique_cliente' => $uniqueIdCliente])->get();
+        $cliente = Cliente::where(['unique_cliente' => $uniqueIdCliente])->first();
+        $tipo = "cadastroPets";
+        return view('dashboard.cliente_cadastro', compact('raca_pet', 'pets', 'cliente', 'tipo' ));
     }
 }
