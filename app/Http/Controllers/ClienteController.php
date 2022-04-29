@@ -8,6 +8,7 @@ use App\Models\ClienteEndereco;
 use App\Models\PetDados;
 use App\Models\PetRaca;
 use App\Models\User;
+use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -30,36 +31,36 @@ class ClienteController extends Controller
         Data: 07/01/2022
         Status: Funcionando
     */
-    public function store(CadastroClienteRequest $request)
+    public function store(Request $request)
     {
         $unique_user = Auth::user()->unique_user; // Busca o codigo do Usuário
-        $unique_endereco = uniqid(); // Cria um codigo único para o Endeço do Cliente
+        $unique_endereco = uniqid(); // Cria um codigo único para o Endereço do Cliente
         $unique_cliente = uniqid(); // Cria um codigo único para o Cliente
-        $unique_pet_1 = uniqid(); // Cria um codigo único para o Primeiro Pet
 
         $whatsapp_str = clean($request->cliente_telefone);
         $telefone_str = clean($request->cliente_telefone);
         $whatsapp = str_replace('-', '', $whatsapp_str);
         $telefone = str_replace('-', '', $telefone_str);
 
-        // VALIDAR SE HÁ EMAIL E NÚMERO CADASTRADO ANTES DE QUALQUER COISA -<<<
+        // VALIDAR SE HÁ EMAIL E NÚMERO CADASTRADO ANTES DE CADASTRAR -<<<
         $email_usado = Cliente::where(['cliente_email' => $request->cliente_email])->get();
         $telefone_usado = Cliente::where(['cliente_telefone' => $request->cliente_telefone])->get();
 
         if (count($email_usado) >= 1) {
-            return back()->with([
+            return response()->json([
+                'title' => 'Atenção',
                 'message' => 'Email já cadastrado',
+                'icon' => 'warning',
             ]);
             exit();
         } elseif (count($telefone_usado) >= 1) {
-            return back()->back([
+            return response()->json([
+                'title' => 'Atenção',
                 'message' => 'Telefone já cadastrado',
+                'icon' => 'warning',
             ]);
-            exit();
         } else {
-
             $data = $request->all();
-
             $cliente = new Cliente();
             $cliente->unique_user = $unique_user;
             $cliente->unique_endereco = $unique_endereco;
@@ -68,8 +69,12 @@ class ClienteController extends Controller
             $cliente->cliente_email = $data['cliente_email'];
             $cliente->cliente_telefone = $telefone;
             $cliente->cliente_whatsapp = $whatsapp;
-            $cliente->cliente_instagram = str_replace(' ','', $data['cliente_instagram']);
+            $cliente->cliente_instagram = str_replace(' ', '', $data['cliente_instagram']);
             $cliente->save();
+
+            //Pegar o Unique ID do Cliente
+            $cliente->id;
+            $objClientCadastrado = Cliente::where(['id' =>  $cliente->id])->get();
 
             $endereco_cliente = new ClienteEndereco();
             $endereco_cliente->unique_endereco = $unique_endereco;
@@ -82,21 +87,14 @@ class ClienteController extends Controller
             $endereco_cliente->cliente_cidade = $data['cliente_cidade'];
             $endereco_cliente->save();
 
-            $pet_cliente = new PetDados();
-            $pet_cliente->unique_pet = $unique_pet_1;
-            $pet_cliente->unique_user = $unique_user;
-            $pet_cliente->unique_cliente = $unique_cliente;
-            $pet_cliente->pet_nome = $data['pet_nome'];
-            $pet_cliente->pet_raca = $data['pet_raca'];
-            $pet_cliente->pet_porte = $data['pet_porte'];
-            $pet_cliente->pet_genero = $data['pet_genero'];
-            $pet_cliente->pet_genero = $data['pet_genero'];
-            $pet_cliente->pet_especie = $data['pet_especie'];
-            $pet_cliente->pet_observacoes = $data['pet_observacoes'];
-            $pet_cliente->pet_pelagem = $data['pet_pelagem'];
-            $pet_cliente->save();
 
-            return Redirect::route('clientes')->with(['message' => 'Cliente adicionado com sucesso!']);
+            return response()->json([
+                'title' => 'Cadastro realizado',
+                'message' => 'Cliente cadastrado com sucesso!',
+                'icon' => 'success',
+                'uniqueIdCliente' =>  $objClientCadastrado[0]->unique_cliente,
+                'clienteNome' =>  'Cadastro de ' . $objClientCadastrado[0]->cliente_nome,
+            ]);
         }
     }
 
@@ -174,7 +172,7 @@ class ClienteController extends Controller
         $cliente->cliente_email = $data['cliente_email'];
         $cliente->cliente_telefone = $telefone;
         $cliente->cliente_whatsapp = $whatsapp;
-        $cliente->cliente_instagram = str_replace(' ','', $data['cliente_instagram']);
+        $cliente->cliente_instagram = str_replace(' ', '', $data['cliente_instagram']);
         $cliente->save();
 
         $endereco_cliente = ClienteEndereco::where('unique_endereco', $user->unique_endereco)->first();
@@ -189,7 +187,6 @@ class ClienteController extends Controller
 
         return Redirect::route('clientes')->with(['message' => 'Cliente atualizado com sucesso!']);
     }
-
 
     public function destroy($id)
     {
@@ -218,7 +215,7 @@ class ClienteController extends Controller
         $cliente = Cliente::find($id);
         $endereco = ClienteEndereco::where(['unique_endereco' => $cliente->unique_endereco])->get();
         $pets = PetDados::where(['unique_cliente' => $cliente->unique_cliente])->get();
-        $titulo = 'Visualizando: '. $cliente->cliente_nome; 
+        $titulo = 'Visualizando: ' . $cliente->cliente_nome;
 
         return view('dashboard.cliente_dados', compact('cliente', 'endereco', 'pets', 'titulo'));
     }
@@ -226,5 +223,10 @@ class ClienteController extends Controller
     public function historicoCliente($id)
     {
         return view('historico');
+    }
+
+    public function viewClientePosCadastro()
+    {
+        dd('aqui');
     }
 }
