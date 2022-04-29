@@ -36,9 +36,9 @@
                                 <tr class="text-center">
                                     <th>Status</th>
                                     <th>Nome</th>
-                                    <th>Pet</th>
                                     <th>Instagram</th>
                                     <th>Whats App</th>
+                                    <th>Pets</th>
                                     <th>Ações</th>
                                     <th>Histórico</th>
                                 </tr>
@@ -50,22 +50,25 @@
                                         <td>
                                             {{ Str::ucfirst($cliente->cliente_nome) }}
                                         </td>
-                                        <td>nome do pet</td>
                                         <td><a href="{{ 'http://instagram.com/' . $cliente->cliente_instagram }}">
-                                                {{ $cliente->cliente_instagram }}
-                                            </a></td>
+                                            {{ $cliente->cliente_instagram }}
+                                        </a></td>
                                         <td>
-                                            <a href="https://wa.me/+55{{ $cliente->cliente_whatsapp }}"
-                                                target="_blank">
+                                            <a href="https://wa.me/+55{{ $cliente->cliente_whatsapp }}" target="_blank">
                                                 <i class="fab fa-whatsapp" style="color:#24CC63"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{route('listaPets', ['uniqueIdCliente' => $cliente->unique_cliente])}}">
+                                                <i class="fas fa-dog"></i>
                                             </a>
                                         </td>
                                         <td>
                                             <a href="{{ url('editar-cliente/' . $cliente->id) }}">
                                                 <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
-                                            <a href="{{ url('excluir-cliente/' . $cliente->id) }}">
-                                                <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
-                                            <a href="{{ url('visualizar-cliente/' . $cliente->id) }}"
+                                                <a href="{{ url('excluir-cliente/' . $cliente->id) }}">
+                                                    <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
+                                                    <a href="{{ url('visualizar-cliente/' . $cliente->id) }}"
                                                 title="Notificar Cliente">
                                                 <i class="fad fa-bells"></i>
                                             </a>&nbsp;&nbsp;
