@@ -3,13 +3,15 @@
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
-            <div class="col-5 align-self-center">
-                <h4 class="page-title">Clientes</h4>
-            </div>
-            <div class="col col-6 botao-padrao-topo">
-                <a type="button" aria-hidden="true" href="{{ route('dadosCliente') }}" class="btn btn-success botao-padrao">
-                    Novo Cliente
-                </a>
+            <div class="col-12 align-self-center">
+                <div style="justify-content:space-between;display: flex;">
+                    <h4 class="page-title" id="name_title">
+                        Clientes
+                    </h4>
+                    <a type="button" aria-hidden="true" href="{{ route('dadosCliente') }}" class="btn btn-success botao-padrao">
+                        Novo Cliente
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -28,7 +30,7 @@
                         <h4 class="card-title">Encontre Clientes, Edite e Notifique</h4>
                     </div>
                     <div class="container">
-                        <input class="form-control form-control-sm" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names...">
+                        <input class="form-control form-control-sm" type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquise pelo nome...">
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover" id="myTable">
