@@ -7,8 +7,7 @@
                 <h4 class="page-title">Clientes</h4>
             </div>
             <div class="col col-6 botao-padrao-topo">
-                <a type="button" aria-hidden="true" href="{{ url('/cadastro-cliente') }}"
-                    class="btn btn-success botao-padrao">
+                <a type="button" aria-hidden="true" href="{{ route('dadosCliente') }}" class="btn btn-success botao-padrao">
                     Novo Cliente
                 </a>
             </div>

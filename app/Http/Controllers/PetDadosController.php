@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\PetDados;
 use App\Models\PetRaca;
 use App\Models\User;
+use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,15 +44,25 @@ class PetDadosController extends Controller
      */
     public function create(Request $request)
     {
+        
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         if ($request) {
             $unique_pet = uniqid();
-            $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
-            $unique_user = $unique_user_db[0]->unique_user;
+            $unique_user_db = User::where(['id' => Auth::id()])->get();
 
             $cadastro_pet = new PetDados();
             $cadastro_pet->unique_pet = $unique_pet;
-            $cadastro_pet->unique_user = $unique_user;
-            $cadastro_pet->unique_cliente = $request->unique_cliente;
+            $cadastro_pet->unique_user = $unique_user_db[0]->unique_user;
+            $cadastro_pet->unique_cliente = $request->uniqueIdCliente;
             $cadastro_pet->pet_nome = $request->pet_nome;
             $cadastro_pet->pet_raca = $request->pet_raca;
             $cadastro_pet->pet_porte = $request->pet_porte;
@@ -66,20 +77,9 @@ class PetDadosController extends Controller
                 'message' => 'Pet cadastrado com sucesso!',
                 'icon' => 'success',
                 'title' => 'Pet Cadastrado',
-                'url' => '/pets'
+                'url' => 'dados-cliente/' . $unique_user_db[0]->id
             ]);
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**

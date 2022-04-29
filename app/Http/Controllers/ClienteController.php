@@ -8,6 +8,7 @@ use App\Models\ClienteEndereco;
 use App\Models\PetDados;
 use App\Models\PetRaca;
 use App\Models\User;
+use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -35,7 +36,6 @@ class ClienteController extends Controller
         $unique_user = Auth::user()->unique_user; // Busca o codigo do Usuário
         $unique_endereco = uniqid(); // Cria um codigo único para o Endereço do Cliente
         $unique_cliente = uniqid(); // Cria um codigo único para o Cliente
-
 
         $whatsapp_str = clean($request->cliente_telefone);
         $telefone_str = clean($request->cliente_telefone);
@@ -65,13 +65,16 @@ class ClienteController extends Controller
             $cliente->unique_user = $unique_user;
             $cliente->unique_endereco = $unique_endereco;
             $cliente->unique_cliente = $unique_cliente;
-
             $cliente->cliente_nome = strtolower($request->cliente_nome);
             $cliente->cliente_email = $data['cliente_email'];
             $cliente->cliente_telefone = $telefone;
             $cliente->cliente_whatsapp = $whatsapp;
             $cliente->cliente_instagram = str_replace(' ', '', $data['cliente_instagram']);
             $cliente->save();
+
+            //Pegar o Unique ID do Cliente
+            $cliente->id;
+            $objClientCadastrado = Cliente::where(['id' =>  $cliente->id])->get();
 
             $endereco_cliente = new ClienteEndereco();
             $endereco_cliente->unique_endereco = $unique_endereco;
@@ -84,10 +87,13 @@ class ClienteController extends Controller
             $endereco_cliente->cliente_cidade = $data['cliente_cidade'];
             $endereco_cliente->save();
 
+
             return response()->json([
                 'title' => 'Cadastro realizado',
                 'message' => 'Cliente cadastrado com sucesso!',
                 'icon' => 'success',
+                'uniqueIdCliente' =>  $objClientCadastrado[0]->unique_cliente,
+                'clienteNome' =>  'Cadastro de ' . $objClientCadastrado[0]->cliente_nome,
             ]);
         }
     }
@@ -182,7 +188,6 @@ class ClienteController extends Controller
         return Redirect::route('clientes')->with(['message' => 'Cliente atualizado com sucesso!']);
     }
 
-
     public function destroy($id)
     {
         if ($id) {
@@ -218,5 +223,10 @@ class ClienteController extends Controller
     public function historicoCliente($id)
     {
         return view('historico');
+    }
+
+    public function viewClientePosCadastro()
+    {
+        dd('aqui');
     }
 }

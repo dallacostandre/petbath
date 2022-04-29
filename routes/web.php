@@ -46,13 +46,19 @@ Route::group(['middleware' => 'auth'], function () {
     
     //CLIENTE
     Route::GET('/clientes', [ClienteController::class, 'index'])->name('clientes');
-    Route::GET('/cadastro-cliente', [ClienteController::class, 'create']);
+
+    Route::GET('/dados-cliente', [ClienteController::class, 'create'])->name('dadosCliente');
+    Route::GET('/dados-cliente/[id]', [ClienteController::class, 'viewClientePosCadastro'])->name('dadosClienteComID');
+
     Route::POST('/cadastrar-novo-cliente', [ClienteController::class, 'store'])->name('cadastrarNovoCliente');
     Route::GET('/editar-cliente/{id}', [ClienteController::class, 'edit']);
     Route::POST('/update-cliente/{id}', [ClienteController::class, 'update'])->name('updateCliente');
     Route::GET('/excluir-cliente/{id}', [ClienteController::class, 'destroy']);
     Route::GET('/historico-cliente/{id}', [ClienteController::class, 'historicoView']);
     Route::GET('/visualizar-cliente/{id}', [ClienteController::class, 'viewCliente'])->name('viewCliente');
+    
+    //PET
+    Route::POST('/cadastrar-novo-pet', [PetDadosController::class, 'store'])->name('cadastrarNovoPet');
     
     // PRODUTO
     Route::POST('/cadastraProduto', [ProdutoController::class, 'store'])->name('cadastroProduto');
