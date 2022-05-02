@@ -14,16 +14,17 @@ class PetDadosController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * Ultima Alteração: 30-04-22
      * @return \Illuminate\Http\Response
      */
     public function index($uniqueIdCliente)
     {
         $uniqueCliente = $uniqueIdCliente;
+        $objCliente = Cliente::where(['unique_cliente' => $uniqueCliente])->first('cliente_nome');
         $objPets = PetDados::where(['unique_cliente' => $uniqueIdCliente])->paginate(10);
         $raca_pet = PetRaca::all();
-        
-        return view('dashboard.lista_pets', compact('objPets', 'raca_pet', 'uniqueCliente'));
+
+        return view('dashboard.lista_pets', compact('objPets', 'raca_pet', 'uniqueCliente', 'objCliente'));
     }
 
     public function cadastroPetView()
@@ -47,7 +48,7 @@ class PetDadosController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     *  Ultima Alteração: 29-04-22
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -71,26 +72,17 @@ class PetDadosController extends Controller
             $cadastro_pet->pet_pelagem = $request->pet_pelagem;
             $cadastro_pet->save();
 
-            if ($request->view == "pets") {
-                return response()->json([
-                    'title' => 'Pet Cadastrado',
-                    'message' => 'Pet cadastrado com sucesso!',
-                    'icon' => 'success',
-                ]);
-            } else {
-                return response()->json([
-                    'message' => 'Pet cadastrado com sucesso!',
-                    'icon' => 'success',
-                    'title' => 'Pet Cadastrado',
-                    'url' => '/pets/' . $request->uniqueIdCliente
-                ]);
-            }
+            return response()->json([
+                'title' => 'Pet Cadastrado',
+                'message' => 'Pet cadastrado com sucesso!',
+                'icon' => 'success',
+            ]);
         }
     }
 
     /**
      * Display the specified resource.
-     *
+     * Ultima Alteração: 29-04-22
      * @param  \App\Models\PetDados  $petDados
      * @return \Illuminate\Http\Response
      */
@@ -135,7 +127,7 @@ class PetDadosController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * Ultima Alteração: 29-04-22
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\PetDados  $petDados
      * @return \Illuminate\Http\Response
@@ -159,7 +151,7 @@ class PetDadosController extends Controller
                 'message' => 'Pet atualizado com sucesso!',
                 'icon' => 'success',
             ]);
-        }else{
+        } else {
             return response()->json([
                 'message' => 'Pet não foi atualizado',
                 'icon' => 'erro',
@@ -170,7 +162,7 @@ class PetDadosController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * Ultima Alteração: 29-04-22
      * @param  \App\Models\PetDados  $petDados
      * @return \Illuminate\Http\Response
      */

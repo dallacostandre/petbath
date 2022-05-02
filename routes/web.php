@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     // CONFIGURAÇÃO
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
     Route::GET('/editar-perfil', [ConfiguracaoController::class, 'editarPerfil']);
-    
+
     //PET
     Route::GET('/pets', [PetDadosController::class, 'index']);
 
@@ -39,36 +39,42 @@ Route::group(['middleware' => 'auth'], function () {
 
     // DASHBOARD
     Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
-    Route::GET('/', function () {return view('dashboard.index');})->name('dashboard');
+    Route::GET('/', function () {
+        return view('dashboard.index');
+    })->name('dashboard');
     Route::GET('/planos-e-assinaturas', [ConfiguracaoController::class, 'planosAssinaturas']);
     Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'fluxoDeCaixa']);
     Route::GET('/financeiro', [FinanceiroController::class, 'index']);
-    
+
     //CLIENTE
     Route::GET('/clientes', [ClienteController::class, 'index'])->name('clientes');
-
     Route::GET('/dados-cliente', [ClienteController::class, 'create'])->name('dadosCliente');
+    Route::GET('/dados-cliente/{id}', [ClienteController::class, 'edit'])->name('editarDadosCliente');
 
     Route::POST('/cadastrar-novo-cliente', [ClienteController::class, 'store'])->name('cadastrarNovoCliente');
-    Route::GET('/editar-cliente/{id}', [ClienteController::class, 'edit']);
     Route::POST('/update-cliente/{id}', [ClienteController::class, 'update'])->name('updateCliente');
     Route::GET('/excluir-cliente/{id}', [ClienteController::class, 'destroy']);
     Route::GET('/historico-cliente/{id}', [ClienteController::class, 'historicoView']);
     Route::GET('/visualizar-cliente/{id}', [ClienteController::class, 'viewCliente'])->name('viewCliente');
-    
-    //PET
+
+    // PET
+    // PET (Cadastra os dados do pet)
     Route::POST('/cadastrar-novo-pet', [PetDadosController::class, 'store'])->name('cadastrarNovoPet');
-    Route::GET('/pets/{uniqueIdCliente}', [PetDadosController::class, 'index'])->name('listaPets');
+    // PET (Exclui os dados do pet)
     Route::DELETE('/excluir-pet', [PetDadosController::class, 'destroy'])->name('excluirPet');
+    // PET (Lista os pets do Cliente)
+    Route::GET('/pets/{uniqueIdCliente}', [PetDadosController::class, 'index'])->name('listaPets');
+    // PET (Busca os dados do pet e recebe no modal)
     Route::POST('/visualizar-dados-pet', [PetDadosController::class, 'show'])->name('visualizarPet');
+    // PET (Atualiza os dados do pet)
     Route::POST('/atualizar-pet', [PetDadosController::class, 'update'])->name('atualizarPet');
-    
+
     // PRODUTO
     Route::POST('/cadastraProduto', [ProdutoController::class, 'store'])->name('cadastroProduto');
     Route::DELETE('/removerProduto', [ProdutoController::class, 'destroy'])->name('removerProduto');
-    
+
     // SERVICO
-    Route::POST('/cadastraServico',[ServicosController::class, 'create'])->name('cadastrarServico');
+    Route::POST('/cadastraServico', [ServicosController::class, 'create'])->name('cadastrarServico');
     Route::DELETE('/removerServico', [ServicosController::class, 'destroy'])->name('removerServico');
     Route::GET('/getServicoPreco', [ServicosController::class, 'getServicoPreco'])->name('getServicoPreco');
     Route::POST('/getServicosTable', [ServicosController::class, 'getServicosTable'])->name('getServicosTable'); // NAO USADO AINDA
@@ -78,6 +84,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/pacotes-e-promocoes', [DashboardController::class, 'pacotesEPromocoes']);
 
     Route::POST('/cadastroPacote', []);
-
-
 });

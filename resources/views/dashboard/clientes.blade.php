@@ -8,7 +8,8 @@
                     <h4 class="page-title" id="name_title">
                         Clientes
                     </h4>
-                    <a type="button" aria-hidden="true" href="{{ route('dadosCliente') }}" class="btn btn-success botao-padrao">
+                    <a type="button" aria-hidden="true" href="{{ route('dadosCliente') }}"
+                        class="btn btn-success botao-padrao">
                         Novo Cliente
                     </a>
                 </div>
@@ -30,7 +31,8 @@
                         <h4 class="card-title">Encontre Clientes, Edite e Notifique</h4>
                     </div>
                     <div class="container">
-                        <input class="form-control form-control-sm" type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquise pelo nome...">
+                        <input class="form-control form-control-sm" type="text" id="myInput" onkeyup="myFunction()"
+                            placeholder="Pesquise pelo nome...">
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover" id="myTable">
@@ -53,24 +55,28 @@
                                             {{ Str::ucfirst($cliente->cliente_nome) }}
                                         </td>
                                         <td><a href="{{ 'http://instagram.com/' . $cliente->cliente_instagram }}">
-                                            {{ $cliente->cliente_instagram }}
-                                        </a></td>
+                                                {{ $cliente->cliente_instagram }}
+                                            </a></td>
                                         <td>
-                                            <a href="https://wa.me/+55{{ $cliente->cliente_whatsapp }}" target="_blank">
+                                            <a href="https://wa.me/+55{{ $cliente->cliente_whatsapp }}"
+                                                target="_blank">
                                                 <i class="fab fa-whatsapp" style="color:#24CC63"></i>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{route('listaPets', ['uniqueIdCliente' => $cliente->unique_cliente])}}">
+                                            <a
+                                                href="{{ route('listaPets', ['uniqueIdCliente' => $cliente->unique_cliente]) }}">
                                                 <i class="fas fa-dog"></i>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{ url('editar-cliente/' . $cliente->id) }}">
-                                                <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
-                                                <a href="{{ url('excluir-cliente/' . $cliente->id) }}">
-                                                    <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
-                                                    <a href="{{ url('visualizar-cliente/' . $cliente->id) }}"
+                                            <a href="{{ url('dados-cliente/' . $cliente->id) }}">
+                                                <i class="fas fa-user-edit"></i>
+                                            </a> &nbsp;&nbsp;
+                                            <a href="#" class="excluirCliente">
+                                                <i class="fad fa-trash"></i>
+                                            </a>&nbsp;&nbsp;
+                                            <a href="{{ url('visualizar-cliente/' . $cliente->id) }}"
                                                 title="Notificar Cliente">
                                                 <i class="fad fa-bells"></i>
                                             </a>&nbsp;&nbsp;
@@ -154,23 +160,23 @@
         });
 
         function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
 
-        // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
                 }
             }
         }
-    }        
     </script>

@@ -6,7 +6,7 @@
             <div class="col-12 align-self-center">
                 <div style="justify-content:space-between;display: flex;">
                     <h4 class="page-title" id="name_title">
-                        Lista de Pets de @AdicionarNome
+                        {{ 'Pets de ' . $objCliente->cliente_nome }}
                     </h4>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">

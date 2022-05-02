@@ -87,13 +87,11 @@ class ClienteController extends Controller
             $endereco_cliente->cliente_cidade = $data['cliente_cidade'];
             $endereco_cliente->save();
 
-
             return response()->json([
                 'title' => 'Cadastro realizado',
                 'message' => 'Cliente cadastrado com sucesso!',
                 'icon' => 'success',
-                'uniqueIdCliente' =>  $objClientCadastrado[0]->unique_cliente,
-                'clienteNome' =>  'Cadastro de ' . $objClientCadastrado[0]->cliente_nome,
+                'url' => '/pets/' . $objClientCadastrado[0]->unique_cliente,
             ]);
         }
     }
@@ -231,6 +229,6 @@ class ClienteController extends Controller
         $pets = PetDados::where(['unique_cliente' => $uniqueIdCliente])->get();
         $cliente = Cliente::where(['unique_cliente' => $uniqueIdCliente])->first();
         $tipo = "cadastroPets";
-        return view('dashboard.cliente_cadastro', compact('raca_pet', 'pets', 'cliente', 'tipo' ));
+        return view('dashboard.cliente_cadastro', compact('raca_pet', 'pets', 'cliente', 'tipo'));
     }
 }
