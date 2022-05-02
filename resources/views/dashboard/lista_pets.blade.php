@@ -21,39 +21,43 @@
             <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-profile-tab" id="nav-profile">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>Pet</th>
-                                <th>Espécie</th>
-                                <th>Porte</th>
-                                <th>Raça</th>
-                                <th>Sexo</th>
-                                <th>Pelagem</th>
-                                <th>Ações</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($objPets as $pet)
-                                    <tr>
-                                        <td>{{ $pet->pet_nome }}</td>
-                                        <td>{{ $pet->pet_especie }}</td>
-                                        <td>{{ $pet->pet_porte }}</td>
-                                        <td>{{ $pet->pet_raca }}</td>
-                                        <td>{{ $pet->pet_genero == 'f' ? 'Fêmea' : 'Macho' }}</td>
-                                        <td>{{ ucfirst($pet->pet_pelagem) }}</td>
-                                        <td>
-                                            <a class="visualizarModalPet" id="{{ $pet->id }}" data-toggle="tooltip"
-                                                data-placement="top" title="Editar Pet">
-                                                <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
-                                            <a class="excluirPet" id="{{ $pet->id }}" data-toggle="tooltip"
-                                                data-placement="top" title="Excluir Pet">
-                                                <i class="fad fa-trash"></i>
-                                            </a>&nbsp;&nbsp;
-                                        </td>
-                                @endforeach
-                                </tr>
-                            </tbody>
-                        </table>
-                        {{ $objPets->links() }}
+                        @if (!$objPets->isEmpty())
+                            <table class="table table-striped" id="table">
+                                <thead>
+                                    <th>Pet</th>
+                                    <th>Espécie</th>
+                                    <th>Porte</th>
+                                    <th>Raça</th>
+                                    <th>Sexo</th>
+                                    <th>Pelagem</th>
+                                    <th>Ações</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($objPets as $pet)
+                                        <tr class="objPets">
+                                            <td>{{ $pet->pet_nome }}</td>
+                                            <td>{{ $pet->pet_especie }}</td>
+                                            <td>{{ $pet->pet_porte }}</td>
+                                            <td>{{ $pet->pet_raca }}</td>
+                                            <td>{{ $pet->pet_genero == 'f' ? 'Fêmea' : 'Macho' }}</td>
+                                            <td>{{ ucfirst($pet->pet_pelagem) }}</td>
+                                            <td>
+                                                <a class="visualizarModalPet" id="{{ $pet->id }}"
+                                                    data-toggle="tooltip" data-placement="top" title="Editar Pet">
+                                                    <i class="fas fa-user-edit"></i></a> &nbsp;&nbsp;
+                                                <a class="excluirPet" id="{{ $pet->id }}" data-toggle="tooltip"
+                                                    data-placement="top" title="Excluir Pet">
+                                                    <i class="fad fa-trash"></i>
+                                                </a>&nbsp;&nbsp;
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{ $objPets->links() }}
+                        @else
+                            <h3>Nenhum pet cadastrado ainda</h3>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -178,6 +182,9 @@
 
         <script>
             $(document).ready(function() {
+                if ($('#table').length == 0) {
+                    $('#staticBackdrop').modal('show');
+                }
                 $('.atualizarPet').hide();
             });
 
@@ -245,7 +252,7 @@
                 var _token = $('meta[name="csrf-token"]').attr('content');
                 $.ajax({
                     url: url,
-                    type: "post",
+                    type: "delete",
                     dataType: "json",
                     data: {
                         id: id,
