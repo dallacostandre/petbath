@@ -37,10 +37,16 @@ class ClienteController extends Controller
         $unique_endereco = uniqid(); // Cria um codigo único para o Endereço do Cliente
         $unique_cliente = uniqid(); // Cria um codigo único para o Cliente
 
-        $whatsapp_str = clean($request->cliente_whatsapp);
         $telefone_str = clean($request->cliente_telefone);
-        $whatsapp = str_replace('-', '', $whatsapp_str);
         $telefone = str_replace('-', '', $telefone_str);
+
+        if($request->cliente_whatsapp != null){
+            $whatsapp_str = clean($request->cliente_whatsapp);
+            $whatsapp = str_replace('-', '', $whatsapp_str);
+        }else{
+            $whatsapp = $request->cliente_whatsapp;
+        }
+
 
         // VALIDAR SE HÁ EMAIL E NÚMERO CADASTRADO ANTES DE CADASTRAR -<<<
         $email_usado = Cliente::where(['cliente_email' => $request->cliente_email])->get();
