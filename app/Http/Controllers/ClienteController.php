@@ -78,7 +78,6 @@ class ClienteController extends Controller
             $cliente->save();
 
             //Pegar o Unique ID do Cliente
-            $cliente->id;
             $objClientCadastrado = Cliente::where(['id' =>  $cliente->id])->get();
 
             $endereco_cliente = new ClienteEndereco();
@@ -252,19 +251,15 @@ class ClienteController extends Controller
         }
     }
 
-    public function viewCliente($id)
-    {
-        $cliente = Cliente::find($id);
-        $endereco = ClienteEndereco::where(['unique_endereco' => $cliente->unique_endereco])->get();
-        $pets = PetDados::where(['unique_cliente' => $cliente->unique_cliente])->get();
-        $titulo = 'Visualizando: ' . $cliente->cliente_nome;
-
-        return view('dashboard.cliente_dados', compact('cliente', 'endereco', 'pets', 'titulo'));
-    }
 
     public function history($id)
     {
-        return view('historico');
+        $objCliente = Cliente::find($id);
+        $endereco = ClienteEndereco::where(['unique_endereco' => $objCliente->unique_endereco])->get();
+        $pets = PetDados::where(['unique_cliente' => $objCliente->unique_cliente])->get();
+        $titulo = 'Visualizando: ' . $objCliente->cliente_nome;
+
+        return view('dashboard.historico', compact('objCliente', 'endereco', 'pets', 'titulo'));
     }
 
     public function viewClientePosCadastro(Request $request, $uniqueIdCliente)

@@ -69,12 +69,12 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ url('dados-cliente/' . $cliente->id) }}"
+                                                <a href="{{ route('dadosCliente', ['id' => $cliente->id]) }}"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Editar Cliente">
                                                     <i class="fas fa-user-edit"></i>
                                                 </a> &nbsp;&nbsp;
-                                                <a href="#" class="excluirCliente" data-id="{{ $cliente->id }}"
+                                                <a href="javascript:void(0)" class="excluirCliente" data-id="{{ $cliente->id }}"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Excluir Cliente">
                                                     <i class="fad fa-trash"></i>
@@ -86,7 +86,7 @@
                                                 </a>&nbsp;&nbsp;
                                             </td>
                                             <td>
-                                                <a href="{{ url('historico/' . $cliente->id) }}">
+                                                <a href="{{ route('historico', ['id' => $cliente->id]) }}">
                                                     <i class="fal fa-history"></i>
                                                 </a>
                                             </td>
@@ -158,7 +158,7 @@
         // $(function() {
         //     $('[data-toggle="tooltip"]').tooltip()
         // })
-       
+
         $('.phone').mask('(00) 0 0000-0000');
 
         // var myModal = document.getElementById('myModal')

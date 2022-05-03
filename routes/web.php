@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
    // CLIENTE(Exclui os dados do cliente)
     Route::POST('/excluir-cliente', [ClienteController::class, 'destroy']);
     // CLIENTE (Histórico do Cliente)
-    Route::GET('/historico/{id}', [ClienteController::class, 'history']);
+    Route::GET('/historico/{id}', [ClienteController::class, 'history'])->name('historico');
 
 
     // PET
