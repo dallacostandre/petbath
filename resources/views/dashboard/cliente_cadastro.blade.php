@@ -258,205 +258,6 @@
                 var cliente_estado = $('#cliente_estado').val();
                 var _token = $('meta[name="csrf-token"]').attr('content');
 
-                if (cliente_whatsapp === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo de WHATS APP esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_whatsapp').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_whatsapp').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_telefone === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo de TELEFONE esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_telefone').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_telefone').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_nome === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo de NOME esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_nome').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_nome').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_email === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo de EMAIL esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_email').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_email').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_instagram === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo INSTAGRAM esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_instagram').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_instagram').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_cep === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O camp CEP esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_cep').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_cep').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_numero === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo NUMERO esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_numero').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_numero').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_complemento === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo COMPLEMENTO esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_complemento').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_complemento').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_cidade === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo CIDADE esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_cidade').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_cidade').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_bairro === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo BAIRRO esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_bairro').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_bairro').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-                if (cliente_estado === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo ESTADO esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_estado').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_estado').css('border-color', '');
-                    }, 3000)
-                    return false;
-                }
-
                 $.ajax({
                     url: url,
                     type: "post",
@@ -589,35 +390,18 @@
                 var cliente_estado = $('#cliente_estado').val();
                 var _token = $('meta[name="csrf-token"]').attr('content');
 
-                if (cliente_whatsapp === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo de WHATS APP esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_whatsapp').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_whatsapp').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
                 if (cliente_telefone === '') {
                     Swal.fire({
                         title: "Atenção",
-                        text: "O campo de TELEFONE esta vazio",
+                        html: 'Ops, parece que o campo de <b>Telefone</b> esta vazio!',
                         icon: "warning",
+                        confirmButtonText: 'Preencher',
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
                         },
                         hideClass: {
                             popup: 'animate__animated animate__fadeOutUp'
-                        }
+                        },
                     })
                     $('#cliente_telefone').css('border-color', 'red');
                     setTimeout(() => {
@@ -628,8 +412,9 @@
                 if (cliente_nome === '') {
                     Swal.fire({
                         title: "Atenção",
-                        text: "O campo de NOME esta vazio",
+                        html: 'Ops, parece que o campo de <b>Nome</b> esta vazio!',
                         icon: "warning",
+                        confirmButtonText: 'Preencher',
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
                         },
@@ -640,150 +425,6 @@
                     $('#cliente_nome').css('border-color', 'red');
                     setTimeout(() => {
                         $('#cliente_nome').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_email === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo de EMAIL esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_email').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_email').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_instagram === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo INSTAGRAM esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_instagram').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_instagram').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_cep === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O camp CEP esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_cep').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_cep').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_numero === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo NUMERO esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_numero').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_numero').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_complemento === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo COMPLEMENTO esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_complemento').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_complemento').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_cidade === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo CIDADE esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_cidade').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_cidade').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_bairro === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo BAIRRO esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_bairro').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_bairro').css('border-color', '');
-                    }, 3000)
-                    exit();
-                }
-                if (cliente_estado === '') {
-                    Swal.fire({
-                        title: "Atenção",
-                        text: "O campo ESTADO esta vazio",
-                        icon: "warning",
-                        showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
-                    $('#cliente_estado').css('border-color', 'red');
-                    setTimeout(() => {
-                        $('#cliente_estado').css('border-color', '');
                     }, 3000)
                     exit();
                 }
