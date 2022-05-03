@@ -68,7 +68,6 @@ class PetDadosController extends Controller
             $cadastro_pet->pet_genero = $request->pet_genero;
             $cadastro_pet->pet_especie = $request->pet_especie;
             $cadastro_pet->pet_observacoes = $request->pet_observacoes;
-            $cadastro_pet->pet_castracao = $request->pet_castracao;
             $cadastro_pet->pet_pelagem = $request->pet_pelagem;
             $cadastro_pet->save();
 
@@ -142,7 +141,6 @@ class PetDadosController extends Controller
             $cadastro_pet->pet_genero = $request->pet_genero;
             $cadastro_pet->pet_especie = $request->pet_especie;
             $cadastro_pet->pet_observacoes = $request->pet_observacoes;
-            $cadastro_pet->pet_castracao = $request->pet_castracao;
             $cadastro_pet->pet_pelagem = $request->pet_pelagem;
             $cadastro_pet->update();
 
