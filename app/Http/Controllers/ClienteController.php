@@ -40,10 +40,10 @@ class ClienteController extends Controller
         $telefone_str = clean($request->cliente_telefone);
         $telefone = str_replace('-', '', $telefone_str);
 
-        if($request->cliente_whatsapp != null){
+        if ($request->cliente_whatsapp != null) {
             $whatsapp_str = clean($request->cliente_whatsapp);
             $whatsapp = str_replace('-', '', $whatsapp_str);
-        }else{
+        } else {
             $whatsapp = $request->cliente_whatsapp;
         }
 
@@ -161,8 +161,14 @@ class ClienteController extends Controller
         if ($request) {
             $whatsapp_str = clean($request->cliente_whatsapp);
             $telefone_str = clean($request->cliente_telefone);
-            $whatsapp = str_replace('-', '', $whatsapp_str);
             $telefone = str_replace('-', '', $telefone_str);
+
+            if ($request->cliente_whatsapp != null) {
+                $whatsapp_str = clean($request->cliente_whatsapp);
+                $whatsapp = str_replace('-', '', $whatsapp_str);
+            } else {
+                $whatsapp = $request->cliente_whatsapp;
+            }
 
             // VALIDAR SE HÁ EMAIL E NÚMERO CADASTRADO ANTES DE CADASTRAR -<<<
             // $email_usado = Cliente::where(['cliente_email' => $request->cliente_email])->get();
