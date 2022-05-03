@@ -10,7 +10,11 @@
                     </h4>
                     <a type="button" aria-hidden="true" href="{{ route('dadosCliente') }}"
                         class="btn btn-success botao-padrao">
-                        @if ($clientes_cadastrados->isEmpty()) Cadastrar @else Novo Cliente @endif
+                        @if ($clientes_cadastrados->isEmpty())
+                            Cadastrar
+                        @else
+                            Novo Cliente
+                        @endif
                     </a>
                 </div>
             </div>
@@ -65,19 +69,24 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ url('dados-cliente/' . $cliente->id) }}">
+                                                <a href="{{ url('dados-cliente/' . $cliente->id) }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Editar Cliente">
                                                     <i class="fas fa-user-edit"></i>
                                                 </a> &nbsp;&nbsp;
-                                                <a href="#" class="excluirCliente" data-id="{{ $cliente->id }}">
+                                                <a href="#" class="excluirCliente" data-id="{{ $cliente->id }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Excluir Cliente">
                                                     <i class="fad fa-trash"></i>
                                                 </a>&nbsp;&nbsp;
-                                                <a href="{{ url('visualizar-cliente/' . $cliente->id) }}"
-                                                    title="Notificar Cliente">
+                                                <a href="{{ url('notificacao/' . $cliente->id) }}"
+                                                    title="Notificar Cliente" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Notificações Cliente">
                                                     <i class="fad fa-bells"></i>
                                                 </a>&nbsp;&nbsp;
                                             </td>
                                             <td>
-                                                <a href="{{ url('historico-cliente/' . $cliente->id) }}">
+                                                <a href="{{ url('historico/' . $cliente->id) }}">
                                                     <i class="fal fa-history"></i>
                                                 </a>
                                             </td>
@@ -88,10 +97,10 @@
                         </div>
                         {{ $clientes_cadastrados->links() }}
                     @else
-                    <div class="card-body">
-                        <h5>Nenhum cliente cadastrado.</h5>
-                    </div>
-                        @endif
+                        <div class="card-body">
+                            <h5>Nenhum cliente cadastrado.</h5>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -149,7 +158,7 @@
         // $(function() {
         //     $('[data-toggle="tooltip"]').tooltip()
         // })
-
+       
         $('.phone').mask('(00) 0 0000-0000');
 
         // var myModal = document.getElementById('myModal')

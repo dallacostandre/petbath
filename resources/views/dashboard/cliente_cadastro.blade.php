@@ -38,6 +38,7 @@
                                     <input required type="text" class="form-control phone" name="cliente_telefone"
                                         id="cliente_telefone"
                                         value="@if (isset($objCliente)) {{ $objCliente->cliente_telefone }} @endif">
+                                        <small id="emailHelp" class="form-text text-muted">Este campo é obrigatório</small>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -46,6 +47,7 @@
                                     <input required type="text" class="form-control" name="cliente_nome"
                                         id="cliente_nome"
                                         value="@if (isset($objCliente)) {{ $objCliente->cliente_nome }} @endif">
+                                        <small id="emailHelp" class="form-text text-muted">Este campo é obrigatório</small>
                                 </div>
                             </div>
                             <div class="col-md-2">

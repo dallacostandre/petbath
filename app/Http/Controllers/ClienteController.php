@@ -250,7 +250,7 @@ class ClienteController extends Controller
         return view('dashboard.cliente_dados', compact('cliente', 'endereco', 'pets', 'titulo'));
     }
 
-    public function historicoCliente($id)
+    public function history($id)
     {
         return view('historico');
     }

@@ -51,11 +51,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::POST('/cadastrar-novo-cliente', [ClienteController::class, 'store'])->name('cadastrarNovoCliente');
     // CLIENTE(Atualiza os dados do cliente)
     Route::POST('/atualizar-cliente', [ClienteController::class, 'update'])->name('updateCliente');
-   // CLIENTE(Exlui os dados do cliente)
+   // CLIENTE(Exclui os dados do cliente)
     Route::POST('/excluir-cliente', [ClienteController::class, 'destroy']);
-   
-    Route::GET('/historico-cliente/{id}', [ClienteController::class, 'historicoView']);
-    Route::GET('/visualizar-cliente/{id}', [ClienteController::class, 'viewCliente'])->name('viewCliente');
+    // CLIENTE (Histórico do Cliente)
+    Route::GET('/historico/{id}', [ClienteController::class, 'history']);
+
 
     // PET
     // PET (Cadastra os dados do pet)

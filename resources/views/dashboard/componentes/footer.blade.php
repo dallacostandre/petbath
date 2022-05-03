@@ -3,6 +3,7 @@
 </footer>
 </div>
 </div>
+
 <script src="{{ url('assets-2/libs/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap tether Core JavaScript -->
 <script src="{{ url('assets-2/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -21,6 +22,12 @@
 <script src="{{ url('assets-2/libs/chartist/dist/chartist.min.js') }}"></script>
 <script src="{{ url('assets-2/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
 <script src="{{ url('assets-2/dist/js/pages/dashboards/dashboard1.js') }}"></script>
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 
 </body>
 
