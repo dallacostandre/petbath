@@ -33,13 +33,18 @@ class ClienteController extends Controller
     */
     public function store(Request $request)
     {
-        $unique_user = Auth::user()->unique_user; // Busca o codigo do Usuário
-        $unique_endereco = uniqid(); // Cria um codigo único para o Endereço do Cliente
-        $unique_cliente = uniqid(); // Cria um codigo único para o Cliente
-
+        // Busca o codigo do Usuário
+        $unique_user = Auth::user()->unique_user;
+        // Cria um codigo único para o Endereço do Cliente
+        $unique_endereco = uniqid();
+        // Cria um codigo único para o Cliente 
+        $unique_cliente = uniqid();
+        // Limpa a string telefone
         $telefone_str = clean($request->cliente_telefone);
+        // Limpa a string telefone
         $telefone = str_replace('-', '', $telefone_str);
 
+        // Se o numero do whats app for nulo ele não limpa os dados.
         if ($request->cliente_whatsapp != null) {
             $whatsapp_str = clean($request->cliente_whatsapp);
             $whatsapp = str_replace('-', '', $whatsapp_str);
@@ -47,57 +52,62 @@ class ClienteController extends Controller
             $whatsapp = $request->cliente_whatsapp;
         }
 
-
-        // VALIDAR SE HÁ EMAIL E NÚMERO CADASTRADO ANTES DE CADASTRAR -<<<
-        $email_usado = Cliente::where(['cliente_email' => $request->cliente_email])->get();
-        $telefone_usado = Cliente::where(['cliente_telefone' => $request->cliente_telefone])->get();
-
-        if (count($email_usado) >= 1) {
-            return response()->json([
-                'title' => 'Atenção',
-                'message' => 'Email já cadastrado',
-                'icon' => 'warning',
-            ]);
-            exit();
-        } elseif (count($telefone_usado) >= 1) {
-            return response()->json([
-                'title' => 'Atenção',
-                'message' => 'Telefone já cadastrado',
-                'icon' => 'warning',
-            ]);
-        } else {
-            $cliente = new Cliente();
-            $cliente->unique_user = $unique_user;
-            $cliente->unique_endereco = $unique_endereco;
-            $cliente->unique_cliente = $unique_cliente;
-            $cliente->cliente_nome = strtolower($request->cliente_nome);
-            $cliente->cliente_email = $request->cliente_email;
-            $cliente->cliente_telefone = $telefone;
-            $cliente->cliente_whatsapp = $whatsapp;
-            $cliente->cliente_instagram = str_replace(' ', '', $request->cliente_instagram);
-            $cliente->save();
-
-            //Pegar o Unique ID do Cliente
-            $objClientCadastrado = Cliente::where(['id' =>  $cliente->id])->get();
-
-            $endereco_cliente = new ClienteEndereco();
-            $endereco_cliente->unique_endereco = $unique_endereco;
-            $endereco_cliente->cliente_rua = $request->cliente_rua;
-            $endereco_cliente->cliente_numero = $request->cliente_numero;
-            $endereco_cliente->cliente_bairro = $request->cliente_bairro;
-            $endereco_cliente->cliente_complemento = $request->cliente_complemento;
-            $endereco_cliente->cliente_cep = $request->cliente_cep;
-            $endereco_cliente->cliente_estado = $request->cliente_estado;
-            $endereco_cliente->cliente_cidade = $request->cliente_cidade;
-            $endereco_cliente->save();
-
-            return response()->json([
-                'title' => 'Cadastro realizado',
-                'message' => 'Cliente cadastrado com sucesso!',
-                'icon' => 'success',
-                'url' => '/pets/' . $objClientCadastrado[0]->unique_cliente,
-            ]);
+        // Se o email inserido pelo cliente for diferente de nulo ele não valida o campo.
+        if ($request->cliente_email) {
+            // Busca no banco de dados o email inserido pelo cliente.
+            $email_usado = Cliente::where(['cliente_email' => $request->cliente_email])->get();
+            if (count($email_usado) >= 1) {
+                return response()->json([
+                    'title' => 'Atenção',
+                    'message' => 'Email já cadastrado',
+                    'icon' => 'warning',
+                ]);
+            }
         }
+        // Se o telefone inserido pelo cliente  for diferente de nulo ele não valida o campo.
+        if ($request->cliente_telefone) {
+            // Busca no banco de dados o telefone inserido pelo cliente.
+            $telefone_usado = Cliente::where(['cliente_telefone' => $telefone])->get();
+            if (count($telefone_usado) >= 1) {
+                return response()->json([
+                    'title' => 'Atenção',
+                    'message' => 'Telefone já cadastrado',
+                    'icon' => 'warning',
+                ]);
+            }
+        }
+
+        $cliente = new Cliente();
+        $cliente->unique_user = $unique_user;
+        $cliente->unique_endereco = $unique_endereco;
+        $cliente->unique_cliente = $unique_cliente;
+        $cliente->cliente_nome = strtolower($request->cliente_nome);
+        $cliente->cliente_email = $request->cliente_email;
+        $cliente->cliente_telefone = $telefone;
+        $cliente->cliente_whatsapp = $whatsapp;
+        $cliente->cliente_instagram = str_replace(' ', '', $request->cliente_instagram);
+        $cliente->save();
+
+        //Pegar o Unique ID do Cliente
+        $objClientCadastrado = Cliente::where(['id' =>  $cliente->id])->get();
+
+        $endereco_cliente = new ClienteEndereco();
+        $endereco_cliente->unique_endereco = $unique_endereco;
+        $endereco_cliente->cliente_rua = $request->cliente_rua;
+        $endereco_cliente->cliente_numero = $request->cliente_numero;
+        $endereco_cliente->cliente_bairro = $request->cliente_bairro;
+        $endereco_cliente->cliente_complemento = $request->cliente_complemento;
+        $endereco_cliente->cliente_cep = $request->cliente_cep;
+        $endereco_cliente->cliente_estado = $request->cliente_estado;
+        $endereco_cliente->cliente_cidade = $request->cliente_cidade;
+        $endereco_cliente->save();
+
+        return response()->json([
+            'title' => 'Cadastro realizado',
+            'message' => 'Cliente cadastrado com sucesso!',
+            'icon' => 'success',
+            'url' => '/pets/' . $objClientCadastrado[0]->unique_cliente,
+        ]);
     }
 
     /*
