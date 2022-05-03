@@ -44,8 +44,9 @@ Route::group(['middleware' => 'auth'], function () {
     // CLIENTE
     // CLIENTE (Lista todos os clientes do usuário)
     Route::GET('/clientes', [ClienteController::class, 'index'])->name('clientes');
-    // CLIENTE(Tela de Cadastro e edição do cliente)
-    Route::GET('/dados-cliente', [ClienteController::class, 'create'])->name('dadosCliente');
+    // CLIENTE(Tela de cadastro do cliente)
+    Route::GET('/dados-cliente', [ClienteController::class, 'create'])->name('cadastroCliente');
+    // CLIENTE(Tela de edição do cliente)
     Route::GET('/dados-cliente/{id}', [ClienteController::class, 'edit'])->name('editarDadosCliente');
     // CLIENTE(Cadastra os dados do cliente)
     Route::POST('/cadastrar-novo-cliente', [ClienteController::class, 'store'])->name('cadastrarNovoCliente');

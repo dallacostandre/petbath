@@ -8,7 +8,7 @@
                     <h4 class="page-title" id="name_title">
                         Clientes
                     </h4>
-                    <a type="button" aria-hidden="true" href="{{ route('dadosCliente') }}"
+                    <a type="button" aria-hidden="true" href="{{ route('cadastroCliente') }}"
                         class="btn btn-success botao-padrao">
                         @if ($clientes_cadastrados->isEmpty())
                             Cadastrar
@@ -69,7 +69,7 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('dadosCliente', ['id' => $cliente->id]) }}"
+                                                <a href="{{ route('editarDadosCliente', ['id' => $cliente->id]) }}"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Editar Cliente">
                                                     <i class="fas fa-user-edit"></i>
