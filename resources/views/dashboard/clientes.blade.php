@@ -70,19 +70,18 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('editarDadosCliente', ['id' => $cliente->id]) }}"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Editar Cliente">
+                                                    data-bs-toggle="tooltip">
                                                     <i class="fas fa-user-edit"></i>
                                                 </a> &nbsp;&nbsp;
-                                                <a href="javascript:void(0)" class="excluirCliente" data-id="{{ $cliente->id }}"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Excluir Cliente">
+                                                <a href="javascript:void(0)" class="excluirCliente"
+                                                    data-id="{{ $cliente->id }}">
                                                     <i class="fad fa-trash"></i>
                                                 </a>&nbsp;&nbsp;
-                                                <a href="{{ url('notificacao/' . $cliente->id) }}"
-                                                    title="Notificar Cliente" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Notificações Cliente">
+                                                <a href="#" title="Notificar Cliente"
+                                                    data-bs-placement="top" title="Notificações Cliente"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                     <i class="fad fa-bells"></i>
+
                                                 </a>&nbsp;&nbsp;
                                             </td>
                                             <td>
@@ -105,68 +104,47 @@
             </div>
         </div>
     </div>
-    @component('dashboard.componentes.footer')
-    @endcomponent
 
     <!-- Modal -->
-    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Notificação</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Adicionar Notificação</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <input class="form-control form-control-sm" type="text" placeholder="Descrição Lembrete">
+                        <input class="form-control form-control-sm" type="text" placeholder="Descrição da Notificação">
                     </div>
-                    <label for="">Data Inicial</label>
+                    <label for="">Data Notificação</label>
                     <div class="mb-3">
                         <input class="form-control form-control-sm" type="date">
                     </div>
-                    <label for="">Notificar em:</label>
-                    <div class="mb-3">
-                        <select class="form-select form-select-sm"" aria-label=" Default select example">
-                            <option value="1">5 dias </option>
-                            <option value="2">10 dias</option>
-                            <option value="2">15 dias</option>
-                            <option value="2">20 dias</option>
-                            <option value="2">25 dias</option>
-                            <option value="3">30 dias</option>
-                            <option value="3">40 dias</option>
-                            <option value="3">50 dias</option>
-                            <option value="3">60 dias</option>
-                            <option value="3">70 dias</option>
-                            <option value="3">80 dias</option>
-                            <option value="3">90 dias</option>
-                        </select>
-                    </div>
-
-                    <label for="">Data Final</label>
-                    <div class="mb-3">
-                        <input class="form-control form-control-sm" type="date" disabled>
-                    </div>
                 </div>
-                <div class="modal-footer mx-auto">
-                    <button type="button" class="btn btn-success btn-sm">Add Notificação</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success botao-padrao">
+                        Adicionar Notificação
+                    </button>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
+
+
+    @component('dashboard.componentes.footer')
+    @endcomponent
+
+
 
     <script>
-        // $(function() {
-        //     $('[data-toggle="tooltip"]').tooltip()
-        // })
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
 
+        myModal.addEventListener('shown.bs.modal', function() {
+            myInput.focus()
+        })
         $('.phone').mask('(00) 0 0000-0000');
-
-        // var myModal = document.getElementById('myModal')
-        // var myInput = document.getElementById('myInput')
-
-        // myModal.addEventListener('shown.bs.modal', function() {
-        //     myInput.focus()
-        // });
 
         function myFunction() {
             var input, filter, table, tr, td, i, txtValue;

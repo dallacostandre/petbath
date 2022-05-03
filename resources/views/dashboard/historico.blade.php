@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-5 align-self-center">
                 <h4 class="page-title" id="name_title">
-                    {{ isset($objCliente) ? 'Cadastro de ' . $objCliente->cliente_nome : 'Cadastro Novo Cliente' }}
+                    {{ 'Histórico de ' . $objCliente->cliente_nome }}
                 </h4>
             </div>
         </div>
