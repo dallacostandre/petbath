@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-5 align-self-center">
                 <h4 class="page-title" id="name_title">
-                    {{ isset($cliente) ? 'Pets de ' . $objCliente->cliente_nome : 'Cadastro Novo Cliente' }}
+                    {{ isset($objCliente) ? 'Cadastro de ' . $objCliente->cliente_nome : 'Cadastro Novo Cliente' }}
                 </h4>
             </div>
         </div>
@@ -15,7 +15,7 @@
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
                     type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                    Dados Cliente
+                    Dados
                 </button>
             </div>
         </nav>
@@ -28,16 +28,16 @@
                                 <div class="form-group">
                                     <label for="whatsapp">Whats App</label>
                                     <input required type="text" class="form-control whatsApp" name="cliente_whatsapp"
-                                        id="whatsapp"
-                                        value="@if (isset($cliente)) {{ $cliente->cliente_whatsapp }} @endif">
+                                        id="cliente_whatsapp"
+                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_whatsapp }} @endif">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="telefone">Telefone</label>
                                     <input required type="text" class="form-control phone" name="cliente_telefone"
-                                        id="telefone"
-                                        value="@if (isset($cliente)) {{ $cliente->cliente_telefone }} @endif">
+                                        id="cliente_telefone"
+                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_telefone }} @endif">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -45,7 +45,7 @@
                                     <label>Nome Completo</label>
                                     <input required type="text" class="form-control" name="cliente_nome"
                                         id="cliente_nome"
-                                        value="@if (isset($cliente)) {{ $cliente->cliente_nome }} @endif">
+                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_nome }} @endif">
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -53,7 +53,7 @@
                                     <label>Email</label>
                                     <input required type="text" class="form-control" id="cliente_email"
                                         name="cliente_email"
-                                        value="@if (isset($cliente)) {{ $cliente->cliente_email }} @endif">
+                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_email }} @endif">
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -61,7 +61,7 @@
                                     <label>Instagram</label>
                                     <input required type="text" class="form-control" id="cliente_instagram"
                                         name="cliente_instagram"
-                                        value="@if (isset($cliente)) {{ $cliente->cliente_instagram }} @endif">
+                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_instagram }} @endif">
                                 </div>
                             </div>
                         </div>
@@ -96,6 +96,8 @@
                                     <input required type="text" class="form-control" id="cliente_complemento"
                                         name="cliente_complemento"
                                         value="@if (isset($endereco)) {{ $endereco->cliente_complemento }} @endif">
+                                    <small id="emailHelp" class="form-text text-muted">Se não houve, insira " -
+                                        ".</small>
                                 </div>
                             </div>
                         </div>
@@ -126,8 +128,9 @@
                             </div>
                         </div>
                         <div style="float:right">
-                            @if (isset($cliente))
-                                <button class="btn btn-success botao-padrao" type="submit" aria-expanded="false">
+                            @if (isset($objCliente))
+                                <button class="btn btn-success botao-padrao" type="button" id="atualizarCliente"
+                                    data-id="{{ $objCliente->id }}" aria-expanded="false">
                                     Atualizar
                                 </button>
                             @else
@@ -234,15 +237,14 @@
             $('.phone').mask('00 0 0000-0000');
             $('.whatsApp').mask('00 0 0000-0000');
             $('.numero').mask('00000');
-            $('.cep').mask('00 000-000');
+            $('.cep').mask('00.000-000');
             $('.uf').mask('AA');
-
-
 
             $('#cadastrarCliente').on('click', function() {
                 event.preventDefault();
+                validateInputs();
                 var url = '/cadastrar-novo-cliente';
-                var cliente_whatsapp = $('#whatsapp').val();
+                var cliente_whatsapp = $('#cliente_whatsapp').val();
                 var cliente_telefone = $('#cliente_telefone').val();
                 var cliente_nome = $('#cliente_nome').val();
                 var cliente_email = $('#cliente_email').val();
@@ -255,6 +257,205 @@
                 var cliente_bairro = $('#cliente_bairro').val();
                 var cliente_estado = $('#cliente_estado').val();
                 var _token = $('meta[name="csrf-token"]').attr('content');
+
+                if (cliente_whatsapp === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo de WHATS APP esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_whatsapp').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_whatsapp').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_telefone === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo de TELEFONE esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_telefone').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_telefone').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_nome === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo de NOME esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_nome').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_nome').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_email === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo de EMAIL esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_email').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_email').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_instagram === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo INSTAGRAM esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_instagram').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_instagram').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_cep === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O camp CEP esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_cep').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_cep').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_numero === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo NUMERO esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_numero').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_numero').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_complemento === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo COMPLEMENTO esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_complemento').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_complemento').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_cidade === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo CIDADE esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_cidade').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_cidade').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_bairro === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo BAIRRO esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_bairro').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_bairro').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
+                if (cliente_estado === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo ESTADO esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_estado').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_estado').css('border-color', '');
+                    }, 3000)
+                    return false;
+                }
 
                 $.ajax({
                     url: url,
@@ -278,7 +479,7 @@
                 }).done(function(data) {
                     Swal.fire({
                         title: data.title,
-                        message: data.message,
+                        text: data.message,
                         icon: data.icon,
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -292,7 +493,7 @@
                 }).fail(function(jqXHR, textStatus, data) {
                     Swal.fire({
                         title: "Error",
-                        message: jqXHR,
+                        text: jqXHR,
                         icon: "error",
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -303,4 +504,288 @@
                     })
                 });
             });
+
+            $('#atualizarCliente').on('click', function() {
+                event.preventDefault();
+                validateInputs();
+                let url = '/atualizar-cliente';
+                let cliente_whatsapp = $('#cliente_whatsapp').val();
+                let cliente_telefone = $('#cliente_telefone').val();
+                let cliente_nome = $('#cliente_nome').val();
+                let cliente_email = $('#cliente_email').val();
+                let cliente_instagram = $('#cliente_instagram').val();
+                let cliente_cep = $('#cliente_cep').val();
+                let cliente_rua = $('#cliente_rua').val();
+                let cliente_numero = $('#cliente_numero').val();
+                let cliente_complemento = $('#cliente_complemento').val();
+                let cliente_cidade = $('#cliente_cidade').val();
+                let cliente_bairro = $('#cliente_bairro').val();
+                let cliente_estado = $('#cliente_estado').val();
+                let id = $(this).attr("data-id");
+                let _token = $('meta[name="csrf-token"]').attr('content');
+
+                $.ajax({
+                    url: url,
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        cliente_whatsapp: cliente_whatsapp,
+                        cliente_telefone: cliente_telefone,
+                        cliente_nome: cliente_nome,
+                        cliente_email: cliente_email,
+                        cliente_instagram: cliente_instagram,
+                        cliente_cep: cliente_cep,
+                        cliente_rua: cliente_rua,
+                        cliente_numero: cliente_numero,
+                        cliente_complemento: cliente_complemento,
+                        cliente_cidade: cliente_cidade,
+                        cliente_bairro: cliente_bairro,
+                        cliente_estado: cliente_estado,
+                        id: id,
+                        _token: _token
+                    }
+                }).done(function(data) {
+                    Swal.fire({
+                        title: data.title,
+                        text: data.message,
+                        icon: data.icon,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    window.location.href = data.url;
+
+                }).fail(function(jqXHR, textStatus, data) {
+                    Swal.fire({
+                        title: "Error",
+                        text: jqXHR,
+                        icon: "error",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                });
+            });
+
+            function validateInputs() {
+                var url = '/cadastrar-novo-cliente';
+                var cliente_whatsapp = $('#cliente_whatsapp').val();
+                var cliente_telefone = $('#cliente_telefone').val();
+                var cliente_nome = $('#cliente_nome').val();
+                var cliente_email = $('#cliente_email').val();
+                var cliente_instagram = $('#cliente_instagram').val();
+                var cliente_cep = $('#cliente_cep').val();
+                var cliente_rua = $('#cliente_rua').val();
+                var cliente_numero = $('#cliente_numero').val();
+                var cliente_complemento = $('#cliente_complemento').val();
+                var cliente_cidade = $('#cliente_cidade').val();
+                var cliente_bairro = $('#cliente_bairro').val();
+                var cliente_estado = $('#cliente_estado').val();
+                var _token = $('meta[name="csrf-token"]').attr('content');
+
+                if (cliente_whatsapp === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo de WHATS APP esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_whatsapp').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_whatsapp').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_telefone === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo de TELEFONE esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_telefone').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_telefone').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_nome === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo de NOME esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_nome').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_nome').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_email === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo de EMAIL esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_email').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_email').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_instagram === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo INSTAGRAM esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_instagram').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_instagram').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_cep === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O camp CEP esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_cep').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_cep').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_numero === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo NUMERO esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_numero').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_numero').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_complemento === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo COMPLEMENTO esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_complemento').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_complemento').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_cidade === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo CIDADE esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_cidade').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_cidade').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_bairro === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo BAIRRO esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_bairro').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_bairro').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+                if (cliente_estado === '') {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: "O campo ESTADO esta vazio",
+                        icon: "warning",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    $('#cliente_estado').css('border-color', 'red');
+                    setTimeout(() => {
+                        $('#cliente_estado').css('border-color', '');
+                    }, 3000)
+                    exit();
+                }
+            }
         </script>

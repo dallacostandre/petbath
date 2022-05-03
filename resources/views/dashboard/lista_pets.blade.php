@@ -56,7 +56,7 @@
                             </table>
                             {{ $objPets->links() }}
                         @else
-                            <h3>Nenhum pet cadastrado ainda</h3>
+                            <h3>Nenhum pet cadastrado.</h3>
                         @endif
                     </div>
                 </div>

@@ -29,9 +29,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
     Route::GET('/editar-perfil', [ConfiguracaoController::class, 'editarPerfil']);
 
-    //PET
-    Route::GET('/pets', [PetDadosController::class, 'index']);
-
     // AGENDAMENTO
     Route::GET('/agendamento', [AgendamentoController::class, 'index']);
 
@@ -39,21 +36,24 @@ Route::group(['middleware' => 'auth'], function () {
 
     // DASHBOARD
     Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
-    Route::GET('/', function () {
-        return view('dashboard.index');
-    })->name('dashboard');
+    Route::GET('/', function () {return view('dashboard.index');})->name('dashboard');
     Route::GET('/planos-e-assinaturas', [ConfiguracaoController::class, 'planosAssinaturas']);
     Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'fluxoDeCaixa']);
     Route::GET('/financeiro', [FinanceiroController::class, 'index']);
 
-    //CLIENTE
+    // CLIENTE
+    // CLIENTE (Lista todos os clientes do usuário)
     Route::GET('/clientes', [ClienteController::class, 'index'])->name('clientes');
+    // CLIENTE(Tela de Cadastro e edição do cliente)
     Route::GET('/dados-cliente', [ClienteController::class, 'create'])->name('dadosCliente');
     Route::GET('/dados-cliente/{id}', [ClienteController::class, 'edit'])->name('editarDadosCliente');
-
+    // CLIENTE(Cadastra os dados do cliente)
     Route::POST('/cadastrar-novo-cliente', [ClienteController::class, 'store'])->name('cadastrarNovoCliente');
-    Route::POST('/update-cliente/{id}', [ClienteController::class, 'update'])->name('updateCliente');
-    Route::GET('/excluir-cliente/{id}', [ClienteController::class, 'destroy']);
+    // CLIENTE(Atualiza os dados do cliente)
+    Route::POST('/atualizar-cliente', [ClienteController::class, 'update'])->name('updateCliente');
+   // CLIENTE(Exlui os dados do cliente)
+    Route::POST('/excluir-cliente', [ClienteController::class, 'destroy']);
+   
     Route::GET('/historico-cliente/{id}', [ClienteController::class, 'historicoView']);
     Route::GET('/visualizar-cliente/{id}', [ClienteController::class, 'viewCliente'])->name('viewCliente');
 

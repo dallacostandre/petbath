@@ -27,7 +27,7 @@ class ClienteController extends Controller
     }
 
     /*
-        Descricao: Funcao que adiciona o cliente e o pet_1
+        Descricao: Funcao que adiciona o cliente
         Data: 07/01/2022
         Status: Funcionando
     */
@@ -37,7 +37,7 @@ class ClienteController extends Controller
         $unique_endereco = uniqid(); // Cria um codigo único para o Endereço do Cliente
         $unique_cliente = uniqid(); // Cria um codigo único para o Cliente
 
-        $whatsapp_str = clean($request->cliente_telefone);
+        $whatsapp_str = clean($request->cliente_whatsapp);
         $telefone_str = clean($request->cliente_telefone);
         $whatsapp = str_replace('-', '', $whatsapp_str);
         $telefone = str_replace('-', '', $telefone_str);
@@ -60,16 +60,15 @@ class ClienteController extends Controller
                 'icon' => 'warning',
             ]);
         } else {
-            $data = $request->all();
             $cliente = new Cliente();
             $cliente->unique_user = $unique_user;
             $cliente->unique_endereco = $unique_endereco;
             $cliente->unique_cliente = $unique_cliente;
             $cliente->cliente_nome = strtolower($request->cliente_nome);
-            $cliente->cliente_email = $data['cliente_email'];
+            $cliente->cliente_email = $request->cliente_email;
             $cliente->cliente_telefone = $telefone;
             $cliente->cliente_whatsapp = $whatsapp;
-            $cliente->cliente_instagram = str_replace(' ', '', $data['cliente_instagram']);
+            $cliente->cliente_instagram = str_replace(' ', '', $request->cliente_instagram);
             $cliente->save();
 
             //Pegar o Unique ID do Cliente
@@ -78,13 +77,13 @@ class ClienteController extends Controller
 
             $endereco_cliente = new ClienteEndereco();
             $endereco_cliente->unique_endereco = $unique_endereco;
-            $endereco_cliente->cliente_rua = $data['cliente_rua'];
-            $endereco_cliente->cliente_numero = $data['cliente_numero'];
-            $endereco_cliente->cliente_bairro = $data['cliente_bairro'];
-            $endereco_cliente->cliente_complemento = $data['cliente_complemento'];
-            $endereco_cliente->cliente_cep = $data['cliente_cep'];
-            $endereco_cliente->cliente_estado = $data['cliente_estado'];
-            $endereco_cliente->cliente_cidade = $data['cliente_cidade'];
+            $endereco_cliente->cliente_rua = $request->cliente_rua;
+            $endereco_cliente->cliente_numero = $request->cliente_numero;
+            $endereco_cliente->cliente_bairro = $request->cliente_bairro;
+            $endereco_cliente->cliente_complemento = $request->cliente_complemento;
+            $endereco_cliente->cliente_cep = $request->cliente_cep;
+            $endereco_cliente->cliente_estado = $request->cliente_estado;
+            $endereco_cliente->cliente_cidade = $request->cliente_cidade;
             $endereco_cliente->save();
 
             return response()->json([
@@ -131,15 +130,15 @@ class ClienteController extends Controller
     */
     public function edit($id)
     {
-        $cliente = Cliente::find($id);
-        $uniqueEnderecoObject = Cliente::where(['unique_endereco' => $cliente->unique_endereco])->get();
+        $objCliente = Cliente::find($id);
+        $uniqueEnderecoObject = Cliente::where(['unique_endereco' => $objCliente->unique_endereco])->get();
         $uniqueEndereco = $uniqueEnderecoObject[0]->unique_endereco;
         $endereco = ClienteEndereco::where(['unique_endereco' => $uniqueEndereco])->first();
-        $titulo = 'Editando: ' . $cliente->cliente_nome;
+        $titulo = 'Editando: ' . $objCliente->cliente_nome;
         $raca_pet  = PetRaca::all();
 
         return view('dashboard.cliente_cadastro', compact(
-            'cliente',
+            'objCliente',
             'endereco',
             'titulo',
             'raca_pet'
@@ -153,58 +152,91 @@ class ClienteController extends Controller
     */
     public function update(Request $request)
     {
-        $id = $request->id;
-        $data = $request->all();
-        $user = Cliente::find($id);
-        $whatsapp_str = clean($data['cliente_whatsapp']);
-        $telefone_str = clean($data['cliente_telefone']);
-        $whatsapp = str_replace('-', '', $whatsapp_str);
-        $telefone = str_replace('-', '', $telefone_str);
+        if ($request) {
+            $whatsapp_str = clean($request->cliente_whatsapp);
+            $telefone_str = clean($request->cliente_telefone);
+            $whatsapp = str_replace('-', '', $whatsapp_str);
+            $telefone = str_replace('-', '', $telefone_str);
 
-        // VALIDAR SE HÁ EMAIL E NÚMERO CADASTRADO ANTES DE QUALQUER COISA -<<<
-        // $email_usado = Cliente::where(['cliente_email' => $request->cliente_email])->get();
-        // $telefone_usado = Cliente::where(['cliente_telefone' => $request->cliente_telefone])->get();
+            // VALIDAR SE HÁ EMAIL E NÚMERO CADASTRADO ANTES DE CADASTRAR -<<<
+            // $email_usado = Cliente::where(['cliente_email' => $request->cliente_email])->get();
+            // $telefone_usado = Cliente::where(['cliente_telefone' => $request->cliente_telefone])->get();
 
-        $cliente = Cliente::find($id);
-        $cliente->cliente_nome = strtolower($data['cliente_nome']);
-        $cliente->cliente_email = $data['cliente_email'];
-        $cliente->cliente_telefone = $telefone;
-        $cliente->cliente_whatsapp = $whatsapp;
-        $cliente->cliente_instagram = str_replace(' ', '', $data['cliente_instagram']);
-        $cliente->save();
+            // if (count($email_usado) >= 1) {
+            //     return response()->json([
+            //         'title' => 'Atenção',
+            //         'message' => 'Email já cadastrado',
+            //         'icon' => 'warning',
+            //     ]);
+            //     exit();
+            // } elseif (count($telefone_usado) >= 1) {
+            //     return response()->json([
+            //         'title' => 'Atenção',
+            //         'message' => 'Telefone já cadastrado',
+            //         'icon' => 'warning',
+            //     ]);
+            // } else {
+            $cliente = Cliente::find($request->id);
+            $cliente->cliente_nome = strtolower($request->cliente_nome);
+            $cliente->cliente_email = $request->cliente_email;
+            $cliente->cliente_telefone = $telefone;
+            $cliente->cliente_whatsapp = $whatsapp;
+            $cliente->cliente_instagram = str_replace(' ', '', $request->cliente_instagram);
+            $cliente->save();
 
-        $endereco_cliente = ClienteEndereco::where('unique_endereco', $user->unique_endereco)->first();
-        $endereco_cliente->cliente_rua = $data['cliente_rua'];
-        $endereco_cliente->cliente_numero = $data['cliente_numero'];
-        $endereco_cliente->cliente_bairro = $data['cliente_bairro'];
-        $endereco_cliente->cliente_complemento = $data['cliente_complemento'];
-        $endereco_cliente->cliente_cep = $data['cliente_cep'];
-        $endereco_cliente->cliente_estado = $data['cliente_estado'];
-        $endereco_cliente->cliente_cidade = $data['cliente_cidade'];
-        $endereco_cliente->save();
+            //Pegar o Unique ID do Cliente
+            $objEndereco = ClienteEndereco::where(['unique_endereco' => $cliente->unique_endereco])->first();
 
-        return Redirect::route('clientes')->with(['message' => 'Cliente atualizado com sucesso!']);
+            $objEnderecoNovo = ClienteEndereco::find($objEndereco->id);
+            $objEnderecoNovo->cliente_rua = $request->cliente_rua;
+            $objEnderecoNovo->cliente_numero = $request->cliente_numero;
+            $objEnderecoNovo->cliente_bairro = $request->cliente_bairro;
+            $objEnderecoNovo->cliente_complemento = $request->cliente_complemento;
+            $objEnderecoNovo->cliente_cep = $request->cliente_cep;
+            $objEnderecoNovo->cliente_estado = $request->cliente_estado;
+            $objEnderecoNovo->cliente_cidade = $request->cliente_cidade;
+            $objEnderecoNovo->update();
+
+            return response()->json([
+                'title' => 'Atualizado',
+                'message' => 'Cliente atualizado com sucesso',
+                'icon' => 'success',
+                'url' => '/clientes'
+            ]);
+        } else {
+            return response()->json([
+                'title' => 'Atenção',
+                'message' => 'Não foi possível atualizar o cliente',
+                'icon' => 'warning',
+            ]);
+        }
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        if ($id) {
-            // Encontra o clientes
-            $cliente = Cliente::find($id);
-            // Encontra o codigo unico do cliente
-            $unique = Cliente::where(['unique_endereco' => $cliente->unique_endereco])->first();
-            // Encontra o codigo de endereço do cliente na tabela cliente
-            $unique_endereco = $unique->unique_endereco;
-            // Encontrar o endereço a ser excluido
-            $endereco = ClienteEndereco::where(['unique_endereco' => $unique_endereco])->get();
-            $id_endereco = $endereco[0]->id;
+        if ($request->id) {
+            // ENCONTRA O CLIENTE
+            $cliente = Cliente::find($request->id);
+            // EXLUIR ENDEREÇO
+            Cliente::where(['unique_endereco' => $cliente->unique_endereco])->delete();
+            // EXCLUIR PETS
+            PetDados::where(['unique_cliente' => $cliente->unique_cliente])->delete();
+            // EXCLUIR CLIENTE
+            Cliente::destroy($request->id);
 
-            Cliente::destroy($id);
-            ClienteEndereco::destroy($id_endereco);
+            // TO DO: VALIDAR SE HÁ AGENDAMENTOS EXISTENTES
 
-            return back()->with(['success' => 'Cliente removido com sucesso.']);
+            return response()->json([
+                'title' => 'Excluído',
+                'message' => 'Dados do cliente foram removidos com sucesso.',
+                'icon' => 'success',
+            ]);
         } else {
-            return back()->with(['success' => 'Não foi possível excluir.']);
+            return response()->json([
+                'title' => 'Erro',
+                'message' => 'Não foi possível excluir este cliente.',
+                'icon' => 'success',
+            ]);
         }
     }
 
