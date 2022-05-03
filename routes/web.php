@@ -10,6 +10,7 @@ use App\Http\Controllers\ServicosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalenderController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificacoesController;
 use App\Http\Controllers\PacotesEPromocoesController;
 use App\Http\Controllers\ProdutoController;
 use App\Models\Servicos;
@@ -25,23 +26,17 @@ Route::GET('/cadastro', function () {
 // USUARIO DEVE ESTAR LOGADO
 Route::group(['middleware' => 'auth'], function () {
 
-    // CONFIGURAÇÃO
+    
+    // DASHBOARD
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
     Route::GET('/editar-perfil', [ConfiguracaoController::class, 'editarPerfil']);
-
-    // AGENDAMENTO
     Route::GET('/agendamento', [AgendamentoController::class, 'index']);
-
-    //------------------------ NOVAS ROTAS
-
-    // DASHBOARD
     Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
     Route::GET('/', function () {return view('dashboard.index');})->name('dashboard');
     Route::GET('/planos-e-assinaturas', [ConfiguracaoController::class, 'planosAssinaturas']);
     Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'fluxoDeCaixa']);
     Route::GET('/financeiro', [FinanceiroController::class, 'index']);
 
-    // CLIENTE
     // CLIENTE (Lista todos os clientes do usuário)
     Route::GET('/clientes', [ClienteController::class, 'index'])->name('clientes');
     // CLIENTE(Tela de cadastro do cliente)
@@ -58,7 +53,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/historico/{id}', [ClienteController::class, 'history'])->name('historico');
 
 
-    // PET
     // PET (Cadastra os dados do pet)
     Route::POST('/cadastrar-novo-pet', [PetDadosController::class, 'store'])->name('cadastrarNovoPet');
     // PET (Exclui os dados do pet)
@@ -69,6 +63,23 @@ Route::group(['middleware' => 'auth'], function () {
     Route::POST('/visualizar-dados-pet', [PetDadosController::class, 'show'])->name('visualizarPet');
     // PET (Atualiza os dados do pet)
     Route::POST('/atualizar-pet', [PetDadosController::class, 'update'])->name('atualizarPet');
+
+    // NOTIFICAÇÕES
+    Route::POST('/adicionar-notificacao', [NotificacoesController::class, 'store'])->name('adicionar.notificacoes');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // PRODUTO
     Route::POST('/cadastraProduto', [ProdutoController::class, 'store'])->name('cadastroProduto');
@@ -83,6 +94,4 @@ Route::group(['middleware' => 'auth'], function () {
 
     //PACOTES
     Route::GET('/pacotes-e-promocoes', [DashboardController::class, 'pacotesEPromocoes']);
-
-    Route::POST('/cadastroPacote', []);
 });

@@ -220,7 +220,7 @@
                 }).done(function(data) {
                     Swal.fire({
                         title: data.title,
-                        message: data.message,
+                        text: data.message,
                         icon: data.icon,
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -234,7 +234,7 @@
                 }).fail(function(jqXHR, textStatus, data) {
                     Swal.fire({
                         title: "Error",
-                        message: jqXHR,
+                        text: jqXHR,
                         icon: "error",
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -261,7 +261,7 @@
                 }).done(function(data) {
                     Swal.fire({
                         title: data.title,
-                        message: data.message,
+                        text: data.message,
                         icon: data.icon,
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -274,7 +274,7 @@
                 }).fail(function(jqXHR, textStatus, data) {
                     Swal.fire({
                         title: "Error",
-                        message: jqXHR,
+                        text: jqXHR,
                         icon: "error",
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -301,7 +301,6 @@
                         _token: _token
                     }
                 }).done(function(data) {
-                    console.log(data);
                     $('#pet_nome').val(data.dados.pet_nome);
                     $('#pet_especie').val(data.dados.pet_especie);
                     $('#pet_porte').val(data.dados.pet_porte);
@@ -315,7 +314,7 @@
                 }).fail(function(jqXHR, textStatus, data) {
                     Swal.fire({
                         title: "Error",
-                        message: jqXHR,
+                        text: jqXHR,
                         icon: "error",
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -359,7 +358,7 @@
                 }).done(function(data) {
                     Swal.fire({
                         title: data.title,
-                        message: data.message,
+                        text: data.message,
                         icon: data.icon,
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
@@ -373,7 +372,7 @@
                 }).fail(function(jqXHR, textStatus, data) {
                     Swal.fire({
                         title: "Error",
-                        message: jqXHR,
+                        text: jqXHR,
                         icon: "error",
                         showClass: {
                             popup: 'animate__animated animate__fadeInDown'
