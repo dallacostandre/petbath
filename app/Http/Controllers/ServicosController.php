@@ -154,7 +154,39 @@ class ServicosController extends Controller
      */
     public function update(Request $request, Servicos $servicos)
     {
-        //
+        if($request->id){
+            $validate = Validator::make($request->all(), [
+                'servico_nome' => 'required',
+                'servico_pet_raca' => 'required',
+                'servico_pet_porte' => 'required',
+                'servico_custo' => 'required',
+                'servico_porcentagem_lucro' => 'required',
+                'servico_preco_de_venda' => 'required',
+                'servico_lucro' => 'required',
+                'servico_especie' => 'required',
+            ]);
+
+            if ($validate->fails()) {
+                return response()->json([
+                    'title' => 'Campo faltando',
+                    'text' => 'Ops, existem campos que estão em branco.',
+                    'icon' => 'warning',
+                ]);
+            };
+            Servicos::find($request->id)->update($request->all());
+            return response()->json([
+                'title' => 'Serviço atualizado com sucesso.',
+                'text' => 'Sucesso ao atualizar este serviço.',
+                'icon' => 'success',
+                'code' => '200'
+            ]);
+        }else{
+            return response()->json([
+                'title' => 'Ops, houve um errro ao atualizar.',
+                'text' => 'Não foi possível atualizar este serviço.',
+                'icon' => 'success',
+            ]);
+        }
     }
 
     /**

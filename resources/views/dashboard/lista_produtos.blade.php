@@ -119,7 +119,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" name="cadastro_produto_custo"
+                            <input type="text" class="form-control money" name="cadastro_produto_custo"
                                 id="cadastro_produto_custo" required>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" required
+                            <input type="text" class="form-control money" required
                                 name="cadastro_produto_preco_de_venda" id="cadastro_produto_preco_de_venda">
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" disabled required
+                            <input type="text" class="form-control money" disabled required
                                 name="cadastro_produto_lucro" id="cadastro_produto_lucro">
                         </div>
                         <small class="form-text text-muted">Lucro estimado sem taxas e impostos.
@@ -226,7 +226,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" name=editar_produto_custo" id="editar_produto_custo" required>
+                            <input type="text" class="form-control 2" name=editar_produto_custo" id="editar_produto_custo" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -256,7 +256,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" required name="editar_produto_preco_de_venda" id="editar_produto_preco_de_venda">
+                            <input type="text" class="form-control 2" required name="editar_produto_preco_de_venda" id="editar_produto_preco_de_venda">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -265,7 +265,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" disabled required name="editar_produto_lucro" id="editar_produto_lucro">
+                            <input type="text" class="form-control 2" disabled required name="editar_produto_lucro" id="editar_produto_lucro">
                         </div>
                         <small class="form-text text-muted">Lucro estimado sem taxas e impostos.
                         </small>
@@ -319,9 +319,7 @@
         }
     }
 
-    $('.money2').mask("#.###,##", {
-        reverse: true
-    });
+    $('.money').mask("000.000,00", {reverse: true});
     $('.percent').mask('0000', {
         reverse: true
     });

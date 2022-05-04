@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     // SERVICO
     Route::GET('/servicos', [ServicosController::class, 'index'])->name('index.servico');
     Route::POST('/cadastrar-servico', [ServicosController::class, 'store'])->name('cadastrar.servico');
+    Route::POST('/atualizar-servico', [ServicosController::class, 'update'])->name('atualizar.servico');
     Route::DELETE('/excluir-servico', [ServicosController::class, 'destroy'])->name('excluir.servico');
     Route::GET('/visualizar-dados-servico', [ServicosController::class, 'edit'])->name('edit.servico');
 

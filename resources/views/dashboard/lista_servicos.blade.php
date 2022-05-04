@@ -72,7 +72,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Cadastrar-->
 <div class="modal fade" id="modalCadastroServico" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -86,13 +86,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Nome Serviço</label>
-                            <input type="text" class="form-control" name="servico_nome" id="servico_nome">
+                            <input type="text" class="form-control" name="cadastrar_servico_nome" id="cadastrar_servico_nome">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Raça</label>
-                            <select class="form-control" name="servico_pet_raca" id="servico_pet_raca" required>
+                            <select class="form-control" name="cadastrar_servico_pet_raca" id="cadastrar_servico_pet_raca" required>
                                 <option disabled>Selecione uma raça</option>
                                 @foreach ($raca_pet as $raca)
                                     @if ($raca->pet_especie == 1)
@@ -110,7 +110,7 @@
                     </div>
                     <div class="col-md-2 ">
                         <label>Porte</label>
-                        <select class="form-control" name="servico_pet_porte" id="servico_pet_porte">
+                        <select class="form-control" name="cadastrar_servico_pet_porte" id="cadastrar_servico_pet_porte">
                             <option value="pequeno" selected>Pequeno</option>
                             <option value="medio">Médio</option>
                             <option value="grande">Grande</option>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="col-md-2 ">
                         <label>Espécie</label>
-                        <select class="form-control" name="servico_especie" id="servico_especie">
+                        <select class="form-control" name="cadastrar_servico_especie" id="cadastrar_servico_especie">
                             <option value="felino">Felino</option>
                             <option value="canino">Canino</option>
                             <option value="outro">Outro</option>
@@ -129,7 +129,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Codigo do Serviço</label>
-                            <input type="text" class="form-control codigo" name="servico_codigo" id="servico_codigo"
+                            <input type="text" class="form-control codigo" name="cadastrar_servico_codigo" id="cadastrar_servico_codigo"
                                 required>
                         </div>
                     </div>
@@ -139,16 +139,16 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" name="servico_custo" id="servico_custo"
+                            <input type="text" class="form-control money" name="cadastrar_servico_custo" id="cadastrar_servico_custo"
                                 required>
                         </div>
                     </div>
                     <div class="col-md-4">
 
-                        <label>Lucro</label>
+                        <label>Lucro (porcentagem)</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control percent" max="100" min="0" name="servico_porcentagem_lucro"
-                                id="servico_porcentagem_lucro" required>
+                            <input type="text" class="form-control percent" max="100" min="0" name="cadastrar_servico_porcentagem_lucro"
+                                id="cadastrar_servico_porcentagem_lucro" required>
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">%</span>
                             </div>
@@ -162,8 +162,8 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" name="servico_preco_sugerido" disabled
-                                id="servico_preco_sugerido" required>
+                            <input type="text" class="form-control money" name="cadastrar_servico_preco_sugerido" disabled
+                                id="cadastrar_servico_preco_sugerido" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -172,18 +172,18 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" name="servico_preco_de_venda"
-                                id="servico_preco_de_venda" required>
+                            <input type="text" class="form-control money" name="cadastrar_servico_preco_de_venda"
+                                id="cadastrar_servico_preco_de_venda" required>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Lucro</label>
+                        <label>Lucro (em reais)</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" disabled required name="servico_lucro"
-                                id="servico_lucro">
+                            <input type="text" class="form-control money" disabled required name="cadastrar_servico_lucro"
+                                id="cadastrar_servico_lucro">
                         </div>
                         <small class="form-text text-muted">Lucro estimado sem taxas e
                             impostos.
@@ -201,6 +201,137 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditarServico" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Dados do serviço</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nome Serviço</label>
+                            <input type="text" class="form-control" name="editar_servico_nome" id="editar_servico_nome">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Raça</label>
+                            <select class="form-control" name="editar_servico_pet_raca" id="editar_servico_pet_raca" required>
+                                <option disabled>Selecione uma raça</option>
+                                @foreach ($raca_pet as $raca)
+                                    @if ($raca->pet_especie == 1)
+                                        <option value="{{ $raca->nome_raca }}">{{ $raca->nome_raca }}</option>
+                                    @endif
+                                @endforeach
+                                <option disabled>Felinos</option>
+                                @foreach ($raca_pet as $raca)
+                                    @if ($raca->pet_especie == 0)
+                                        <option value="{{ $raca->nome_raca }}">{{ $raca->nome_raca }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <label>Porte</label>
+                        <select class="form-control" name="editar_servico_pet_porte" id="editar_servico_pet_porte">
+                            <option value="pequeno" selected>Pequeno</option>
+                            <option value="medio">Médio</option>
+                            <option value="grande">Grande</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 ">
+                        <label>Espécie</label>
+                        <select class="form-control" name="editar_servico_especie" id="editar_servico_especie">
+                            <option value="felino">Felino</option>
+                            <option value="canino">Canino</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Codigo do Serviço</label>
+                            <input type="text" class="form-control codigo" name="editar_servico_codigo" id="editar_servico_codigo"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Custo Unitário</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input type="text" class="form-control money" name="editar_servico_custo" id="editar_servico_custo"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <label>Lucro</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control percent" max="100" min="0" name="editar_servico_porcentagem_lucro"
+                                id="editar_servico_porcentagem_lucro" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Preço Sugerido</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input type="text" class="form-control money" name="editar_servico_preco_sugerido" disabled
+                                id="editar_servico_preco_sugerido" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Preço de Venda</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input type="text" class="form-control money" name="editar_servico_preco_de_venda"
+                                id="editar_servico_preco_de_venda" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Lucro</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input type="text" class="form-control money" disabled required name="editar_servico_lucro"
+                                id="editar_servico_lucro">
+                        </div>
+                        <small class="form-text text-muted">Lucro estimado sem taxas e
+                            impostos.
+                        </small>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success botao-padrao float-end" id="atualizarServico" data-id="">
+                    Salvar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 @component('dashboard.componentes.footer')
@@ -237,9 +368,7 @@
         }
     }
 
-    $('.money2').mask('0.000.000,00', {
-        reverse: true
-    });
+    $('.money').mask("000.000,00", {reverse: true});
     $('.percent').mask('0000', {
         reverse: true
     });
@@ -247,19 +376,20 @@
         reverse: true
     });
 
+
+
     $('#adicionarServico').on('click', function(e) {
         e.preventDefault();
-
         var url = "/cadastrar-servico";
-        var servico_nome = $('#servico_nome').val();
-        var servico_pet_raca = $('#servico_pet_raca').val();
-        var servico_pet_porte = $('#servico_pet_porte').val();
-        var servico_codigo = $('#servico_codigo').val();
-        var servico_custo = $('#servico_custo').val();
-        var servico_especie = $('#servico_especie').val();
-        var servico_porcentagem_lucro = $('#servico_porcentagem_lucro').val();
-        var servico_preco_de_venda = $('#servico_preco_de_venda').val();
-        var servico_lucro = $('#servico_lucro').val();
+        var cadastrar_servico_nome = $('#cadastrar_servico_nome').val();
+        var cadastrar_servico_pet_raca = $('#cadastrar_servico_pet_raca').val();
+        var cadastrar_servico_pet_porte = $('#cadastrar_servico_pet_porte').val();
+        var cadastrar_servico_especie = $('#cadastrar_servico_especie').val();
+        var cadastrar_servico_codigo = $('#cadastrar_servico_codigo').val();
+        var cadastrar_servico_custo = $('#cadastrar_servico_custo').val();
+        var cadastrar_servico_porcentagem_lucro = $('#cadastrar_servico_porcentagem_lucro').val();
+        var cadastrar_servico_preco_de_venda = $('#cadastrar_servico_preco_de_venda').val();
+        var cadastrar_servico_lucro = $('#cadastrar_servico_lucro').val();
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -268,15 +398,15 @@
             method: 'POST',
             dataType: 'JSON',
             data: {
-                servico_nome: servico_nome,
-                servico_pet_raca: servico_pet_raca,
-                servico_pet_porte: servico_pet_porte,
-                servico_codigo: servico_codigo,
-                servico_custo: servico_custo,
-                servico_porcentagem_lucro: servico_porcentagem_lucro,
-                servico_preco_de_venda: servico_preco_de_venda,
-                servico_lucro: servico_lucro,
-                servico_especie: servico_especie,
+                servico_nome: cadastrar_servico_nome,
+                servico_pet_raca: cadastrar_servico_pet_raca,
+                servico_pet_porte: cadastrar_servico_pet_porte,
+                servico_codigo: cadastrar_servico_codigo,
+                servico_custo: cadastrar_servico_custo,
+                servico_porcentagem_lucro: cadastrar_servico_porcentagem_lucro,
+                servico_preco_de_venda: cadastrar_servico_preco_de_venda,
+                servico_lucro: cadastrar_servico_lucro,
+                servico_especie: cadastrar_servico_especie,
                 _token: token
             },
             success: function(data) {
@@ -339,45 +469,47 @@
         });
     });
 
-    $('#servico_porcentagem_lucro').on('keyup', function() {
-        var custo = $('#servico_custo').val();
+    $('#cadastrar_servico_custo').on('keyup', function() {
+        var custo = $('#cadastrar_servico_custo').val();
         custo = custo.replace(".", "").replace(",", ".")
-        var porcentagem = parseFloat($('#servico_porcentagem_lucro').val()) / 100;
+        var porcentagem = parseFloat($('#cadastrar_servico_porcentagem_lucro').val()) / 100;
         var precoSugeridoServico = Math.floor(custo * porcentagem) + parseFloat(custo);
 
         if (!custo) {
             return false;
         } else {
-            $('#servico_preco_sugerido').val(precoSugeridoServico);
-            $('#servico_preco_de_venda').val(precoSugeridoServico);
+            $('#cadastrar_servico_preco_sugerido').val(precoSugeridoServico);
+            $('#cadastrar_servico_preco_de_venda').val(precoSugeridoServico);
 
-            var precoDeVenda = $('#servico_preco_sugerido').val();
-            var custoUnitario = $('#servico_custo').val();
+            var precoDeVenda = $('#cadastrar_servico_preco_sugerido').val();
+            var custoUnitario = $('#cadastrar_servico_custo').val();
 
             var lucroServico = (parseFloat(precoDeVenda) - parseFloat(custoUnitario)).toFixed(2);
-            $('#servico_lucro').val(lucroServico);
+            $('#cadastrar_servico_lucro').val(lucroServico);
         }
     });
 
-    $('#servico_lucro').on('keyup', function() {
-        var custo = $('#servico_custo').val();
+    $('#cadastrar_servico_porcentagem_lucro').on('keyup', function() {
+        var custo = $('#cadastrar_servico_custo').val();
         custo = custo.replace(".", "").replace(",", ".")
-        var porcentagem = parseFloat($('#servico_porcentagem_lucro').val()) / 100;
+        var porcentagem = parseFloat($('#cadastrar_servico_porcentagem_lucro').val()) / 100;
         var precoSugeridoServico = Math.floor(custo * porcentagem) + parseFloat(custo);
 
         if (!porcentagem) {
             return false;
         } else {
-            $('#servico_preco_sugerido').val(precoSugeridoServico);
-            $('#servico_preco_de_venda').val(precoSugeridoServico);
+            $('#cadastrar_servico_preco_sugerido').val(precoSugeridoServico);
+            $('#cadastrar_servico_preco_de_venda').val(precoSugeridoServico);
 
-            var precoDeVenda = $('#servico_preco_sugerido').val();
-            var custoUnitario = $('#servico_custo').val();
+            var precoDeVenda = $('#cadastrar_servico_preco_sugerido').val();
+            var custoUnitario = $('#cadastrar_servico_custo').val();
 
             var lucroServico = (parseFloat(precoDeVenda) - parseFloat(custoUnitario)).toFixed(2);
-            $('#servico_lucro').val(lucroServico);
+            $('#cadastrar_servico_lucro').val(lucroServico);
         }
     });
+
+
 
     $('.visualizarModalServico').on('click', function() {
         var id = $(this).data('id');
@@ -392,15 +524,17 @@
                 _token: _token
             }
         }).done(function(data) {
-            $('#servico_nome').val(data.dados.servico_nome);
-            $('#servico_pet_raca').val(data.dados.servico_pet_raca);
-            $('#servico_pet_porte').val(data.dados.servico_pet_porte);
-            $('#servico_codigo').val(data.dados.servico_codigo);
-            $('#servico_custo').val(data.dados.servico_custo);
-            $('#servico_porcentagem_lucro').val(data.dados.servico_porcentagem_lucro);
-            $('#servico_preco_de_venda').val(data.dados.servico_preco_de_venda);
-            $('#servico_lucro').val(data.dados.servico_lucro);
-            $('#modalCadastroServico').modal('show');
+            $('#editar_servico_nome').val(data.dados.servico_nome);
+            $('#editar_servico_pet_raca').val(data.dados.servico_pet_raca);
+            $('#editar_servico_pet_porte').val(data.dados.servico_pet_porte);
+            $('#editar_servico_codigo').val(data.dados.servico_codigo);
+            $('#editar_servico_custo').val(data.dados.servico_custo);
+            $('#editar_servico_porcentagem_lucro').val(data.dados.servico_porcentagem_lucro);
+            $('#editar_servico_preco_de_venda').val(data.dados.servico_preco_de_venda);
+            $('#editar_servico_lucro').val(data.dados.servico_lucro);
+            $('#editar_servico_preco_sugerido').val(data.dados.servico_preco_de_venda);
+            $('#atualizarServico').attr('data-id', id);
+            $('#modalEditarServico').modal('show');
 
         }).fail(function(jqXHR, textStatus, data) {
             Swal.fire({
@@ -416,4 +550,102 @@
             })
         });
     });
+
+    $('#atualizarServico').on('click', function(e) {
+        e.preventDefault();
+        var url = "/atualizar-servico";
+        var id = $(this).data('id');
+        var editar_servico_nome = $('#editar_servico_nome').val();
+        var editar_servico_pet_raca = $('#editar_servico_pet_raca').val();
+        var editar_servico_pet_porte = $('#editar_servico_pet_porte').val();
+        var editar_servico_codigo = $('#editar_servico_codigo').val();
+        var editar_servico_custo = $('#editar_servico_custo').val();
+        var editar_servico_especie = $('#editar_servico_especie').val();
+        var editar_servico_porcentagem_lucro = $('#editar_servico_porcentagem_lucro').val();
+        var editar_servico_preco_de_venda = $('#editar_servico_preco_de_venda').val();
+        var editar_servico_lucro = $('#editar_servico_lucro').val();
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            method: 'POST',
+            dataType: 'JSON',
+            data: {
+                id:id,
+                servico_nome: editar_servico_nome,
+                servico_pet_raca: editar_servico_pet_raca,
+                servico_pet_porte: editar_servico_pet_porte,
+                servico_codigo: editar_servico_codigo,
+                servico_custo: editar_servico_custo,
+                servico_porcentagem_lucro: editar_servico_porcentagem_lucro,
+                servico_preco_de_venda: editar_servico_preco_de_venda,
+                servico_lucro: editar_servico_lucro,
+                servico_especie: editar_servico_especie,
+                _token: token
+            },
+            success: function(data) {
+                Swal.fire({
+                    title: data.title,
+                    text: data.text,
+                    icon: data.icon,
+                    button: "Ótimo!",
+                });
+                if (data.code == '200') {
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Não foi possível adicionar o serviço!',
+                    button: "Voltar",
+                });
+            }
+        });
+    });
+
+    $('#editar_servico_porcentagem_lucro').on('keyup', function() {
+        var custo = $('#editar_servico_custo').val();
+        custo = custo.replace(".", "").replace(",", ".")
+        var porcentagem = parseFloat($('#editar_servico_porcentagem_lucro').val()) / 100;
+        var precoSugeridoServico = Math.floor(custo * porcentagem) + parseFloat(custo);
+
+        if (!custo) {
+            return false;
+        } else {
+            $('#editar_servico_preco_sugerido').val(precoSugeridoServico);
+            $('#editar_servico_preco_de_venda').val(precoSugeridoServico);
+
+            var precoDeVenda = $('#editar_servico_preco_sugerido').val();
+            var custoUnitario = $('#editar_servico_custo').val();
+
+            var lucroServico = (parseFloat(precoDeVenda) - parseFloat(custoUnitario)).toFixed(2);
+            $('#editar_servico_lucro').val(lucroServico);
+        }
+    });
+
+    $('#editar_servico_lucro').on('keyup', function() {
+        var custo = $('#editar_servico_custo').val();
+        custo = custo.replace(".", "").replace(",", ".")
+        var porcentagem = parseFloat($('#editar_servico_porcentagem_lucro').val()) / 100;
+        var precoSugeridoServico = Math.floor(custo * porcentagem) + parseFloat(custo);
+
+        if (!porcentagem) {
+            return false;
+        } else {
+            $('#editar_servico_preco_sugerido').val(precoSugeridoServico);
+            $('#editar_servico_preco_de_venda').val(precoSugeridoServico);
+
+            var precoDeVenda = $('#editar_servico_preco_sugerido').val();
+            var custoUnitario = $('#editar_servico_custo').val();
+
+            var lucroServico = (parseFloat(precoDeVenda) - parseFloat(custoUnitario)).toFixed(2);
+            $('#editar_servico_lucro').val(lucroServico);
+        }
+    });
+
 </script>
