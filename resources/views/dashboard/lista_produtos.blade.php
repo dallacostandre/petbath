@@ -246,7 +246,7 @@
                 produto_preco_de_venda: produto_preco_de_venda,
                 produto_lucro: produto_lucro,
                 produto_categoria: produto_categoria,
-                produto_especie: produto_especie
+                produto_especie: produto_especie,
                 _token: token
             },
             success: function(data) {
