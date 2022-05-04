@@ -1,83 +1,141 @@
 @component('dashboard.componentes.header')
 @endcomponent
+<style>
+    .notificationIcon:hover {
+        color: crimson;
+    }
+
+</style>
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
                 <h4 class="page-title" id="name_title">
-                    {{ 'Histórico de ' . $objCliente->cliente_nome }}
+                    {{ $titulo }}
                 </h4>
             </div>
         </div>
     </div>
     <div class="container-fluid">
-        <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                    type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                    Dados
-                </button>
-            </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-home-tab" id="nav-home">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="whatsapp">Whats App</label>
-                                    <input required type="text" class="form-control whatsApp" name="cliente_whatsapp"
-                                        id="cliente_whatsapp"
-                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_whatsapp }} @endif">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="telefone">Telefone</label>
-                                    <input required type="text" class="form-control phone" name="cliente_telefone"
-                                        id="cliente_telefone"
-                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_telefone }} @endif">
-                                    <small id="emailHelp" class="form-text text-muted">Este campo é obrigatório</small>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Nome Completo</label>
-                                    <input required type="text" class="form-control" name="cliente_nome"
-                                        id="cliente_nome"
-                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_nome }} @endif">
-                                    <small id="emailHelp" class="form-text text-muted">Este campo é obrigatório</small>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input required type="text" class="form-control" id="cliente_email"
-                                        name="cliente_email"
-                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_email }} @endif">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Instagram</label>
-                                    <input required type="text" class="form-control" id="cliente_instagram"
-                                        name="cliente_instagram"
-                                        value="@if (isset($objCliente)) {{ $objCliente->cliente_instagram }} @endif">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">Histórico Pet</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">Notificações</h5>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-top-0">Data</th>
+                                                        <th class="border-top-0">Descricão</th>
+                                                        <th class="border-top-0">Status</th>
+                                                        <th class="border-top-0">Ações</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($objNotificacoesCliente as $notificacao)
+                                                        <tr>
+                                                            <td class="txt-oflo">
+                                                                {{ date('d/m/Y H:i ', strtotime($notificacao->notificacao_data)) }}
+                                                            </td>
+                                                            <td class="txt-oflo">
+                                                                {{ $notificacao->notificacao_descricao }}
+                                                            </td>
+                                                            @if (Carbon\Carbon::today() > $notificacao->notificacao_data)
+                                                                <td>
+                                                                    <span class="label label-danger label-rounded">
+                                                                        Atrasado
+                                                                    </span>
+                                                                </td>
+                                                            @else
+                                                                <td>
+                                                                    <span class="label label-warning label-rounded">
+                                                                        Agendado
+                                                                    </span>
+                                                                </td>
+                                                            @endif
+                                                            <td class="notificationIcon excluirNotificacao" data-id="{{$notificacao->id}}">
+                                                                <i class="fas fa-bell-slash"></i>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        @component('dashboard.componentes.footer')
-        @endcomponent
+            @component('dashboard.componentes.footer')
+            @endcomponent
 
-        <script>
-            $('.phone').mask('00 0 0000-0000');
-            $('.whatsApp').mask('00 0 0000-0000');
-            $('.numero').mask('00000');
-            $('.cep').mask('00.000-000');
-            $('.uf').mask('AA');
-        </script>
+            <script>
+                $('.excluirNotificacao').on('click', function() {
+                    var id = $(this).data("id");
+                    var url = '/excluir-notificacao';
+                    var _token = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        dataType: "json",
+                        data: {
+                            id: id,
+                            _token: _token
+                        }
+                    }).done(function(data) {
+                        Swal.fire({
+                            title: data.title,
+                            text: data.message,
+                            icon: data.icon,
+                            html: 'Aguarde <b></b> millisegundos.',
+                            timer: 20000,
+                            timerProgressBar: true,
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            },
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        });
+                        location.reload();
+                    }).fail(function(jqXHR, textStatus, data) {
+                        Swal.fire({
+                            title: "Error",
+                            text: jqXHR,
+                            icon: "error",
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        })
+
+                    });
+                })
+            </script>

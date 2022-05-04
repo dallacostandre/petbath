@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CadastroClienteRequest;
 use App\Models\Cliente;
 use App\Models\ClienteEndereco;
+use App\Models\Notificacoes;
 use App\Models\PetDados;
 use App\Models\PetRaca;
 use App\Models\User;
@@ -284,11 +285,10 @@ class ClienteController extends Controller
     public function history($id)
     {
         $objCliente = Cliente::find($id);
-        $endereco = ClienteEndereco::where(['unique_endereco' => $objCliente->unique_endereco])->get();
-        $pets = PetDados::where(['unique_cliente' => $objCliente->unique_cliente])->get();
-        $titulo = 'Visualizando: ' . $objCliente->cliente_nome;
+        $titulo = 'Visualizando histório: ' . $objCliente->cliente_nome;
+        $objNotificacoesCliente = Notificacoes::where(['unique_cliente' => $objCliente->unique_cliente])->orderBy('notificacao_data', 'ASC')->get();
 
-        return view('dashboard.historico', compact('objCliente', 'endereco', 'pets', 'titulo'));
+        return view('dashboard.historico', compact('objCliente', 'titulo', 'objNotificacoesCliente'));
     }
 
     public function viewClientePosCadastro(Request $request, $uniqueIdCliente)

@@ -223,7 +223,7 @@
 
     $('#adicionarNotificacao').on('click', function() {
         event.preventDefault();
-        let uniqueIdCliente = $(this).attr('data-id');
+        let id = $(this).attr('data-id');
         let url = '/adicionar-notificacao';
         let descricaoNotificacao = $('#descricaoNotificacao').val()
         let dataNotificacao = $('#dataNotificacao').val()
@@ -273,7 +273,7 @@
             type: "POST",
             dataType: "json",
             data: {
-                uniqueIdCliente: uniqueIdCliente,
+                id: id,
                 descricaoNotificacao: descricaoNotificacao,
                 dataNotificacao: dataNotificacao,
                 _token: _token

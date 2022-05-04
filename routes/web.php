@@ -65,7 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::POST('/atualizar-pet', [PetDadosController::class, 'update'])->name('atualizarPet');
 
     // NOTIFICAÇÕES
-    Route::POST('/adicionar-notificacao', [NotificacoesController::class, 'store'])->name('adicionar.notificacoes');
+    Route::POST('/adicionar-notificacao', [NotificacoesController::class, 'store'])->name('adicionar.notificacao');
+    Route::DELETE('/excluir-notificacao', [NotificacoesController::class, 'destroy'])->name('remover.notificacao');
 
 
 

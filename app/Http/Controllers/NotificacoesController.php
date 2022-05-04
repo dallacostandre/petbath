@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\Notificacoes;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,14 +39,14 @@ class NotificacoesController extends Controller
     {
         if ($request) {
             // BUSCA O UNIQUE ID DO USUÁRIO
-            $unique_user = Auth::user()->unique_user;
+            $objCliente = Cliente::find($request->id);
 
             // ADICIONAR AS NOTIFICAÇÕES
             $notificacoes = new Notificacoes();
             $notificacoes->notificacao_data = $request->dataNotificacao;
             $notificacoes->notificacao_descricao = $request->descricaoNotificacao;
-            $notificacoes->unique_user = $unique_user;
-            $notificacoes->unique_cliente = $request->uniqueIdCliente;
+            $notificacoes->unique_user = $objCliente->unique_user;
+            $notificacoes->unique_cliente = $objCliente->unique_cliente;
             $notificacoes->save();
 
             return response()->json([
@@ -95,8 +97,21 @@ class NotificacoesController extends Controller
      * @param  \App\Models\Notificacoes  $notificacoes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notificacoes $notificacoes)
+    public function destroy(Notificacoes $notificacoes, Request $request)
     {
-        //
+        if($request){
+            $notificacoes->destroy($request->id);
+            return response()->json([
+                'message' => 'Notificação excluída com sucesso',
+                'title' => 'Excluindo...',
+                'icon' => 'success',
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Houve um erro ao tentar excluir esta notifição.',
+                'title' => 'Atenção',
+                'icon' => 'error',
+            ]);
+        }
     }
 }
