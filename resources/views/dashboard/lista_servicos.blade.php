@@ -144,10 +144,14 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">% de Lucro</label>
-                            <input type="text" class="form-control percent" name="servico_porcentagem_lucro"
-                                id="servico_porcentagem_lucro">
+
+                        <label>Lucro</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" max="100" min="0" name="servico_porcentagem_lucro"
+                                id="servico_porcentagem_lucro" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,7 +162,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" name="servico_preco_sugerido"
+                            <input type="text" class="form-control money2" name="servico_preco_sugerido" disabled
                                 id="servico_preco_sugerido" required>
                         </div>
                     </div>
@@ -175,6 +179,9 @@
                     <div class="col-md-4">
                         <label>Lucro</label>
                         <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
                             <input type="text" class="form-control money2" disabled required name="servico_lucro"
                                 id="servico_lucro">
                         </div>
@@ -333,34 +340,42 @@
         });
     });
 
-    $('#servico_porcentagem_lucro').on('change', function() {
+    $('#servico_porcentagem_lucro').on('keyup', function() {
         var custo = $('#servico_custo').val();
-        var porcentagem = $('#servico_porcentagem_lucro').val();
-        var precoSugeridoServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
+        custo = custo.replace(".", "").replace(",", ".")
+        var porcentagem = parseFloat($('#servico_porcentagem_lucro').val()) / 100;
+        var precoSugeridoServico = Math.floor(custo * porcentagem) + parseFloat(custo);
 
-        if (custo === "") {
+        if (!custo) {
             return false;
         } else {
             $('#servico_preco_sugerido').val(precoSugeridoServico);
             $('#servico_preco_de_venda').val(precoSugeridoServico);
 
-            var lucroServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+            var precoDeVenda = $('#servico_preco_sugerido').val();
+            var custoUnitario = $('#servico_custo').val();
+
+            var lucroServico = (parseFloat(precoDeVenda) - parseFloat(custoUnitario)).toFixed(2);
             $('#servico_lucro').val(lucroServico);
         }
     });
 
-    $('#servico_lucro').on('change', function() {
-        var custo = $('#servico_lucro').val();
-        var porcentagem = $('#servico_porcentagem_lucro').val();
-        var precoSugeridoServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
+    $('#servico_lucro').on('keyup', function() {
+        var custo = $('#servico_custo').val();
+        custo = custo.replace(".", "").replace(",", ".")
+        var porcentagem = parseFloat($('#servico_porcentagem_lucro').val()) / 100;
+        var precoSugeridoServico = Math.floor(custo * porcentagem) + parseFloat(custo);
 
-        if (porcentagem === "") {
+        if (!porcentagem) {
             return false;
         } else {
             $('#servico_preco_sugerido').val(precoSugeridoServico);
             $('#servico_preco_de_venda').val(precoSugeridoServico);
 
-            var lucroServico = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+            var precoDeVenda = $('#servico_preco_sugerido').val();
+            var custoUnitario = $('#servico_custo').val();
+
+            var lucroServico = (parseFloat(precoDeVenda) - parseFloat(custoUnitario)).toFixed(2);
             $('#servico_lucro').val(lucroServico);
         }
     });

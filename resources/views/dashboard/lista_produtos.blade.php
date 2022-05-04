@@ -364,7 +364,6 @@
             $('#produto_preco_de_venda').val(precoSugeridoProduto);
 
             var produto_lucro = (parseFloat(precoSugeridoProduto) - parseFloat(custo)).toFixed(2);
-            console.log(produto_lucro);
             $('#produto_lucro').val(produto_lucro);
         }
     });
