@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
     // PRODUTOS
     Route::GET('/produtos', [ProdutoController::class, 'index'])->name('index.produto');
     Route::POST('/cadastrar-produto', [ProdutoController::class, 'store'])->name('cadastro.produto');
+    Route::POST('/atualizar-produto', [ProdutoController::class, 'update'])->name('atualizar.produto');
     Route::GET('/visualizar-dados-produto', [ProdutoController::class, 'edit'])->name('edit.produto');
     Route::DELETE('/excluir-produto', [ProdutoController::class, 'destroy'])->name('removerProduto');
     

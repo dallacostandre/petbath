@@ -143,9 +143,24 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        if($request->id){
+            Produtos::find($request->id)->update($request->all());
+            return response()->json([
+                'title' => 'Produto atualizado com sucesso.',
+                'text' => 'Sucesso ao atualizar este produto.',
+                'icon' => 'success',
+                'code' => '200'
+            ]);
+        }else{
+            return response()->json([
+                'title' => 'Ops, houve um errro ao atualizar.',
+                'text' => 'Não foi possível atualizar este produto.',
+                'icon' => 'success',
+            ]);
+        }
     }
 
     /**

@@ -147,7 +147,7 @@
 
                         <label>Lucro</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" max="100" min="0" name="servico_porcentagem_lucro"
+                            <input type="text" class="form-control percent" max="100" min="0" name="servico_porcentagem_lucro"
                                 id="servico_porcentagem_lucro" required>
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">%</span>
@@ -190,7 +190,6 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="clearfix"></div>
             </div>
             <div class="modal-footer">
@@ -241,7 +240,7 @@
     $('.money2').mask('0.000.000,00', {
         reverse: true
     });
-    $('.percent').mask('0000%', {
+    $('.percent').mask('0000', {
         reverse: true
     });
     $('.codigo').mask('AAAAAAAAAAAAAAAAAAA', {

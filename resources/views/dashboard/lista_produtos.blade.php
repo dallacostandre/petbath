@@ -43,7 +43,7 @@
                                         </td>
                                         <td>{{ $produto->produto_nome }}</td>
                                         <td>R$ {{ $produto->produto_custo }}</td>
-                                        <td>{{ $produto->produto_porcentagem_lucro }}</td>
+                                        <td>{{ $produto->produto_porcentagem_lucro }} %</td>
                                         <td>R${{ number_format($produto->produto_preco_de_venda, 2, ',', '.') }}
                                         </td>
                                         <td>R$
@@ -71,7 +71,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Cadastro -->
 <div class="modal fade" id="modalCadastroProduto" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -85,19 +85,20 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Nome Produto</label>
-                            <input type="text" class="form-control" name="produto_nome" id="produto_nome" required>
+                            <input type="text" class="form-control" name="cadastro_produto_nome"
+                                id="cadastro_produto_nome" required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Categoria do Produto</label>
-                            <input type="text" class="form-control" name="produto_categoria" id="produto_categoria"
-                                required>
+                            <input type="text" class="form-control" name="produto_categoria"
+                                id="cadastro_produto_categoria" required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label>Espécie</label>
-                        <select class="form-control" name="produto_especie" id="produto_especie">
+                        <select class="form-control" name="cadastro_produto_especie" id="cadastro_produto_especie">
                             <option value="felino">Felino</option>
                             <option value="canino">Canino</option>
                             <option value="outro">Outro</option>
@@ -108,8 +109,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Codigo do Produto</label>
-                            <input type="text" class="form-control codigo" name="produto_codigo" id="produto_codigo"
-                                required>
+                            <input type="text" class="form-control codigo" name="cadastro_produto_codigo"
+                                id="cadastro_produto_codigo" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -118,15 +119,16 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" name="produto_custo" id="produto_custo"
-                                required>
+                            <input type="text" class="form-control money2" name="cadastro_produto_custo"
+                                id="cadastro_produto_custo" required>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Lucro</label>
+                        <label>Lucro (percentual)</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" max="100" min="0"
-                                name="produto_porcentagem_lucro" id="produto_porcentagem_lucro" required>
+                            <input type="text" class="form-control percent" max="100" min="0"
+                                name="cadastro_produto_porcentagem_lucro" id="cadastro_produto_porcentagem_lucro"
+                                required>
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">%</span>
                             </div>
@@ -140,8 +142,8 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control" disabled name="precoSugeridoProduto"
-                                id="precoSugeridoProduto">
+                            <input type="text" class="form-control" disabled name="cadastro_preco_sugerido"
+                                id="cadastro_preco_sugerido">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -150,21 +152,20 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" required name="produto_preco_de_venda"
-                                id="produto_preco_de_venda">
+                            <input type="text" class="form-control money2" required
+                                name="cadastro_produto_preco_de_venda" id="cadastro_produto_preco_de_venda">
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Lucro</label>
+                        <label>Lucro (em reais)</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">R$</div>
                             </div>
-                            <input type="text" class="form-control money2" disabled required name="produto_lucro"
-                                id="produto_lucro">
+                            <input type="text" class="form-control money2" disabled required
+                                name="cadastro_produto_lucro" id="cadastro_produto_lucro">
                         </div>
-                        <small class="form-text text-muted">Lucro estimado sem taxas e
-                            impostos.
+                        <small class="form-text text-muted">Lucro estimado sem taxas e impostos.
                         </small>
                     </div>
                 </div>
@@ -172,8 +173,110 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarProduto">
+                <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarProduto" data-id="">
                     Adicionar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditarProduto" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Dados Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nome Produto</label>
+                            <input type="text" class="form-control" name="editar_produto_nome" id="editar_produto_nome" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Categoria do Produto</label>
+                            <input type="text" class="form-control" name="editar_produto_categoria" id="editar_produto_categoria" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Espécie</label>
+                        <select class="form-control" name="editar_produto_especie" id="editar_produto_especie">
+                            <option value="felino">Felino</option>
+                            <option value="canino">Canino</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Codigo do Produto</label>
+                            <input type="text" class="form-control codigo" name="editar_produto_codigo"
+                                id="editar_produto_codigo" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Custo Unitário</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input type="text" class="form-control money2" name=editar_produto_custo" id="editar_produto_custo" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Lucro (percentual)</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control percent" max="100" min="0"
+                                name="editar_produto_porcentagem_lucro" id="editar_produto_porcentagem_lucro" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Preço Sugerido</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input type="text" class="form-control" disabled name="editar_preco_sugerido" id="editar_preco_sugerido">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Preço de Venda</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input type="text" class="form-control money2" required name="editar_produto_preco_de_venda" id="editar_produto_preco_de_venda">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Lucro (em reais)</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
+                            <input type="text" class="form-control money2" disabled required name="editar_produto_lucro" id="editar_produto_lucro">
+                        </div>
+                        <small class="form-text text-muted">Lucro estimado sem taxas e impostos.
+                        </small>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success botao-padrao float-end" id="atualizarProduto" data-id="">
+                    Salvar
                 </button>
             </div>
         </div>
@@ -219,7 +322,7 @@
     $('.money2').mask("#.###,##", {
         reverse: true
     });
-    $('.percent').mask('0000%', {
+    $('.percent').mask('0000', {
         reverse: true
     });
     $('.codigo').mask('AAAAAAAAAAAAAAAAAAA', {
@@ -229,14 +332,14 @@
     $('#adicionarProduto').on('click', function(e) {
         e.preventDefault();
         var url = "/cadastrar-produto";
-        var produto_nome = $('#produto_nome').val();
-        var produto_codigo = $('#produto_codigo').val();
-        var produto_custo = $('#produto_custo').val();
-        var produto_preco_de_venda = $('#produto_preco_de_venda').val();
-        var produto_porcentagem_lucro = $('#produto_porcentagem_lucro').val();
-        var produto_lucro = $('#produto_lucro').val();
-        var produto_categoria = $('#produto_categoria').val();
-        var produto_especie = $('#produto_especie').val();
+        var cadastro_produto_nome = $('#cadastro_produto_nome').val();
+        var cadastro_produto_codigo = $('#cadastro_produto_codigo').val();
+        var cadastro_produto_custo = $('#cadastro_produto_custo').val();
+        var cadastro_produto_preco_de_venda = $('#cadastro_produto_preco_de_venda').val();
+        var cadastro_produto_porcentagem_lucro = $('#cadastro_produto_porcentagem_lucro').val();
+        var cadastro_produto_lucro = $('#cadastro_produto_lucro').val();
+        var cadastro_produto_categoria = $('#cadastro_produto_categoria').val();
+        var cadastro_produto_especie = $('#cadastro_produto_especie').val();
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -245,14 +348,14 @@
             method: 'POST',
             dataType: 'JSON',
             data: {
-                produto_nome: produto_nome,
-                produto_porcentagem_lucro: produto_porcentagem_lucro,
-                produto_codigo: produto_codigo,
-                produto_custo: produto_custo,
-                produto_preco_de_venda: produto_preco_de_venda,
-                produto_lucro: produto_lucro,
-                produto_categoria: produto_categoria,
-                produto_especie: produto_especie,
+                produto_nome: cadastro_produto_nome,
+                produto_porcentagem_lucro: cadastro_produto_porcentagem_lucro,
+                produto_codigo: cadastro_produto_codigo,
+                produto_custo: cadastro_produto_custo,
+                produto_preco_de_venda: cadastro_produto_preco_de_venda,
+                produto_lucro: cadastro_produto_lucro,
+                produto_categoria: cadastro_produto_categoria,
+                produto_especie: cadastro_produto_especie,
                 _token: token
             },
             success: function(data) {
@@ -280,7 +383,6 @@
 
     $('.removerProduto').on('click', function(e) {
         e.preventDefault();
-
         var url = "/excluir-produto";
         var idProduto = $(this).data('id');
         var token = $('meta[name="csrf-token"]').attr('content');
@@ -327,14 +429,15 @@
                 _token: _token
             }
         }).done(function(data) {
-            $('#produto_nome').val(data.dados.produto_nome);
-            $('#produto_codigo').val(data.dados.produto_codigo);
-            $('#produto_custo').val(data.dados.produto_custo);
-            $('#produto_preco_de_venda').val(data.dados.produto_preco_de_venda);
-            $('#produto_porcentagem_lucro').val(data.dados.produto_porcentagem_lucro);
-            $('#produto_lucro').val(data.dados.produto_lucro);
-            $('#produto_categoria').val(data.dados.produto_categoria);
-            $('#modalCadastroProduto').modal('show');
+            $('#editar_produto_nome').val(data.dados.produto_nome);
+            $('#editar_produto_codigo').val(data.dados.produto_codigo);
+            $('#editar_produto_custo').val(data.dados.produto_custo);
+            $('#editar_produto_preco_de_venda').val(data.dados.produto_preco_de_venda);
+            $('#editar_produto_porcentagem_lucro').val(data.dados.produto_porcentagem_lucro);
+            $('#editar_produto_lucro').val(data.dados.produto_lucro);
+            $('#editar_produto_categoria').val(data.dados.produto_categoria);
+            $('#atualizarProduto').attr('data-id', id);
+            $('#modalEditarProduto').modal('show');
 
         }).fail(function(jqXHR, textStatus, data) {
             Swal.fire({
@@ -351,39 +454,127 @@
         });
     });
 
-    $('#produto_porcentagem_lucro').on('keyup', function() {
-        var custo = $('#produto_custo').val();
+    $('#atualizarProduto').on('click', function(e) {
+        e.preventDefault();
+        var url = "/atualizar-produto";
+        var id = $(this).data('id');
+        var editar_produto_nome = $('#editar_produto_nome').val();
+        var editar_produto_codigo = $('#editar_produto_codigo').val();
+        var editar_produto_custo = $('#editar_produto_custo').val();
+        var editar_produto_preco_de_venda = $('#editar_produto_preco_de_venda').val();
+        var editar_produto_porcentagem_lucro = $('#editar_cadastro_produto_porcentagem_lucro').val();
+        var editar_produto_lucro = $('#editar_produto_lucro').val();
+        var editar_produto_categoria = $('#editar_produto_categoria').val();
+        var editar_produto_especie = $('#editar_produto_especie').val();
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            method: 'POST',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                produto_nome: editar_produto_nome,
+                produto_porcentagem_lucro: editar_produto_porcentagem_lucro,
+                produto_codigo: editar_produto_codigo,
+                produto_custo: editar_produto_custo,
+                produto_preco_de_venda: editar_produto_preco_de_venda,
+                produto_lucro: editar_produto_lucro,
+                produto_categoria: editar_produto_categoria,
+                produto_especie: editar_produto_especie,
+                _token: token
+            },
+            success: function(data) {
+                Swal.fire({
+                    title: data.title,
+                    text: data.text,
+                    icon: data.icon,
+                });
+                if (data.code == '200') {
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Não foi possível adicionar o produto. Erro de conexão.',
+                    button: "Voltar",
+                });
+            }
+        });
+    });
+
+    $('#cadastro_produto_porcentagem_lucro').on('keyup', function() {
+        var custo = $('#cadastro_produto_custo').val();
         custo = custo.replace(".", "").replace(",", ".");
-        var porcentagem = parseFloat($('#produto_porcentagem_lucro').val())/100;
-        var precoSugeridoProduto = Math.floor(custo * porcentagem) + parseFloat(custo);
+        var porcentagem = parseFloat($('#cadastro_produto_porcentagem_lucro').val()) / 100;
+        var preco_sugerido = Math.floor(custo * porcentagem) + parseFloat(custo);
 
         if (custo === "") {
             return false;
         } else {
-            $('#precoSugeridoProduto').val(precoSugeridoProduto);
-            $('#produto_preco_de_venda').val(precoSugeridoProduto);
+            $('#cadastro_preco_sugerido').val(preco_sugerido);
+            $('#cadastro_produto_preco_de_venda').val(preco_sugerido);
 
-            var produto_lucro = (parseFloat(precoSugeridoProduto) - parseFloat(custo)).toFixed(2);
-            $('#produto_lucro').val(produto_lucro);
+            var produto_lucro = (parseFloat(preco_sugerido) - parseFloat(custo)).toFixed(2);
+            $('#cadastro_produto_lucro').val(produto_lucro);
         }
     });
 
-    $('#produto_custo').on('keyup', function() {
-        var custo = $('#produto_custo').val();
-        var porcentagem = $('#produto_porcentagem_lucro').val();
-        porcentagem = porcentagem.replace("%", "");
+    $('#cadastro_produto_custo').on('keyup', function() {
+        var custo = $('#cadastro_produto_custo').val();
         custo = custo.replace(".", "").replace(",", ".");
-        parseFloat(custo.replace);
-        porcentagem = parseFloat(porcentagem / 100);
-        var precoSugeridoProduto = Math.floor(custo * porcentagem) + parseFloat(custo);
+        var porcentagem = parseFloat($('#cadastro_produto_porcentagem_lucro').val()) / 100;
+        var preco_sugerido = Math.floor(custo * porcentagem) + parseFloat(custo);
 
-        if (porcentagem === "") {
+        if (custo === "") {
             return false;
         } else {
-            $('#precoSugeridoProduto').val(precoSugeridoProduto);
-            $('#produto_preco_de_venda').val(precoSugeridoProduto);
-            var produto_lucro = (parseFloat(precoSugeridoProduto) - parseFloat(custo)).toFixed(2);
-            $('#produto_lucro').val(produto_lucro);
+            $('#cadastro_preco_sugerido').val(preco_sugerido);
+            $('#cadastro_produto_preco_de_venda').val(preco_sugerido);
+
+            var produto_lucro = (parseFloat(preco_sugerido) - parseFloat(custo)).toFixed(2);
+            $('#cadastro_produto_lucro').val(produto_lucro);
         }
     });
+
+    $('#editar_produto_porcentagem_lucro').on('keyup', function() {
+        var custo = $('#editar_produto_custo').val();
+        custo = custo.replace(".", "").replace(",", ".");
+        var porcentagem = parseFloat($('#editar_produto_porcentagem_lucro').val()) / 100;
+        var preco_sugerido = Math.floor(custo * porcentagem) + parseFloat(custo);
+
+        if (custo === "") {
+            return false;
+        } else {
+            $('#editar_preco_sugerido').val(preco_sugerido);
+            $('#editar_produto_preco_de_venda').val(preco_sugerido);
+
+            var produto_lucro = (parseFloat(preco_sugerido) - parseFloat(custo)).toFixed(2);
+            $('#editar_produto_lucro').val(produto_lucro);
+        }
+    });
+
+    $('#editar_produto_custo').on('keyup', function() {
+        var custo = $('#editar_produto_custo').val();
+        custo = custo.replace(".", "").replace(",", ".");
+        var porcentagem = parseFloat($('#editar_produto_porcentagem_lucro').val()) / 100;
+        var preco_sugerido = Math.floor(custo * porcentagem) + parseFloat(custo);
+
+        if (custo === "") {
+            return false;
+        } else {
+            $('#editar_preco_sugerido').val(preco_sugerido);
+            $('#editar_produto_preco_de_venda').val(preco_sugerido);
+
+            var produto_lucro = (parseFloat(preco_sugerido) - parseFloat(custo)).toFixed(2);
+            $('#editar_produto_lucro').val(produto_lucro);
+        }
+    });
+
+    
 </script>
