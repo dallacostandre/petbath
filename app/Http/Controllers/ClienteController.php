@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CadastroClienteRequest;
 use App\Models\Cliente;
 use App\Models\ClienteEndereco;
 use App\Models\Notificacoes;
 use App\Models\PetDados;
 use App\Models\PetRaca;
 use App\Models\User;
-use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Str;
 
 class ClienteController extends Controller
 {
@@ -107,7 +103,7 @@ class ClienteController extends Controller
             $endereco_cliente->save();
 
             return response()->json([
-                'title' => 'Cadastro realizado',
+                'title' => 'Aguarde...',
                 'message' => 'Cliente cadastrado com sucesso!',
                 'icon' => 'success',
                 'url' => '/pets/' . $objClientCadastrado[0]->unique_cliente,

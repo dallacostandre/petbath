@@ -111,9 +111,17 @@
                                     <label>Raça</label>
                                     <select class="form-control" name="pet_raca" id="pet_raca">
                                         <option disabled>Selecione uma raça</option>
+                                        <option disabled>Caninos</option>
                                         @foreach ($raca_pet as $raca)
-                                            <option value="{{ $raca->nome_raca }}">
-                                                {{ $raca->nome_raca }}</option>
+                                            @if($raca->pet_especie == 1)
+                                                <option value="{{ $raca->nome_raca }}">{{ $raca->nome_raca }}</option>
+                                            @endif
+                                        @endforeach
+                                        <option disabled>Felinos</option>
+                                        @foreach ($raca_pet as $raca)
+                                            @if($raca->pet_especie == 0)
+                                                <option value="{{ $raca->nome_raca }}">{{ $raca->nome_raca }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
