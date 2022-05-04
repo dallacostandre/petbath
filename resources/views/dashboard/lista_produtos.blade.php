@@ -123,10 +123,13 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Lucro em %</label>
-                            <input type="text" class="form-control percent" max="100" min="0"
+                        <label>Lucro</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" max="100" min="0"
                                 name="produto_porcentagem_lucro" id="produto_porcentagem_lucro" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -154,6 +157,9 @@
                     <div class="col-md-4">
                         <label>Lucro</label>
                         <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">R$</div>
+                            </div>
                             <input type="text" class="form-control money2" disabled required name="produto_lucro"
                                 id="produto_lucro">
                         </div>
@@ -210,7 +216,7 @@
         }
     }
 
-    $('.money2').mask('0.000.000,00', {
+    $('.money2').mask("#.###,##", {
         reverse: true
     });
     $('.percent').mask('0000%', {
@@ -345,32 +351,39 @@
         });
     });
 
-    $('#produto_porcentagem_lucro').on('change', function() {
+    $('#produto_porcentagem_lucro').on('keyup', function() {
         var custo = $('#produto_custo').val();
-        var porcentagem = $('#produto_porcentagem_lucro').val();
-        var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
+        custo = custo.replace(".", "").replace(",", ".");
+        var porcentagem = parseFloat($('#produto_porcentagem_lucro').val())/100;
+        var precoSugeridoProduto = Math.floor(custo * porcentagem) + parseFloat(custo);
 
         if (custo === "") {
             return false;
         } else {
             $('#precoSugeridoProduto').val(precoSugeridoProduto);
             $('#produto_preco_de_venda').val(precoSugeridoProduto);
-            var produto_lucro = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+
+            var produto_lucro = (parseFloat(precoSugeridoProduto) - parseFloat(custo)).toFixed(2);
+            console.log(produto_lucro);
             $('#produto_lucro').val(produto_lucro);
         }
     });
 
-    $('#produto_custo').on('change', function() {
+    $('#produto_custo').on('keyup', function() {
         var custo = $('#produto_custo').val();
         var porcentagem = $('#produto_porcentagem_lucro').val();
-        var precoSugeridoProduto = (parseFloat(custo)) * (parseFloat(porcentagem) / 100) + parseFloat(custo);
+        porcentagem = porcentagem.replace("%", "");
+        custo = custo.replace(".", "").replace(",", ".");
+        parseFloat(custo.replace);
+        porcentagem = parseFloat(porcentagem / 100);
+        var precoSugeridoProduto = Math.floor(custo * porcentagem) + parseFloat(custo);
 
         if (porcentagem === "") {
             return false;
         } else {
             $('#precoSugeridoProduto').val(precoSugeridoProduto);
             $('#produto_preco_de_venda').val(precoSugeridoProduto);
-            var produto_lucro = (parseFloat(custo)) * (parseFloat(porcentagem) / 100);
+            var produto_lucro = (parseFloat(precoSugeridoProduto) - parseFloat(custo)).toFixed(2);
             $('#produto_lucro').val(produto_lucro);
         }
     });
