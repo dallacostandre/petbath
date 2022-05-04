@@ -31,7 +31,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index']);
     Route::GET('/editar-perfil', [ConfiguracaoController::class, 'editarPerfil']);
     Route::GET('/agendamento', [AgendamentoController::class, 'index']);
-    Route::GET('/produtos-e-servicos', [DashboardController::class, 'produtosEServicosIndex']);
     Route::GET('/', function () {return view('dashboard.index');})->name('dashboard');
     Route::GET('/planos-e-assinaturas', [ConfiguracaoController::class, 'planosAssinaturas']);
     Route::GET('/fluxo-de-caixa', [FinanceiroController::class, 'fluxoDeCaixa']);
@@ -52,7 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
     // CLIENTE (Histórico do Cliente)
     Route::GET('/historico/{id}', [ClienteController::class, 'history'])->name('historico');
 
-
     // PET (Cadastra os dados do pet)
     Route::POST('/cadastrar-novo-pet', [PetDadosController::class, 'store'])->name('cadastrarNovoPet');
     // PET (Exclui os dados do pet)
@@ -65,33 +63,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::POST('/atualizar-pet', [PetDadosController::class, 'update'])->name('atualizarPet');
 
     // NOTIFICAÇÕES
-    Route::POST('/adicionar-notificacao', [NotificacoesController::class, 'store'])->name('adicionar.notificacao');
+    Route::POST('/cadastrar-notificacao', [NotificacoesController::class, 'store'])->name('adicionar.notificacao');
     Route::DELETE('/excluir-notificacao', [NotificacoesController::class, 'destroy'])->name('remover.notificacao');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // PRODUTO
-    Route::POST('/cadastraProduto', [ProdutoController::class, 'store'])->name('cadastroProduto');
-    Route::DELETE('/removerProduto', [ProdutoController::class, 'destroy'])->name('removerProduto');
-
+    // PRODUTOS
+    Route::GET('/produtos', [ProdutoController::class, 'index'])->name('index.produto');
+    Route::POST('/cadastrar-produto', [ProdutoController::class, 'store'])->name('cadastro.produto');
+    Route::GET('/visualizar-dados-produto', [ProdutoController::class, 'edit'])->name('edit.produto');
+    Route::DELETE('/excluir-produto', [ProdutoController::class, 'destroy'])->name('removerProduto');
+    
     // SERVICO
-    Route::POST('/cadastraServico', [ServicosController::class, 'create'])->name('cadastrarServico');
-    Route::DELETE('/removerServico', [ServicosController::class, 'destroy'])->name('removerServico');
-    Route::GET('/getServicoPreco', [ServicosController::class, 'getServicoPreco'])->name('getServicoPreco');
-    Route::POST('/getServicosTable', [ServicosController::class, 'getServicosTable'])->name('getServicosTable'); // NAO USADO AINDA
-    Route::GET('/getAllServicosProdutos', [ServicosController::class, 'getAllServicosProdutos'])->name('getAllServicosProdutos');
+    Route::GET('/servicos', [ServicosController::class, 'index'])->name('index.servico');
+    Route::POST('/cadastrar-servico', [ServicosController::class, 'store'])->name('cadastrar.servico');
+    Route::DELETE('/excluir-servico', [ServicosController::class, 'destroy'])->name('excluir.servico');
+    Route::GET('/visualizar-dados-servico', [ServicosController::class, 'edit'])->name('edit.servico');
+
 
     //PACOTES
     Route::GET('/pacotes-e-promocoes', [DashboardController::class, 'pacotesEPromocoes']);

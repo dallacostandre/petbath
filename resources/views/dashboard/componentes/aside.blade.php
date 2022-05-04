@@ -25,9 +25,16 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ url('/produtos-e-servicos') }}" aria-expanded="false">
+                        href="{{ route('index.produto') }}" aria-expanded="false">
                         <i class="fas fa-dog fa-2x"></i>
-                        <span class="hide-menu">Produtos & Serviços</span>
+                        <span class="hide-menu">Produtos</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('index.servico') }}" aria-expanded="false">
+                        <i class="fas fa-shower"></i>
+                        <span class="hide-menu">Serviços</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

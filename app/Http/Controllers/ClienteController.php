@@ -129,7 +129,7 @@ class ClienteController extends Controller
         $clientes_cadastrados = Cliente::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
 
         return view(
-            'dashboard.clientes',
+            'dashboard.lista_clientes',
             compact('clientes_cadastrados')
         );
     }

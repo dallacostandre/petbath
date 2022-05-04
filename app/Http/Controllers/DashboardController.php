@@ -17,15 +17,6 @@ class DashboardController extends Controller
         $unique_user = $unique_user_db[0]->unique_user;
     }
 
-    public function produtosEServicosIndex()
-    {
-        $unique_user = User::find(Auth::id())->getUserUniqueId();
-        $produtos = Produtos::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
-        $servicos = Servicos::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
-        $raca_pet  = PetRaca::all();
-
-        return view('dashboard.produtos_e_servicos', compact('servicos', 'raca_pet', 'produtos'));
-    }
 
     public function pacotesEPromocoes()
     {

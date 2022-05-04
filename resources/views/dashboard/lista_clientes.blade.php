@@ -25,16 +25,12 @@
             <div class="col-12">
                 <div class="card">
                     @if (!$clientes_cadastrados->isEmpty())
-                        <div class="card-body">
-                            <h4 class="card-title">Encontre Clientes, Edite e Notifique</h4>
-                        </div>
-                        <div class="container">
-                            <input class="form-control form-control-sm" type="text" id="myInput" onkeyup="myFunction()"
-                                placeholder="Pesquise pelo nome...">
+                    <div class="container pt-4">
+                            <input class="form-control form-control-sm" type="text" id="myInput"
+                                onkeyup="pesquisarPor()" placeholder="Pesquise pelo nome...">
                         </div>
                         <div class="table-responsive">
-
-                            <table class="table table-hover" id="myTable">
+                            <table class="table table-hover" id="clienteTable">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Status</th>
@@ -138,11 +134,11 @@
 <script>
     $('.phone').mask('(00) 0 0000-0000');
 
-    function myFunction() {
+    function pesquisarPor() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
+        table = document.getElementById("clienteTable");
         tr = table.getElementsByTagName("tr");
 
         // Loop through all table rows, and hide those who don't match the search query
@@ -211,7 +207,7 @@
                     popup: 'animate__animated animate__fadeOutUp'
                 }
             })
-            
+
         });
     })
 
@@ -224,7 +220,7 @@
     $('#adicionarNotificacao').on('click', function() {
         event.preventDefault();
         let id = $(this).attr('data-id');
-        let url = '/adicionar-notificacao';
+        let url = '/cadastrar-notificacao';
         let descricaoNotificacao = $('#descricaoNotificacao').val()
         let dataNotificacao = $('#dataNotificacao').val()
         let _token = $('meta[name="csrf-token"]').attr('content');

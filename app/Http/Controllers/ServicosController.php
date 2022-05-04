@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use LDAP\Result;
 
 class ServicosController extends Controller
@@ -20,13 +21,14 @@ class ServicosController extends Controller
      */
     public function index()
     {
+        $unique_user = User::find(Auth::id())->getUserUniqueId();
+        $servicos = Servicos::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
+        $raca_pet  = PetRaca::all();
+
+        return view('dashboard.lista_servicos', compact('raca_pet', 'servicos'));
     }
 
-    public function cadastroServicoView()
-    {
-        return view('cadastro_servico', compact('raca_pet'));
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -34,12 +36,41 @@ class ServicosController extends Controller
      */
     public function create(Request $request)
     {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         if ($request) {
             $data = $request->all();
             $unique_servico = uniqid();
 
             $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
             $unique_user = $unique_user_db[0]->unique_user;
+            
+            $validate = Validator::make($request->all(), [
+                'servico_nome' => 'required',
+                'servico_pet_raca' => 'required',
+                'servico_pet_porte' => 'required',
+                'servico_codigo' => 'required',
+                'servico_custo' => 'required',
+                'servico_porcentagem_lucro' => 'required',
+                'servico_preco_de_venda' => 'required',
+                'servico_lucro' => 'required',
+            ]);
+
+            if ($validate->fails()) {
+                return response()->json([
+                    'title' => 'Ops, parece que tem campos faltando.',
+                    'text' => 'Ops, existem campos que estão em branco.',
+                    'icon' => 'warning',
+                ]);
+            };
 
             $servicos = new Servicos();
             $servicos->unique_servico = $unique_servico;
@@ -58,25 +89,16 @@ class ServicosController extends Controller
                 'title' => 'Serviço Cadastrado',
                 'text' => 'Serviço foi cadastrado com sucesso.',
                 'icon' => 'success',
+                'code' => '200' 
             ]);
         } else {
             return response()->json([
-                'title' => 'Houve um erro Cadastrado',
+                'title' => 'Houve um erro no cadastro',
                 'text' => 'Houve um erro ao cadastrar o serviço',
                 'icon' => 'error',
+                
             ]);
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -96,9 +118,30 @@ class ServicosController extends Controller
      * @param  \App\Models\Servicos  $servicos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Servicos $servicos)
+    public function edit(Servicos $servicos, Request $request)
     {
-        //
+        if ($request->id) {
+            $objServico = Servicos::find($request->id);
+            $dados = [
+                'servico_nome' => $objServico->servico_nome,
+                'servico_pet_raca' => $objServico->servico_pet_raca,
+                'servico_pet_porte' => $objServico->servico_pet_porte,
+                'servico_codigo' => $objServico->servico_codigo,
+                'servico_custo' => $objServico->servico_custo,
+                'servico_porcentagem_lucro' => $objServico->servico_porcentagem_lucro,
+                'servico_preco_de_venda' => $objServico->servico_preco_de_venda,
+                'servico_lucro' => $objServico->servico_lucro,
+            ];
+            return response()->json([
+                'dados' => $dados,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Houve um erro. Não foi encontrado nenhum produto.',
+                'icon' => 'error',
+                'title' => 'Produto não encontrado.',
+            ]);
+        }
     }
 
     /**

@@ -98,8 +98,6 @@
                                     <input required type="text" class="form-control" id="cliente_complemento"
                                         name="cliente_complemento"
                                         value="@if (isset($endereco)) {{ $endereco->cliente_complemento }} @endif">
-                                    <small id="emailHelp" class="form-text text-muted">Se não houve, insira " -
-                                        ".</small>
                                 </div>
                             </div>
                         </div>
