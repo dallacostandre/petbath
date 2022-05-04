@@ -9,9 +9,8 @@
                     <h4 class="page-title" id="name_title">
                         Produtos Cadastrados
                     </h4>
-                    <a type="button" aria-hidden="true" href="#"
-                        class="btn btn-success botao-padrao" data-bs-toggle="modal"
-                        data-bs-target="#modalCadastroProduto">
+                    <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao"
+                        data-bs-toggle="modal" data-bs-target="#modalCadastroProduto">
                         Cadastrar Produto
                     </a>
                 </div>
@@ -27,7 +26,7 @@
                             placeholder="Pesquise pelo produto...">
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-hover" id="produtosTable">
+                        <table class="table table-hover text-center" id="produtosTable">
                             <thead>
                                 <th>Cod. Produto</th>
                                 <th>Nome Produto</th>
@@ -39,8 +38,9 @@
                             </thead>
                             <tbody>
                                 @foreach ($produtos as $produto)
-                                <tr class="text-center">
-                                        <td>{{ $produto->produto_codigo == null ? ' - ' : $produto->produto_codigo }}</td>
+                                    <tr class="text-center">
+                                        <td>{{ $produto->produto_codigo == null ? ' - ' : $produto->produto_codigo }}
+                                        </td>
                                         <td>{{ $produto->produto_nome }}</td>
                                         <td>R$ {{ $produto->produto_custo }}</td>
                                         <td>{{ $produto->produto_porcentagem_lucro }}</td>
@@ -59,7 +59,7 @@
                                                 title="Excluir Produto">
                                                 <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
                                         </td>
-                                </tr>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -82,18 +82,26 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Nome Produto</label>
                             <input type="text" class="form-control" name="produto_nome" id="produto_nome" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Categoria do Produto</label>
                             <input type="text" class="form-control" name="produto_categoria" id="produto_categoria"
                                 required>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Espécie</label>
+                        <select class="form-control" name="produto_especie" id="produto_especie">
+                            <option value="felino">Felino</option>
+                            <option value="canino">Canino</option>
+                            <option value="outro">Outro</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row">
@@ -214,7 +222,6 @@
 
     $('#adicionarProduto').on('click', function(e) {
         e.preventDefault();
-
         var url = "/cadastrar-produto";
         var produto_nome = $('#produto_nome').val();
         var produto_codigo = $('#produto_codigo').val();
@@ -223,6 +230,7 @@
         var produto_porcentagem_lucro = $('#produto_porcentagem_lucro').val();
         var produto_lucro = $('#produto_lucro').val();
         var produto_categoria = $('#produto_categoria').val();
+        var produto_especie = $('#produto_especie').val();
         var token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -238,6 +246,7 @@
                 produto_preco_de_venda: produto_preco_de_venda,
                 produto_lucro: produto_lucro,
                 produto_categoria: produto_categoria,
+                produto_especie: produto_especie
                 _token: token
             },
             success: function(data) {
@@ -246,7 +255,7 @@
                     text: data.text,
                     icon: data.icon,
                 });
-                if(data.code == '200'){
+                if (data.code == '200') {
                     setTimeout(function() {
                         location.reload();
                     }, 1000);

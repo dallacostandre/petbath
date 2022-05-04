@@ -80,6 +80,7 @@ class ServicosController extends Controller
             $servicos->servico_pet_porte = $data['servico_pet_porte'];
             $servicos->servico_codigo = $data['servico_codigo'];
             $servicos->servico_custo = $data['servico_custo'];
+            $servicos->servico_especie = $data['servico_especie'];
             $servicos->servico_porcentagem_lucro = $data['servico_porcentagem_lucro'];
             $servicos->servico_preco_de_venda = $data['servico_preco_de_venda'];
             $servicos->servico_lucro = $data['servico_lucro'];
@@ -200,21 +201,6 @@ class ServicosController extends Controller
         }
     }
 
-    public function getServicosTable(Request $request)
-    {
-        if ($request->ajax()) {
-            $id = $request->id;
-            $response = Servicos::where(['id' => $id])->get();
-            return response()->json([
-                'return' => $response,
-            ]);
-        }
-        return response()->json([
-            'icon' => 'error',
-            'title' => 'Preco do servico não foi não encontrado.',
-            'text' => 'Erro ao procurar o serviço.',
-        ]);
-    }
 
     public function getAllServicosProdutos(Request $request)
     {

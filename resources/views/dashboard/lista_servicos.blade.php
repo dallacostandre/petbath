@@ -27,7 +27,7 @@
                             placeholder="Pesquise pelo produto...">
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-hover" id="servicosTable">
+                        <table class="table table-hover text-center" id="servicosTable">
                             <thead>
                                 <th>Cod. Serviço</th>
                                 <th>Nome Serviço</th>
@@ -78,7 +78,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Dados Servico</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Dados do serviço</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -95,17 +95,33 @@
                             <select class="form-control" name="servico_pet_raca" id="servico_pet_raca" required>
                                 <option disabled>Selecione uma raça</option>
                                 @foreach ($raca_pet as $raca)
-                                    <option value="{{ $raca->nome_raca }}">{{ $raca->nome_raca }}</option>
+                                    @if ($raca->pet_especie == 1)
+                                        <option value="{{ $raca->nome_raca }}">{{ $raca->nome_raca }}</option>
+                                    @endif
+                                @endforeach
+                                <option disabled>Felinos</option>
+                                @foreach ($raca_pet as $raca)
+                                    @if ($raca->pet_especie == 0)
+                                        <option value="{{ $raca->nome_raca }}">{{ $raca->nome_raca }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-2 ">
                         <label>Porte</label>
                         <select class="form-control" name="servico_pet_porte" id="servico_pet_porte">
                             <option value="pequeno" selected>Pequeno</option>
                             <option value="medio">Médio</option>
                             <option value="grande">Grande</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 ">
+                        <label>Espécie</label>
+                        <select class="form-control" name="servico_especie" id="servico_especie">
+                            <option value="felino">Felino</option>
+                            <option value="canino">Canino</option>
+                            <option value="outro">Outro</option>
                         </select>
                     </div>
                 </div>
@@ -234,6 +250,7 @@
         var servico_pet_porte = $('#servico_pet_porte').val();
         var servico_codigo = $('#servico_codigo').val();
         var servico_custo = $('#servico_custo').val();
+        var servico_especie = $('#servico_especie').val();
         var servico_porcentagem_lucro = $('#servico_porcentagem_lucro').val();
         var servico_preco_de_venda = $('#servico_preco_de_venda').val();
         var servico_lucro = $('#servico_lucro').val();
@@ -253,6 +270,7 @@
                 servico_porcentagem_lucro: servico_porcentagem_lucro,
                 servico_preco_de_venda: servico_preco_de_venda,
                 servico_lucro: servico_lucro,
+                servico_especie: servico_especie,
                 _token: token
             },
             success: function(data) {

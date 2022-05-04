@@ -20,8 +20,7 @@ class Produtos extends Model
         'produto_custo',
         'produto_preco_de_venda',
         'produto_lucro',
-        'produto_categoria'
-
-
+        'produto_categoria',
+        'produto_especie',
     ];
 }

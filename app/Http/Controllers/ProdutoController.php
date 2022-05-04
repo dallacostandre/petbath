@@ -75,6 +75,7 @@ class ProdutoController extends Controller
             $produto->produto_categoria = $data['produto_categoria'];
             $produto->produto_codigo = $data['produto_codigo'];
             $produto->produto_custo = $data['produto_custo'];
+            $produto->produto_especie = $data['produto_especie'];
             $produto->produto_preco_de_venda = $data['produto_preco_de_venda'];
             $produto->produto_lucro = $data['produto_lucro'];
             $produto->save();

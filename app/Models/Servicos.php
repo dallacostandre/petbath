@@ -21,5 +21,6 @@ class Servicos extends Model
         'servico_porcentagem_lucro',
         'servico_preco_de_venda',
         'servico_lucro',
+        'servico_especie'
     ];
 }
