@@ -57,7 +57,6 @@ class ServicosController extends Controller
                 'servico_nome' => 'required',
                 'servico_pet_raca' => 'required',
                 'servico_pet_porte' => 'required',
-                'servico_codigo' => 'required',
                 'servico_custo' => 'required',
                 'servico_porcentagem_lucro' => 'required',
                 'servico_preco_de_venda' => 'required',
