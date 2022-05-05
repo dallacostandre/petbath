@@ -45,7 +45,7 @@
                                         <td>{{ $servico->servico_nome }}</td>
                                         <td>{{ $servico->servico_pet_raca }}</td>
                                         <td>R$ {{ $servico->servico_custo }}</td>
-                                        <td>{{ $servico->servico_porcentagem_lucro }}%</td>
+                                        <td>{{ $servico->servico_porcentagem_lucro }}</td>
                                         <td>R$ {{ $servico->servico_preco_de_venda }}</td>
                                         <td>R$ {{ $servico->servico_lucro }}</td>
                                         <td>
