@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalenderController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificacoesController;
+use App\Http\Controllers\PacoteEPromocoesController;
 use App\Http\Controllers\PacotesEPromocoesController;
 use App\Http\Controllers\ProdutoController;
 use App\Models\Servicos;
@@ -81,6 +82,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/visualizar-dados-servico', [ServicosController::class, 'edit'])->name('edit.servico');
 
 
-    //PACOTES
-    Route::GET('/pacotes-e-promocoes', [DashboardController::class, 'pacotesEPromocoes']);
+    // PACOTES
+    Route::GET('/pacotes-e-promocoes', [PacoteEPromocoesController::class, 'index']);
+    Route::GET('/adicionar-pacote-promocao', [PacoteEPromocoesController::class, 'create'])->name('cadastro.pacote.promocao');
+    // PACOTES E SERVICO (Captura todos os servicos e produtos do cliente)
+    Route::POST('/getAllServicosProdutos', [PacoteEPromocoesController::class, 'getAllServicosProdutos']);
 });

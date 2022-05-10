@@ -233,41 +233,5 @@ class ServicosController extends Controller
     }
 
 
-    public function getAllServicosProdutos(Request $request)
-    {
-        if ($request->ajax()) {
-            $unique_user_db = User::where(['id' => Auth::id()])->first();
-            $resultsProduto = Produtos::where(['unique_user' => $unique_user_db->unique_user])->orderBy('id', 'ASC')->get();
-            
-            foreach ($resultsProduto as $key => $v) {
-                $arrayProdutoParaAutoComplete[] = [
-                    "id" => $v->id, 
-                    "value" => $v->produto_nome,
-                    "custo" => $v->produto_custo,
-                    "unique_produto" => $v->unique_produto,   
-                ];
-            }
 
-            $resultsServico = Servicos::where(['unique_user' => $unique_user_db->unique_user])->orderBy('id', 'ASC')->get();
-
-            foreach ($resultsServico as $key => $v) {
-                $arrayServicoParaAutoComplete[] = [
-                    "id" => $v->id, 
-                    "value" => $v->servico_nome,
-                    "custo" => $v->servico_custo,
-                    "unique_servico" => $v->unique_servico
-                ];
-            }
-
-
-            $result = array_merge($arrayServicoParaAutoComplete, $arrayProdutoParaAutoComplete);
-
-            return response()->json($result);
-        }
-        return response()->json([
-            'icon' => 'error',
-            'title' => 'Produto e servico não foram encontrados.',
-            'text' => 'Erro ao procurar o serviço.',
-        ]);
-    }
 }
