@@ -53,38 +53,10 @@
                                     placeholder="Qual o nome do pacote?" id="pacote_nome">
                             </div>
                             <div class="form-group">
-                                <label>Selecione o serviço ou produto </label>
+                                <label>Selecione o serviço ou produto</label>
                                 <input type="text" class="form-control nome"
                                     placeholder="Digite aqui o nome do produto ou servico cadastrado"
                                     id="inputInsertPacotePromocoes">
-                            </div>
-                            <div class="row" style="display: flex;">
-                                <div class="col col-md-6">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                            style="height: 100px"></textarea><label for="floatingTextarea2">Observações
-                                            Adicionais</label>
-                                    </div>
-                                </div>
-                                <div class="col col-md-6" style="display: flex;">
-                                    <div class="col col-md-6">
-                                        <div class="col col-md-12"><label for="">Preço Total Sugerido:</label>
-                                        </div>
-                                        <div class="col col-md-12"><label for="">Preço Total de Venda:</label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-md-6">
-                                        <div class="col-md-12">
-                                            <div class="form-group"><input type="text" class="form-control percent"
-                                                    name="pacote_porcentagem_desconto" id="pacote_porcentagem_desconto">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group"><input type="text" class="form-control money2"
-                                                    name="pacote_valor_final" id="pacote_valor_final"></div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -109,6 +81,34 @@
                                 </table>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row pt-3" style="display: flex;">
+                            <div class="col col-md-6">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                        style="height: 100px"></textarea>
+                                    <label for="floatingTextarea2">Observações Adicionais</label>
+                                </div>
+                            </div>
+                            <div class="col col-md-6" style="display: flex;">
+                                <div class="col col-md-6">
+                                    <div class="col col-md-12"><label for="">Preço Total Sugerido:</label>
+                                    </div>
+                                    <div class="col col-md-12"><label for="">Preço Total de Venda:</label>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control percent" name="preco_total_sugerido" id="preco_total_sugerido">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group"><input type="text" class="form-control money2" name="preco_total_de_venda" id="preco_total_de_venda"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarServico">
@@ -127,7 +127,6 @@
 
 <script>
     $(document).ready(function() {
-
         $('#inputInsertPacotePromocoes').keyup(delay(function() {
             var texto_digitado = $('#inputInsertPacotePromocoes').val();
             var MIN_LENGTH = 3;
@@ -153,29 +152,22 @@
                                 '<tr><td>' + ui.item.value + '</td>' +
                                 '<td>' +
                                 '<div class="col col-4">' +
-                                '<input class="form-control form-control-sm" type="text"/>' +
+                                '<input class="form-control form-control-sm qntSelecionado" type="text"/>' +
                                 '</div>' +
                                 '</td>' +
-                                '<td>' +
-                                '<span id="valorUnitario">' + ui.item.custo +
-                                '</span>' +
-                                '</td>' +
-                                '<td>' +
-                                '<span id="valorTotal"></span>' +
-                                '</td>' +
-                                '<td>' +
-                                '<input class="form-control form-control-sm" type="text" placeholder="%">' +
-                                '</td>' +
-                                '<td>' +
-                                '<span id="valorTotalComDesconto"></span>' +
-                                '</td>' +
-                                '<td>' +
-                                '<a href="#" data-toggle="tooltip" onclick ="delete_user($(this))" data-placement="top" title="Excluir"><i class="fad fa-trash"></i></a>' +
-                                '</td>' +
+                                '<td><span class="valorUnitario">R$ ' + ui.item
+                                .custo + '</span></td>' +
+                                '<td><span class="valorTotal">-</span></td>' +
+                                '<td><input class="form-control form-control-sm descontoSelecionado" type="text" placeholder="%"></td>' +
+                                '<td><span class="valorTotalComDesconto">R$ </span></td>' +
+                                '<td><a href="#" data-toggle="tooltip" onclick ="delete_user($(this))" data-placement="top" title="Excluir"><i class="fad fa-trash"></i></a></td>' +
                                 '</tr>';
                             $('#tableProdutoServicosSelecionados').append(text)
+                            $('.qntSelecionado').mask('0000');
+                            $('.descontoSelecionado').mask('000');
                         }
                     });
+
                 }).fail(function(jqXHR, textStatus, data) {
                     Swal.fire({
                         title: data.title,
@@ -190,8 +182,56 @@
                     })
                 });
             }
-        }, 1000));
+        }, 500));
     });
+
+    $(document).on("keyup", ".qntSelecionado", function() {
+        let quantidade = $(this).val();
+        let preco = $(this).closest('tr').find('.valorUnitario').text();
+
+        preco = preco.replace('R$', '');
+        preco = preco.replace('.', '');
+        preco = preco.replace(',', '.');
+
+        let resultadoValorTotal = quantidade * parseFloat(preco);
+
+        resultadoValorTotal = resultadoValorTotal.toFixed(2);
+        resultadoValorTotal = new Intl.NumberFormat().format(resultadoValorTotal);
+        resultadoValorTotal = 'R$ ' + resultadoValorTotal;
+        $(this).closest('tr').find('.valorTotal').text(resultadoValorTotal);
+        somaValoresTotais();
+    });
+
+    $(document).on("change", ".descontoSelecionado", function() {
+        let desconto = $(this).val();
+        let precoValorTotal = $(this).closest('tr').find('.valorTotal').text();
+
+        precoValorTotal = precoValorTotal.replace('R$', '');
+        precoValorTotal = precoValorTotal.replace('.', '');
+        precoValorTotal = precoValorTotal.replace(',', '.');
+
+        let descontoTotal = parseFloat(precoValorTotal) * (parseFloat(desconto) / 100);
+
+        let valorTotalComDesconto = precoValorTotal - descontoTotal;
+
+        valorTotalComDesconto = valorTotalComDesconto.toFixed(2);
+        valorTotalComDesconto = new Intl.NumberFormat().format(valorTotalComDesconto);
+        valorTotalComDesconto = 'R$ ' + valorTotalComDesconto;
+
+        $(this).closest('tr').find('.valorTotalComDesconto').text(valorTotalComDesconto);
+        somaValoresTotais();
+    });
+
+    function somaValoresTotais() {
+        var sum = 0;
+
+        $('td[class*="valorTotalComDesconto-"]').each(function() {
+            sum += Number($(this).text()) || 0;
+            console.log(sum);
+        });
+
+        $('#preco_total_sugerido').val(sum);
+    }
 
 
 
@@ -206,7 +246,6 @@
             }, ms || 0);
         };
     }
-
 
     function delete_user(row) {
         row.closest('tr').remove();
