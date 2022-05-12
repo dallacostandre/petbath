@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label>Nome do Pacote</label>
                                 <input type="text" class="form-control" name="pacote_nome"
-                                    placeholder="Qual o nome do pacote?" id="pacote_nome">
+                                    placeholder="Qual o nome do pacote?" id="pacote_nome" required>
                             </div>
                             <div class="form-group">
                                 <label>Selecione o serviço ou produto</label>
@@ -83,29 +83,26 @@
                         </div>
                         <hr>
                         <div class="row pt-3" style="display: flex;">
-                            <div class="col col-md-6">
+                            <div class="col col-md-8">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                        style="height: 100px"></textarea>
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                                     <label for="floatingTextarea2">Observações Adicionais</label>
                                 </div>
                             </div>
-                            <div class="col col-md-6" style="display: flex;">
-                                <div class="col col-md-6">
-                                    <div class="col col-md-12"><label for="">Preço Total Sugerido:</label>
-                                    </div>
-                                    <div class="col col-md-12"><label for="">Preço Total de Venda:</label>
-                                    </div>
+                            <div class="col col-md-4">
+                                <div class="col col-md-12">
+                                    {{-- <label for="">Preço Total Sugerido:</label> --}}
+
+                                        <input type="text" class="form-control money" name="preco_total_sugerido" id="preco_total_sugerido" readonly/>
+                                        <small id="emailHelp" class="form-text text-muted">Preço Sugerido</small>
+
                                 </div>
-                                <div class="col col-md-6">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control percent" name="preco_total_sugerido" id="preco_total_sugerido">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group"><input type="text" class="form-control money2" name="preco_total_de_venda" id="preco_total_de_venda"></div>
-                                    </div>
+                                <div class="col col-md-12">
+                                    {{-- <label for="">Preço Total de Venda:</label> --}}
+
+                                        <input type="text" class="form-control money" name="preco_total_de_venda" id="preco_total_de_venda" />
+                                        <small id="emailHelp" class="form-text text-muted">Preço de Venda</small>
+
                                 </div>
                             </div>
                         </div>
@@ -149,12 +146,12 @@
                         autoFocus: true,
                         select: function(e, ui) {
                             const text =
-                                '<tr><td>' + ui.item.value + '</td>' +
-                                '<td>' +
-                                '<div class="col col-4">' +
+                                '<tr>' +
+                                // '<td><span>' +  ui.item.unique_servico ? ui.item.unique_servico : ui.item.unique_produto + '</span></td>' +
+                                '<td><span>' + ui.item.value + '</span></td>' +
+                                '<td><div class="col col-2">' +
                                 '<input class="form-control form-control-sm qntSelecionado" type="text"/>' +
-                                '</div>' +
-                                '</td>' +
+                                '</div></td>' +
                                 '<td><span class="valorUnitario">R$ ' + ui.item
                                 .custo + '</span></td>' +
                                 '<td><span class="valorTotal">-</span></td>' +
@@ -163,8 +160,9 @@
                                 '<td><a href="#" data-toggle="tooltip" onclick ="delete_user($(this))" data-placement="top" title="Excluir"><i class="fad fa-trash"></i></a></td>' +
                                 '</tr>';
                             $('#tableProdutoServicosSelecionados').append(text)
-                            $('.qntSelecionado').mask('0000');
+                            $('.qntSelecionado').mask('00');
                             $('.descontoSelecionado').mask('000');
+                            $('#inputInsertPacotePromocoes').val();
                         }
                     });
 
@@ -185,21 +183,34 @@
         }, 500));
     });
 
-    $(document).on("keyup", ".qntSelecionado", function() {
+    $(document).on("change", ".qntSelecionado", function() {
+        // Pega o valor atual da quantidade
         let quantidade = $(this).val();
+        // Pega o valor atual do valor unitário
         let preco = $(this).closest('tr').find('.valorUnitario').text();
-
+        // Retira o R$
         preco = preco.replace('R$', '');
+        // Altera o . por uma virgula
         preco = preco.replace('.', '');
+        // Altera a virgula por ponto
         preco = preco.replace(',', '.');
 
+        // Multipla o valor unitário pela quantidade
         let resultadoValorTotal = quantidade * parseFloat(preco);
 
+        // Coloca duas virgulas no valor Total
         resultadoValorTotal = resultadoValorTotal.toFixed(2);
+        // Muda o Valor total para modelo internacional ( R$ xx.xxx,00)
         resultadoValorTotal = new Intl.NumberFormat().format(resultadoValorTotal);
+        // Adiconar o R$ ao resultado final)
         resultadoValorTotal = 'R$ ' + resultadoValorTotal;
+
+        // Atualiza o campo de valor total na tabela
         $(this).closest('tr').find('.valorTotal').text(resultadoValorTotal);
-        somaValoresTotais();
+
+        // Atualiza o Preço Final
+        atualizarPrecoTotal();
+
     });
 
     $(document).on("change", ".descontoSelecionado", function() {
@@ -219,20 +230,30 @@
         valorTotalComDesconto = 'R$ ' + valorTotalComDesconto;
 
         $(this).closest('tr').find('.valorTotalComDesconto').text(valorTotalComDesconto);
-        somaValoresTotais();
+        // Atualiza o Preço Final
+        atualizarPrecoTotal();
+
     });
 
-    function somaValoresTotais() {
-        var sum = 0;
 
-        $('td[class*="valorTotalComDesconto-"]').each(function() {
-            sum += Number($(this).text()) || 0;
-            console.log(sum);
+    function atualizarPrecoTotal() {
+        var theTotal = 0;
+        $("td:nth-child(6)").each(function() {
+            var val = $(this).text().replace("R$", "").replace('.', '').replace(',', '.');
+            theTotal += parseFloat(val);
+            // theTotal = new Intl.NumberFormat().format(theTotal);
         });
 
-        $('#preco_total_sugerido').val(sum);
+        $("#preco_total_sugerido").val(theTotal);
+        $("#preco_total_de_venda").val(theTotal);
+        Mask();
     }
 
+    function Mask() {
+        $('.money').mask("000.000,00", {
+            reverse: true
+        });
+    }
 
 
     function delay(callback, ms) {
@@ -249,5 +270,10 @@
 
     function delete_user(row) {
         row.closest('tr').remove();
+        atualizarPrecoTotal();
     }
+
+
+    
+
 </script>
