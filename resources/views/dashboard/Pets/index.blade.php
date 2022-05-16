@@ -106,7 +106,7 @@
                                         <select class="form-control" name="pet_porte" id="pet_porte">
                                             <option selected disabled>Selecione o porte</option>
                                             <option value="grande">Grande</option>
-                                            <option value="médio">Médio</option>
+                                            <option value="medio">Médio</option>
                                             <option value="pequeno">Pequeno</option>
                                         </select>
                                     </div>

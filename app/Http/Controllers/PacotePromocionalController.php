@@ -86,6 +86,8 @@ class PacotePromocionalController extends Controller
                 $pacotePromocional->pacote_total_preco_sugerido = $total_preco_sugerido;
                 $pacotePromocional->pacote_total_preco_de_venda = $preco_total_de_venda;
                 $pacotePromocional->pacote_observacoes = $request->pacote_observacoes;
+                $pacotePromocional->pacote_pet_especie = $request->pacote_pet_especie;
+                $pacotePromocional->pacote_pet_porte = $request->pacote_pet_porte;
                 $pacotePromocional->pacote_status = 1; // ATIVA O PLANO PROMOCIONAL
                 $pacotePromocional->save();
 

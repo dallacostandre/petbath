@@ -19,7 +19,9 @@ class PacotePromocional extends Model
         'pacote_total_preco_de_venda',
         'pacote_observacoes',
         'pacote_porcentagem_desconto',
-        'pacote_status'
+        'pacote_status',
+        'pacote_pet_especie',
+        'pacote_pet_porte',
     ];
 
     public function itens()

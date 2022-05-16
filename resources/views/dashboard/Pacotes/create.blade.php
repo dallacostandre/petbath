@@ -26,6 +26,21 @@
             text-decoration: none;
         }
 
+        .ajax-loader {
+            visibility: hidden;
+            background-color: rgba(255, 255, 255, 0.7);
+            position: absolute;
+            z-index: +100 !important;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ajax-loader img {
+            position: sticky;
+            top: 50%;
+            left: 50%;
+        }
+
     </style>
 @endsection
 
@@ -58,6 +73,32 @@
                                     <input type="text" class="form-control nome"
                                         placeholder="Digite aqui o nome do produto ou servico cadastrado"
                                         id="inputInsertPacotePromocoes">
+                                </div>
+                                <div class="ajax-loader">
+                                    <img src="{{ asset('assets/img/loading.gif') }}" class="img-responsive" />
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Espécie</label>
+                                        <select class="form-control" name="pacote_pet_especie" id="pacote_pet_especie">
+                                            <option selected disabled>Selecione a Espécie
+                                            </option>
+                                            <option value="felino">Felino</option>
+                                            <option value="canino">Canino</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Porte</label>
+                                        <select class="form-control" name="pacote_pet_porte" id="pacote_pet_porte">
+                                            <option selected disabled>Selecione o porte</option>
+                                            <option value="grande">Grande</option>
+                                            <option value="medio">Médio</option>
+                                            <option value="pequeno">Pequeno</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -133,8 +174,12 @@
                         data: {
                             texto_digitado: texto_digitado,
                             _token: _token
-                        }
+                        },
+                        beforeSend: function() {
+                            $('.ajax-loader').css("visibility", "visible");
+                        },
                     }).done(function(response) {
+                        $('.ajax-loader').css("visibility", "hidden");
                         const msg = response;
                         $('#inputInsertPacotePromocoes').autocomplete({
                             source: msg,
@@ -294,6 +339,8 @@
             let pacote_observacoes = $('#pacote_observacoes').val();
             let preco_total_sugerido = $("#preco_total_sugerido").val();
             let preco_total_de_venda = $("#preco_total_de_venda").val();
+            let pacote_pet_especie = $("#pacote_pet_especie").val();
+            let pacote_pet_porte = $("#pacote_pet_porte").val();
             let itensTabela = dadosTabela();
             let token = $('meta[name="csrf-token"]').attr('content');
 
@@ -308,6 +355,8 @@
                     preco_total_sugerido: preco_total_sugerido,
                     preco_total_de_venda: preco_total_de_venda,
                     itensTabela: itensTabela,
+                    pacote_pet_porte: pacote_pet_porte,
+                    pacote_pet_especie: pacote_pet_especie,
                     _token: token
                 },
                 success: function(data) {
