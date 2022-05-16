@@ -111,25 +111,29 @@
                                                 <td>
                                                     {{ $pacote->unique_pacote_promocional }}
                                                 </td>
-                                                <td>{{ $pacote->pacote_nome }}</td>
-                                                <td>R$
-                                                    {{ number_format($pacote->pacote_total_preco_sugerido, 2, ',', '.') }}
+                                                <td>
+                                                    {{ $pacote->pacote_nome }}
                                                 </td>
-                                                <td>R$
-                                                    {{ number_format($pacote->pacote_total_preco_de_venda, 2, ',', '.') }}
+                                                <td>
+                                                    R$ {{ number_format($pacote->pacote_total_preco_sugerido, 2, ',', '.') }}
                                                 </td>
-                                                <td>{{ $pacote->pacote_porcentagem_desconto }}%</td>
+                                                <td>
+                                                    R$ {{ number_format($pacote->pacote_total_preco_de_venda, 2, ',', '.') }}
+                                                </td>
+                                                <td>
+                                                    {{ $pacote->pacote_porcentagem_desconto }}%
+                                                </td>
                                                 <td>
                                                     <a href="{{ url('editar-servico/') }}" data-toggle="tooltip"
                                                         data-placement="top" title="Editar Servico">
                                                         <i class="fas fa-user-edit"></i>
                                                     </a>
                                                     &nbsp;&nbsp;
-                                                    <a href="#" data-toggle="tooltip" data-placement="top"
+                                                    {{-- <a href="#" data-toggle="tooltip" data-placement="top"
                                                         class="excluirPacotePromocional" data-id="{{ $pacote->id }}"
                                                         title="Excluir Pacote Promocional">
                                                         <i class="fad fa-trash"></i>
-                                                    </a>
+                                                    </a> --}}
                                                     &nbsp;&nbsp;
                                                     <a href="#" data-toggle="tooltip" data-placement="top"
                                                         class="desativar-ativar-pacote" data-id="{{ $pacote->id }}"
