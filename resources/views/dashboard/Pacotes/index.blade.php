@@ -61,8 +61,9 @@
                         <div class="table-responsive">
                             <table class="table table-hover text-center" id="servicosTable">
                                 <thead>
-                                    <th>Codigo </th>
+                                    <th>Codigo</th>
                                     <th>Nome Pacote</th>
+                                    <th>Porte</th>
                                     <th>Preço Sugerido</th>
                                     <th>Preço Venda</th>
                                     <th>Desconto</th>
@@ -72,20 +73,12 @@
                                     @foreach ($pacotePromocional as $pacote)
                                         @if ($pacote->pacote_status == 0)
                                             <tr class="text-center">
-                                                <td class="text-muted">
-                                                    {{ $pacote->unique_pacote_promocional }}
-                                                </td>
-                                                <td class="text-muted">
-                                                    {{ $pacote->pacote_nome }}</td>
-                                                <td class="text-muted">
-                                                    R$ {{ number_format($pacote->pacote_total_preco_sugerido, 2, ',', '.') }}
-                                                </td>
-                                                <td class="text-muted">
-                                                    R$ {{ number_format($pacote->pacote_total_preco_de_venda, 2, ',', '.') }}
-                                                </td>
-                                                <td class="text-muted">
-                                                    {{ $pacote->pacote_porcentagem_desconto }}%
-                                                </td>
+                                                <td class="text-muted">{{ $pacote->unique_pacote_promocional }}</td>
+                                                <td class="text-muted">{{ $pacote->pacote_nome }}</td>
+                                                <td class="text-muted">{{ $pacote->pacote_pet_porte ? ucfirst( $pacote->pacote_pet_porte): 'Sem Porte' }}</td>
+                                                <td class="text-muted">R$ {{ number_format($pacote->pacote_total_preco_sugerido, 2, ',', '.') }}</td>
+                                                <td class="text-muted">R$ {{ number_format($pacote->pacote_total_preco_de_venda, 2, ',', '.') }}</td>
+                                                <td class="text-muted">{{ $pacote->pacote_porcentagem_desconto }}%</td>
                                                 <td>
                                                     <a href="{{ url('editar-servico/') }}" data-toggle="tooltip"
                                                         data-placement="top" title="Editar Servico">
@@ -108,21 +101,12 @@
                                             </tr>
                                         @else
                                             <tr class="text-center">
-                                                <td>
-                                                    {{ $pacote->unique_pacote_promocional }}
-                                                </td>
-                                                <td>
-                                                    {{ $pacote->pacote_nome }}
-                                                </td>
-                                                <td>
-                                                    R$ {{ number_format($pacote->pacote_total_preco_sugerido, 2, ',', '.') }}
-                                                </td>
-                                                <td>
-                                                    R$ {{ number_format($pacote->pacote_total_preco_de_venda, 2, ',', '.') }}
-                                                </td>
-                                                <td>
-                                                    {{ $pacote->pacote_porcentagem_desconto }}%
-                                                </td>
+                                                <td>{{ $pacote->unique_pacote_promocional }}</td>
+                                                <td>{{ $pacote->pacote_nome }}</td>
+                                                <td>{{ $pacote->pacote_pet_porte ? ucfirst( $pacote->pacote_pet_porte): 'Sem Porte' }}</td>
+                                                <td>R$ {{ number_format($pacote->pacote_total_preco_sugerido, 2, ',', '.') }}</td>
+                                                <td>R$ {{ number_format($pacote->pacote_total_preco_de_venda, 2, ',', '.') }}</td>
+                                                <td>{{ $pacote->pacote_porcentagem_desconto }}%</td>
                                                 <td>
                                                     <a href="{{ url('editar-servico/') }}" data-toggle="tooltip"
                                                         data-placement="top" title="Editar Servico">

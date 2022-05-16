@@ -7,7 +7,7 @@
         }
 
         .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
-            background: #874242 !important;
+            background: #6352CA !important;
             font-weight: bold !important;
             color: #ffffff !important;
         }
