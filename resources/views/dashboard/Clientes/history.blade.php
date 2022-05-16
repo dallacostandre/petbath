@@ -1,18 +1,30 @@
-@component('dashboard.componentes.header')
-@endcomponent
+@extends('layouts.app')
+@section('cssExtras')
 <style>
     .notificationIcon:hover {
         color: crimson;
     }
-
+    
 </style>
+@endsection
+@section('content')
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
-            <div class="col-5 align-self-center">
-                <h4 class="page-title" id="name_title">
-                    {{ $titulo }}
-                </h4>
+            <div class="col-12 align-self-center">
+                <div style="justify-content:space-between;display: flex;">
+                    <h4 class="page-title" id="name_title">
+                        {{ $titulo }}
+                    </h4>
+                </div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('cliente.index')}}">Cliente</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('cliente.index')}}">Histórico</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $cliente }}</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
@@ -80,9 +92,9 @@
                     </div>
                 </div>
             </div>
-            @component('dashboard.componentes.footer')
-            @endcomponent
+            @endsection
 
+            @section('scriptExtras')
             <script>
                 $('.excluirNotificacao').on('click', function() {
                     var id = $(this).data("id");

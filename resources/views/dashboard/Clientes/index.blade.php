@@ -1,5 +1,5 @@
-@component('dashboard.componentes.header')
-@endcomponent
+@extends('layouts.app')
+@section('content')
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
@@ -8,15 +8,19 @@
                     <h4 class="page-title" id="name_title">
                         Clientes
                     </h4>
-                    <a type="button" aria-hidden="true" href="{{ route('cadastroCliente') }}"
+                    <a type="button" aria-hidden="true" href="{{ route('cliente.create') }}"
                         class="btn btn-success botao-padrao">
-                        @if ($clientes_cadastrados->isEmpty())
-                            Cadastrar
-                        @else
-                            Novo Cliente
-                        @endif
+                        Cadastrar
                     </a>
                 </div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('dashboard.index')}}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
@@ -60,12 +64,12 @@
                                             </td>
                                             <td>
                                                 <a
-                                                    href="{{ route('listaPets', ['uniqueIdCliente' => $cliente->unique_cliente]) }}">
+                                                    href="{{ route('pet.index', ['uniqueIdCliente' => $cliente->unique_cliente]) }}">
                                                     <i class="fas fa-dog"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('editarDadosCliente', ['id' => $cliente->id]) }}"
+                                                <a href="{{ route('cliente.edit', ['id' => $cliente->id]) }}"
                                                     data-bs-toggle="tooltip">
                                                     <i class="fas fa-user-edit"></i>
                                                 </a> &nbsp;&nbsp;
@@ -80,7 +84,7 @@
                                                 </a>&nbsp;&nbsp;
                                             </td>
                                             <td>
-                                                <a href="{{ route('historico', ['id' => $cliente->id]) }}">
+                                                <a href="{{ route('cliente.history', ['id' => $cliente->id]) }}">
                                                     <i class="fal fa-history"></i>
                                                 </a>
                                             </td>
@@ -128,9 +132,9 @@
         </div>
     </div>
 </div>
-@component('dashboard.componentes.footer')
-@endcomponent
+@endsection
 
+@section('scriptExtras')
 <script>
     $('.phone').mask('(00) 0 0000-0000');
 
@@ -303,3 +307,4 @@
         });
     });
 </script>
+@endsection

@@ -36,7 +36,6 @@ class User extends Authenticatable
         'user_foto',
         'user_cpf_cpnj',
         'user_responsavel',
-        
     ];
 
     /**
@@ -77,4 +76,9 @@ class User extends Authenticatable
         return $unique_user;
     }
 
+    public function getUser()
+    {
+        $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
+        $unique_user = $unique_user_db[0]->unique_user;
+    }
 }

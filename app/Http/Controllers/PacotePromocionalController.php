@@ -147,6 +147,8 @@ class PacotePromocionalController extends Controller
                     'title' => 'Adicionado!',
                     'text' => 'Pacote promocional adicionado com sucesso.',
                     'icon' => 'success',
+                    'code' => '200',
+                    'url' => '/pacotes-promocionais',
                 ]);
             }
         } else {

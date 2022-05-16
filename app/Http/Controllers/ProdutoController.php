@@ -22,7 +22,7 @@ class ProdutoController extends Controller
         $produtos = Produtos::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
         $raca_pet  = PetRaca::all();
 
-        return view('dashboard.lista_produtos', compact('raca_pet', 'produtos'));
+        return view('dashboard.produtos.index', compact('raca_pet', 'produtos'));
     }
 
     /**

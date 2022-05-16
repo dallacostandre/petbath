@@ -14,7 +14,7 @@ class FinanceiroController extends Controller
      */
     public function index()
     {
-        return view('dashboard.financeiro');
+        return view('dashboard.financeiro.index');
     }
 
     /**
@@ -90,6 +90,6 @@ class FinanceiroController extends Controller
     
     public function fluxoDeCaixa()
     {
-        return view('dashboard.fluxo_de_caixa');
+        
     }
 }

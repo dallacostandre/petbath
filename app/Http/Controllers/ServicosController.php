@@ -25,7 +25,7 @@ class ServicosController extends Controller
         $servicos = Servicos::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
         $raca_pet  = PetRaca::all();
 
-        return view('dashboard.lista_servicos', compact('raca_pet', 'servicos'));
+        return view('dashboard.servicos.index', compact('raca_pet', 'servicos'));
     }
 
     

@@ -24,7 +24,7 @@ class PetDadosController extends Controller
         $objPets = PetDados::where(['unique_cliente' => $uniqueIdCliente])->paginate(10);
         $raca_pet = PetRaca::all();
 
-        return view('dashboard.lista_pets', compact('objPets', 'raca_pet', 'uniqueCliente', 'objCliente'));
+        return view('dashboard.pets.index', compact('objPets', 'raca_pet', 'uniqueCliente', 'objCliente'));
     }
 
     public function cadastroPetView()

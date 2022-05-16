@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agendamento;
 use Illuminate\Http\Request;
 
-class AgendamentoController extends Controller
+class PlanosAssinaturasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class AgendamentoController extends Controller
      */
     public function index()
     {
-        return view('dashboard.agendamento.index');
+        return view('dashboard.planos.index');
     }
 
     /**
@@ -41,10 +40,10 @@ class AgendamentoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Agendamento  $agendamento
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Agendamento $agendamento)
+    public function show($id)
     {
         //
     }
@@ -52,10 +51,10 @@ class AgendamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Agendamento  $agendamento
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Agendamento $agendamento)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +63,10 @@ class AgendamentoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Agendamento  $agendamento
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Agendamento $agendamento)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +74,10 @@ class AgendamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Agendamento  $agendamento
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Agendamento $agendamento)
+    public function destroy($id)
     {
         //
     }

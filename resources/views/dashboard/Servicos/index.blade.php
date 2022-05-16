@@ -1,5 +1,5 @@
-@component('dashboard.componentes.header')
-@endcomponent
+@extends('layouts.app')
+@section('content')
 
 <div class="page-wrapper">
     <div class="page-breadcrumb">
@@ -9,13 +9,21 @@
                     <h4 class="page-title" id="name_title">
                         Serviços Cadastrados
                     </h4>
-                    <a type="button" aria-hidden="true" href="{{ route('cadastroCliente') }}"
+                    <a type="button" aria-hidden="true" 
                         class="btn btn-success botao-padrao" data-bs-toggle="modal"
                         data-bs-target="#modalCadastroServico">
-                        Cadastrar Serviço
+                        Cadastrar
                     </a>
                 </div>
             </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{route('dashboard.index')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Serviços</li>
+                </ol>
+            </nav>
         </div>
     </div>
     <div class="container-fluid">
@@ -331,12 +339,9 @@
         </div>
     </div>
 </div>
+@endsection
 
-
-
-@component('dashboard.componentes.footer')
-@endcomponent
-
+@section('scriptExtras')
 <script>
     $(document).ready(function() {
         var myModal = document.getElementById('myModal')
@@ -649,3 +654,4 @@
     });
 
 </script>
+@endsection

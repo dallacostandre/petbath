@@ -8,16 +8,6 @@ class ConfiguracaoController extends Controller
 {
     public function index()
     {
-        return view('dashboard.configuracoes');
-    }
-
-    public function editarPerfil()
-    {
-        return view('dashboard.editar_perfil');
-    }
-
-    public function planosAssinaturas()
-    {
-        return view('dashboard.planos_assinaturas_usuario');
+        return view('dashboard.configuracoes.index');
     }
 }

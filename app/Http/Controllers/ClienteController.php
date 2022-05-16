@@ -24,6 +24,35 @@ class ClienteController extends Controller
     }
 
     /*
+        Descricao: Funcao que retorna todos os clientes cadastrados do usuário logado
+        Data: 07/01/2022
+        Status: Funcionando
+    */
+    public function index()
+    {
+        $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
+        $unique_user = $unique_user_db[0]->unique_user;
+        $clientes_cadastrados = Cliente::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
+
+        return view(
+            'dashboard.clientes.index',
+            compact('clientes_cadastrados')
+        );
+    }
+
+        /*
+        Descricao: Funcao que retorna a view de cadastro do cliente
+        Data: 07/01/2022
+        Status: Funcionando
+    */
+    public function create()
+    {
+        $raca_pet  = PetRaca::all();
+        return view('dashboard.clientes.create', compact('raca_pet'));
+    }
+
+
+    /*
         Descricao: Funcao que adiciona o cliente
         Data: 07/01/2022
         Status: Funcionando
@@ -118,34 +147,6 @@ class ClienteController extends Controller
     }
 
     /*
-        Descricao: Funcao que retorna todos os clientes cadastrados do usuário logado
-        Data: 07/01/2022
-        Status: Funcionando
-    */
-    public function index()
-    {
-        $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
-        $unique_user = $unique_user_db[0]->unique_user;
-        $clientes_cadastrados = Cliente::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
-
-        return view(
-            'dashboard.lista_clientes',
-            compact('clientes_cadastrados')
-        );
-    }
-
-    /*
-        Descricao: Funcao que retorna a view de cadastro do cliente
-        Data: 07/01/2022
-        Status: Funcionando
-    */
-    public function create()
-    {
-        $raca_pet  = PetRaca::all();
-        return view('dashboard.cliente_cadastro', compact('raca_pet'));
-    }
-
-    /*
         Descrição: Função que retorna a view de editar com os dados do cliente.
         Status: Funcionado
         Data: 06/01/2022
@@ -159,7 +160,7 @@ class ClienteController extends Controller
         $titulo = 'Editando: ' . $objCliente->cliente_nome;
         $raca_pet  = PetRaca::all();
 
-        return view('dashboard.cliente_cadastro', compact(
+        return view('dashboard.clientes.create', compact(
             'objCliente',
             'endereco',
             'titulo',
@@ -282,17 +283,9 @@ class ClienteController extends Controller
     {
         $objCliente = Cliente::find($id);
         $titulo = 'Visualizando histório: ' . $objCliente->cliente_nome;
+        $cliente = $objCliente->cliente_nome;
         $objNotificacoesCliente = Notificacoes::where(['unique_cliente' => $objCliente->unique_cliente])->orderBy('notificacao_data', 'ASC')->get();
 
-        return view('dashboard.historico', compact('objCliente', 'titulo', 'objNotificacoesCliente'));
-    }
-
-    public function viewClientePosCadastro(Request $request, $uniqueIdCliente)
-    {
-        $raca_pet  = PetRaca::all();
-        $pets = PetDados::where(['unique_cliente' => $uniqueIdCliente])->get();
-        $cliente = Cliente::where(['unique_cliente' => $uniqueIdCliente])->first();
-        $tipo = "cadastroPets";
-        return view('dashboard.cliente_cadastro', compact('raca_pet', 'pets', 'cliente', 'tipo'));
+        return view('dashboard.clientes.history', compact('objCliente', 'titulo', 'objNotificacoesCliente', 'cliente'));
     }
 }
