@@ -115,12 +115,13 @@
                     <div class="modal-body">
                         <label for="">Serviço</label>
                         <div class="mb-3">
-                            <select class="form-control form-control-sm" id="servicoNotificacao" required>
+                            <select class="form-control form-control-sm" id="servicoNotificacao">
                                 <option selected disabled>Selecione o serviço...</option>
                                 @foreach ($servicos as $servico)
                                     <option value="{{$servico->servico_nome}}">{{$servico->servico_nome}}</option>
                                 @endforeach
                             </select>
+                            <div id="emailHelp" class="form-text">A seleção do serviço é opcional.</div>
                         </div>
                         <label for="">Descrição Notificação</label>
                         <div class="mb-3">
@@ -131,6 +132,7 @@
                         <div class="mb-3">
                             <input class="form-control form-control-sm" type="datetime-local" id="dataNotificacao">
                         </div>
+                        <div class="form-text">Data para lembrar seu pet-shop.</div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success botao-padrao" id="adicionarNotificacao" data-id="">
@@ -302,7 +304,7 @@
                         popup: 'animate__animated animate__fadeOutUp'
                     }
                 })
-
+                location.reload();
             }).fail(function(jqXHR, textStatus, data) {
                 Swal.fire({
                     title: "Error",
