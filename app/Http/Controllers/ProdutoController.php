@@ -65,7 +65,6 @@ class ProdutoController extends Controller
 
             $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
             $unique_user = $unique_user_db[0]->unique_user;
-            // dd($unique_user);
 
             $produto = new Produtos();
             $produto->unique_user = $unique_user;

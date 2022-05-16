@@ -34,8 +34,8 @@
         <div class="row">
             <div class="col-12 align-self-center">
                 <div style="justify-content:space-between;display: flex;">
-                    <h4 class="page-title" id="name_title">Pacotes & Promoçõe </h4>
-                    <a type="button" aria-hidden="true" href="{{ route('cadastro.pacote.promocao') }}"
+                    <h4 class="page-title" id="name_title">Pacotes Promocionais</h4>
+                    <a type="button" aria-hidden="true" href="{{ route('pacotes.promocionais.create') }}"
                         class="btn btn-success botao-padrao">
                         Cadastrar
                     </a>
@@ -48,45 +48,47 @@
             <div class="col-12">
                 <div class="card">
                     <div class="container pt-4"><input class="form-control" type="text" id="myInput"
-                            onkeyup="pesquisarPor()" placeholder="Pesquise pelo produto..."></div>
+                            onkeyup="pesquisarPor()" placeholder="Pesquise por pacotes promocionais..."></div>
                     <div class="table-responsive">
                         <table class="table table-hover text-center" id="servicosTable">
                             <thead>
-                                <th>Cod. Prom/Pacote </th>
-                                <th>Nome Promo/Pacote</th>
-                                <th>Serviço</th>
-                                <th>Produtos</th>
-                                <th>Porte</th>
-                                <th>Custo Unit.</th>
-                                <th>% de Lucro</th>
+                                <th>Codigo </th>
+                                <th>Nome Pacote</th>
                                 <th>Preço Sugerido</th>
                                 <th>Preço Venda</th>
+                                <th>Desconto</th>
                                 <th>Ações</th>
                             </thead>
                             <tbody>
-                                <tr class="text-center">
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td>xxxxx</td>
-                                    <td><a href="{{ url('editar-servico/') }}" data-toggle="tooltip"
-                                            data-placement="top" title="Editar Servico"><i
-                                                class="fas fa-user-edit"></i></a>&nbsp;
-                                        &nbsp;
-                                        <a href="{{ url('excluir-servico/') }}" data-toggle="tooltip"
-                                            data-placement="top" title="Excluir Servico"><i
-                                                class="fad fa-trash"></i></a>&nbsp;
-                                        &nbsp;
-                                    </td>
-                                </tr>
+                                @foreach ($pacotePromocional as $pacote)
+                                    <tr class="text-center">
+                                        <td>
+                                            {{ $pacote->unique_pacote_promocional }}
+                                        </td>
+                                        <td>{{ $pacote->pacote_nome }}</td>
+                                        <td>R$ {{ number_format($pacote->pacote_total_preco_sugerido, 2, ',', '.') }}
+                                        </td>
+                                        <td>R$ {{ number_format($pacote->pacote_total_preco_de_venda, 2, ',', '.') }}
+                                        </td>
+                                        <td>{{ $pacote->pacote_porcentagem_desconto }}%</td>
+                                        <td>
+                                            <a href="{{ url('editar-servico/') }}" data-toggle="tooltip"
+                                                data-placement="top" title="Editar Servico">
+                                                <i class="fas fa-user-edit"></i>
+                                            </a>
+                                            &nbsp;&nbsp;
+                                            <a href="#" data-toggle="tooltip" data-placement="top" class="excluirPacotePromocional" data-id="{{$pacote->id}}" 
+                                                title="Excluir Pacote Promocional">
+                                                <i class="fad fa-trash"></i>
+                                            </a>
+                                            &nbsp;&nbsp;
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                    </div>{{-- {{ $servicos->links() }} --}}
+                    </div>
+                    {{ $pacotePromocional->links() }}
                 </div>
             </div>
         </div>
@@ -115,7 +117,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Serviço ou Produto </label>
+                            <label>Serviço ou Produto</label>
                             <input type="text" class="form-control"
                                 placeholder="Digite aqui o nome do produto ou servico cadastrado"
                                 id="inputInsertPacotePromocoes">
@@ -143,7 +145,8 @@
                     <div class="col col-md-6">
                         <div class="form-floating">
                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                style="height: 100px"></textarea><label for="floatingTextarea2">Observações Adicionais</label>
+                                style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Observações Adicionais</label>
                         </div>
                     </div>
                     <div class="col col-md-6" style="display: flex;">
@@ -166,8 +169,11 @@
                 <div class="clearfix"></div>
             </div>
             <div class="modal-footer"><button type="button" class="btn btn-secondary"
-                    data-bs-dismiss="modal">Cancelar</button><button type="button"
-                    class="btn btn-success botao-padrao float-end" id="adicionarServico">Cadastrar </button></div>
+                    data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarServico">
+                    Cadastrar
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -249,44 +255,49 @@
 
 @component('dashboard.componentes.footer')
 @endcomponent
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 
 <script>
     $(document).ready(function() {
-        $('#inputInsertPacotePromocoes').autocomplete({
-            source: '/getAllServicosProdutos',
-            minlength: 3,
-            autoFocus: true,
-            select: function(e, ui) {
-                const text =
-                    '<tr><td>' + ui.item.label + '</td>' +
-                    '<td>' +
-                    '<div class="col col-4">' +
-                    '<input class="form-control form-control-sm" type="text"/>' +
-                    '</div>' +
-                    '</td>' +
-                    '<td>' +
-                    '<span id="valorUnitario">' + ui.item.custo + '</span>' +
-                    '</td>' +
-                    '<td>' +
-                    '<span id="valorTotal"></span>' +
-                    '</td>' +
-                    '<td>' +
-                    '<input class="form-control form-control-sm" type="text" placeholder="%">' +
-                    '</td>' +
-                    '<td>' +
-                    '<span id="valorTotalComDesconto"></span>' +
-                    '</td>' +
-                    '<td>' +
-                    '<a href="#" data-toggle="tooltip" onclick ="delete_user($(this))" data-placement="top" title="Excluir"><i class="fad fa-trash"></i></a>' +
-                    '</td>' +
-                    '</tr>';
-                $('#tableProdutoServicosSelecionados').append(text)
-            }
+        $('.excluirPacotePromocional').on('click', function() {
+            var id = $(this).data('id');
+                var url = '/excluir-pacote-promocional';
+                var _token = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    url: url,
+                    type: "DELETE",
+                    dataType: "json",
+                    data: {
+                        id: id,
+                        _token: _token
+                    }
+                }).done(function(data) {
+                    Swal.fire({
+                        title: data.title,
+                        text: data.message,
+                        icon: data.icon,
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                    location.reload();
+                }).fail(function(jqXHR, textStatus, data) {
+                    Swal.fire({
+                        title: "Error",
+                        text: jqXHR,
+                        icon: "error",
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                });
         });
-    });
 
-    function delete_user(row) {
-        row.closest('tr').remove();
-    }
+    });
 </script>

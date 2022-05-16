@@ -63,19 +63,16 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/clientes') }}">
-                           
                             <p> &nbsp;&nbsp; </p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/servicos-e-produtos') }}">
-                            
                             <p> &nbsp;&nbsp; </p>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ url('/pacotes-e-promocoes') }}">
-                     
                             <p> &nbsp;&nbsp; </p>
                         </a>
                     </li>

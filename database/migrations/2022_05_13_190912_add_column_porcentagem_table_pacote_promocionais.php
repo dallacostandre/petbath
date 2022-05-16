@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePacoteEPromocoesTable extends Migration
+class AddColumnPorcentagemTablePacotePromocionais extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreatePacoteEPromocoesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pacote_e_promocoes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('pacote_promocional', function (Blueprint $table) {
+            $table->float('pacote_porcentagem_desconto')->nullable();
         });
     }
 
@@ -26,6 +25,6 @@ class CreatePacoteEPromocoesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pacote_e_promocoes');
+        //
     }
 }

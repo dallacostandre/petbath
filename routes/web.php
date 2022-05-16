@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalenderController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificacoesController;
-use App\Http\Controllers\PacoteEPromocoesController;
-use App\Http\Controllers\PacotesEPromocoesController;
+use App\Http\Controllers\PacotePromocionalController;
 use App\Http\Controllers\ProdutoController;
 use App\Models\Servicos;
 
@@ -80,11 +79,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::POST('/atualizar-servico', [ServicosController::class, 'update'])->name('atualizar.servico');
     Route::DELETE('/excluir-servico', [ServicosController::class, 'destroy'])->name('excluir.servico');
     Route::GET('/visualizar-dados-servico', [ServicosController::class, 'edit'])->name('edit.servico');
-
-
-    // PACOTES
-    Route::GET('/pacotes-e-promocoes', [PacoteEPromocoesController::class, 'index']);
-    Route::GET('/adicionar-pacote-promocao', [PacoteEPromocoesController::class, 'create'])->name('cadastro.pacote.promocao');
-    // PACOTES E SERVICO (Captura todos os servicos e produtos do cliente)
-    Route::POST('/getAllServicosProdutos', [PacoteEPromocoesController::class, 'getAllServicosProdutos']);
+    
+    
+    // PROMOCAO E PACOTE
+    Route::GET('/pacotes-promocionais', [PacotePromocionalController::class, 'index'])->name('pacotes.promocionais.index');
+    Route::GET('/adicionar-pacote-promocional', [PacotePromocionalController::class, 'create'])->name('pacotes.promocionais.create');
+    Route::POST('/cadastrar-pacote-promocional', [PacotePromocionalController::class, 'store'])->name('pacotes.promocionais.store');
+    Route::DELETE('/excluir-pacote-promocional', [PacotePromocionalController::class, 'destroy'])->name('pacotes.promocionais.destroy');
+    
+    // RETORNA TODOS OS SERVICOE E PRODUTOS DO CLIENTE (Captura todos os servicos e produtos do cliente)
+    Route::POST('/getAllServicosProdutos', [PacotePromocionalController::class, 'getAllServicosProdutos']);
 });

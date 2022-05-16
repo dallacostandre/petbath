@@ -39,9 +39,9 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="{{ url('/pacotes-e-promocoes') }}" aria-expanded="false">
+                        href="{{ route('pacotes.promocionais.index') }}" aria-expanded="false">
                         <i class="far fa-percentage"></i>
-                        <span class="hide-menu">Pacotes & Promoções</span>
+                        <span class="hide-menu">Pacotes Promocional</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

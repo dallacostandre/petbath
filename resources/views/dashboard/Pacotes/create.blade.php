@@ -35,7 +35,7 @@
             <div class="col-12 align-self-center">
                 <div style="justify-content:space-between;display: flex;">
                     <h4 class="page-title" id="name_title">
-                        Novo Pacote ou Promoção
+                        Novo Pacote Promocional
                     </h4>
                 </div>
             </div>
@@ -48,12 +48,12 @@
                     <div class="container pt-3 pb-3">
                         <div class="row">
                             <div class="form-group">
-                                <label>Nome do Pacote</label>
+                                <label>Nome Pacote ou Promoção</label>
                                 <input type="text" class="form-control" name="pacote_nome"
                                     placeholder="Qual o nome do pacote?" id="pacote_nome" required>
                             </div>
                             <div class="form-group">
-                                <label>Selecione o serviço ou produto</label>
+                                <label>Selecione o serviços ou produtos</label>
                                 <input type="text" class="form-control nome"
                                     placeholder="Digite aqui o nome do produto ou servico cadastrado"
                                     id="inputInsertPacotePromocoes">
@@ -70,11 +70,11 @@
                                         <tr>
                                             <th>Tipo</th>
                                             <th>Quantidade</th>
-                                            <th>Valor Unitário</th>
-                                            <th>Valor Total</th>
-                                            <th>Desconto %</th>
-                                            <th>Valor Final</th>
-                                            <th>Ações</th>
+                                            <th>Custo Unitário</th>
+                                            <th>Custo Total</th>
+                                            <th>(%) Desconto</th>
+                                            <th>Preço Final</th>
+                                            <th>Excluir</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -85,30 +85,29 @@
                         <div class="row pt-3" style="display: flex;">
                             <div class="col col-md-8">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="pacote_observacoes"
+                                        style="height: 100px"></textarea>
                                     <label for="floatingTextarea2">Observações Adicionais</label>
                                 </div>
                             </div>
                             <div class="col col-md-4">
                                 <div class="col col-md-12">
-                                    {{-- <label for="">Preço Total Sugerido:</label> --}}
-
-                                        <input type="text" class="form-control money" name="preco_total_sugerido" id="preco_total_sugerido" readonly/>
-                                        <small id="emailHelp" class="form-text text-muted">Preço Sugerido</small>
+                                    <input type="text" class="form-control money" name="preco_total_sugerido"
+                                        id="preco_total_sugerido" readonly />
+                                    <small id="emailHelp" class="form-text text-muted">Preço Sugerido</small>
 
                                 </div>
                                 <div class="col col-md-12">
-                                    {{-- <label for="">Preço Total de Venda:</label> --}}
-
-                                        <input type="text" class="form-control money" name="preco_total_de_venda" id="preco_total_de_venda" />
-                                        <small id="emailHelp" class="form-text text-muted">Preço de Venda</small>
+                                    <input type="text" class="form-control money" name="preco_total_de_venda"
+                                        id="preco_total_de_venda" />
+                                    <small id="emailHelp" class="form-text text-muted">Preço de Venda</small>
 
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarServico">
+                <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarPromocao">
                     Cadastrar
                 </button>
             </div>
@@ -149,13 +148,11 @@
                                 '<tr>' +
                                 // '<td><span>' +  ui.item.unique_servico ? ui.item.unique_servico : ui.item.unique_produto + '</span></td>' +
                                 '<td><span>' + ui.item.value + '</span></td>' +
-                                '<td><div class="col col-2">' +
-                                '<input class="form-control form-control-sm qntSelecionado" type="text"/>' +
-                                '</div></td>' +
-                                '<td><span class="valorUnitario">R$ ' + ui.item
+                                '<td><input class="form-control form-control-sm qntSelecionado inputDados" type="number"/></td>' +
+                                '<td><span class="valorUnitario ">R$ ' + ui.item
                                 .custo + '</span></td>' +
                                 '<td><span class="valorTotal">-</span></td>' +
-                                '<td><input class="form-control form-control-sm descontoSelecionado" type="text" placeholder="%"></td>' +
+                                '<td><input class="form-control form-control-sm descontoSelecionado inputDados" type="number" placeholder="%"></td>' +
                                 '<td><span class="valorTotalComDesconto">R$ </span></td>' +
                                 '<td><a href="#" data-toggle="tooltip" onclick ="delete_user($(this))" data-placement="top" title="Excluir"><i class="fad fa-trash"></i></a></td>' +
                                 '</tr>';
@@ -230,31 +227,24 @@
         valorTotalComDesconto = 'R$ ' + valorTotalComDesconto;
 
         $(this).closest('tr').find('.valorTotalComDesconto').text(valorTotalComDesconto);
+
         // Atualiza o Preço Final
         atualizarPrecoTotal();
 
     });
-
 
     function atualizarPrecoTotal() {
         var theTotal = 0;
         $("td:nth-child(6)").each(function() {
             var val = $(this).text().replace("R$", "").replace('.', '').replace(',', '.');
             theTotal += parseFloat(val);
-            // theTotal = new Intl.NumberFormat().format(theTotal);
         });
+        theTotal = new Intl.NumberFormat().format(theTotal);
+        theTotal = 'R$ ' + theTotal;
 
         $("#preco_total_sugerido").val(theTotal);
         $("#preco_total_de_venda").val(theTotal);
-        Mask();
     }
-
-    function Mask() {
-        $('.money').mask("000.000,00", {
-            reverse: true
-        });
-    }
-
 
     function delay(callback, ms) {
         var timer = 0;
@@ -273,7 +263,76 @@
         atualizarPrecoTotal();
     }
 
+    function dadosTabela() {
+        var arr = $('tbody tr').get()
+            .map(function(row) {
+                return $(row).find('td').get()
+                    .map(function(cell) {
+                        return cell.innerText;
+                    });
+            });
 
-    
+        return arr;
+    };
 
+    $('#adicionarPromocao').on('click', function(e) {
+        e.preventDefault();
+
+        var value = $('.inputDados').filter(function() {
+            return this.value != '';
+        });
+
+        var reqlength = $('.inputDados').length;
+        if (value.length >= 0 && (value.length !== reqlength)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Atenção',
+                text: 'Não foi possível adicionar esta promoção ou pacote. Erro de conexão.',
+            });
+            return false;
+        }
+
+        let url = "/cadastrar-pacote-promocional";
+        let pacote_nome = $('#pacote_nome').val();
+        let pacote_observacoes = $('#pacote_observacoes').val();
+        let preco_total_sugerido = $("#preco_total_sugerido").val();
+        let preco_total_de_venda = $("#preco_total_de_venda").val();
+        let itensTabela = dadosTabela();
+        let token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            method: 'POST',
+            dataType: 'JSON',
+            data: {
+                pacote_nome: pacote_nome,
+                pacote_observacoes: pacote_observacoes,
+                preco_total_sugerido: preco_total_sugerido,
+                preco_total_de_venda: preco_total_de_venda,
+                itensTabela: itensTabela,
+                _token: token
+            },
+            success: function(data) {
+                Swal.fire({
+                    title: data.title,
+                    text: data.text,
+                    icon: data.icon,
+                });
+                if (data.code == '200') {
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }
+            },
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Atenção',
+                    text: 'Não foi possível adicionar esta promoção ou pacote. Erro de conexão.',
+                    button: "Voltar",
+                });
+            }
+        });
+    });
 </script>
