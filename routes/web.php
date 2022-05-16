@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificacoesController;
 use App\Http\Controllers\PacotePromocionalController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\PermissoesController;
 use App\Http\Controllers\PlanosAssinaturasController;
 use App\Http\Controllers\ProdutoController;
 
@@ -88,4 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // FLUXO DE CAIXA
     Route::GET('/fluxo-de-caixa', [CaixaController::class, 'index'])->name('caixa.index');
+    
+    // PERMISSÕES
+    Route::GET('/permissao', [PermissoesController::class, 'index'])->name('permissao.index');
+
 });
