@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/adicionar-pacote-promocional', [PacotePromocionalController::class, 'create'])->name('pacotes.promocionais.create');
     Route::POST('/cadastrar-pacote-promocional', [PacotePromocionalController::class, 'store'])->name('pacotes.promocionais.store');
     Route::DELETE('/excluir-pacote-promocional', [PacotePromocionalController::class, 'destroy'])->name('pacotes.promocionais.destroy');
+    Route::POST('/desativar-pacote-promocional', [PacotePromocionalController::class, 'enabledisable'])->name('pacotes.promocionais.enabledisable');
     
     // RETORNA TODOS OS SERVICOE E PRODUTOS DO CLIENTE (Captura todos os servicos e produtos do cliente)
     Route::POST('/getAllServicosProdutos', [PacotePromocionalController::class, 'getAllServicosProdutos']);

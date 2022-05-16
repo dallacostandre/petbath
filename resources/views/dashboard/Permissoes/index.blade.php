@@ -59,7 +59,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{-- {{ $servicos->links() }} --}}
+                        {{-- {{ $permissoes->links() }} --}}
                     </div>
                 </div>
             </div>

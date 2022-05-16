@@ -38,6 +38,7 @@ class NotificacoesController extends Controller
     public function store(Request $request)
     {
         if ($request) {
+
             // BUSCA O UNIQUE ID DO USUÁRIO
             $objCliente = Cliente::find($request->id);
 
@@ -45,13 +46,15 @@ class NotificacoesController extends Controller
             $notificacoes = new Notificacoes();
             $notificacoes->notificacao_data = $request->dataNotificacao;
             $notificacoes->notificacao_descricao = $request->descricaoNotificacao;
+            $notificacoes->notificacao_servico = $request->servicoNotificacao;
+            $notificacoes->notificacao_status = 1; // ATIVA A NOTIFICAÇÃO
             $notificacoes->unique_user = $objCliente->unique_user;
             $notificacoes->unique_cliente = $objCliente->unique_cliente;
             $notificacoes->save();
 
             return response()->json([
-                'message' => 'Notificação adicionada com sucesso',
                 'title' => 'Adicionado',
+                'message' => 'Notificação adicionada com sucesso!',
                 'icon' => 'success',
             ]);
         }

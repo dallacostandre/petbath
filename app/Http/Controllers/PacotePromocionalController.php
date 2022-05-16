@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notificacoes;
 use App\Models\PacotePromocional;
 use App\Models\PacotePromocionalItem;
 use App\Models\Produtos;
@@ -22,7 +23,7 @@ class PacotePromocionalController extends Controller
     public function index()
     {
         $unique_user = User::find(Auth::id())->getUserUniqueId();
-        $pacotePromocional = PacotePromocional::with('itens')->where(['unique_user' => $unique_user])->paginate(10);
+        $pacotePromocional = PacotePromocional::with('itens')->where(['unique_user' => $unique_user])->orderBy('pacote_status', 'DESC')->paginate(10);
 
         return view('dashboard.pacotes.index', compact('pacotePromocional'));
     }
@@ -73,7 +74,6 @@ class PacotePromocionalController extends Controller
                 $total_preco_sugerido = str_replace('.', '', $total_preco_sugerido);
                 $total_preco_sugerido = str_replace(',', '.', $total_preco_sugerido);
 
-
                 // TOTAL PRECO DE VENDAS - String para float
                 $preco_total_de_venda = trim(str_replace('R$ ', ' ', $request->preco_total_sugerido));
                 $preco_total_de_venda = str_replace('.', '', $preco_total_de_venda);
@@ -86,6 +86,7 @@ class PacotePromocionalController extends Controller
                 $pacotePromocional->pacote_total_preco_sugerido = $total_preco_sugerido;
                 $pacotePromocional->pacote_total_preco_de_venda = $preco_total_de_venda;
                 $pacotePromocional->pacote_observacoes = $request->pacote_observacoes;
+                $pacotePromocional->pacote_status = 1; // ATIVA O PLANO PROMOCIONAL
                 $pacotePromocional->save();
 
                 foreach ($request->itensTabela as $dadoItem) {
@@ -123,7 +124,7 @@ class PacotePromocionalController extends Controller
 
                     // Calculo da porcentagem de desconto por item
                     $porcentagem_desconto = (100 * $item_preco_final) / $item_custo_total;
-                    
+
                     // Adiciona os itens do Pacote
                     $pacotePromocionalItem->item_nome = $dadoItem[0]; // Nome do Item
                     $pacotePromocionalItem->item_quantidade_total = $quantidadeItem;  // Quantidade de Itens
@@ -139,10 +140,10 @@ class PacotePromocionalController extends Controller
                 $somaPreco = reset($array_soma_preco_final);
 
                 $porcentagemFinal = (100 * $somaPreco) / $somaCustos;
-                $porcentagemFinal = (int) $porcentagemFinal;    
+                $porcentagemFinal = (int) $porcentagemFinal;
                 PacotePromocional::where(['id' => $pacotePromocional->id])->update(['pacote_porcentagem_desconto' => $porcentagemFinal]);
-                
-                
+
+
                 return response()->json([
                     'title' => 'Adicionado!',
                     'text' => 'Pacote promocional adicionado com sucesso.',
@@ -262,7 +263,41 @@ class PacotePromocionalController extends Controller
         }
         return response()->json([
             'title' => 'Produto e servico não foram encontrados.',
-            'message' => 'Erro ao procurar o serviço ou produco.',
+            'message' => 'Erro ao procurar o serviço ou produto.',
+            'icon' => 'error',
+        ]);
+    }
+
+    /**
+     * Disable the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\PacotePromocional  $pacotePromocional
+     * @return \Illuminate\Http\Response
+     */
+    public function enabledisable(Request $request, PacotePromocional $pacotePromocional)
+    {
+        if ($request->ajax()) {
+            $statusAtual = PacotePromocional::where(['id' => $request->id])->first();
+            if ($statusAtual->pacote_status == 0) {
+                PacotePromocional::where(['id' => $request->id])->update(['pacote_status' => 1]);
+                return response()->json([
+                    'title' => 'Pacote habilitado.',
+                    'message' => 'Sucesso ao desabilitar o pacote promocional.',
+                    'icon' => 'success',
+                ]);
+            } else {
+                PacotePromocional::where(['id' => $request->id])->update(['pacote_status' => 0]);
+                return response()->json([
+                    'title' => 'Pacote desabilitado.',
+                    'message' => 'Sucesso ao desabilitar o pacote promocional.',
+                    'icon' => 'success',
+                ]);
+            }
+        }
+        return response()->json([
+            'title' => 'Houve um erro',
+            'message' => 'Erro ao alterar o status deste pacote.',
             'icon' => 'error',
         ]);
     }

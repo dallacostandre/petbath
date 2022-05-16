@@ -7,6 +7,7 @@ use App\Models\ClienteEndereco;
 use App\Models\Notificacoes;
 use App\Models\PetDados;
 use App\Models\PetRaca;
+use App\Models\Servicos;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,11 +33,12 @@ class ClienteController extends Controller
     {
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
         $unique_user = $unique_user_db[0]->unique_user;
+        $servicos = Servicos::where(['unique_user' => $unique_user])->get();
         $clientes_cadastrados = Cliente::orderBy('id', 'DESC')->where(['unique_user' => $unique_user])->paginate(10);
 
         return view(
             'dashboard.clientes.index',
-            compact('clientes_cadastrados')
+            compact('clientes_cadastrados', 'servicos')
         );
     }
 

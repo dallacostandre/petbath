@@ -14,5 +14,7 @@ class Notificacoes extends Model
     protected $fillable = [
         'notificacao_descricao',
         'notificacao_data',
+        'notificacao_servico',
+        'notificacao_status'
     ];
 }
