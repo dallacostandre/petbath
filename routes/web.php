@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     // PET (Cadastra os dados do pet)
     Route::GET('/pets/{uniqueIdCliente}', [PetDadosController::class, 'index'])->name('pet.index');
     Route::POST('/cadastrar-novo-pet', [PetDadosController::class, 'store'])->name('pet.store');
-    Route::DELETE('/excluir-pet', [PetDadosController::class, 'destroy'])->name('excluirPet');
+    Route::DELETE('/excluir-pet', [PetDadosController::class, 'destroy'])->name('pet.destroy');
     Route::POST('/visualizar-dados-pet', [PetDadosController::class, 'show'])->name('pet.show');
     Route::POST('/atualizar-pet', [PetDadosController::class, 'update'])->name('pet.update');
     
@@ -51,10 +51,10 @@ Route::group(['middleware' => 'auth'], function () {
     
     // PRODUTOS
     Route::GET('/produtos', [ProdutoController::class, 'index'])->name('produto.index');
-    Route::POST('/cadastrar-produto', [ProdutoController::class, 'store'])->name('cadastro.produto');
-    Route::POST('/atualizar-produto', [ProdutoController::class, 'update'])->name('atualizar.produto');
-    Route::GET('/visualizar-dados-produto', [ProdutoController::class, 'edit'])->name('edit.produto');
-    Route::DELETE('/excluir-produto', [ProdutoController::class, 'destroy'])->name('removerProduto');
+    Route::POST('/cadastrar-produto', [ProdutoController::class, 'store'])->name('produto.store');
+    Route::POST('/atualizar-produto', [ProdutoController::class, 'update'])->name('produto.update');
+    Route::GET('/visualizar-dados-produto', [ProdutoController::class, 'edit'])->name('produto.edit');
+    Route::DELETE('/excluir-produto', [ProdutoController::class, 'destroy'])->name('produto.destroy');
     
     // SERVICO
     Route::GET('/servicos', [ServicosController::class, 'index'])->name('servico.index');

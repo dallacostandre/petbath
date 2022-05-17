@@ -172,5 +172,3 @@ $('#adicionarServico').on('click', function(e) {
         }
     });
 });
-
-// CADASTRO DE CLIENTES
