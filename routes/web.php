@@ -27,7 +27,7 @@ Route::GET('/cadastro', function () {
 // USUARIO DEVE ESTAR LOGADO
 Route::group(['middleware' => 'auth'], function () {
     // DASHBOARD
-    Route::GET('/', [DashboardController::class, 'index'])->name('dashboard.main.index');
+    Route::GET('/', [DashboardController::class, 'index'])->name('dashboard.index');
      
     // CLIENTE (Lista todos os clientes do usuário)
     Route::GET('/clientes', [ClienteController::class, 'index'])->name('cliente.index');

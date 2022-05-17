@@ -21,7 +21,7 @@
                     </div>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard.main.index') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('cliente.index') }}">Editar</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('cliente.index') }}">Clientes</a></li>
                             <li class="breadcrumb-item active" aria-current="page">
