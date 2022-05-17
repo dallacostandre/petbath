@@ -10,15 +10,10 @@ use App\Http\Controllers\ServicosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificacoesController;
-<<<<<<< Updated upstream
 use App\Http\Controllers\PacotePromocionalController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PermissoesController;
 use App\Http\Controllers\PlanosAssinaturasController;
-=======
-use App\Http\Controllers\PacoteEPromocoesController;
-use App\Http\Controllers\PacotesEPromocoesController;
->>>>>>> Stashed changes
 use App\Http\Controllers\ProdutoController;
 
 Route::GET('/acessar', function () {
@@ -99,12 +94,4 @@ Route::group(['middleware' => 'auth'], function () {
     // PERMISSÕES
     Route::GET('/permissao', [PermissoesController::class, 'index'])->name('permissao.index');
 
-<<<<<<< Updated upstream
-=======
-    // PACOTES
-    Route::GET('/pacotes-e-promocoes', [PacoteEPromocoesController::class, 'index']);
-    Route::GET('/adicionar-pacote-promocao', [PacoteEPromocoesController::class, 'create'])->name('cadastro.pacote.promocao');
-    // PACOTES E SERVICO (Captura todos os servicos e produtos do cliente)
-    Route::POST('/getAllServicosProdutos', [PacoteEPromocoesController::class, 'getAllServicosProdutos']);
->>>>>>> Stashed changes
 });
