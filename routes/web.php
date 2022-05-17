@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\CaixaController;
 use App\Http\Controllers\ClienteController;
@@ -7,7 +8,6 @@ use App\Http\Controllers\ConfiguracaoController;
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\PetDadosController;
 use App\Http\Controllers\ServicosController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificacoesController;
 use App\Http\Controllers\PacotePromocionalController;
@@ -72,26 +72,18 @@ Route::group(['middleware' => 'auth'], function () {
     
     // RETORNA TODOS OS SERVICOE E PRODUTOS DO CLIENTE (Captura todos os servicos e produtos do cliente)
     Route::POST('/getAllServicosProdutos', [PacotePromocionalController::class, 'getAllServicosProdutos']);
-
     // AGENDAMENTO
     Route::GET('/agendamento', [AgendamentoController::class, 'index'])->name('agendamento.index');
-
     // FINANCEIRO
     Route::GET('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro.index');
-
     // CONFIGURAÇÕES
     Route::GET('/configuracoes', [ConfiguracaoController::class, 'index'])->name('configuracoes.index');
-
     // PLANOS E ASSINATURAS
     Route::GET('/planos-e-assinaturas', [PlanosAssinaturasController::class, 'index'])->name('planos.assinaturas.index');
-
     // PERFIL
     Route::GET('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
-
     // FLUXO DE CAIXA
     Route::GET('/fluxo-de-caixa', [CaixaController::class, 'index'])->name('caixa.index');
-    
     // PERMISSÕES
     Route::GET('/permissao', [PermissoesController::class, 'index'])->name('permissao.index');
-
 });
