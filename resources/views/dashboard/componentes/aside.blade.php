@@ -3,7 +3,7 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard.index') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard.main.index') }}"
                         aria-expanded="false">
                         <i class="fas fa-paw fa-2x"></i>
                         <span class="hide-menu">Dashboard</span>
