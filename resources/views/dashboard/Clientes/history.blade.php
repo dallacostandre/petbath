@@ -67,7 +67,7 @@
                                                                 </td>
                                                                 <td class="txt-oflo">
                                                                     {{ $notificacao->notificacao_servico ? $notificacao->notificacao_servico : 'Não Definido' }}
-                                                                </td>
+                                                                </td
                                                                 @if (Carbon\Carbon::today() > $notificacao->notificacao_data)
                                                                     <td>
                                                                         <span class="label label-danger label-rounded">
