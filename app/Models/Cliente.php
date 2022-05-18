@@ -18,6 +18,7 @@ class Cliente extends Model
         'cliente_telefone',
         'cliente_whatsapp',
         'unique_endereco',
-        'unique_pet',
+        'cliente_fonte',
+        'unique_pet'
     ];
 }

@@ -25,17 +25,38 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Financeiro</h5>
-                            <p class="card-text">Realizar Lançamento e Verificar Saldo</p>
-                            <a href="{{ url('/fluxo-de-caixa') }}" class="btn btn-primary">Acessar</a>
+                            <h5 class="card-title">Relatórios</h5>
+                            <p class="card-text">Relatórios Personalizados
+                            </p>
+                            <a href="#" class="btn btn-primary">Entrar</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Relatórios</h5>
-                            <p class="card-text">Relatórios Personalizados
+                            <h5 class="card-title">Lançamentos</h5>
+                            <p class="card-text">Lançamentos Personalizados
+                            </p>
+                            <a href="#" class="btn btn-primary">Entrar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Despesas</h5>
+                            <p class="card-text">Contas a pagar
+                            </p>
+                            <a href="#" class="btn btn-primary">Entrar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">DRE - Demonstrativo Geral</h5>
+                            <p class="card-text">Demonstrativo
                             </p>
                             <a href="#" class="btn btn-primary">Entrar</a>
                         </div>

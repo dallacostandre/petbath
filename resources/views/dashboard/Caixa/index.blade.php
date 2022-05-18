@@ -3,7 +3,7 @@
     <div class="page-wrapper">
         <div class="page-breadcrumb">
             <div class="row">
-                <div class="col-10 align-self-center">
+                <div class="col-9 align-self-center">
                     <h4 class="page-title">Fluxo de Caixa</h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -14,7 +14,7 @@
                         </ol>
                     </nav>
                 </div>
-                <div class="col col-2 botao-padrao-topo">
+                <div class="col col-3 botao-padrao-topo">
                     <div style="display: flex; justify-content:flex-end;">
                         <div style="margin-right: 0.25rem">
                             <button class="btn btn-success botao-padrao float-end" type="button" data-bs-toggle="modal"

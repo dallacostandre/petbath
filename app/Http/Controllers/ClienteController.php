@@ -116,6 +116,7 @@ class ClienteController extends Controller
             $cliente->cliente_email = $request->cliente_email;
             $cliente->cliente_telefone = $telefone;
             $cliente->cliente_whatsapp = $whatsapp;
+            $cliente->cliente_fonte = $request->cliente_fonte;
             $cliente->cliente_instagram = str_replace(' ', '', $request->cliente_instagram);
             $cliente->save();
 
@@ -221,6 +222,7 @@ class ClienteController extends Controller
             $cliente->cliente_email = $request->cliente_email;
             $cliente->cliente_telefone = $telefone;
             $cliente->cliente_whatsapp = $whatsapp;
+            $cliente->cliente_fonte = $request->cliente_fonte;
             $cliente->cliente_instagram = str_replace(' ', '', $request->cliente_instagram);
             $cliente->save();
 

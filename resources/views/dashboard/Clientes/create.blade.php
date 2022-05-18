@@ -5,8 +5,9 @@
     <style>
         .nav-tabs .nav-item.show .nav-link,
         .nav-tabs .nav-link.active {
-            border-color: white!important;
+            border-color: white !important;
         }
+
     </style>
 @endsection
 @section('content')
@@ -148,6 +149,33 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleDataList" class="form-label">Como nos conheceu?</label>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="cliente_fonte">
+                                        @if (isset($objCliente->cliente_fonte))
+                                            <option selected>{{ $objCliente->cliente_fonte }}</option>
+                                            <option value="Facebook">Facebook</option>
+                                            <option value="Instagram">Instagram</option>
+                                            <option value="Fachada">Fachada</option>
+                                            <option value="Google">Google</option>
+                                            <option value="Indicação">Indicação</option>
+                                            <option value="Panfleto">Panfleto</option>
+                                            <option value="Radio">Radio</option>
+                                        @else
+                                            <option selected disabled>Selecionar</option>
+                                            <option value="Facebook">Facebook</option>
+                                            <option value="Instagram">Instagram</option>
+                                            <option value="Fachada">Fachada</option>
+                                            <option value="Google">Google</option>
+                                            <option value="Indicação">Indicação</option>
+                                            <option value="Panfleto">Panfleto</option>
+                                            <option value="Radio">Radio</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
                             <div style="float:right">
                                 @if (isset($objCliente))
                                     <button class="btn btn-success botao-padrao" type="button" id="atualizarCliente"
@@ -277,6 +305,7 @@
                     var cliente_cidade = $('#cliente_cidade').val();
                     var cliente_bairro = $('#cliente_bairro').val();
                     var cliente_estado = $('#cliente_estado').val();
+                    var cliente_fonte = $('#cliente_fonte').val();
                     var _token = $('meta[name="csrf-token"]').attr('content');
 
                     $.ajax({
@@ -296,6 +325,7 @@
                             cliente_cidade: cliente_cidade,
                             cliente_bairro: cliente_bairro,
                             cliente_estado: cliente_estado,
+                            cliente_fonte: cliente_fonte,
                             _token: _token
                         }
                     }).done(function(data) {
@@ -345,6 +375,7 @@
                     let cliente_cidade = $('#cliente_cidade').val();
                     let cliente_bairro = $('#cliente_bairro').val();
                     let cliente_estado = $('#cliente_estado').val();
+                    let cliente_fonte = $('#cliente_fonte').val();
                     let id = $(this).attr("data-id");
                     let _token = $('meta[name="csrf-token"]').attr('content');
 
@@ -365,6 +396,7 @@
                             cliente_cidade: cliente_cidade,
                             cliente_bairro: cliente_bairro,
                             cliente_estado: cliente_estado,
+                            cliente_fonte: cliente_fonte,
                             id: id,
                             _token: _token
                         }
