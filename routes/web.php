@@ -9,6 +9,7 @@ use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\PetDadosController;
 use App\Http\Controllers\ServicosController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LancamentosController;
 use App\Http\Controllers\NotificacoesController;
 use App\Http\Controllers\PacotePromocionalController;
 use App\Http\Controllers\PerfilController;
@@ -86,4 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::GET('/fluxo-de-caixa', [CaixaController::class, 'index'])->name('caixa.index');
     // PERMISSÕES
     Route::GET('/permissao', [PermissoesController::class, 'index'])->name('permissao.index');
+    // LANÇAMENTOS
+    Route::GET('/lancamentos', [LancamentosController::class, 'index'])->name('lancamentos.index');
 });

@@ -36,9 +36,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Lançamentos</h5>
-                            <p class="card-text">Lançamentos Personalizados
-                            </p>
-                            <a href="#" class="btn btn-primary">Entrar</a>
+                            <p class="card-text">Lançamentos Personalizados</p>
+                            <a href="{{route('lancamentos.index')}}" class="btn btn-primary">Entrar</a>
                         </div>
                     </div>
                 </div>
