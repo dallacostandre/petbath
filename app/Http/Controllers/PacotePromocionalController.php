@@ -145,7 +145,6 @@ class PacotePromocionalController extends Controller
                 $porcentagemFinal = (int) $porcentagemFinal;
                 PacotePromocional::where(['id' => $pacotePromocional->id])->update(['pacote_porcentagem_desconto' => $porcentagemFinal]);
 
-
                 return response()->json([
                     'title' => 'Adicionado!',
                     'text' => 'Pacote promocional adicionado com sucesso.',

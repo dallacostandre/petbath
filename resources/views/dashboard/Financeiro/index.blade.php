@@ -11,7 +11,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="{{route('dashboard.index')}}">Dashboard</a>
+                                    <a href="{{ route('dashboard.index') }}">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">Financeiro</li>
                             </ol>
@@ -37,17 +37,17 @@
                         <div class="card-body">
                             <h5 class="card-title">Lançamentos</h5>
                             <p class="card-text">Lançamentos Personalizados</p>
-                            <a href="{{route('lancamentos.index')}}" class="btn btn-primary">Entrar</a>
+                            <a href="{{ route('lancamentos.index') }}" class="btn btn-primary">Entrar</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Despesas</h5>
+                            <h5 class="card-title">Contas a pagar</h5>
                             <p class="card-text">Contas a pagar
                             </p>
-                            <a href="#" class="btn btn-primary">Entrar</a>
+                            <a href="{{ route('contaspagar.index') }}" class="btn btn-primary">Entrar</a>
                         </div>
                     </div>
                 </div>
@@ -62,6 +62,6 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     @endsection

@@ -148,6 +148,7 @@
 @section('scriptExtras')
     <script>
         $('.phone').mask('(00) 0 0000-0000');
+        document.getElementById('dataNotificacao').valueAsDate = new Date();
 
         function pesquisarPor() {
             var input, filter, table, tr, td, i, txtValue;

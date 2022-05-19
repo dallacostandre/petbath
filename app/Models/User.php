@@ -72,7 +72,6 @@ class User extends Authenticatable
     {
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
         $unique_user = $unique_user_db[0]->unique_user;
-
         return $unique_user;
     }
 
@@ -80,5 +79,6 @@ class User extends Authenticatable
     {
         $unique_user_db = User::where(['id' => Auth::id()])->get('unique_user');
         $unique_user = $unique_user_db[0]->unique_user;
+        return $unique_user;
     }
 }
