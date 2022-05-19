@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Agendamento extends Model
 {
@@ -11,10 +12,21 @@ class Agendamento extends Model
     
     protected $table = 'agendamento';
     
-    protected $fillable = [
-        'unique_pet',
+    protected $fillable = [        
         'unique_user',
-        'unique_servico',
-        'agendamento_data_horario'
+        'id_pet',
+        'id_cliente',
+        'id_pacote',
+        'id_servicos_evento',
+        'title',
+        'start',
+        'end'
     ];
+
+    public function getAgendamentosByUser()
+    {
+        $unique_user_id = new User();
+        $agendamentos = Agendamento::where(['unique_user'=> $unique_user_id->getUserUniqueId()])->paginate(5);
+        return $agendamentos;    
+    }
 }

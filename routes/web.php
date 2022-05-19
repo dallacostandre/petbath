@@ -76,8 +76,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     // RETORNA TODOS OS SERVICOE E PRODUTOS DO CLIENTE (Captura todos os servicos e produtos do cliente)
     Route::POST('/getAllServicosProdutos', [PacotePromocionalController::class, 'getAllServicosProdutos']);
+    
     // AGENDAMENTO
     Route::GET('/agendamento', [AgendamentoController::class, 'index'])->name('agendamento.index');
+    Route::post('agendamentoAjax', [AgendamentoController::class, 'ajax']);
+
     // FINANCEIRO
     Route::GET('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro.index');
     // CONFIGURAÇÕES

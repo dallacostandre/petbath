@@ -85,7 +85,19 @@
                                         <td>Empresa XWZ</td>
                                         <td>1(x)</td>
                                         <td>R$300,00</td>
-                                        <td><span class="badge rounded-pill bg-warning text-dark">A vencer</span></td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-warning text-dark">A vencer</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10/03/2022</td>
+                                        <td>Pagamento rerefente ao fornecedor Xx</td>
+                                        <td>Produtos para Gatos</td>
+                                        <td>Empresa XWZ</td>
+                                        <td>1(x)</td>
+                                        <td>R$300,00</td>
+                                        <td>
+                                            <span class="badge rounded-pill" style="background-color: rgb(25, 151, 25)">Pago</span></td>
 
                                     </tr>
                                     <tr>
@@ -95,19 +107,8 @@
                                         <td>Empresa XWZ</td>
                                         <td>1(x)</td>
                                         <td>R$300,00</td>
-                                        <td><span class="badge rounded-pill"
-                                                style="background-color: rgb(25, 151, 25)">Pago</span></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>10/03/2022</td>
-                                        <td>Pagamento rerefente ao fornecedor Xx</td>
-                                        <td>Produtos para Gatos</td>
-                                        <td>Empresa XWZ</td>
-                                        <td>1(x)</td>
-                                        <td>R$300,00</td>
-                                        <td><span class="badge rounded-pill"
-                                                style="background-color: rgb(201, 8, 8)">Vencido</span></td>
+                                        <td>
+                                            <span class="badge rounded-pill" style="background-color: rgb(201, 8, 8)">Vencido</span></td>
                                     </tr>
                                 </tbody>
                             </table>

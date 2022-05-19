@@ -12,9 +12,62 @@ class AgendamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('dashboard.agendamento.index');
+        if ($request->ajax()) {
+            $data = Agendamento::whereDate('start', '>=', $request->start)
+                ->whereDate('end',   '<=', $request->end)
+                ->get(['id', 'title', 'start', 'end']);
+
+            return response()->json($data);
+        }
+        $titulo = 'Agendamento';
+        $getAgendamento = new Agendamento();
+        $agendamentos = $getAgendamento->getAgendamentosByUser();
+        return view('dashboard.agendamento.index', compact('agendamentos', 'titulo'));
+    }
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function ajax(Request $request)
+    {
+        switch ($request->type) {
+            case 'add':
+                $event = Agendamento::create([
+                    'unique_user' => '616a0cb09015e',
+                    'id_pet' => '616',
+                    'id_cliente' => '102',
+                    'id_pacote' => '12',
+                    'id_servicos_evento' => '5',
+                    'title' => $request->title,
+                    'start' => $request->start,
+                    'end' => $request->end,
+                ]);
+
+                return response()->json($event);
+                break;
+
+            case 'update':
+                $event = Agendamento::find($request->id)->update([
+                    'title' => $request->title,
+                    'start' => $request->start,
+                    'end' => $request->end,
+                ]);
+
+                return response()->json($event);
+                break;
+
+            case 'delete':
+                $event = Agendamento::find($request->id)->delete();
+                return response()->json($event);
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 
     /**
