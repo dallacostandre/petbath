@@ -4,7 +4,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-5 align-self-center">
-                    <h4 class="page-title">{{$titulo}}</h4>
+                    <h4 class="page-title">{{ $titulo }}</h4>
                 </div>
                 <div class="col-7 align-self-center">
                     <div class="d-flex align-items-center justify-content-end">
@@ -38,20 +38,24 @@
                                 <div style="display: flex">
                                     <div class="col col-5">
                                         <span class="font-light">Cliente:</span></br>
-                                        <span class="font-light">Contato: <a href="https://wa.me/+554199283748"
-                                            target="_blank">
-                                            <i class="fab fa-whatsapp" style="color:#24CC63"></i>
-                                        </a></span></br>
+                                        <span class="font-light">Contato:
+                                            <a href="https://wa.me/+554199283748" target="_blank">
+                                                <i class="fab fa-whatsapp" style="color:#24CC63"></i>
+                                            </a></span></br>
                                         <span class="font-light">Obs:</span></br>
                                     </div>
                                     <div class="col col-5">
                                         <span class="font-light">Horário:</span></br>
                                         <span class="font-light">Pacote:</span></br>
+                                        <span class="font-light">
+                                            Servico: <i class="fas fa-cut"></i> |<i class="fal fa-shower"></i> |
+                                            <iclass="fas fa-paw"></i>
+                                        </span></br>
                                     </div>
                                     <div class="col col-2">
-                                        <span class="font-light">
-                                            Servico: <i class="fas fa-cut"></i> |<i class="fal fa-shower"></i> | <i class="fas fa-paw"></i>
-                                        </span></br>
+                                        <a type="button" class="btn btn-secondary float-end" href="{{ route('agendamento.show',['id' => $agendamento->id_cliente ]) }}">
+                                            Visualizar
+                                        </a>
                                     </div>
                                 </div>
                             </div>

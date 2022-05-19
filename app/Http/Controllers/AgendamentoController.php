@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agendamento;
+use App\Models\Cliente;
+use App\Models\Notificacoes;
 use Illuminate\Http\Request;
 
 class AgendamentoController extends Controller
@@ -97,9 +99,14 @@ class AgendamentoController extends Controller
      * @param  \App\Models\Agendamento  $agendamento
      * @return \Illuminate\Http\Response
      */
-    public function show(Agendamento $agendamento)
-    {
-        //
+    public function show(Agendamento $agendamento, Request $request)
+    {   
+        $objCliente = Cliente::find($request->id);
+        $titulo = 'Histório de Agendamento e Notificações: ' . $objCliente->cliente_nome;
+        $cliente = $objCliente->cliente_nome;
+        $objNotificacoesCliente = Notificacoes::where(['unique_cliente' => $objCliente->unique_cliente])->orderBy('notificacao_data', 'ASC')->get();
+
+        return view('dashboard.clientes.history', compact('objCliente', 'titulo', 'objNotificacoesCliente', 'cliente'));
     }
 
     /**

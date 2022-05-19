@@ -79,7 +79,8 @@ Route::group(['middleware' => 'auth'], function () {
     
     // AGENDAMENTO
     Route::GET('/agendamento', [AgendamentoController::class, 'index'])->name('agendamento.index');
-    Route::post('agendamentoAjax', [AgendamentoController::class, 'ajax']);
+    Route::GET('/agendamento-historico/', [AgendamentoController::class, 'show'])->name('agendamento.show');
+    Route::POST('agendamentoAjax', [AgendamentoController::class, 'ajax']);
 
     // FINANCEIRO
     Route::GET('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro.index');
