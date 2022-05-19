@@ -14,12 +14,14 @@
                 </div>
                 <div class="col-6" style="justify-content:flex-end; display:flex;">
                     <div class="mx-2">
-                        <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                        <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao" id="novaEntrada"
+                            data-bs-toggle="modal" data-bs-target="#modalNovaEntrada">
                             Nova Entrada
                         </a>
                     </div>
                     <div>
-                        <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                        <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao"
+                            data-bs-toggle="modal" data-bs-target="#modalNovaSaída">
                             Nova Saída
                         </a>
                     </div>
@@ -38,21 +40,8 @@
         <div class="container" style="padding: 0px 20px 0 20px;">
             <div class="row">
                 <div style="display: flex;justify-content: flex-end;">
-                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
-                            checked>
-                        <label class="btn btn-outline-primary" for="btnradio1">Hoje</label>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="btnradio2">Semanal</label>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="btnradio3">Mensal</label>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off"
-                            data-bs-toggle="modal" data-bs-target="#modal2">
-                        <label class="btn btn-outline-primary" for="btnradio4">Personalizado</label>
-                    </div>
+                    @component('dashboard.componentes.filtrosperiodo')
+                    @endcomponent
                 </div>
             </div>
         </div>
@@ -210,85 +199,127 @@
             </div>
         </div>
 
-        <!-- Modal Novo Lançamento -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <!-- Modal Entrada -->
+        <div class="modal fade" id="modalNovaEntrada" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Lançamento</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nova Entrada</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="col col-12 mb-3 text-center">
-                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
-                                    checked>
-                                <label class="btn btn-outline-primary" for="btnradio1">Receita</label>
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
-                                    autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btnradio2">Despesa</label>
+                        <div class="row mb-3">
+                            <div class="col col-4">
+                                <label>Buscar por Cliente</label>
+                                <input type="text" class="form-control" placeholder="Ex: Roberto Santos">
+                            </div>
+                            <div class="col col-4">
+                                <label>Buscar por Telefone</label>
+                                <input type="text" class="form-control" placeholder="41 99294-94822">
+                            </div>
+                            <div class="col col-4">
+                                <label>Buscar por Pet</label>
+                                <input type="text" class="form-control" placeholder="Romeu">
                             </div>
                         </div>
-                        <div class="col col-12 mb-3" style="display: flex; justify-content:space-between;">
-                            <div class="col col-5">
-                                <label>Forma</label>
-                                <select class="form-select">
-                                    <option value="1">Boleto</option>
-                                    <option value="1">Dinheiro</option>
-                                    <option value="2">Cartão de Crédito</option>
-                                    <option value="2">Cartão de Débito</option>
-                                    <option value="2">PIX</option>
-                                    <option value="3">Outro</option>
-                                </select>
-                            </div>
-                            <div class="col col-6">
-                                <label>Valor</label>
-                                <input class="form-control form-control money" type="text">
+                        <hr>
+                        <div class="row mb-3">
+                            <div class="col col-12">
+                                <label>Descrição</label>
+                                <input type="text" class="form-control" placeholder="Descrição/Observação">
                             </div>
                         </div>
-                        <div class="col col-12 mb-3">
-                            <label>Data</label>
-                            <div class="mb-3">
-                                <input class="form-control form-control" type="date" id="datePicker">
+                        <div class="row mb-3">
+                            <div class="col col-12">
+                                <label>Buscar Produto ou Serviço</label>
+                                <input type="text" class="form-control" placeholder="Servico X...">
                             </div>
                         </div>
                         <div class="col col-12 mb-3">
-                            <label>Categoria</label>
+                            <label>Listagem Produtos</label>
                             <div class="mb-3">
-                                <input class="form-control form-control" type="text">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th scope="col">Item</th>
+                                            <th scope="col">Qtde</th>
+                                            <th scope="col">Preço</th>
+                                            <th scope="col">Desconto</th>
+                                            <th scope="col">Preço Final</th>
+                                            <th scope="col">Excluir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>Shampoo Canino</th>
+                                            <td><input type="number" class="form-control" placeholder="Ex: 01"></td>
+                                            <td>R$ 20,00</td>
+                                            <td><input type="text" class="form-control money" placeholder="Ex: R$ 2,99">
+                                            </td>
+                                            <td>R$ 18,00</td>
+                                            <td>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Exluir">
+                                                    <i class="fas fa-ban"></i>
+                                                </a>&nbsp;&nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Osso Canino</th>
+                                            <td><input type="number" class="form-control" placeholder="Ex: 01"></td>
+                                            <td>R$ 10,00</td>
+                                            <td><input type="text" class="form-control money" placeholder="Ex: R$ 2,99">
+                                            </td>
+                                            <td>R$ 8,00</td>
+                                            <td>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Exluir">
+                                                    <i class="fas fa-ban"></i>
+                                                </a>&nbsp;&nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Coleira Prets</th>
+                                            <td><input type="number" class="form-control" placeholder="Ex: 01"></td>
+                                            <td>R$ 100,00</td>
+                                            <td><input type="text" class="form-control money" placeholder="Ex: R$ 2,99">
+                                            </td>
+                                            <td>R$ 98,00</td>
+                                            <td>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Exluir">
+                                                    <i class="fas fa-ban"></i>
+                                                </a>&nbsp;&nbsp;
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="col col-12 mb-3">
-                            <label>Frequência</label>
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadio" id="nao_repete" />
-                                    <label class=" form-check-label" for="nao_repete">Não se repete</label>
+                            <div class="mb-3" style="display: flex; justify-content:end;">
+                                <h4>Valor Total: </h4> &nbsp;&nbsp;
+                                <h4>R$ 400,00</h4>
+                            </div>
+                        </div>
+                        <div class="col col-12 mb-3">
+                            <label>Forma de Pagamento</label>
+                            <div>
+                                @component('dashboard.componentes.pagamentos')
+                                @endcomponent
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col col-4">
+                                    <label>Parcelas</label>
+                                    <input type="text" class="form-control" placeholder="Parcelas">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadio" id="repete" />
-                                    <label class=" form-check-label" for="repete">Repete</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-12 mb-3">
-                            <div class="mb-3 repeticao_div" style="display:none">
-                                <label>Periodo</label>
-                                <select class="form-select">
-                                    <option value="1">Mensal</option>
-                                    <option value="2">Anual</option>
-                                    <option value="3">Semanal</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 repeticao_div" style="display:none">
-                                <label>Parcelas</label>
-                                <input class="form-control form-control" name="parcelas" id="" type="number">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarLancamento">
-                            Adicionar
+                        <button type="button" class="btn btn-secondary float-end">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-success botao-padrao float-end">
+                            Finalizar
                         </button>
                     </div>
                 </div>
@@ -296,30 +327,24 @@
         </div>
 
         <!-- Modal Filtrar -->
-        <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalPeriodoPersonalizado" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Filtrar</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Filtrar por Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div>
-                            <div class="mb-2">
-                                <label>Filtrar por valor</label>
-                                <input class="form-control form-control money" type="text">
-                            </div>
-                            <div class="mb-2">
-                                <label>Filtrar por forma de entrada</label>
-                                <select class="form-select">
-                                    <option value="1">Pix</option>
-                                    <option value="2">Débito</option>
-                                    <option value="3">Crédito</option>
-                                    <option value="3">Dinheiro</option>
-                                </select>
+                            <div class="col col-12 mb-3">
+                                <label>Data Inicial</label>
+                                <div class="mb-3">
+                                    <input class="form-control form-control" type="date" id="datePicker">
+                                </div>
                             </div>
                             <div class="col col-12 mb-3">
-                                <label>Filtrar por data</label>
+                                <label>Data Final</label>
                                 <div class="mb-3">
                                     <input class="form-control form-control" type="date" id="datePicker">
                                 </div>
@@ -334,31 +359,68 @@
                 </div>
             </div>
         </div>
-    @endsection
-    @section('scriptExtras')
-        <script>
-            $(document).ready(function() {
-                $('.money').mask("000.000,00", {
-                    reverse: true
-                });
-                document.getElementById('datePicker').valueAsDate = new Date();
 
-                $(function() {
-                    $('[data-toggle="tooltip"]').tooltip();
-                })
+        <!-- Modal Saida -->
+        <div class="modal fade" id="modalNovaSaída" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Saída</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div class="col col-12 mb-3">
+                                <label>Descrição</label>
+                                <div class="mb-3">
+                                    <input class="form-control form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="col col-12 mb-3">
+                                <label>Forma de Pagamento</label>
+                                <div>
+                                    @component('dashboard.componentes.pagamentos')
+                                    @endcomponent
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary float-end">
+                                Cancelar
+                            </button>
+                            <button type="button" class="btn btn-success botao-padrao float-end">
+                                Finalizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endsection
+        @section('scriptExtras')
+            <script>
+                $(document).ready(function() {
+                    $('.money').mask("000.000,00", {
+                        reverse: true
+                    });
+                    document.getElementById('datePicker').valueAsDate = new Date();
 
-                $('.phone').mask('(00) 0 0000-0000');
-                var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
-                var offcanvasList = offcanvasElementList.map(function(offcanvasEl) {
-                    return new bootstrap.Offcanvas(offcanvasEl)
-                })
+                    $(function() {
+                        $('[data-toggle="tooltip"]').tooltip();
+                    })
 
-                $(':radio[id=nao_repete]').change(function() {
-                    $(".repeticao_div").css("display", "none");
+                    $('.phone').mask('(00) 0 0000-0000');
+                    var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
+                    var offcanvasList = offcanvasElementList.map(function(offcanvasEl) {
+                        return new bootstrap.Offcanvas(offcanvasEl)
+                    })
+
+                    $(':radio[id=nao_repete]').change(function() {
+                        $(".repeticao_div").css("display", "none");
+                    });
+                    $(':radio[id=repete]').change(function() {
+                        $(".repeticao_div").css("display", "block");
+                    });
                 });
-                $(':radio[id=repete]').change(function() {
-                    $(".repeticao_div").css("display", "block");
-                });
-            });
-        </script>
-    @endsection
+            </script>
+        @endsection
