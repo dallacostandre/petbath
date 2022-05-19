@@ -57,7 +57,7 @@
                             <h5 class="card-title">DRE - Demonstrativo Geral</h5>
                             <p class="card-text">Demonstrativo
                             </p>
-                            <a href="#" class="btn btn-primary">Entrar</a>
+                            <a href="{{route('demonstrativo.index')}}" class="btn btn-primary">Entrar</a>
                         </div>
                     </div>
                 </div>

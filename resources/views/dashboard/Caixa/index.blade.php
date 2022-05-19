@@ -3,119 +3,299 @@
     <div class="page-wrapper">
         <div class="page-breadcrumb">
             <div class="row">
-                <div class="col-9 align-self-center">
-                    <h4 class="page-title">Fluxo de Caixa</h4>
+                <div class="col-6 align-self-center">
+                    <h4 class="page-title">{{ $titulo }}</h4>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="{{ route('dashboard.index') }}">Dashboard</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Fluxo de Caixa</li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $titulo }}</li>
                         </ol>
                     </nav>
                 </div>
-                <div class="col col-3 botao-padrao-topo">
-                    <div style="display: flex; justify-content:flex-end;">
-                        <div style="margin-right: 0.25rem">
-                            <button class="btn btn-success botao-padrao float-end" type="button" data-bs-toggle="modal"
-                                data-bs-target="#modal2">
-                                Filtrar
-                            </button>
-                        </div>
-                        <div>
-                            <button class="btn btn-success botao-padrao float-end" type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Novo Lançamento
-                            </button>
-                        </div>
+                <div class="col-6" style="justify-content:flex-end; display:flex;">
+                    <div class="mx-2">
+                        <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                            Nova Entrada
+                        </a>
+                    </div>
+                    <div>
+                        <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                            Nova Saída
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-breadcrumb">
+            <div class="card">
+                <div class="card-body">
+                    <span class="card-title"><strong>Nome Caixa:</strong> Lucas Ferreira</span> |
+                    <span class="card-title"> <strong>Abertura em:</strong> 23/03/2022 às 08:15 </span> |
+                    <span><strong>Fechado em:</strong> 22/03/2022 às 21:21 </span>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="padding: 0px 20px 0 20px;">
+            <div class="row">
+                <div style="display: flex;justify-content: flex-end;">
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
+                            checked>
+                        <label class="btn btn-outline-primary" for="btnradio1">Hoje</label>
+
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio2">Semanal</label>
+
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio3">Mensal</label>
+
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off"
+                            data-bs-toggle="modal" data-bs-target="#modal2">
+                        <label class="btn btn-outline-primary" for="btnradio4">Personalizado</label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="row">
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">Caixa Inicial</h5>
+                            <h3 class="font-light">$769.08</h3>
+                            <div class="mt-3 text-center">
+                                {{-- <div id="earnings"></div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">Total Entrada</h5>
+                            <h3 class="font-light">$769.08</h3>
+                            <div class="mt-3 text-center">
+                                {{-- <div id="earnings"></div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">Total Saída</h5>
+                            <h3 class="font-light">$769.08</h3>
+                            <div class="mt-3 text-center">
+                                {{-- <div id="earnings"></div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">Balanço Final</h5>
+                            <h3 class="font-light">$769.08</h3>
+                            <div class="mt-3 text-center">
+                                {{-- <div id="earnings"></div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="card">
                         <div class="table-responsive">
                             <table class="table table-hover">
-                                <thead>
+                                <thead class="text-left">
+                                    <th>Cod.</th>
+                                    <th>Data</th>
                                     <th>Descrição</th>
-                                    <th>Método de Pagamento</th>
-                                    <th>Data Pagamento</th>
-                                    <th>Entrada</th>
-                                    <th>Saída</th>
-                                    <th>Saldo</th>
+                                    <th>Pet</th>
+                                    <th>Forma de Pagamento</th>
+                                    <th>Valor</th>
                                     <th>Ações</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>XXXXX</td>
-                                        <td>XXXXX</td>
-                                        <td>XXXXX</td>
-                                        <td>XXXXX</td>
-                                        <td>XXXXX</td>
-                                        <td>XXXXX</td>
+                                    <tr class="text-left">
+                                        <td>8904893048</td>
+                                        <td>13/04/2022</td>
+                                        <td>Roberto Santos</td>
+                                        <td>Romeu</td>
+                                        <td>PIX</td>
+                                        <td class="success">(+) 300,00</td>
                                         <td>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Remover">
-                                                <i class="fas fa-exchange-alt"></i></a>&nbsp;&nbsp;
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Alterar">
-                                                <i class="fad fa-trash"></i></a>&nbsp;&nbsp;
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Editar">
+                                                <i class="fas fa-user-edit"></i>
+                                            </a> &nbsp;&nbsp;
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Excluir">
+                                                <i class="fad fa-trash"></i>
+                                            </a>&nbsp;&nbsp;
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Visualizar">
+                                                <i class="fad fa-eye"></i>
+                                            </a>&nbsp;&nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr class="text-left">
+                                        <td>8397489374</td>
+                                        <td>14/04/2022</td>
+                                        <td>Vitor Specht Rockenbach </td>
+                                        <td>Barto</td>
+                                        <td>Débito</td>
+                                        <td class="success">(+) 290,00</td>
+                                        <td>
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Editar">
+                                                <i class="fas fa-user-edit"></i>
+                                            </a> &nbsp;&nbsp;
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Excluir">
+                                                <i class="fad fa-trash"></i>
+                                            </a>&nbsp;&nbsp;
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Visualizar">
+                                                <i class="fad fa-eye"></i>
+                                            </a>&nbsp;&nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr class="text-left">
+                                        <td>8397489374</td>
+                                        <td>15/04/2022</td>
+                                        <td>Débora </td>
+                                        <td>Barto</td>
+                                        <td>Dinheiro</td>
+                                        <td class="danger"> (-) 14,99</td>
+                                        <td>
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Editar">
+                                                <i class="fas fa-user-edit"></i>
+                                            </a> &nbsp;&nbsp;
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Excluir">
+                                                <i class="fad fa-trash"></i>
+                                            </a>&nbsp;&nbsp;
+                                            <a class="" id="" data-toggle="tooltip" data-placement="top"
+                                                title="Visualizar">
+                                                <i class="fad fa-eye"></i>
+                                            </a>&nbsp;&nbsp;
+
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <div style="justify-content:flex-end; display:flex;">
+                        <div class="mx-2">
+                            <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                                Fechar Caixa
+                            </a>
+                        </div>
+                        <div class="mx-2">
+                            <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                                Imprimir
+                            </a>
+                        </div>
+                        <div>
+                            <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                                Relatório PDF
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal 1 -->
+        <!-- Modal Novo Lançamento -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Você deseja lançar para:</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Lançamento</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" type="text"
-                                placeholder="Pequise por pet, cliente ou telefone">
+                        <div class="col col-12 mb-3 text-center">
+                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
+                                    checked>
+                                <label class="btn btn-outline-primary" for="btnradio1">Receita</label>
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
+                                    autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnradio2">Despesa</label>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <select class="form-select form-select-sm"" aria-label=" Default select example">
-                                <option value="1">Serviço 1</option>
-                                <option value="1">Serviço 2</option>
-                                <option value="1">Serviço 3</option>
-                                <option value="1">Serviço 4</option>
-                            </select>
+                        <div class="col col-12 mb-3" style="display: flex; justify-content:space-between;">
+                            <div class="col col-5">
+                                <label>Forma</label>
+                                <select class="form-select">
+                                    <option value="1">Boleto</option>
+                                    <option value="1">Dinheiro</option>
+                                    <option value="2">Cartão de Crédito</option>
+                                    <option value="2">Cartão de Débito</option>
+                                    <option value="2">PIX</option>
+                                    <option value="3">Outro</option>
+                                </select>
+                            </div>
+                            <div class="col col-6">
+                                <label>Valor</label>
+                                <input class="form-control form-control money" type="text">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" type="text" placeholder="Valor">
+                        <div class="col col-12 mb-3">
+                            <label>Data</label>
+                            <div class="mb-3">
+                                <input class="form-control form-control" type="date" id="datePicker">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm" type="text" placeholder="Descrição">
+                        <div class="col col-12 mb-3">
+                            <label>Categoria</label>
+                            <div class="mb-3">
+                                <input class="form-control form-control" type="text">
+                            </div>
                         </div>
-                        <div class="mb-12">
-                            <label for="">Serviços Selecionados</label>
-                            <ul>
-                                <li>Cras justo odio</li>
-                                <li>Dapibus ac facilisis in</li>
-                                <li>Morbi leo risus</li>
-                                <li>Porta ac consectetur ac</li>
-                                <li>Vestibulum at eros</li>
-                            </ul>
+                        <div class="col col-12 mb-3">
+                            <label>Frequência</label>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadio" id="nao_repete" />
+                                    <label class=" form-check-label" for="nao_repete">Não se repete</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadio" id="repete" />
+                                    <label class=" form-check-label" for="repete">Repete</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-12 mb-3">
+                            <div class="mb-3 repeticao_div" style="display:none">
+                                <label>Periodo</label>
+                                <select class="form-select">
+                                    <option value="1">Mensal</option>
+                                    <option value="2">Anual</option>
+                                    <option value="3">Semanal</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 repeticao_div" style="display:none">
+                                <label>Parcelas</label>
+                                <input class="form-control form-control" name="parcelas" id="" type="number">
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer mx-auto">
-                        <button type="button" class="btn btn-success btn-sm">Adicionar</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarLancamento">
+                            Adicionar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal 2 -->
+        <!-- Modal Filtrar -->
         <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -124,52 +304,32 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="container">
-                            <p>Filtre por categorias:</p>
-                        </div>
                         <div>
                             <div class="mb-2">
-                                <label for="exampleFormControlInput1" class="form-label">Valor</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="name@example.com">
+                                <label>Filtrar por valor</label>
+                                <input class="form-control form-control money" type="text">
                             </div>
                             <div class="mb-2">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Forma de Pagamento</option>
+                                <label>Filtrar por forma de entrada</label>
+                                <select class="form-select">
                                     <option value="1">Pix</option>
                                     <option value="2">Débito</option>
                                     <option value="3">Crédito</option>
                                     <option value="3">Dinheiro</option>
                                 </select>
                             </div>
-                            <div class="mb-2">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Natureza</option>
-                                    <option value="1">Entrada</option>
-                                    <option value="3">Saida</option>
-                                </select>
-                            </div>
-                            <div class="mb-2">
-                                <div class="input-group input-daterange">
-                                    <input type="text" class="form-control" value="2012-04-05">
-                                    <div class="input-group-addon">to</div>
-                                    <input type="text" class="form-control" value="2012-04-19">
-                                </div>
-                            </div>
-                            <div class="mb-2">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Pesquisar por descrição:</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <div class="col col-12 mb-3">
+                                <label>Filtrar por data</label>
+                                <div class="mb-3">
+                                    <input class="form-control form-control" type="date" id="datePicker">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer mx-auto">
-                        <div class="container" style="display: flex; justify-content:space-between;">
-                            <a style="text-decoration: none;" href="http://">Limpar Filtro</a>
-                            <button type="button" name="" id="" class="btn btn-success btn-sm" btn-lg
-                                btn-block">Filtrar</button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success botao-padrao float-end" id="adicionarLancamento">
+                            Pesquisar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -177,14 +337,28 @@
     @endsection
     @section('scriptExtras')
         <script>
-            $(function() {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
+            $(document).ready(function() {
+                $('.money').mask("000.000,00", {
+                    reverse: true
+                });
+                document.getElementById('datePicker').valueAsDate = new Date();
 
-            $('.phone').mask('(00) 0 0000-0000');
-            var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
-            var offcanvasList = offcanvasElementList.map(function(offcanvasEl) {
-                return new bootstrap.Offcanvas(offcanvasEl)
-            })
+                $(function() {
+                    $('[data-toggle="tooltip"]').tooltip();
+                })
+
+                $('.phone').mask('(00) 0 0000-0000');
+                var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
+                var offcanvasList = offcanvasElementList.map(function(offcanvasEl) {
+                    return new bootstrap.Offcanvas(offcanvasEl)
+                })
+
+                $(':radio[id=nao_repete]').change(function() {
+                    $(".repeticao_div").css("display", "none");
+                });
+                $(':radio[id=repete]').change(function() {
+                    $(".repeticao_div").css("display", "block");
+                });
+            });
         </script>
     @endsection

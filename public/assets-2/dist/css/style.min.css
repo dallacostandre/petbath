@@ -110,6 +110,16 @@ h1 {
     font-size: calc(1.35rem + 1.2vw)
 }
 
+.success {
+    color: var(--bs-teal);
+    text-align: right;
+}
+
+.danger {
+    color: var(--bs-danger);
+    text-align: right;
+}
+
 @media (min-width:1200px) {
     .h1,
     h1 {

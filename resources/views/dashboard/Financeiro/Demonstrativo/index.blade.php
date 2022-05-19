@@ -28,7 +28,6 @@
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off"
                             data-bs-toggle="modal" data-bs-target="#modal2">
                         <label class="btn btn-outline-primary" for="btnradio4">Personalizado</label>
-
                     </div>
                 </div>
             </div>
@@ -38,7 +37,7 @@
                 <div class="col-lg-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-1">Falta Pagar</h5>
+                            <h5 class="card-title mb-1">Receita Bruta</h5>
                             <h3 class="font-light">$769.08</h3>
                             <div class="mt-3 text-center">
                                 {{-- <div id="earnings"></div> --}}
@@ -49,7 +48,7 @@
                 <div class="col-lg-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-1">Pago</h5>
+                            <h5 class="card-title mb-1">Custo Operacional</h5>
                             <h3 class="font-light">$769.08</h3>
                             <div class="mt-3 text-center">
                                 {{-- <div id="earnings"></div> --}}
@@ -60,7 +59,7 @@
                 <div class="col-lg-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-1">Vencidos</h5>
+                            <h5 class="card-title mb-1">Despesas Administrativas</h5>
                             <h3 class="font-light">$769.08</h3>
                             <div class="mt-3 text-center">
                                 {{-- <div id="earnings"></div> --}}
@@ -71,7 +70,7 @@
                 <div class="col-lg-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-1">À Vencer</h5>
+                            <h5 class="card-title mb-1">Lucro/Prejuízo</h5>
                             <h3 class="font-light">$769.08</h3>
                             <div class="mt-3 text-center">
                                 {{-- <div id="earnings"></div> --}}
@@ -86,45 +85,46 @@
                                 <thead>
                                     <th>Data</th>
                                     <th>Descrição</th>
-                                    <th>Categoria</th>
-                                    <th>Fornecedor</th>
-                                    <th>Qnt. Parcelas</th>
-                                    <th>Valor</th>
-                                    <th>Status</th>
+                                    <th>Forma de Pagamento</th>
+                                    <th>Crédito</th>
+                                    <th>Débito</th>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>10/03/2022</td>
-                                        <td>Pagamento rerefente ao fornecedor Xx</td>
-                                        <td>Produtos para Gatos</td>
-                                        <td>Empresa XWZ</td>
-                                        <td>1(x)</td>
-                                        <td>R$300,00</td>
-                                        <td><span class="badge rounded-pill bg-warning text-dark">A vencer</span></td>
-
+                                        <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum officia cum ut! Aliquid exercitationem accusamus in autem labore accusantium, enim voluptas iste! Delectus doloribus porro, quam perspiciatis fuga inventore quis?</td>
+                                        <td>Pix</td>
+                                        <td>-</td>
+                                        <td class="success">R$300,00</td>
                                     </tr>
                                     <tr>
                                         <td>10/03/2022</td>
-                                        <td>Pagamento rerefente ao fornecedor Xx</td>
-                                        <td>Produtos para Gatos</td>
-                                        <td>Empresa XWZ</td>
-                                        <td>1(x)</td>
-                                        <td>R$300,00</td>
-                                        <td><span class="badge rounded-pill" style="background-color: rgb(25, 151, 25)">Pago</span></td>
-
+                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur expedita maiores at aut enim nemo incidunt culpa natus quam, nesciunt, itaque quo blanditiis voluptates quae deserunt cum recusandae suscipit omnis!</td>
+                                        <td>Pix</td>
+                                        <td class="danger">R$230,00</td>
+                                        <td>-</td>
                                     </tr>
                                     <tr>
                                         <td>10/03/2022</td>
-                                        <td>Pagamento rerefente ao fornecedor Xx</td>
-                                        <td>Produtos para Gatos</td>
-                                        <td>Empresa XWZ</td>
-                                        <td>1(x)</td>
-                                        <td>R$300,00</td>
-                                        <td><span class="badge rounded-pill" style="background-color: rgb(201, 8, 8)">Vencido</span></td>
-
+                                        <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias consequuntur illo deleniti blanditiis odio doloremque maiores placeat eaque quisquam voluptatem earum dolorum, facilis velit minus ratione illum sunt ullam. Amet?</td>
+                                        <td>Cartão Débito</td>
+                                        <td>-</td>
+                                        <td class="success">R$500,00</td>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                    <div style="justify-content:flex-end; display:flex;">
+                        <div class="mx-2">
+                            <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                                Imprimir
+                            </a>
+                        </div>
+                        <div>
+                            <a type="button" aria-hidden="true" href="#" class="btn btn-success botao-padrao">
+                                Relatório PDF
+                            </a>
                         </div>
                     </div>
                 </div>

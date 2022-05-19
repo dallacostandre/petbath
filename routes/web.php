@@ -10,6 +10,7 @@ use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\PetDadosController;
 use App\Http\Controllers\ServicosController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DemonstrativoController;
 use App\Http\Controllers\LancamentosController;
 use App\Http\Controllers\NotificacoesController;
 use App\Http\Controllers\PacotePromocionalController;
@@ -97,4 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     
     // FINANCEIRO - CONTAS A PAGAR
     Route::GET('/contas-a-pagar', [ContasPagarController::class, 'index'])->name('contaspagar.index');
+    
+    // FINANCEIRO - CONTAS A PAGAR
+    Route::GET('/demonstrativo', [DemonstrativoController::class, 'index'])->name('demonstrativo.index');
 });
