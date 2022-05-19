@@ -209,20 +209,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="row mb-3">
-                            <div class="col col-4">
-                                <label>Buscar por Cliente</label>
-                                <input type="text" class="form-control" placeholder="Ex: Roberto Santos">
-                            </div>
-                            <div class="col col-4">
-                                <label>Buscar por Telefone</label>
-                                <input type="text" class="form-control" placeholder="41 99294-94822">
-                            </div>
-                            <div class="col col-4">
-                                <label>Buscar por Pet</label>
-                                <input type="text" class="form-control" placeholder="Romeu">
-                            </div>
-                        </div>
+                        @component('dashboard.componentes.buscaModal') @endcomponent
                         <hr>
                         <div class="row mb-3">
                             <div class="col col-12">
@@ -396,31 +383,33 @@
                     </div>
                 </div>
             </div>
-        @endsection
-        @section('scriptExtras')
-            <script>
-                $(document).ready(function() {
-                    $('.money').mask("000.000,00", {
-                        reverse: true
-                    });
-                    document.getElementById('datePicker').valueAsDate = new Date();
-
-                    $(function() {
-                        $('[data-toggle="tooltip"]').tooltip();
-                    })
-
-                    $('.phone').mask('(00) 0 0000-0000');
-                    var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
-                    var offcanvasList = offcanvasElementList.map(function(offcanvasEl) {
-                        return new bootstrap.Offcanvas(offcanvasEl)
-                    })
-
-                    $(':radio[id=nao_repete]').change(function() {
-                        $(".repeticao_div").css("display", "none");
-                    });
-                    $(':radio[id=repete]').change(function() {
-                        $(".repeticao_div").css("display", "block");
-                    });
+        </div>
+        
+    @endsection
+    @section('scriptExtras')
+        <script>
+            $(document).ready(function() {
+                $('.money').mask("000.000,00", {
+                    reverse: true
                 });
-            </script>
-        @endsection
+                document.getElementById('datePicker').valueAsDate = new Date();
+
+                $(function() {
+                    $('[data-toggle="tooltip"]').tooltip();
+                })
+
+                $('.phone').mask('(00) 0 0000-0000');
+                var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
+                var offcanvasList = offcanvasElementList.map(function(offcanvasEl) {
+                    return new bootstrap.Offcanvas(offcanvasEl)
+                })
+
+                $(':radio[id=nao_repete]').change(function() {
+                    $(".repeticao_div").css("display", "none");
+                });
+                $(':radio[id=repete]').change(function() {
+                    $(".repeticao_div").css("display", "block");
+                });
+            });
+        </script>
+    @endsection

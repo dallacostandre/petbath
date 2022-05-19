@@ -53,7 +53,8 @@
                                         </span></br>
                                     </div>
                                     <div class="col col-2">
-                                        <a type="button" class="btn btn-secondary float-end" href="{{ route('agendamento.show',['id' => $agendamento->id_cliente ]) }}">
+                                        <a type="button" class="btn btn-secondary float-end"
+                                            href="{{ route('agendamento.show', ['id' => $agendamento->id_cliente]) }}">
                                             Visualizar
                                         </a>
                                     </div>
@@ -61,6 +62,88 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+            </div>
+        </div>
+        <!-- Modal Agendamento -->
+        <div class="modal fade" id="modalAgendamento" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ $titulo }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="col col-12 mb-3">
+                            <label>Já possui cadastro?</label>
+                            <div class="mb-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                        value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Sim</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                        value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-12 mb-3">
+                            @component('dashboard.componentes.buscaModal')
+                            @endcomponent
+                        </div>
+                        <div class="col col-12 mb-3">
+                            <label for="appt">Selecione o serviço</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected disabled>Qual o serviço?</option>
+                                <option value="1">Serviço 1</option>
+                                <option value="2">Serviço 2</option>
+                                <option value="3">Serviço 3</option>
+                            </select>
+                        </div>
+                        <div class="col col-12 mb-3">
+                            <label for="appt">Selecione o horário a time:</label>
+                            <input type="time" class="form-control">
+                        </div>
+                        <div class="col col-12 mb-3">
+                            <label>Pacote Promocional?</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                        value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Sim</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                        value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-12 mb-3">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected disabled>Selecione o Pacote Promocional</option>
+                                <option value="1">Pacote 1</option>
+                                <option value="2">Pacote 2</option>
+                                <option value="3">Pacote 3</option>
+                            </select>
+                        </div>
+                        <div class="col col-12 mb-3">
+                            <label for="appt">Observações</label>
+                            <textarea name="" id="" cols="3" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary float-end">
+                                Cancelar
+                            </button>
+                            <button type="button" class="btn btn-success botao-padrao float-end">
+                                Agendar
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,7 +180,9 @@
                     selectable: true,
                     selectHelper: true,
                     select: function(start, end, allDay) {
-                        var title = prompt('Event Title:');
+                        $('#modalAgendamento').modal('show');
+
+                        return false;
                         if (title) {
                             var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                             var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
@@ -139,12 +224,12 @@
                             },
                             type: "POST",
                             success: function(response) {
-                                displayMessage("Event Updated Successfully");
+                                displayMessage("Agendamento atualizado.");
                             }
                         });
                     },
                     eventClick: function(event) {
-                        var deleteMsg = confirm("Do you really want to delete?");
+                        var deleteMsg = confirm("Deseja realmente excluir este agendamento?");
                         if (deleteMsg) {
                             $.ajax({
                                 type: "POST",
@@ -155,7 +240,7 @@
                                 },
                                 success: function(response) {
                                     calendar.fullCalendar('removeEvents', event.id);
-                                    displayMessage("Event Deleted Successfully");
+                                    displayMessage("Agendamento excluído.");
                                 }
                             });
                         }
